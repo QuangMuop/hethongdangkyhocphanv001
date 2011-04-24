@@ -1,0 +1,313 @@
+package org.apache.jsp.jsps;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.jsp.*;
+
+public final class jspCaiDatQuiDinh_jsp extends org.apache.jasper.runtime.HttpJspBase
+    implements org.apache.jasper.runtime.JspSourceDependent {
+
+  private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
+
+  private static java.util.Vector _jspx_dependants;
+
+  static {
+    _jspx_dependants = new java.util.Vector(1);
+    _jspx_dependants.add("/jsps/jspmenu.jsp");
+  }
+
+  private org.apache.jasper.runtime.ResourceInjector _jspx_resourceInjector;
+
+  public Object getDependants() {
+    return _jspx_dependants;
+  }
+
+  public void _jspService(HttpServletRequest request, HttpServletResponse response)
+        throws java.io.IOException, ServletException {
+
+    PageContext pageContext = null;
+    HttpSession session = null;
+    ServletContext application = null;
+    ServletConfig config = null;
+    JspWriter out = null;
+    Object page = this;
+    JspWriter _jspx_out = null;
+    PageContext _jspx_page_context = null;
+
+
+    try {
+      response.setContentType("text/html;charset=UTF-8");
+      pageContext = _jspxFactory.getPageContext(this, request, response,
+      			null, true, 8192, true);
+      _jspx_page_context = pageContext;
+      application = pageContext.getServletContext();
+      config = pageContext.getServletConfig();
+      session = pageContext.getSession();
+      out = pageContext.getOut();
+      _jspx_out = out;
+      _jspx_resourceInjector = (org.apache.jasper.runtime.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
+
+      out.write('\n');
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n");
+      out.write("   \"http://www.w3.org/TR/html4/loose.dtd\">\n");
+      out.write("\n");
+      out.write("<html>\n");
+      out.write("    <head>\n");
+      out.write("        <link href=\"../csss/menu.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">\n");
+      out.write("    </head>\n");
+      out.write("    <body>\n");
+      out.write("        <MARQUEE onmouseover=\"this.stop();\" onmouseout=\"this.start();\" HEIGHT=25 BGCOLOR=#C0C6CE BEHAVIOR=scroll SCROLLAMOUNT=\"4\">\n");
+      out.write("            Chào mừng đến với hệ thống đăng ký học phần.\n");
+      out.write("        </MARQUEE>\n");
+      out.write("\n");
+      out.write("        <div id=\"logo\">\n");
+      out.write("\n");
+      out.write("        </div>\n");
+      out.write("        <div id = \"menu\">\n");
+      out.write("            <ul>\n");
+      out.write("                <li><a href=\"jspTrangChu.jsp\"> Trang chủ </a>\n");
+      out.write("                </li>\n");
+      out.write("                <li><a href=\"jspXemDSLop.jsp\">Xem DS Lớp Học</a> </li>\n");
+      out.write("                <li><a href=\"jspXemTKB.jsp\">Xem TKB</a></li>\n");
+      out.write("                <li><a href=\"#\">Quản Lý Khoa</a>\n");
+      out.write("                    <ul>\n");
+      out.write("                        <li> <a href=\"jspTiepNhanSV.jsp\">Tiếp Nhận SV</a> </li>\n");
+      out.write("                        <li><a href=\"jspTiepNhanGV.jsp\">Tiếp Nhận GV</a> </li>\n");
+      out.write("                        <li> <a href=\"jspLapTKB.jsp\">Lập TKB</a> </li>\n");
+      out.write("                        <li><a href=\"jspTaoLopHoc.jsp\">Tạo Lớp Học</a> </li>\n");
+      out.write("                        <li><a href=\"jspGhiNhanDiemSV.jsp\">Ghi Nhận Điểm SV</a> </li>\n");
+      out.write("                        <li> <a href=\"jspCapNhatTaiKhoan.jsp\">Cập Nhật Tài Khoản</a> </li>\n");
+      out.write("                        <li><a href=\"jspCaiDatQuiDinh.jsp\">Cài Đặt Qui Định</a> </li>\n");
+      out.write("                    </ul>\n");
+      out.write("                </li>\n");
+      out.write("                <li><a href=\"#\">Sinh Viên</a>\n");
+      out.write("                <ul>\n");
+      out.write("                        <li> <a href=\"jspDangKyMonHoc.jsp\">Đăng Ký Môn Học</a> </li>\n");
+      out.write("                        <li><a href=\"jspXemChuongTrinhDaoTao.jsp\">Xem Chương Trình Đào Tạo</a> </li>\n");
+      out.write("                        <li><a href=\"jspXemTKB.jsp\">Xem TKB</a> </li>\n");
+      out.write("                        <li> <a href=\"jspXemKQHocTap.jsp\">Xem KQ Học Tập</a> </li>\n");
+      out.write("                        <li><a href=\"jspCapNhatThongTin.jsp\">Cập Nhật Thông Tin</a> </li>\n");
+      out.write("                        <li> <a href=\"jspGuiYeuCau.jsp\">Gửi Yêu Cầu</a> </li>\n");
+      out.write("                    </ul>\n");
+      out.write("                </li>\n");
+      out.write("                <li><a href=\"jspLogin.jsp\">Login</a></li>\n");
+      out.write("                <li><a href=\"#\">Qui định</a>\n");
+      out.write("                <ul>\n");
+      out.write("                        <li> <a href=\"jspXemQuiDinh.jsp\">Xem Qui Định</a> </li>\n");
+      out.write("                        <li><a href=\"jspCaiDatQuiDinh.jsp\">Sửa Qui Định</a> </li>\n");
+      out.write("                    </ul>\n");
+      out.write("                </li>\n");
+      out.write("                <li><a href=\"jspLienHe.jsp\">Liên Hệ</a></li>\n");
+      out.write("            </ul>\n");
+      out.write("        </div>\n");
+      out.write("        <br/><br/>\n");
+      out.write("        <hr/><hr/>        \n");
+      out.write("    </body>\n");
+      out.write("</html>");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n");
+      out.write("   \"http://www.w3.org/TR/html4/loose.dtd\">\n");
+      out.write("\n");
+      out.write("<html>\n");
+      out.write("    <head>\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
+      out.write("        <title>Trang Cài Đặt Qui Định.</title>\n");
+      out.write("        <style media=\"all\" type=\"text/css\">\n");
+      out.write("            table{\n");
+      out.write("                border: 3px solid #ff092d;\n");
+      out.write("                margin-left: 25%;\n");
+      out.write("                margin-top: 100px;\n");
+      out.write("                padding: .2cm;\n");
+      out.write("                width: 50%;\n");
+      out.write("                background-color: #E0FFFF;\n");
+      out.write("            }\n");
+      out.write("            table th{\n");
+      out.write("                border: 2px solid #153E7E;\n");
+      out.write("                background: #488AC7;\n");
+      out.write("                height: 38px;\n");
+      out.write("            }\n");
+      out.write("            table td{\n");
+      out.write("                border: 1px solid #d53E7E;\n");
+      out.write("                background: #98AFC7;\n");
+      out.write("                height: 25px;\n");
+      out.write("            }\n");
+      out.write("            table option{\n");
+      out.write("                width: 40px;\n");
+      out.write("            }\n");
+      out.write("\n");
+      out.write("            #button-update{\n");
+      out.write("                margin-left: 45%;\n");
+      out.write("                margin-top: 25px;\n");
+      out.write("                border: 2px solid #83021C;\n");
+      out.write("                text-transform: uppercase;\n");
+      out.write("                width: 125px;\n");
+      out.write("                height: 45px;\n");
+      out.write("            }\n");
+      out.write("        </style>\n");
+      out.write("    </head>\n");
+      out.write("    <body>\n");
+      out.write("        <h1>BẠN ĐANG Ở TRANG CÀI ĐẶT QUI ĐINH!</h1><br/>\n");
+      out.write("        <h1>Chào mừng đến với hệ thống đăng ký học phần...!</h1>\n");
+      out.write("\n");
+      out.write("        <form action=\"\" method=\"post\">\n");
+      out.write("            <table>\n");
+      out.write("                <tr align=\"center\">\n");
+      out.write("                    <th>Mục</th><th>Giá Trị hiện tại</th><th>Giá Trị Mới</th>\n");
+      out.write("                </tr>\n");
+      out.write("                <tr>\n");
+      out.write("                    <td>Tuổi SV Tối Thiểu</td>\n");
+      out.write("                    <td align=\"center\">15</td>\n");
+      out.write("                    <td align=\"center\">\n");
+      out.write("                        <select name=\"sTuoiSVToiThieu\">\n");
+      out.write("                            <option>14</option>\n");
+      out.write("                            <option>15</option>\n");
+      out.write("                            <option>16</option>\n");
+      out.write("                            <option>17</option>\n");
+      out.write("                            <option>18</option>\n");
+      out.write("                            <option>19</option>\n");
+      out.write("                        </select>\n");
+      out.write("                    </td>\n");
+      out.write("                </tr>\n");
+      out.write("                <tr>\n");
+      out.write("                    <td>Tuổi SV Tối Đa</td>\n");
+      out.write("                    <td align=\"center\">27</td>\n");
+      out.write("                    <td align=\"center\">\n");
+      out.write("                        <select name=\"sTuoiSVToiDa\">\n");
+      out.write("                                <option>24</option>\n");
+      out.write("                                <option>25</option>\n");
+      out.write("                                <option>26</option>\n");
+      out.write("                                <option>27</option>\n");
+      out.write("                                <option>28</option>\n");
+      out.write("                                <option>29</option>\n");
+      out.write("                        </select>\n");
+      out.write("                    </td>\n");
+      out.write("                </tr>\n");
+      out.write("                <tr>\n");
+      out.write("                    <td>Tuổi GV Tối Thiểu</td>\n");
+      out.write("                    <td align=\"center\">30</td>\n");
+      out.write("                    <td align=\"center\">\n");
+      out.write("                        <select name=\"sTuoiGVToiThieu\">\n");
+      out.write("                            <option>28</option>\n");
+      out.write("                            <option>29</option>\n");
+      out.write("                            <option>30</option>\n");
+      out.write("                            <option>31</option>\n");
+      out.write("                            <option>32</option>\n");
+      out.write("                            <option>33</option>\n");
+      out.write("                        </select>\n");
+      out.write("                    </td>\n");
+      out.write("                </tr>\n");
+      out.write("                <tr>\n");
+      out.write("                    <td>Tuổi GV Tối Đa</td>\n");
+      out.write("                    <td align=\"center\">65</td>\n");
+      out.write("                    <td align=\"center\">\n");
+      out.write("                        <select name=\"sTuoiGVToiDa\">\n");
+      out.write("                            <option>62</option>\n");
+      out.write("                            <option>63</option>\n");
+      out.write("                                <option>64</option>\n");
+      out.write("                                <option>65</option>\n");
+      out.write("                                <option>66</option>\n");
+      out.write("                                <option>67</option>\n");
+      out.write("                        </select>\n");
+      out.write("                    </td>\n");
+      out.write("                </tr>\n");
+      out.write("                <tr>\n");
+      out.write("                    <td>Số TC tối thiểu/HK/SV</td>\n");
+      out.write("                    <td align=\"center\">15</td>\n");
+      out.write("                    <td align=\"center\">\n");
+      out.write("                        <select name=\"sTCToiThieu\">\n");
+      out.write("                            <option>14</option>\n");
+      out.write("                            <option>15</option>\n");
+      out.write("                            <option>16</option>\n");
+      out.write("                            <option>17</option>\n");
+      out.write("                            <option>18</option>\n");
+      out.write("                            <option>19</option>\n");
+      out.write("                        </select>\n");
+      out.write("                    </td>\n");
+      out.write("                </tr>\n");
+      out.write("                <tr>\n");
+      out.write("                    <td>Số TC tối đa/HK/SV</td>\n");
+      out.write("                    <td align=\"center\">25</td>\n");
+      out.write("                    <td align=\"center\">\n");
+      out.write("                        <select name=\"sTCToiDa\">\n");
+      out.write("                            <option>24</option>\n");
+      out.write("                            <option>25</option>\n");
+      out.write("                            <option>26</option>\n");
+      out.write("                            <option>27</option>\n");
+      out.write("                            <option>28</option>\n");
+      out.write("                            <option>29</option>\n");
+      out.write("                        </select>\n");
+      out.write("                    </td>\n");
+      out.write("                </tr>\n");
+      out.write("                <tr>\n");
+      out.write("                    <td>Học Vị Tối Thiều GV</td>\n");
+      out.write("                    <td align=\"center\">Cao Học</td>\n");
+      out.write("                    <td align=\"center\">\n");
+      out.write("                        <select name=\"sHVToiThieu\">\n");
+      out.write("                            <option>Cao Học</option>\n");
+      out.write("                            <option>Thạc Sĩ</option>\n");
+      out.write("                            <option>Tiến Sĩ</option>\n");
+      out.write("                        </select>\n");
+      out.write("                    </td>\n");
+      out.write("                </tr>\n");
+      out.write("                <tr>\n");
+      out.write("                    <td>Số SV Tối Thiểu/Lớp</td>\n");
+      out.write("                    <td align=\"center\">35</td>\n");
+      out.write("                    <td align=\"center\">\n");
+      out.write("                        <select name=\"sSVToiThieuLop\">\n");
+      out.write("                            <option>30</option>\n");
+      out.write("                            <option>22</option>\n");
+      out.write("                            <option>24</option>\n");
+      out.write("                            <option>25</option>\n");
+      out.write("                            <option>26</option>\n");
+      out.write("                            <option>28</option>\n");
+      out.write("                        </select>\n");
+      out.write("                    </td>\n");
+      out.write("                </tr>\n");
+      out.write("                <tr>\n");
+      out.write("                    <td>Số SV Tối Đa/Lớp</td>\n");
+      out.write("                    <td align=\"center\">125</td>\n");
+      out.write("                    <td align=\"center\">\n");
+      out.write("                        <select name=\"sTCToiDa\">\n");
+      out.write("                            <option>100</option>\n");
+      out.write("                            <option>120</option>\n");
+      out.write("                            <option>125</option>\n");
+      out.write("                            <option>130</option>\n");
+      out.write("                            <option>135</option>\n");
+      out.write("                            <option>140</option>\n");
+      out.write("                        </select>\n");
+      out.write("                    </td>\n");
+      out.write("                </tr>\n");
+      out.write("                <tr>\n");
+      out.write("                    <td>Số Điểm HT Môn học</td>\n");
+      out.write("                    <td align=\"center\">5.0</td>\n");
+      out.write("                    <td align=\"center\">\n");
+      out.write("                        <select name=\"sDiem\">\n");
+      out.write("                            <option>4.5</option>\n");
+      out.write("                            <option>5.0</option>\n");
+      out.write("                            <option>5.5</option>\n");
+      out.write("                        </select>\n");
+      out.write("                    </td>\n");
+      out.write("                </tr>\n");
+      out.write("            </table>\n");
+      out.write("            <input id=\"button-update\" type=\"submit\" name=\"btnChange\" value=\"Update\">\n");
+      out.write("        </form>\n");
+      out.write("\n");
+      out.write("        <br/><br/><br/><br/><br/><br/><br/><br/>\n");
+      out.write("    </body>\n");
+      out.write("</html>\n");
+    } catch (Throwable t) {
+      if (!(t instanceof SkipPageException)){
+        out = _jspx_out;
+        if (out != null && out.getBufferSize() != 0)
+          out.clearBuffer();
+        if (_jspx_page_context != null) _jspx_page_context.handlePageException(t);
+      }
+    } finally {
+      _jspxFactory.releasePageContext(_jspx_page_context);
+    }
+  }
+}
