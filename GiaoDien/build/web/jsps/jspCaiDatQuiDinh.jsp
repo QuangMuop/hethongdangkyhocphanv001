@@ -43,6 +43,11 @@
                 width: 125px;
                 height: 45px;
             }
+            #button-update hover{
+                border: 2px solid #ffd21C;
+                text-transform: uppercase;
+                background-color: #dd2ff9;
+            }
         </style>
     </head>
     <body>
