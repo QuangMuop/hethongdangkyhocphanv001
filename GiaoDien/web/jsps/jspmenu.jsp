@@ -30,11 +30,10 @@
                     <ul>
                         <li> <a href="jspTiepNhanSV.jsp">Tiếp Nhận SV</a> </li>
                         <li><a href="jspTiepNhanGV.jsp">Tiếp Nhận GV</a> </li>
-                        <li> <a href="jspLapTKB.jsp">Lập TKB</a> </li>
                         <li><a href="jspTaoLopHoc.jsp">Tạo Lớp Học</a> </li>
                         <li><a href="jspGhiNhanDiemSV.jsp">Ghi Nhận Điểm SV</a> </li>
-                        <li><a href="jspTaoTaiKhoan.jsp">Tạo Tài Khoản Mới</a> </li>
-                        <li> <a href="jspCapNhatTaiKhoan.jsp">Cập Nhật Tài Khoản</a> </li>
+                        <li><a href="jspCaiDatTaiKhoan.jsp">Cài Đặt Tài Khoản</a> </li>
+                        <!--<li> <a href="jspCapNhatTaiKhoan.jsp">Cập Nhật Tài Khoản</a> </li>-->
                         <li><a href="jspCaiDatQuiDinh.jsp">Cài Đặt Qui Định</a> </li>                        
                     </ul>
                 </li>
@@ -49,11 +48,12 @@
                     </ul>
                 </li>
                 <li><a href="jspLogin.jsp">Login</a></li>
-                <li><a href="#">Qui định</a>
-                <ul>
+                <li><a href="jspXemQuiDinh.jsp">Qui định</a>
+                <!--<ul>
                         <li> <a href="jspXemQuiDinh.jsp">Xem Qui Định</a> </li>
                         <li><a href="jspCaiDatQuiDinh.jsp">Sửa Qui Định</a> </li>
                     </ul>
+                -->
                 </li>
                 <li><a href="jspLienHe.jsp">Liên Hệ</a></li>
             </ul>

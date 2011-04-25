@@ -1,6 +1,6 @@
 <%-- 
-    Document   : jspCapNhatTaiKhoan
-    Created on : Apr 23, 2011, 4:32:05 PM
+    Document   : jspTaoTaiKhoan
+    Created on : Apr 24, 2011, 2:49:42 PM
     Author     : ngloc_it
 --%>
 <%@include file="jspmenu.jsp" %>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cập nhật tài khoản</title>
+        <title>Tạo Tài Khoản Mơi.</title>
         <style media="all" type="text/css">
             #table-info{
                 margin-left: 240px;
@@ -52,29 +52,20 @@
         </style>
     </head>
     <body>
-        <h1>BẠN ĐANG Ở TRANG CẬP NHẬT TÀI KHOẢN!</h1><br/>
+        <h1>BẠN ĐANG Ở TRANG CÀI ĐẶT TÀI KHOẢN!</h1><br/>
         <h1>Chào mừng đến với hệ thống đăng ký học phần...!</h1>
 
-        <hr/><hr/> <h3>Phần thông tin cho tài khoản
-            Quản lý sẽ thay đổi thông tin và nhấn nut cập nhật để cập nhậtlai account
-        </h3> <br/>
-
-        <%
-            String username = request.getParameter("username");
-        %>
+        <br/><br/>
+        <hr/><hr/> <h3>Phần thông tin cho tài khoản</h3> <br/>
         <form method="post" action="#">
             <table id="table-info">
                 <tr>
                     <td id="text-label">Tên Đăng Nhập</td>
-                    <td><input id="text-input" type="text" name="txtUsername" value="<%=username%>"></td>
+                    <td><input id="text-input" type="text" name="txtUsername"></td>
                 </tr>
                 <tr>
                     <td id="text-label">Mật Khẩu</td>
                     <td><input id="text-input" type="text" name="txtPassword"></td>
-                </tr>
-                <tr>
-                    <td id="text-label">Mật Khẩu Mới</td>
-                    <td><input id="text-input" type="text" name="txtNewPassword"></td>
                 </tr>
                 <tr>
                     <td id="text-label">Nhập lại Mật khẩu</td>
@@ -121,7 +112,7 @@
                 </tr>
                 <tr>
                     <td id="text-label">Quyền truy cập</td>
-                    <td>                        
+                    <td>
                         <select name="sRole">
                             <option>Admin</option>
                             <option>Normal</option>
@@ -130,11 +121,31 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input id="btn-submit" type="submit" name="btnCreate" value="Cập Nhật"></td>
+                    <td><input id="btn-submit" type="submit" name="btnCreate" value="Tạo Mới"></td>
                 </tr>
             </table>
         </form>
         <br/><br/>
         <hr/><hr/>
+        <!--Danh sach accounts-->
+        <h3>Phần danh sách các tài khoản đã có <br/><br/>
+            quản lý nhập thông tin vào phân thông tin ở trên để tạo tk mới <br/>
+            quản lý click zô button Delete để xóa tài khoản tương ứng.<br/>
+            quản lý click zô tưng account để thực hiện thay đổi<br/>
+        </h3> <br/>
+        <table id = "table-list">
+            <tr id = "table-list-header">
+                <th>Tài khoản</th><th>Mật khẩu</th><th>Quyền</th><th>Ngày tạo</th><th>...</th><th>...</th><th>...</th><th width="75px"></th>
+            </tr>
+            <tr>
+                <td><a href="jspCapNhatTaiKhoan.jsp?username=ngloc_it">ngloc_it</a></td><td>unknown</td><td>1</td><td>1-1-2001</td><td>...</td><td>...</td><td>...</td>
+                <td><form action="#" method="post"><input type="submit" value="Delete"></form></td>
+            </tr>
+            <tr>
+                <td><a href="jspCapNhatTaiKhoan.jsp?username=trungthanh_xlt">trungthanhxl</a></td><td>unknown</td><td>1</td><td>1-1-2001</td><td>...</td><td>...</td><td>...</td>
+                <td><form action="#" method="post"><input type="submit" value="Delete"></form></td>
+            </tr>
+        </table>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </body>
 </html>
