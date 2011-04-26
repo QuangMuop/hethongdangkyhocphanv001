@@ -46,55 +46,63 @@
         </style>
     </head>
     <body>
-        <h1>BẠN ĐANG Ở TRANG XEM QUI ĐỊNH!</h1><br/>
-        <h1>Chào mừng đến với hệ thống đăng ký học phần...!</h1>
+        <!--Div Wrapper-->
+        <div id="wrapper">
+            <div id="mainNav"><!--Main Navigation-->
+                <%@include file="jspMainNav.jsp" %>
+            </div><!--End Navigation-->
+            <div id="content"><!--Main Contents-->
+                <table>
+                <tr align="center">
+                    <th>Mục</th><th>Giá Trị</th>
+                </tr>
+                <tr>
+                    <td>Tuổi SV Tối Thiểu</td>
+                    <td align="center">15</td>
+                </tr>
+                <tr>
+                    <td>Tuổi SV Tối Đa</td>
+                    <td align="center">27</td>
+                </tr>
+                <tr>
+                    <td>Tuổi GV Tối Thiểu</td>
+                    <td align="center">30</td>
+                </tr>
+                <tr>
+                    <td>Tuổi GV Tối Đa</td>
+                    <td align="center">65</td>
+                </tr>
+                <tr>
+                    <td>Số TC tối thiểu/HK/SV</td>
+                    <td align="center">15</td>
+                </tr>
+                <tr>
+                    <td>Số TC tối đa/HK/SV</td>
+                    <td align="center">25</td>
+                </tr>
+                <tr>
+                    <td>Học Vị Tối Thiều GV</td>
+                    <td align="center">Cao Học</td>
+                </tr>
+                <tr>
+                    <td>Số SV Tối Thiểu/Lớp</td>
+                    <td align="center">35</td>
+                </tr>
+                <tr>
+                    <td>Số SV Tối Đa/Lớp</td>
+                    <td align="center">125</td>
+                </tr>
+                <tr>
+                    <td>Số Điểm HT Môn học</td>
+                    <td align="center">5.0</td>
+                </tr>
+            </table>
+            </div><!--End Contents-->
 
-        <table>
-            <tr align="center">
-                <th>Mục</th><th>Giá Trị</th>
-            </tr>
-            <tr>
-                <td>Tuổi SV Tối Thiểu</td>
-                <td align="center">15</td>
-            </tr>
-            <tr>
-                <td>Tuổi SV Tối Đa</td>
-                <td align="center">27</td>
-            </tr>
-            <tr>
-                <td>Tuổi GV Tối Thiểu</td>
-                <td align="center">30</td>
-            </tr>
-            <tr>
-                <td>Tuổi GV Tối Đa</td>
-                <td align="center">65</td>
-            </tr>
-            <tr>
-                <td>Số TC tối thiểu/HK/SV</td>
-                <td align="center">15</td>
-            </tr>
-            <tr>
-                <td>Số TC tối đa/HK/SV</td>
-                <td align="center">25</td>
-            </tr>
-            <tr>
-                <td>Học Vị Tối Thiều GV</td>
-                <td align="center">Cao Học</td>
-            </tr>
-            <tr>
-                <td>Số SV Tối Thiểu/Lớp</td>
-                <td align="center">35</td>
-            </tr>
-            <tr>
-                <td>Số SV Tối Đa/Lớp</td>
-                <td align="center">125</td>
-            </tr>
-            <tr>
-                <td>Số Điểm HT Môn học</td>
-                <td align="center">5.0</td>
-            </tr>
-        </table>
-
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <div id="footer"><!--Footer-->
+                 <%@include file="jspFooter.jsp" %>
+            </div><!--End footer-->
+        </div>
+        <!--End Wrapper-->
     </body>
 </html>

@@ -14,7 +14,20 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>BẠN ĐANG Ở TRANG CẬP NHẬT THÔNG TIN NGƯỜI DÙNG!</h1><br/>
-        <h1>Chào mừng đến với hệ thống đăng ký học phần...!</h1>
+        <!--Div Wrapper-->
+        <div id="wrapper">
+            <div id="mainNav"><!--Main Navigation-->
+                <%@include file="jspMainNav.jsp" %>
+            </div><!--End Navigation-->
+            <div id="content"><!--Main Contents-->
+                <h1>BẠN ĐANG Ở TRANG CẬP NHẬT THÔNG TIN NGƯỜI DÙNG!</h1><br/>
+                <h1>Chào mừng đến với hệ thống đăng ký học phần...!</h1>
+            </div><!--End Contents-->
+
+            <div id="footer"><!--Footer-->
+                 <%@include file="jspFooter.jsp" %>
+            </div><!--End footer-->
+        </div>
+        <!--End Wrapper-->
     </body>
 </html>

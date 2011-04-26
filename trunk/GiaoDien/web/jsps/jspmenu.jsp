@@ -11,6 +11,7 @@
 <html>
     <head>
         <link href="../csss/menu.css" rel="stylesheet" type="text/css" media="screen">
+        
     </head>
     <body>
         <MARQUEE onmouseover="this.stop();" onmouseout="this.start();" HEIGHT=25 BGCOLOR=#C0C6CE BEHAVIOR=scroll SCROLLAMOUNT="4">
@@ -47,18 +48,9 @@
                         <li> <a href="jspGuiYeuCau.jsp">Gửi Yêu Cầu</a> </li>
                     </ul>
                 </li>
-                <li><a href="jspLogin.jsp">Login</a></li>
-                <li><a href="jspXemQuiDinh.jsp">Qui định</a>
-                <!--<ul>
-                        <li> <a href="jspXemQuiDinh.jsp">Xem Qui Định</a> </li>
-                        <li><a href="jspCaiDatQuiDinh.jsp">Sửa Qui Định</a> </li>
-                    </ul>
-                -->
-                </li>
+                <li><a href="jspLogin.jsp">Login</a></li>                
                 <li><a href="jspLienHe.jsp">Liên Hệ</a></li>
             </ul>
-        </div>
-        <br/><br/>
-        <hr/><hr/>        
+        </div>       
     </body>
 </html>

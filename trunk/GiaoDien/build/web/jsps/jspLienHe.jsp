@@ -14,9 +14,10 @@
         <title>JSP Page</title>
         <style media="all" type="text/css">
             table{
-                margin-left: 200px;
-                margin-top: 120px;
-                width: 75%;
+                margin-left: 20px;
+                margin-top: 100px;
+                margin-bottom: 120px;
+                width: 650px;
                 border: 2px solid;
                 padding: 50 10 20 10;
                 background-color: #495C28;
@@ -34,33 +35,45 @@
         </style>
     </head>
     <body>
-       <h1>BẠN ĐANG Ở TRANG LIÊN HỆ!</h1><br/>
-        <h1>Chào mừng đến với hệ thống đăng ký học phần...!</h1>
+       <!--Div Wrapper-->
+        <div id="wrapper">
+            <div id="mainNav"><!--Main Navigation-->
+                <%@include file="jspMainNav.jsp" %>
+            </div><!--End Navigation-->
+            <div id="content"><!--Main Contents-->
+                <p>
+                    Bạn đọc có ý kiến đóng góp về website này xin vui lòng gửi ý kiến đóng góp vào ô dưới.
+                </p>
+                <form method="post" action="#">
+                    <table>
+                        <tr>
+                            <td><a>Họ Tên</a></td>
+                            <td><input type="text" name="txtName" id="txt-info"></td>
+                        </tr>
+                        <tr>
+                            <td><a>Email</a></td>
+                            <td><input type="text" name="txtName" id="txt-info"></td>
+                        </tr>
+                        <tr>
+                            <td><a>Nội dung:</a></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><textarea type="textarea" name="txtContent" rows="12" cols="50"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td align="right"><input type="submit" name="btnSend" id="btn-send" value="Gửi"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div><!--End Contents-->
 
-        <form method="post" action="#">
-            <table>
-                <tr>
-                    <td><a>Họ Tên</a></td>
-                    <td><input type="text" name="txtName" id="txt-info"></td>
-                </tr>
-                <tr>
-                    <td><a>Email</a></td>
-                    <td><input type="text" name="txtName" id="txt-info"></td>
-                </tr>
-                <tr>
-                    <td><a>Nội dung:</a></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><textarea type="textarea" name="txtContent" rows="12" cols="50"></textarea></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td align="right"><input type="submit" name="btnSend" id="btn-send" value="Gửi"></td>
-                </tr>
-            </table>
-        </form>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <div id="footer"><!--Footer-->
+                 <%@include file="jspFooter.jsp" %>
+            </div><!--End footer-->
+        </div>
+        <!--End Wrapper-->
     </body>
 </html>

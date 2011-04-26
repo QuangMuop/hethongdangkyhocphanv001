@@ -64,7 +64,20 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: #98AFC7;
+    /*background-color: #98AFC7;*/
 }
+
+#page-left{
+    float: left;
+    width: 200px;
+    background-color: #5F5B26;
+}
+
+#page-right{
+    float: right;
+    width: 800px;
+    background-color: #7D8103;
+}
+
 
 /*FootNote*/
