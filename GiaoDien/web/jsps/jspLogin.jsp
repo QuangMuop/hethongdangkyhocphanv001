@@ -15,8 +15,9 @@
 
         <style media="all" type="text/css">
             table{
-                margin-left: 350px;
-                margin-top: 120px;
+                margin-left: 250px;
+                margin-top: 100px;
+                margin-bottom: 120px;
                 padding-top: 125px;
                 padding-left: 25px;
                 padding-right: 25px;
@@ -34,37 +35,46 @@
         </style>>
     </head>
     <body>
-        <h1>BẠN ĐANG Ở TRANG LOGIN!</h1><br/>
-        <h1>Chào mừng đến với hệ thống đăng ký học phần...!</h1>
+        <!--Div Wrapper-->
+        <div id="wrapper">
+            <div id="mainNav"><!--Main Navigation-->
+                <%@include file="jspMainNav.jsp" %>
+            </div><!--End Navigation-->
+            <div id="content"><!--Main Contents-->
+                <form method="post" action="#">
+                    <table>
+                        <tr>
+                            <td>Tên Đăng Nhập</td>
+                            <td>
+                                <input type="text" name="txtUsername" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mật Khẩu</td>
+                            <td>
+                                <input type="password" name="txtPassword" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" name="chkRemember"/> Nhớ tên truy cập
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" id="login-submit" value="Đăng Nhập"/>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div><!--End Contents-->
 
-        <form method="post" action="#">
-            <table>
-                <tr>
-                    <td>Tên Đăng Nhập</td>
-                    <td>
-                        <input type="text" name="txtUsername" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Mật Khẩu</td>
-                    <td>
-                        <input type="password" name="txtPassword" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="checkbox" name="chkRemember"/> Nhớ tên truy cập
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="submit" id="login-submit" value="Đăng Nhập"/>
-                    </td>
-                </tr>
-            </table>
-        </form>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <div id="footer"><!--Footer-->
+                 <%@include file="jspFooter.jsp" %>
+            </div><!--End footer-->
+        </div>
+        <!--End Wrapper-->
     </body>
 </html>

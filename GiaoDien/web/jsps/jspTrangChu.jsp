@@ -11,48 +11,26 @@
 
 <html>
     <head>
+        <link href="../csss/general.css" rel="stylesheet" type="text/css" media="screen">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Trang Chủ</title>
-        <style media="all" type="text/css">
-            #ul-menu{
-                display: block;
-                width: 250px;
-                background-color: #EBF4F4;
-            }
-            #ul-menu a{
-                list-style: none;
-                margin-left: 25px;
-                background-color: #FCF5E3;
-            }
-        </style>
+        <title>Trang Chủ</title>        
     </head>
     <body>
-        <h1>BẠN ĐANG Ở TRANG CHỦ!</h1><br/>
-        <h1>Chào mừng đến với hệ thống đăng ký học phần...!</h1>
+        <!--Div Wrapper-->
+        <div id="wrapper">            
+            <div id="mainNav"><!--Main Navigation-->
+                <%@include file="jspMainNav.jsp" %>
+            </div><!--End Navigation-->
+            <div id="content"><!--Main Contents-->
+                <p>
+                    Một số nội dung ở trang chủ....
+                </p>
+            </div><!--End Contents-->
 
-        <ul id="ul-menu">
-            <li><a href="jspTrangChu.jsp"> Trang chủ </a></li>
-            <li><a href="jspXemDSLop.jsp">Xem DS Lớp Học</a> </li>
-            <li><a href="jspXemTKB.jsp">Xem TKB</a></li>
-            <li> <a href="jspTiepNhanSV.jsp">Tiếp Nhận SV</a> </li>
-            <li><a href="jspTiepNhanGV.jsp">Tiếp Nhận GV</a> </li>
-            <li> <a href="jspLapTKB.jsp">Lập TKB</a> </li>
-            <li><a href="jspTaoLopHoc.jsp">Tạo Lớp Học</a> </li>
-            <li><a href="jspGhiNhanDiemSV.jsp">Ghi Nhận Điểm SV</a> </li>
-            <li> <a href="jspTaoTaiKhoan.jsp">Tạo Tài Khoản mới</a> </li>
-            <li> <a href="jspCapNhatTaiKhoan.jsp">Cập Nhật Tài Khoản</a> </li>
-            <li><a href="jspCaiDatQuiDinh.jsp">Cài Đặt Qui Định</a> </li>
-            <li> <a href="jspDangKyMonHoc.jsp">Đăng Ký Môn Học</a> </li>
-            <li><a href="jspXemChuongTrinhDaoTao.jsp">Xem Chương Trình Đào Tạo</a> </li>
-            <li><a href="jspXemTKB.jsp">Xem TKB</a> </li>
-            <li> <a href="jspXemKQHocTap.jsp">Xem KQ Học Tập</a> </li>
-            <li><a href="jspCapNhatThongTin.jsp">Cập Nhật Thông Tin</a> </li>
-            <li> <a href="jspGuiYeuCau.jsp">Gửi Yêu Cầu</a> </li>
-            <li><a href="jspLogin.jsp">Login</a></li>
-            <li> <a href="jspXemQuiDinh.jsp">Xem Qui Định</a> </li>
-            <li><a href="jspCaiDatQuiDinh.jsp">Sửa Qui Định</a> </li>
-            <li><a href="jspLienHe.jsp">Liên Hệ</a></li>
-        </ul>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <div id="footer"><!--Footer-->
+                 <%@include file="jspFooter.jsp" %>
+            </div><!--End footer-->
+        </div>
+        <!--End Wrapper-->
     </body>
 </html>

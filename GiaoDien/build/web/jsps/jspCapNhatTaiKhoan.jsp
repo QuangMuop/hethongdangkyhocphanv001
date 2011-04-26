@@ -16,6 +16,7 @@
             #table-info{
                 margin-left: 240px;
                 margin-top: 75px;
+                margin-bottom: 120px;
                 padding: 22 5 22 5;
                 width: 350px;
                 border: 3px solid #503438;
@@ -37,7 +38,7 @@
             }
             #table-list{
                 margin-left: 175px;
-                margin-top: 50px;
+                margin-top: 50px;                
                 width: 700px;
                 padding: 22 5 22 5;
                 border: 3px solid #503438;
@@ -52,10 +53,13 @@
         </style>
     </head>
     <body>
-        <h1>BẠN ĐANG Ở TRANG CẬP NHẬT TÀI KHOẢN!</h1><br/>
-        <h1>Chào mừng đến với hệ thống đăng ký học phần...!</h1>
-
-        <hr/><hr/> <h3>Phần thông tin cho tài khoản
+        <!--Div Wrapper-->
+        <div id="wrapper">
+            <div id="mainNav"><!--Main Navigation-->
+                <%@include file="jspMainNav.jsp" %>
+            </div><!--End Navigation-->
+            <div id="content"><!--Main Contents-->
+                <hr/><hr/> <h3>Phần thông tin cho tài khoản
             Quản lý sẽ thay đổi thông tin và nhấn nut cập nhật để cập nhậtlai account
         </h3> <br/>
 
@@ -121,7 +125,7 @@
                 </tr>
                 <tr>
                     <td id="text-label">Quyền truy cập</td>
-                    <td>                        
+                    <td>
                         <select name="sRole">
                             <option>Admin</option>
                             <option>Normal</option>
@@ -134,7 +138,12 @@
                 </tr>
             </table>
         </form>
-        <br/><br/>
-        <hr/><hr/>
+            </div><!--End Contents-->
+
+            <div id="footer"><!--Footer-->
+                 <%@include file="jspFooter.jsp" %>
+            </div><!--End footer-->
+        </div>
+        <!--End Wrapper-->
     </body>
 </html>
