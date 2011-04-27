@@ -26,5 +26,6 @@
     </head>
     <body>
         <a href="jsps/jspTrangChu.jsp">Click vao day de bat dau.</a>
+        
     </body>
 </html>

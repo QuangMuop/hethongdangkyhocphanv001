@@ -1,14 +1,16 @@
 <%-- 
     Document   : index
-    Created on : Apr 23, 2011, 3:43:28 PM
+    Created on : 27-04-2011, 22:06:10
     Author     : ngloc_it
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
+        <link href="../csss/general.css" rel="stylesheet" type="text/css" media="screen">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style media="all" type="text/css">
             a{
@@ -24,8 +26,10 @@
             }
         </style>
     </head>
-    <body>
-        <a href="jsps/jspTrangChu.jsp">Click vao day de bat dau.</a>
-        
+    <body>        
+        <%
+            response.sendRedirect("./jsps/jspTrangChu.jsp");
+        %>
+
     </body>
 </html>
