@@ -14,7 +14,7 @@
         <title>Chi tiêt lớp học</title>
         <style media="all" type="text/css">
             #form-class-info{
-            margin-left: 250px;
+            margin-left: 50px;
             margin-top: 20px;
             width: 350px;
             border: 2px solid;
@@ -26,10 +26,10 @@
             }
 
             #form-list-student{
-            margin-left: 200px;
+            margin-left: 20px;
             margin-top: 20px;
             margin-bottom: 120px;
-            width: 500px;
+            width: 650px;
             border-left: 2px solid;
             border-right: 2px solid;
             background-color: #f3df02;
@@ -79,7 +79,6 @@
 			</table>
 			<br/><br/>
 		</form>
-
 		<br/><br/>
 		<u>Phần này liệt Danh sach SV trong lớp.</u><br/><br/>
 		<form name="form_list_student" id="form-list-student" action="#" method="post">

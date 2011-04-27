@@ -59,22 +59,25 @@
 
 		<table>
 			<tr>
-				<th>STT</th><th>Mã Môn</th><th>Tên môn</th><th>Số TC</th><th>LT</th><th>TH</th><th>Điểm</th><th>Đạt</th>
+				<th>STT</th><th>Học kỳ</th><th>Mã Môn</th><th>Tên môn</th><th>Số TC</th><th>LT</th><th>TH</th><th>Điểm</th><th>Đạt</th>
 			</tr>
 			<tr>
-                            <td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
+                            <td>1</td><td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
 			</tr>
                         <tr>
-                            <td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
+                            <td>1</td><td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
 			</tr>
                         <tr>
-                            <td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
+                            <td>1</td><td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
 			</tr>
                         <tr>
-                            <td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
+                            <td>1</td><td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
 			</tr>
                         <tr>
-                            <td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
+                            <td>1</td><td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
+			</tr>
+                        <tr>
+                            <td>1</td><td>1</td><td>SE001</td><td>Lập trình hướng đối tượng</td><td>4</td><td>3</td><td>1</td><td>32</td><td>x</td>
 			</tr>
 		</table>
             </div><!--End Contents-->

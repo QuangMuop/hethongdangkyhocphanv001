@@ -131,11 +131,7 @@
             <br/><br/>
             <hr/><hr/>
             <!--Danh sach accounts-->
-            <h3>Phần danh sách các tài khoản đã có <br/><br/>
-                quản lý nhập thông tin vào phân thông tin ở trên để tạo tk mới <br/>
-                quản lý click zô button Delete để xóa tài khoản tương ứng.<br/>
-                quản lý click zô tưng account để thực hiện thay đổi<br/>
-            </h3> <br/>
+            <h3>Danh sách các tài khoản đã có</h3><br/><br/>
                 <table id = "table-list">
                     <tr id = "table-list-header">
                         <th>Tài khoản</th><th>Mật khẩu</th><th>Quyền</th><th>Ngày tạo</th><th>...</th><th>...</th><th>...</th><th width="75px"></th>
