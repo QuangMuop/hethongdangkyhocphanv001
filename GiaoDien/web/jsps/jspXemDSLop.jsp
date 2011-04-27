@@ -57,11 +57,7 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <h3>Phần này cung cấp các chức năng search
-                ???sao không cho thêm chức năng search vào trang đăng ký môn học và bỏ chức năng này
-                (chức năng xem danh sách lớp học) đi nhỉ...
-                </h3>
-
+                ---Search area---
                 <form id = "form-search" action="" method="post">
                     <table>
                         <tr>
@@ -94,8 +90,9 @@
                     </table>
                 </form>
                 <hr/>
-                <h3>Phần này là danh sách các lớp học hiện có.</h3>
 
+
+                <h3>Phần này là danh sách các lớp học đã mở.</h3>
                 <table id="table-list-class">
                     <tr>
                         <th>Mã</th><th>Tên Lớp</th><th>Giảng Viên</th><th>Số TC LT</th><th>Số TC TH</th><th>Phòng</th><th>Thứ</th><th>Ca</th><th>
