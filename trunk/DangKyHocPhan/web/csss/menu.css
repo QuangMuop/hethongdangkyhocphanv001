@@ -5,7 +5,7 @@
 
 /*Menu*/
 #menu{
-	margin-left: 150px;
+	margin-left: 250px;
 	margin-top: -46px;
 	border: 1px solid #686;
 	background: #e4e4e3;
@@ -77,6 +77,10 @@ body{
     float: right;
     width: 800px;
     background-color: #7D8103;
+}
+
+#sf{
+    margin-left: 250px;
 }
 
 
