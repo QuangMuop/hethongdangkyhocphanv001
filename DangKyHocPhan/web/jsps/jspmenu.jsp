@@ -19,7 +19,15 @@
         </MARQUEE>
 
         <div id="logo">
-
+            <DIV id="flash" style="Z-INDEX: 1; padding-left: 10%; padding-top: 0px; WIDTH: 80%; POSITION: absolute; TOP: 0px; HEIGHT: 1px">
+                <OBJECT height=200 width=100%>
+                    <embed src="../flash/flash.swf" width="100%" height="120"
+                           quality="high" 
+                           type="application/x-shockwave-flash" menu="false"
+                           wmode="transparent">
+                    </embed>
+                </OBJECT>
+            </DIV>
         </div>
         <div id = "menu">
             <ul>

@@ -41,18 +41,18 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <form method="post" action="#">
+                <form method="post" action="../servTest">
                     <table>
                         <tr>
                             <td>Tên Đăng Nhập</td>
                             <td>
-                                <input type="text" name="txtUsername" value="" />
+                                <input type="text" name="txtUsername"  />
                             </td>
                         </tr>
                         <tr>
                             <td>Mật Khẩu</td>
                             <td>
-                                <input type="password" name="txtPassword" value="" />
+                                <input type="password" name="txtPassword" />
                             </td>
                         </tr>
                         <tr>
@@ -64,7 +64,7 @@
                         <tr>
                             <td></td>
                             <td>
-                                <input type="submit" id="login-submit" value="Đăng Nhập"/>
+                                <input type="submit" name="login-submit" value="Đăng Nhập"/>
                             </td>
                         </tr>
                     </table>
