@@ -26,7 +26,7 @@ public class clsMapperLecturer extends clsMapperDb {
         try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.lecturer Where ");
-            sql.append(" FullName = '").append(name).append("'");
+            sql.append("FullName = '").append(name).append("'");//có dấu tiếng việt thì chưa lấy được
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             if((rs!=null) && rs.next()){
