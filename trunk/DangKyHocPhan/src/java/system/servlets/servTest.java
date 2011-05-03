@@ -31,10 +31,10 @@ public class servTest extends HttpServlet {
         try {
            String Username=request.getParameter("txtUsername");
             String Password=request.getParameter("txtPassword");
-            //clsLecturer cls=new clsLecturer();
+            clsLecturer cls=new clsLecturer();
             clsMapperLecturer mpc=new clsMapperLecturer();
-          // cls= mpc.getLecturerInfo(Username);
-            out.println(mpc.LecturerCheckExistCode(Username));
+           cls= mpc.getLecturerInfo(Username);
+            out.println(cls.getAddress());
                     } finally { 
             out.close();
         }
