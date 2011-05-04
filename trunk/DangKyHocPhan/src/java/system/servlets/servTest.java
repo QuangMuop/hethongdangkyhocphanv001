@@ -32,9 +32,9 @@ public class servTest extends HttpServlet {
        try {
            String Username=request.getParameter("txtUsername");
             String Password=request.getParameter("txtPassword");
-            clsProgram cls=new clsProgram(Integer.parseInt(Username), Password);
-             clsMapperProgram mpp=new clsMapperProgram();
-             mpp.ProgramDelete(cls);
+            clsRegistration cls=new clsRegistration(Username, Password, 1, "2010-2011",0);
+             clsMapperRegistration mpr=new clsMapperRegistration();
+             mpr.RegistrationInsert(cls);
            out.println("OK");
                     } finally { 
             out.close();

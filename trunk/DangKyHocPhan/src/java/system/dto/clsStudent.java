@@ -6,7 +6,7 @@ import java.sql.Date;
 
 public class clsStudent {
     private String FullName;
-    private Date BirthDay;
+    private String BirthDay;
     private String Code;
     private String Class;
     private String Email;
@@ -15,7 +15,10 @@ public class clsStudent {
     private String Home;
     private int IsStuding;
     private int Course;
-    public clsStudent(String fullname, Date birthday, String code, String classs, String email, String phone, String address, String home, int isstuding, int course){
+    public clsStudent(){
+
+    }
+    public clsStudent(String fullname, String birthday, String code, String classs, String email, String phone, String address, String home, int isstuding, int course){
         this.FullName=fullname;
         this.BirthDay=birthday;
         this.Code=code;
@@ -30,7 +33,7 @@ public class clsStudent {
     public void setFullName(String name){
     this.FullName=name;
 }
-public void setBirthDay(Date birth){
+public void setBirthDay(String birth){
     this.BirthDay=birth;
 }
 public void setCode(String code){
@@ -60,7 +63,7 @@ public void setCourse(int course){
 public String getFullname(){
     return this.FullName;
 }
-public Date getBirthDay(){
+public String getBirthDay(){
     return this.BirthDay;
 }
 public String getCode(){

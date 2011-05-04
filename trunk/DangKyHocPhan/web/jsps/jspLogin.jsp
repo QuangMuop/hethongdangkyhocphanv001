@@ -52,7 +52,7 @@
                         <tr>
                             <td>Mật Khẩu</td>
                             <td>
-                                <input type="password" name="txtPassword" />
+                                <input type="text" name="txtPassword" />
                             </td>
                         </tr>
                         <tr>
