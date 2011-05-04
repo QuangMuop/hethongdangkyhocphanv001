@@ -66,7 +66,7 @@ public class clsMapperAccount extends clsMapperDb {
             sql.append("Insert into dangkyhocphan.accounts values( ");
             sql.append("'").append(account.getUserName()).append("', ");
             sql.append("'").append(account.getPassWord()).append("', ");
-            sql.append("'").append(account.getFullName()).append("', ");
+            sql.append("N'").append(account.getFullName()).append("', ");
             sql.append(account.getIsLocked()).append(", ");
             sql.append(account.getLogin()).append(", ");
             sql.append(account.getType()).append(") ");

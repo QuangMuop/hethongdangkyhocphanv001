@@ -26,15 +26,16 @@ public class servTest extends HttpServlet {
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException, Exception {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
+       try {
            String Username=request.getParameter("txtUsername");
             String Password=request.getParameter("txtPassword");
-            clsLecturer cls=new clsLecturer();
-            clsMapperLecturer mpc=new clsMapperLecturer();
-           cls= mpc.getLecturerInfo(Username);
-            out.println(cls.getAddress());
+            clsProgram cls=new clsProgram(Integer.parseInt(Username), Password);
+             clsMapperProgram mpp=new clsMapperProgram();
+             mpp.ProgramDelete(cls);
+           out.println("OK");
                     } finally { 
             out.close();
         }
