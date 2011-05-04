@@ -2,20 +2,23 @@
 package system.dto;
 
 public class clsProgram {
-private int ProgrameCode;
+private int ProgramCode;
 private String SubjectCode;
+public clsProgram(){
+
+}
 public clsProgram(int programcode, String subjectcode){
-    this.ProgrameCode=programcode;
+    this.ProgramCode=programcode;
     this.SubjectCode=subjectcode;
 }
 public void setProgramCode(int programcode){
-    this.ProgrameCode=programcode;
+    this.ProgramCode=programcode;
 }
 public void setSubjectCode(String subjectcode){
     this.SubjectCode=subjectcode;
 }
 public int getProgramCode(){
-    return this.ProgrameCode;
+    return this.ProgramCode;
 }
 public String getSubjectCode(){
     return this.SubjectCode;
