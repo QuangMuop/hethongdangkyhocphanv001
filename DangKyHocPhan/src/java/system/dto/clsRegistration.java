@@ -5,14 +5,16 @@ package system.dto;
 
 public class clsRegistration {
 private String StudentCode;
-private String SubjectCode;
+private String ClassName;
 private int Semester;
 private String Year;
 private float Mark;
+public clsRegistration(){
 
-public clsRegistration(String studentcode, String subjectcode, int semester,String year, float mark ){
+}
+public clsRegistration(String studentcode, String classname, int semester,String year, float mark ){
     this.StudentCode=studentcode;
-    this.SubjectCode=subjectcode;
+    this.ClassName=classname;
     this.Semester=semester;
     this.Year=year;
     this.Mark=mark;
@@ -20,8 +22,8 @@ public clsRegistration(String studentcode, String subjectcode, int semester,Stri
 public void setStudentCode(String studentcode){
     this.StudentCode=studentcode;
 }
-public void setSubjectCode(String subjectcode){
-    this.SubjectCode=subjectcode;
+public void setClassName(String subjectcode){
+    this.ClassName=subjectcode;
 }
 public void setSemester(int semetesr){
     this.Semester=semetesr;
@@ -35,8 +37,8 @@ public void setMark(float mark){
 public String getStudentCode(){
     return this.StudentCode;
 }
-public String getSubjectCode(){
-    return this.SubjectCode;
+public String getClassName(){
+    return this.ClassName;
 }
 public float getMark(){
     return this.Mark;

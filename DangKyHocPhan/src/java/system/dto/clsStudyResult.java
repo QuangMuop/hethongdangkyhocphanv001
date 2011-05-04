@@ -6,6 +6,9 @@ public class clsStudyResult {
 private String StudentCode;
 private String SubjectCode;
 private float Mark;
+public clsStudyResult(){
+
+}
 public clsStudyResult(String studentcode, String subjectcode, float mark){
     this.StudentCode=studentcode;
     this.SubjectCode=subjectcode;

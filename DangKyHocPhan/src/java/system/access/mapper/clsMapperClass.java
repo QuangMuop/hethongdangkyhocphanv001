@@ -83,12 +83,12 @@ public class clsMapperClass extends clsMapperDb{
      public void ClassUpdate(clsClass classDTO) throws Exception{
            try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Update dangkyhocphan.class set SubCode = '").append(classDTO.getSubCode()).append("',");
-            sql.append("LectuerCode='").append(classDTO.getLectureCode()).append("',");
-            sql.append("DateOfWeek='").append(classDTO.getDate()).append("',");
-            sql.append("Room='").append(classDTO.getRoom()).append("',");
-            sql.append("Time=").append(classDTO.getShift()).append("");
-            sql.append("where ClassName='").append(classDTO.getClassName()).append("'");
+            sql.append(" Update dangkyhocphan.class set SubCode = '").append(classDTO.getSubCode()).append("',");
+            sql.append(" LectuerCode='").append(classDTO.getLectureCode()).append("',");
+            sql.append(" DateOfWeek='").append(classDTO.getDate()).append("',");
+            sql.append(" Room='").append(classDTO.getRoom()).append("',");
+            sql.append(" Time=").append(classDTO.getShift());
+            sql.append(" where ClassName='").append(classDTO.getClassName()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){

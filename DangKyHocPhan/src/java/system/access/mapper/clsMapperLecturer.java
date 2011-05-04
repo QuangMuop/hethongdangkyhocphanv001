@@ -41,13 +41,13 @@ public class clsMapperLecturer extends clsMapperDb {
      try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.lecturer values('");
-            sql.append(lecturer.getLecturerCode()).append("',N'");
+            sql.append(lecturer.getLecturerCode()).append("','");
             sql.append(lecturer.getFullname()).append("','");
             sql.append(lecturer.getBirthDay()).append("','");
             sql.append(lecturer.getEmail()).append("','");
-            sql.append(lecturer.getPhone()).append("',N'");
-            sql.append(lecturer.getAddress()).append("',N'");
-            sql.append(lecturer.getHocHam()).append("',N'");
+            sql.append(lecturer.getPhone()).append("','");
+            sql.append(lecturer.getAddress()).append("','");
+            sql.append(lecturer.getHocHam()).append("','");
             sql.append(lecturer.getHocVi()).append("')");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
