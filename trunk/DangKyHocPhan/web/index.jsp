@@ -29,6 +29,7 @@
     <body>        
         <%
             response.sendRedirect("./jsps/jspTrangChu.jsp");
+            //response.sendRedirect("./jsps/jspTest.jsp");
         %>
 
     </body>

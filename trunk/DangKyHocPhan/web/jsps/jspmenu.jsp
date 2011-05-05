@@ -33,7 +33,7 @@
             <ul>
                 <li><a href="jspTrangChu.jsp"> Trang chủ </a>
                 </li>
-                <li><a href="jspXemDSLop.jsp">Xem DS Lớp Học</a> </li>
+                <li><a href="../ViewListClass?searchengine=false">Xem DS Lớp Học</a> </li>
                 <li><a href="jspXemTKB.jsp">Xem TKB</a></li>
                 <li><a href="#">Quản Lý Khoa</a>
                     <ul>

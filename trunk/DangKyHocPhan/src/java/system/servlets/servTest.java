@@ -7,7 +7,6 @@ package system.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -33,10 +32,11 @@ public class servTest extends HttpServlet {
        try {
            String Username=request.getParameter("txtUsername");
             String Password=request.getParameter("txtPassword");
-           clsMapperStudent mps=new clsMapperStudent();
-              clsStudent cls=mps.getStudentInfoByName(Username);
-            out.println(cls.getFullname());
-                        } finally { 
+            clsProgram cls=new clsProgram(Integer.parseInt(Username), Password);
+             //clsMapperProgram mpp=new clsMapperProgram();
+             //mpp.ProgramDelete(cls);
+           out.println("OK");
+                    } finally { 
             out.close();
         }
     } 
