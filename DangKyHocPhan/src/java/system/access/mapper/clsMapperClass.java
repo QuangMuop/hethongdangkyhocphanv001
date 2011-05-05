@@ -36,6 +36,8 @@ public class clsMapperClass extends clsMapperDb{
         }
         return classDTO;
      }
+
+    
      public void ClassInsert(clsClass classDTO) throws Exception{
          try {
             StringBuffer sql = new StringBuffer();
