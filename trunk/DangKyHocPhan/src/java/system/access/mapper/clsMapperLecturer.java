@@ -87,10 +87,20 @@ public class clsMapperLecturer extends clsMapperDb {
         }
         return result;
  }
-  public void LecturerDelete(String name) throws Exception{
+  public void LecturerDeleteByName(String name) throws Exception{
         try{
     StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.lecturer Where FullName = '").append(name).append("'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            stmt.execute();
+        }catch(Exception ex){
+                throw ex;
+        }
+  }
+  public void LecturerDeleteByCode(String code) throws Exception{
+        try{
+    StringBuffer sql = new StringBuffer();
+            sql.append("Delete from dangkyhocphan.lecturer Where LectuterCode = '").append(code).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){
