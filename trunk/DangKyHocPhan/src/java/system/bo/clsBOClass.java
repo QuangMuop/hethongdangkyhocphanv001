@@ -1,5 +1,6 @@
 package system.bo;
 
+import java.util.ArrayList;
 import system.access.mapper.clsMapperClass;
 import system.dto.clsClass;
 
@@ -8,6 +9,19 @@ import system.dto.clsClass;
  * @author ngloc_it
  */
 public class clsBOClass {
+
+     public ArrayList<clsClass> GetAllClass() throws Exception{
+         ArrayList<clsClass> listResult = new ArrayList<clsClass>();
+         try{
+            clsMapperClass mapper = new clsMapperClass();
+            listResult = mapper.GetAllClass();
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+     }
+
+
     /**
      * Get Class Object from class name
      * @param classname Class Name
