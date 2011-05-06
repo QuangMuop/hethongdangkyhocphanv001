@@ -10,6 +10,11 @@ import system.dto.clsClass;
  */
 public class clsBOClass {
 
+    /**
+     * Get all class were opened
+     * @return
+     * @throws Exception
+     */
      public ArrayList<clsClass> GetAllClass() throws Exception{
          ArrayList<clsClass> listResult = new ArrayList<clsClass>();
          try{
@@ -36,6 +41,21 @@ public class clsBOClass {
             throw e;
         }
      }
+
+    /**
+     * Get a class object from it's name
+     * @param classId: name (code) of class
+     * @return
+     * @throws Exception
+     */
+    public clsClass getClassFromId(String classId) throws Exception{
+         try{
+            clsMapperClass mapper = new clsMapperClass();
+            return mapper.getClassinfo(classId);
+        }catch(Exception e){
+            throw e;
+        }
+    }
 
     /**
      * Insert a new class into table class in database

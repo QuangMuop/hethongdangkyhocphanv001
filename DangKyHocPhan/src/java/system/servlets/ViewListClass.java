@@ -135,7 +135,7 @@ public class ViewListClass extends HttpServlet {
         session.setAttribute("listlecturername", listLecturerName);        
     }
 
-    /**
+    /**NOT YET
      *Get data from datbase, put all into sesstion. Do without search selection
      * @param req
      * @param resp
@@ -148,9 +148,30 @@ public class ViewListClass extends HttpServlet {
         ArrayList<clsSubject> listSubject = new ArrayList<clsSubject>();
         ArrayList<String> listLecturerName = new ArrayList<String>();
 
-        
-        session.setAttribute("listclass", null);
-        session.setAttribute("listsubject", null);
-        session.setAttribute("listlecturername", null);
+        int i,j,n,m;
+
+        try {
+            clsBOClass classBo = new clsBOClass();
+            clsBOLecturer lecturerBo = new clsBOLecturer();
+            clsBOSubject subjectBo = new clsBOSubject();
+
+            listClass = classBo.GetAllClass();
+            n = listClass.size();
+            for(i = 0; i < n; i++){
+                String subjectId = listClass.get(i).getSubCode();
+                clsSubject subjectTemp = subjectBo.getSubjectinfoByCode(subjectId);
+                listSubject.add(subjectTemp);
+
+                String lectureCode = listClass.get(i).getLectureCode();
+                String lectureName = lecturerBo.LecturerGetLecturerNameFromId(lectureCode);
+                listLecturerName.add(lectureName);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ViewListClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        session.setAttribute("listclass", listClass);
+        session.setAttribute("listsubject", listSubject);
+        session.setAttribute("listlecturername", listLecturerName);
     }
 }

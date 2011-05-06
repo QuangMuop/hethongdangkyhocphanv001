@@ -81,7 +81,11 @@ public class clsMapperClass extends clsMapperDb{
         return classDTO;
      }
 
-    
+     /**
+      *
+      * @param classDTO
+      * @throws Exception
+      */
      public void ClassInsert(clsClass classDTO) throws Exception{
          try {
             StringBuffer sql = new StringBuffer();
