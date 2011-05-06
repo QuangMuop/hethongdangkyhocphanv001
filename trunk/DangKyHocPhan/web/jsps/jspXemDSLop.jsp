@@ -12,12 +12,12 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-            ArrayList<clsClass> listClass = new ArrayList<clsClass>();
-            ArrayList<clsSubject> listSubject = new ArrayList<clsSubject>();
-            ArrayList<String> listLecturerName = new ArrayList<String>();
+            ArrayList<clsClass> listClass;
+            ArrayList<clsSubject> listSubject;
+            ArrayList<String> listLecturerName;
 
-            ArrayList<String> listSubjectNameFull = new ArrayList<String>();
-            ArrayList<String> listLecturerNameFull = new ArrayList<String>();
+            ArrayList<String> listSubjectNameFull;
+            ArrayList<String> listLecturerNameFull;
 
             listClass = (ArrayList<clsClass>)session.getAttribute("listclass");
             listSubject = (ArrayList<clsSubject>)session.getAttribute("listsubject");
@@ -134,7 +134,7 @@
                     n = listClass.size();
                     for(i = 0; i < n; i++){%>
                         <tr>
-                            <td><a href="jspChiTietLopHoc.jsp?id=<%=listClass.get(i).getClassName()%>"/><%=listClass.get(i).getClassName()%></td>
+                            <td><a href="../ViewClassDetail?id=<%=listClass.get(i).getClassName()%>"/><%=listClass.get(i).getClassName()%></td>
                             <td><%=listSubject.get(i).getSubName()%></td>
                             <td><%=listLecturerName.get(i)%></td>
                             <td><%=listSubject.get(i).getTCLT()%></td>

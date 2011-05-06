@@ -3,6 +3,7 @@ package system.access.mapper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import system.dto.clsRegistration;
 public class clsMapperRegistration extends clsMapperDb{
 public clsMapperRegistration() throws Exception{
@@ -17,6 +18,33 @@ public clsMapperRegistration() throws Exception{
             reg.setMark(Float.parseFloat(rs.getString("Mark")));
          }
      }
+
+
+     /**
+      *
+      * @param className
+      * @return
+      * @throws Exception
+      */
+     public ArrayList<String> getListStudentIdFromClassName(String className) throws Exception{
+        ArrayList<String> listStudentCode = new ArrayList<String>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.registry Where ");
+            sql.append("ClassName = '").append(className);
+            sql.append("'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while(rs!=null && rs.next()){
+                String idTemp = rs.getString("MSSV");
+                listStudentCode.add(idTemp);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listStudentCode;
+     }
+
 public ResultSet getRegistrationInfo(clsRegistration reg) throws Exception{//lấy chưa được thông tin các lớp học của một sinh viên
      try{
             StringBuffer sql = new StringBuffer();
