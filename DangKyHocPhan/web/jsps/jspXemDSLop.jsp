@@ -3,11 +3,28 @@
     Created on : Apr 23, 2011, 4:29:09 PM
     Author     : ngloc_it
 --%>
+<%@page import="system.dto.clsSubject"%>
+<%@page import="system.dto.clsClass"%>
+<%@page import="java.util.ArrayList"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
+<%
+            ArrayList<clsClass> listClass = new ArrayList<clsClass>();
+            ArrayList<clsSubject> listSubject = new ArrayList<clsSubject>();
+            ArrayList<String> listLecturerName = new ArrayList<String>();
+
+            listClass = (ArrayList<clsClass>)session.getAttribute("listclass");
+            listSubject = (ArrayList<clsSubject>)session.getAttribute("listsubject");
+            listLecturerName = (ArrayList<String>)session.getAttribute("listlecturername");
+            String s = (String) session.getAttribute("a");
+            int i, n;
+            n = listClass.size();
+            String tt = listLecturerName.get(1);
+            i = n;            
+        %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -51,6 +68,8 @@
         </style>
     </head>
     <body>
+        <!--Get data from controller-->
+        
         <!--Div Wrapper-->
         <div id="wrapper">
             <div id="mainNav"><!--Main Navigation-->
@@ -97,54 +116,26 @@
                     <tr>
                         <th>Mã</th><th>Tên Lớp</th><th>Giảng Viên</th><th>Số TC LT</th><th>Số TC TH</th><th>Phòng</th><th>Thứ</th><th>Ca</th><th>
                     </tr>
+
+                    <%
+                    for(i = 0; i < n; i++){%>
+                        <tr>
+                            <td><a href="jspChiTietLopHoc.jsp?id=<%=listClass.get(i).getClassName()%>"/><%=listClass.get(i).getClassName()%></td>
+                            <td><%=listSubject.get(i).getSubName()%></td>
+                            <td><%=listLecturerName.get(i)%></td>
+                            <td><%=listSubject.get(i).getTCLT()%></td>
+                            <td><%=listSubject.get(i).getTCTH()%></td>
+                            <td><%=listClass.get(i).getRoom()%></td>
+                            <td><%=listClass.get(i).getDate()%></td>
+                            <td><%=listClass.get(i).getShift()%></td>
+                        </tr>
+                    <%}%>
+                    <!--
                     <tr>
                         <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
                     </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
+                    -->
+                   
                 </table>
             </div><!--End Contents-->
 

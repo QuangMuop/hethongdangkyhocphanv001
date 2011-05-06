@@ -4,11 +4,25 @@ package system.access.mapper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import system.dto.clsClass;
 public class clsMapperClass extends clsMapperDb{
+
+    /**
+     * Constructor
+     * @throws Exception
+     */
      public clsMapperClass() throws Exception{
         super();
-}
+     }
+
+
+     /**
+      * Initial a ClassDTO object from a resultset
+      * @param classs object created
+      * @param rs source
+      * @throws SQLException
+      */
      public void IniClassDTOFromRs(clsClass classs, ResultSet rs) throws SQLException{
          if((rs!=null) && (classs!=null)){
             classs.setClassName(rs.getString("ClassName"));
@@ -20,6 +34,36 @@ public class clsMapperClass extends clsMapperDb{
             classs.setShift(Integer.parseInt(rs.getString("Time")));
          }
      }
+     
+     /**
+      * Get all class in this course
+      * @return current list in database
+      * @throws Exception
+      */
+     public ArrayList<clsClass> GetAllClass() throws Exception{
+         ArrayList<clsClass> listResult = new ArrayList<clsClass>();
+         try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.class");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsClass classTemp = new clsClass();
+                IniClassDTOFromRs(classTemp, rs);
+                listResult.add(classTemp);
+            }
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+     }
+
+     /**
+      *
+      * @param classname
+      * @return
+      * @throws Exception
+      */
      public clsClass getClassinfo(String classname) throws Exception{
          clsClass classDTO=new clsClass();
         try{
