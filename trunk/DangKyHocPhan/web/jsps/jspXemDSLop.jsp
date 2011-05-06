@@ -16,14 +16,16 @@
             ArrayList<clsSubject> listSubject = new ArrayList<clsSubject>();
             ArrayList<String> listLecturerName = new ArrayList<String>();
 
+            ArrayList<String> listSubjectNameFull = new ArrayList<String>();
+            ArrayList<String> listLecturerNameFull = new ArrayList<String>();
+
             listClass = (ArrayList<clsClass>)session.getAttribute("listclass");
             listSubject = (ArrayList<clsSubject>)session.getAttribute("listsubject");
             listLecturerName = (ArrayList<String>)session.getAttribute("listlecturername");
-            String s = (String) session.getAttribute("a");
-            int i, n;
-            n = listClass.size();
-            String tt = listLecturerName.get(1);
-            i = n;            
+            listSubjectNameFull = (ArrayList<String>)session.getAttribute("listsubjectnamefull");
+            listLecturerNameFull = (ArrayList<String>)session.getAttribute("listlecturernamefull");
+            int i, n;                    
+            
         %>
 <html>
     <head>
@@ -77,17 +79,21 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 ---Search area---
-                <form id = "form-search" action="" method="post">
+                <form id = "form-search" action="../ViewListClass?searchengine=true" method="post">
                     <table>
                         <tr>
                             <td><input type="checkbox" name="chkSearchByName"></td>
                             <td>
                                 <select name="sName">
-                                    <option>Lập Trình Hướng Đối Tượng</option>
+                                    <% n = listSubjectNameFull.size();
+                                    for(i = 0; i < n; i++){%>
+                                        <option><%=listSubjectNameFull.get(i)%></option>
+                                    <%}%>
                                 </select>
                             </td>
                             <td></td>
                         </tr>
+                       <!--
                         <tr>
                             <td><input type="checkbox" name="chkSearchByID"></td>
                             <td>
@@ -97,19 +103,26 @@
                             </td>
                             <td><input type="submit" value="Tìm Kiếm"></td>
                         </tr>
+                       -->
                         <tr>
                             <td><input type="checkbox" name="chkSearchByTeacher"></td>
                             <td>
                                 <select name="sTeacherName">
-                                    <option>Vũ Thanh Nguyên</option>
+                                    <% n = listLecturerNameFull.size();
+                                    for(i = 0; i < n; i++){%>
+                                        <option><%=listLecturerNameFull.get(i)%></option>
+                                    <%}%>                                    
                                 </select>
                             </td>
                             <td></td>
                         </tr>
+                        <tr>
+                            <td colspan="2"><input type="submit" value="Tìm Kiếm"></td>
+                        </tr>
                     </table>
                 </form>
-                <hr/>
-
+                <hr/><hr/>
+                <br/>
 
                 <h3>Phần này là danh sách các lớp học đã mở.</h3>
                 <table id="table-list-class">
@@ -118,6 +131,7 @@
                     </tr>
 
                     <%
+                    n = listClass.size();
                     for(i = 0; i < n; i++){%>
                         <tr>
                             <td><a href="jspChiTietLopHoc.jsp?id=<%=listClass.get(i).getClassName()%>"/><%=listClass.get(i).getClassName()%></td>
