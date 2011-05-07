@@ -26,7 +26,7 @@ public clsMapperRule() throws Exception{
       clsRule rule=new clsRule();
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select * from dangkyhocphan.rule");
+            sql.append("Select * from dangkyhocphan.rule where STT=1");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             if((rs!=null) && rs.next()){

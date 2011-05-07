@@ -8,21 +8,10 @@ import java.util.ArrayList;
 import system.dto.clsClass;
 public class clsMapperClass extends clsMapperDb{
 
-    /**
-     * Constructor
-     * @throws Exception
-     */
      public clsMapperClass() throws Exception{
         super();
      }
 
-
-     /**
-      * Initial a ClassDTO object from a resultset
-      * @param classs object created
-      * @param rs source
-      * @throws SQLException
-      */
      public void IniClassDTOFromRs(clsClass classs, ResultSet rs) throws SQLException{
          if((rs!=null) && (classs!=null)){
             classs.setClassName(rs.getString("ClassName"));
@@ -35,11 +24,7 @@ public class clsMapperClass extends clsMapperDb{
          }
      }
      
-     /**
-      * Get all class in this course
-      * @return current list in database
-      * @throws Exception
-      */
+    
      public ArrayList<clsClass> GetAllClass() throws Exception{
          ArrayList<clsClass> listResult = new ArrayList<clsClass>();
          try{
@@ -58,12 +43,7 @@ public class clsMapperClass extends clsMapperDb{
          return listResult;
      }
 
-     /**
-      *
-      * @param classname
-      * @return
-      * @throws Exception
-      */
+    
      public clsClass getClassinfo(String classname) throws Exception{
          clsClass classDTO=new clsClass();
         try{
