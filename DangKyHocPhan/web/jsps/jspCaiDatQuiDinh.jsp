@@ -84,29 +84,28 @@
                         </tr>
                         <tr>
                             <td>Tuổi SV Tối Đa</td>
-                            <td align="center">27</td>
+                            <td align="center">29</td>
                             <td align="center">
                                 <select name="sTuoiSVToiDa">
-                                        <option>24</option>
-                                        <option>25</option>
-                                        <option>26</option>
-                                        <option>27</option>
-                                        <option>28</option>
-                                        <option>29</option>
+                                        <option>30</option>
+                                        <option>31</option>
+                                        <option>32</option>
+                                        <option>33</option>
+                                        <option>34</option>
+                                        <option>35</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>Tuổi GV Tối Thiểu</td>
-                            <td align="center">30</td>
+                            <td align="center">25</td>
                             <td align="center">
                                 <select name="sTuoiGVToiThieu">
+                                    <option>26</option>
+                                    <option>27</option>
                                     <option>28</option>
                                     <option>29</option>
-                                    <option>30</option>
-                                    <option>31</option>
-                                    <option>32</option>
-                                    <option>33</option>
+                                    <option>30</option
                                 </select>
                             </td>
                         </tr>
@@ -115,12 +114,12 @@
                             <td align="center">65</td>
                             <td align="center">
                                 <select name="sTuoiGVToiDa">
-                                    <option>62</option>
-                                    <option>63</option>
+                                    <option>60</option>
+                                    <option>61</option>
+                                        <option>62</option>
+                                        <option>63</option>
                                         <option>64</option>
                                         <option>65</option>
-                                        <option>66</option>
-                                        <option>67</option>
                                 </select>
                             </td>
                         </tr>
@@ -153,27 +152,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Học Vị Tối Thiều GV</td>
-                            <td align="center">Cao Học</td>
-                            <td align="center">
-                                <select name="sHVToiThieu">
-                                    <option>Cao Học</option>
-                                    <option>Thạc Sĩ</option>
-                                    <option>Tiến Sĩ</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Số SV Tối Thiểu/Lớp</td>
-                            <td align="center">35</td>
+                            <td align="center">29</td>
                             <td align="center">
                                 <select name="sSVToiThieuLop">
                                     <option>30</option>
-                                    <option>22</option>
-                                    <option>24</option>
-                                    <option>25</option>
-                                    <option>26</option>
-                                    <option>28</option>
+                                    <option>31</option>
+                                    <option>32</option>
+                                    <option>33</option>
+                                    <option>34</option>
+                                    <option>35</option>
                                 </select>
                             </td>
                         </tr>
