@@ -15,11 +15,11 @@ public class clsBOClass {
      * @return
      * @throws Exception
      */
-     public ArrayList<clsClass> GetAllClass() throws Exception{
+     public ArrayList<clsClass> GetAllClass(String strOrderBy) throws Exception{
          ArrayList<clsClass> listResult = new ArrayList<clsClass>();
          try{
             clsMapperClass mapper = new clsMapperClass();
-            listResult = mapper.GetAllClass();
+            listResult = mapper.GetAllClass(strOrderBy);
          }catch(Exception ex){
             throw ex;
          }

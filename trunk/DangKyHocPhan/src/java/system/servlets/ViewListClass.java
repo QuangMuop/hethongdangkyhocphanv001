@@ -77,7 +77,7 @@ public class ViewListClass extends HttpServlet {
             clsBOLecturer lecturerBo = new clsBOLecturer();
             clsBOSubject subjectBo = new clsBOSubject();
 
-            ArrayList<clsClass> listClass = classBo.GetAllClass();
+            ArrayList<clsClass> listClass = classBo.GetAllClass("");
             n = listClass.size();
             for(i = 0; i < n; i++){
                 String subjectId = listClass.get(i).getSubCode();
@@ -115,7 +115,7 @@ public class ViewListClass extends HttpServlet {
             clsBOLecturer lecturerBo = new clsBOLecturer();
             clsBOSubject subjectBo = new clsBOSubject();
 
-            listClass = classBo.GetAllClass();
+            listClass = classBo.GetAllClass("");
             n = listClass.size();
             for(i = 0; i < n; i++){
                 String subjectId = listClass.get(i).getSubCode();
@@ -155,7 +155,7 @@ public class ViewListClass extends HttpServlet {
             clsBOLecturer lecturerBo = new clsBOLecturer();
             clsBOSubject subjectBo = new clsBOSubject();
 
-            listClass = classBo.GetAllClass();
+            listClass = classBo.GetAllClass("");
             n = listClass.size();
             for(i = 0; i < n; i++){
                 String subjectId = listClass.get(i).getSubCode();
