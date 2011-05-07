@@ -32,7 +32,7 @@
                 <li><a href="jspCapNhatThongTin.jsp">Cập Nhật Thông Tin</a> </li>
                 <li> <a href="jspGuiYeuCau.jsp">Gửi Yêu Cầu</a> </li>
                 <li><a href="jspLogin.jsp">Login</a></li>
-                <li> <a href="jspXemQuiDinh.jsp">Xem Qui Định</a> </li>
+                <li> <a href="../servViewRule">Xem Qui Định</a> </li>
                 <li><a href="jspCaiDatQuiDinh.jsp">Sửa Qui Định</a> </li>
                 <li><a href="jspLienHe.jsp">Liên Hệ</a></li>
             </ul>
