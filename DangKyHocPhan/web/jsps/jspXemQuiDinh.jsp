@@ -3,11 +3,14 @@
     Created on : Apr 23, 2011, 4:35:04 PM
     Author     : ngloc_it
 --%>
+<%@page import="system.dto.clsRule;"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
-
+<%
+clsRule rule =(clsRule) session.getAttribute("rule");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -58,43 +61,39 @@
                 </tr>
                 <tr>
                     <td>Tuổi SV Tối Thiểu</td>
-                    <td align="center">15</td>
+                    <td align="center"><%=rule.getMinStudentAge()%></td>
                 </tr>
                 <tr>
                     <td>Tuổi SV Tối Đa</td>
-                    <td align="center">27</td>
+                    <td align="center"><%= rule.getMaxStudentAge()%></td>
                 </tr>
                 <tr>
                     <td>Tuổi GV Tối Thiểu</td>
-                    <td align="center">30</td>
+                    <td align="center"><%= rule.getMinLecturerAge()%></td>
                 </tr>
                 <tr>
                     <td>Tuổi GV Tối Đa</td>
-                    <td align="center">65</td>
+                    <td align="center"><%=rule.getMaxLecturerAge()%></td>
                 </tr>
                 <tr>
                     <td>Số TC tối thiểu/HK/SV</td>
-                    <td align="center">15</td>
+                    <td align="center"><%=rule.getMinTC()%></td>
                 </tr>
                 <tr>
                     <td>Số TC tối đa/HK/SV</td>
-                    <td align="center">25</td>
-                </tr>
-                <tr>
-                    <td>Học Vị Tối Thiều GV</td>
-                    <td align="center">Cao Học</td>
+                    <td align="center"><%=rule.getMaxTC()%></td>
                 </tr>
                 <tr>
                     <td>Số SV Tối Thiểu/Lớp</td>
-                    <td align="center">35</td>
+                    <td align="center"><%=rule.getMinOfStudent()%></td>
                 </tr>
                 <tr>
                     <td>Số SV Tối Đa/Lớp</td>
-                    <td align="center">125</td>
+                    <td align="center"><%=rule.getMaxOfStudent()%></td>
                 </tr>
                 <tr>
                     <td>Số Điểm HT Môn học</td>
-                    <td align="center">5.0</td>
+                    <td align="center"><%=rule.getMarkPass()%></td>
                 </tr>
             </table>
             </div><!--End Contents-->
