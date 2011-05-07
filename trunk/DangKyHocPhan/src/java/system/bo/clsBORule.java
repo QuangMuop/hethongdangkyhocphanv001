@@ -1,9 +1,11 @@
 package system.bo;
-
-/**
- *
- * @author ngloc_it
- */
+import system.access.mapper.clsMapperRule;
+import system.dto.clsRule;
 public class clsBORule {
-
+public clsRule getRuleInfo() throws Exception{
+    clsRule rule=new clsRule();
+    clsMapperRule mpr=new clsMapperRule();
+    rule=mpr.getRuleInfo();
+    return rule;
+}
 }
