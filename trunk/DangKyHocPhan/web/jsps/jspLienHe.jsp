@@ -44,15 +44,15 @@
                 <p>
                     Bạn đọc có ý kiến đóng góp về website này xin vui lòng gửi ý kiến đóng góp vào ô dưới.
                 </p>
-                <form method="post" action="#">
+                <form id="myform" name="myform" method="post" action="../servSendComment">
                     <table>
                         <tr>
                             <td><a>Họ Tên</a></td>
-                            <td><input type="text" name="txtName" id="txt-info"></td>
+                            <td><input type="text"  name="txtName" id="txt-info"></td>
                         </tr>
                         <tr>
                             <td><a>Email</a></td>
-                            <td><input type="text" name="txtName" id="txt-info"></td>
+                            <td><input type="text"  name="txtEmail" id="txt-info"></td>
                         </tr>
                         <tr>
                             <td><a>Nội dung:</a></td>
@@ -60,11 +60,11 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td><textarea type="textarea" name="txtContent" rows="12" cols="50"></textarea></td>
+                            <td><textarea type="textarea"  name="txtContent" rows="12" cols="50"></textarea></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td align="right"><input type="submit" name="btnSend" id="btn-send" value="Gửi"></td>
+                            <td align="right"><input type="button" name="btnSend" onclick="sendcomment()" value="Gửi"></td>
                         </tr>
                     </table>
                 </form>
@@ -76,4 +76,22 @@
         </div>
         <!--End Wrapper-->
     </body>
+     <script  type = "text/javascript" >
+         function sendcomment(){
+           var content = document.myform.txtContent.value;
+           var name = document.myform.txtName.value;
+           var email = document.myform.txtEmail.value;
+         if(content.length==0){
+             alert("Bạn chưa nhập nội dung");
+          }
+          else if(name.length==0){
+             alert("Bạn chưa nhập tên");
+          }else if(email.length==0){
+             alert("Bạn chưa nhập email"); 
+          }
+          else{
+           document.forms["myform"].submit();
+          }
+  }
+       </script>
 </html>
