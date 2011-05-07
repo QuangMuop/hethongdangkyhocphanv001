@@ -25,11 +25,12 @@ public class clsMapperClass extends clsMapperDb{
      }
      
     
-     public ArrayList<clsClass> GetAllClass() throws Exception{
+     public ArrayList<clsClass> GetAllClass(String strOrderBy) throws Exception{
          ArrayList<clsClass> listResult = new ArrayList<clsClass>();
          try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select * from dangkyhocphan.class");
+            sql.append("Select * from dangkyhocphan.class order by ");
+            sql.append(strOrderBy);
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while((rs!=null) && rs.next()){

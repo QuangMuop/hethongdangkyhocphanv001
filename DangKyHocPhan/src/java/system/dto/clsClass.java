@@ -52,6 +52,10 @@ public String getSubCode(){
 public String getLectureCode(){
     return this.LecturerCode;
 }
+/**
+ * Get date for subject
+ * @return
+ */
 public String getDate(){
     return this.Date;
 }

@@ -34,7 +34,7 @@
                 <li><a href="jspTrangChu.jsp"> Trang chủ </a>
                 </li>
                 <li><a href="../ViewListClass?searchengine=false">Xem DS Lớp Học</a> </li>
-                <li><a href="jspXemTKB.jsp">Xem TKB</a></li>
+                <li><a href="../ViewSchedule">Xem TKB</a></li>
                 <li><a href="#">Quản Lý Khoa</a>
                     <ul>
                         <li> <a href="jspTiepNhanSV.jsp">Tiếp Nhận SV</a> </li>
@@ -50,7 +50,7 @@
                 <ul>
                         <li> <a href="jspDangKyMonHoc.jsp">Đăng Ký Môn Học</a> </li>
                         <li><a href="jspXemChuongTrinhDaoTao.jsp">Xem Chương Trình Đào Tạo</a> </li>
-                        <li><a href="jspXemTKB.jsp">Xem TKB</a> </li>
+                        <li><a href="../ViewSchedule">Xem TKB</a> </li>
                         <li> <a href="jspXemKQHocTap.jsp">Xem KQ Học Tập</a> </li>
                         <li><a href="jspCapNhatThongTin.jsp">Cập Nhật Thông Tin</a> </li>
                         <li> <a href="jspGuiYeuCau.jsp">Gửi Yêu Cầu</a> </li>

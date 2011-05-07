@@ -3,6 +3,7 @@
     Created on : Apr 23, 2011, 4:29:26 PM
     Author     : ngloc_it
 --%>
+<%@page import="java.util.ArrayList"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -33,6 +34,13 @@
         </style>
     </head>
     <body>
+        <!--Get data from controller-->
+        <%
+        ArrayList<String> listData;
+        listData = (ArrayList<String>)session.getAttribute("listdata");
+        int i=0, n;
+        n = listData.size();
+        %>
         <!--Div Wrapper-->
         <div id="wrapper">
             <div id="mainNav"><!--Main Navigation-->
@@ -44,92 +52,109 @@
                 </MARQUEE>
                 <br/><br/><br/>
                 <table>
-                    <tr><td><a href="#">Thứ 2</a></td></tr><td></td><td></td><td></td><td></td><td></td>
+                    <!--Thu 2, clasname, sub name, phong, ca, giang vien-->
                     <tr>
-                        <tr><td><td>Mã môn 1</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
+                        <td><a href="#">Thứ 2</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
                     </tr>
-                    <tr>
-                        <tr><td><td>Mã môn 2</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <tr><td><td>...</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
+                    <%while((i<n) && listData.get(i).equals("2")){
+                        i++;%>
+                        <tr>
+                            <td></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                        </tr>
+                    <%}%>
                 </table>
                 <table>
-                    <tr><td><a href="#">Thứ 3</a></td></tr><td></td><td></td><td></td><td></td><td></td><td></td>
-                    <tr>
-                        <td></td><td>Mã môn 1</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>Mã môn 1</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>...</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
+                    <tr><td><a href="#">Thứ 3</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <%while((i<n) && listData.get(i).equals("3")){
+                        i++;%>
+                        <tr>
+                            <td></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                        </tr>
+                    <%}%>
                 </table>
                 <table>
-                    <tr><td><a href="#">Thứ 4</a></td></tr><td></td><td></td><td></td><td></td><td></td><td></td>
-                    <tr>
-                        <td></td><td>Mã môn 1</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>Mã môn 2</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>...</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                </table>
-
-                <table>
-                    <tr><td><a href="#">Thứ 5</a></td></tr><td></td><td></td><td></td><td></td><td></td><td></td>
-                    <tr>
-                        <td></td><td>Mã môn 1</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>Mã môn 2</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>...</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
+                    <tr><td><a href="#">Thứ 4</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <%while((i<n) && listData.get(i).equals("4")){
+                        i++;%>
+                        <tr>
+                            <td></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                        </tr>
+                    <%}%>
                 </table>
 
                 <table>
-                    <tr><td><a href="#">Thứ 6</a></td></tr><td></td><td></td><td></td><td></td><td></td><td></td>
-                    <tr>
-                        <td></td><td>Mã môn 1</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>Mã môn 2</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>...</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
+                    <tr><td><a href="#">Thứ 5</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <%while((i<n) && listData.get(i).equals("5")){
+                        i++;%>
+                        <tr>
+                            <td></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                        </tr>
+                    <%}%>
                 </table>
 
                 <table>
-                    <tr><td><a href="#">Thứ 7</a></td></tr><td></td><td></td><td></td><td></td><td></td><td></td>
-                    <tr>
-                        <td></td><td>Mã môn 1</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>Mã môn 2</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>...</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
+                    <tr><td><a href="#">Thứ 6</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                   <%while((i<n) && listData.get(i).equals("2")){
+                        i++;%>
+                        <tr>
+                            <td></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                        </tr>
+                    <%}%>
                 </table>
 
                 <table>
-                    <tr><td><a href="#">Chủ Nhật</a></td></tr><td></td><td></td><td></td><td></td><td></td><td></td>
-                    <tr>
-                        <td></td><td>Mã môn 1</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>Mã môn 2</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
-                    <tr>
-                        <td></td><td>...</td><td>Lập Trình Hướng Đối Tượng</td><td>P.202</td><td>Ca 1-2</td><td>Ts. Vũ Thanh Nguyên</td>
-                    </tr>
+                    <tr><td><a href="#">Thứ 7</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <%while((i<n) && listData.get(i).equals("2")){
+                        i++;%>
+                        <tr>
+                            <td></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                        </tr>
+                    <%}%>
+                </table>
+
+                <table>
+                    <tr><td><a href="#">Chủ Nhật</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <%while((i<n) && ((listData.get(i).equals("chunhat"))||(listData.get(i).equals("8")))){
+                        i++;%>
+                        <tr>
+                            <td></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                            <td><%=listData.get(i++)%></td>
+                        </tr>
+                    <%}%>
                 </table>
             </div><!--End Contents-->
 
