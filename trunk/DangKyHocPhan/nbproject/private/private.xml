@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <data xmlns="http://www.netbeans.org/ns/profiler/1" version="0.4"/>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
+        <file>
+            <url>src/java/system/access/mapper/clsMapperComment.java</url>
+            <line>8</line>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/D:/UIT/Hoc%20ky%208/Do%20An/hethongdangkyhocphanv001/DangKyHocPhan/web/jsps/jspmenu.jsp</file>
+        <file>file:/D:/UIT/Hoc%20ky%208/Do%20An/hethongdangkyhocphanv001/DangKyHocPhan/src/java/system/servlets/servViewRule.java</file>
+        <file>file:/D:/UIT/Hoc%20ky%208/Do%20An/hethongdangkyhocphanv001/DangKyHocPhan/web/jsps/jspCaiDatQuiDinh.jsp</file>
+    </open-files>
 </project-private>
