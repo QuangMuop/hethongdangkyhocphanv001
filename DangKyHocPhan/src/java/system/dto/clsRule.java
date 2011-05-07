@@ -9,7 +9,7 @@ private int MinTC;
 private int MaxStudentAge;
 private int MinStudentAge;
 private int MaxOfStudent;
-private int MinofStudent;
+private int MinOfStudent;
 private int MarkPass;
 private int MaxLecturerAge;
 private int MinLecturerAge;
@@ -23,7 +23,7 @@ public clsRule(int maxtc, int mintc, int maxstudentage, int minstudentage, int m
     this.MaxStudentAge=maxstudentage;
     this.MinStudentAge=minstudentage;
     this.MaxOfStudent=maxofstudent;
-    this.MinofStudent=minofstudent;
+    this.MinOfStudent=minofstudent;
     this.MarkPass=markpass;
     this.MaxLecturerAge=maxlecturerage;
     this.MinLecturerAge=minlecturerage;
@@ -47,7 +47,7 @@ public void setMaxOfStudent(int maxofstudent){
     this.MaxOfStudent=maxofstudent;
 }
 public void setMinOfStudent(int minofstudent){
-    this.MinStudentAge=minofstudent;
+    this.MinOfStudent=minofstudent;
 }
 public void setMarkPass(int markpass){
     this.MarkPass=markpass;
@@ -77,7 +77,7 @@ public int getMaxOfStudent(){
     return this.MaxOfStudent;
 }
 public int getMinOfStudent(){
-        return this.MinofStudent;
+        return this.MinOfStudent;
 }
 public int getMarkPass(){
     return this.MarkPass;
