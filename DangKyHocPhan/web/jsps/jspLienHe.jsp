@@ -44,7 +44,7 @@
                 <p>
                     Bạn đọc có ý kiến đóng góp về website này xin vui lòng gửi ý kiến đóng góp vào ô dưới.
                 </p>
-                <form id="myform" name="myform" method="post" action="../servSendComment">
+                <form id="myform" name="myform" method="post" action="../servSendComment?guest=true">
                     <table>
                         <tr>
                             <td><a>Họ Tên</a></td>

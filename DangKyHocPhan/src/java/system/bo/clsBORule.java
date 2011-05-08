@@ -8,4 +8,8 @@ public clsRule getRuleInfo() throws Exception{
     rule=mpr.getRuleInfo();
     return rule;
 }
+public void updateRule(clsRule rule) throws Exception{
+    clsMapperRule mpr=new clsMapperRule();
+    mpr.RuleUpdate(rule);
+}
 }

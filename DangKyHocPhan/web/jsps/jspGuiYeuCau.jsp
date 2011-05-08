@@ -3,11 +3,14 @@
     Created on : Apr 23, 2011, 4:34:30 PM
     Author     : ngloc_it
 --%>
+<%@page import="system.dto.clsStudent;"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
-
+<%
+clsStudent student =(clsStudent) session.getAttribute("student");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -44,7 +47,7 @@
                 <p>
                     Vui lòng ghi yêu cầu vào ô bên dưới và click Gửi Yêu Cầu.
                 </p>
-                <form method="post" action="#">
+                <form id="myform" name="myform" method="post" action="../servSendComment?guest=false">
                      <table>
                         <tr>
                             <td><a>Họ Tên</a></td>
@@ -52,11 +55,11 @@
                         </tr>
                         <tr>
                             <td><a>MSSV</a></td>
-                            <td><input type="text" name="txtMSSV" id="txt-info"></td>
+                            <td><input type="text" name="txtMSSV" value="<%=student.getCode()%>" readonly="true" id="txt-info"></td>
                         </tr>
                         <tr>
                             <td><a>Email</a></td>
-                            <td><input type="text" name="txtName" id="txt-info"></td>
+                            <td><input type="text" name="txtEmail" id="txt-info"></td>
                         </tr>
                         <tr>
                             <td><a>Nội dung:</a></td>
@@ -68,7 +71,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td align="right"><input type="submit" name="btnSend" id="btn-send" value="Gửi"></td>
+                            <td align="right"><input type="button" name="btnSend" onclick="sendComment()" id="btn-send" value="Gửi"></td>
                         </tr>
                     </table>
                 </form>
@@ -80,4 +83,22 @@
         </div>
         <!--End Wrapper-->
     </body>
+     <script  type = "text/javascript" >
+         function sendComment(){
+           var content = document.myform.txtContent.value;
+           var name = document.myform.txtName.value;
+           var email = document.myform.txtEmail.value;
+         if(content.length==0){
+             alert("Bạn chưa nhập nội dung");
+          }
+          else if(name.length==0){
+             alert("Bạn chưa nhập tên");
+          }else if(email.length==0){
+             alert("Bạn chưa nhập email");
+          }
+          else{
+           document.forms["myform"].submit();
+          }
+  }
+       </script>
 </html>

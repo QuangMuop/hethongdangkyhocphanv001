@@ -84,7 +84,7 @@ public class justfortest extends HttpServlet {
         String HocHam = "null";
         String HocVi = "Thạc sĩ";
 
-        clsLecturer lecturer = new clsLecturer(FullName, BirthDay, Email, Phone, Address, HocHam, HocVi);
+     clsLecturer lecturer = new clsLecturer(FullName, BirthDay, Email, Phone, Address, HocHam, HocVi,"","");
         lecturer.setLecturerCode(LecturerCode);
         try {
             clsMapperLecturer mapper = new clsMapperLecturer();

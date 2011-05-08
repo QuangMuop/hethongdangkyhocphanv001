@@ -17,7 +17,7 @@ public clsMapperRule() throws Exception{
             rule.setMinStudentAge(Integer.parseInt(rs.getString("MinStudentAge")));
             rule.setMaxOfStudent(Integer.parseInt(rs.getString("MaxNumOfStudent")));
             rule.setMinOfStudent(Integer.parseInt(rs.getString("MinNumOfStudent")));
-            rule.setMarkPass(Integer.parseInt(rs.getString("MarkPass")));
+            rule.setMarkPass(Float.parseFloat(rs.getString("MarkPass")));
             rule.setMaxLecturerge(Integer.parseInt(rs.getString("MaxLecturerAge")));
             rule.setMinLecturerge(Integer.parseInt(rs.getString("MinLecturerAge")));
           }
@@ -64,16 +64,16 @@ public clsMapperRule() throws Exception{
  public void RuleUpdate(clsRule rule) throws Exception{
      try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Update dangkyhocphan.rule set MaxTC=").append(rule.getMaxTC());
-            sql.append(",MinTC=").append(rule.getMinTC());
-            sql.append(",MaxStudentAge=").append(rule.getMaxStudentAge());
-            sql.append(",MinStudentAge=").append(rule.getMinStudentAge());
-            sql.append(",MaxNumOfStudent=").append(rule.getMaxOfStudent());
-            sql.append(",MinNumOfStudent=").append(rule.getMinOfStudent());
-            sql.append(",MarkPass=").append(rule.getMarkPass());
-            sql.append(",MaxLecturerAge=").append(rule.getMaxLecturerAge());
-            sql.append(",MinLecturerAge=").append(rule.getMinLecturerAge());
-            sql.append(" where STT=1");
+            sql.append("Update dangkyhocphan.rule set MaxTC=");
+            sql.append(rule.getMaxTC()).append(", MinTC=");
+            sql.append(rule.getMinTC()).append(", MaxStudentAge=");
+            sql.append(rule.getMaxStudentAge()).append(", MinStudentAge=");
+            sql.append(rule.getMinStudentAge()).append(", MaxNumOfStudent=");
+            sql.append(rule.getMaxOfStudent()).append(", MinNumOfStudent=");
+            sql.append(rule.getMinOfStudent()).append(", MarkPass=");
+            sql.append(rule.getMarkPass()).append(", MaxLecturerAge=");
+            sql.append(rule.getMaxLecturerAge()).append(", MinLecturerAge=");
+            sql.append(rule.getMinLecturerAge()).append(" where STT=1");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             boolean execute = stmt.execute();
         }catch(Exception ex){

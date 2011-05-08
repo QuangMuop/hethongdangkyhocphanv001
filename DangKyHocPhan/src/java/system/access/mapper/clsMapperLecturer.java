@@ -20,12 +20,26 @@ public class clsMapperLecturer extends clsMapperDb {
             lecturer.setAddress(rs.getString("Address"));
             lecturer.setHocHam(rs.getString("HocHam"));
             lecturer.setHocVi(rs.getString("Degree"));
+            lecturer.setGender(rs.getString("Gender"));
+            lecturer.setCMND(rs.getString("CMND"));
          }
      }
+
+ /**
+  *
+  * @param name
+  * @return
+  * @throws Exception
+  */
  public clsLecturer getLecturerInfo(String name) throws Exception{
      clsLecturer lecturer=new clsLecturer();
         try{
             StringBuffer sql = new StringBuffer();
+
+            sql.append("Select * from dangkyhocphan.lecturer");
+           // sql.append("Select * from dangkyhocphan.lecturer Where ");
+            //sql.append("FullName like '%Thanh Nguyen'");//.append(name).append("' order by FullName COLLATE utf8_unicode_ci DESC");//có dấu tiếng việt thì chưa lấy được
+
             //sql.append("Select * from dangkyhocphan.lecturer");
             sql.append("Select * from dangkyhocphan.lecturer Where ");
             sql.append("FullName = '").append(name).append("'");//có dấu tiếng việt thì chưa lấy được
@@ -82,8 +96,9 @@ public class clsMapperLecturer extends clsMapperDb {
             sql.append(lecturer.getPhone()).append("','");
             sql.append(lecturer.getAddress()).append("','");
             sql.append(lecturer.getHocHam()).append("','");
-            sql.append(lecturer.getHocVi()).append("')");
-
+            sql.append(lecturer.getHocVi()).append("','");
+            sql.append(lecturer.getGender()).append("','");
+            sql.append(lecturer.getCMND()).append("')");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();
@@ -149,9 +164,11 @@ public class clsMapperLecturer extends clsMapperDb {
             sql.append("BirthDay='").append(lecturer.getBirthDay()).append("',");
             sql.append("Email='").append(lecturer.getEmail()).append("',");
             sql.append("Phone='").append(lecturer.getPhone()).append("',");
-            sql.append("Address=").append(lecturer.getAddress()).append("");
-            sql.append("HocHam='").append(lecturer.getHocHam()).append("'");
-            sql.append("Degree='").append(lecturer.getHocVi()).append("'");
+            sql.append("Address=,").append(lecturer.getAddress()).append("',");
+            sql.append("HocHam='").append(lecturer.getHocHam()).append("',");
+            sql.append("Degree='").append(lecturer.getHocVi()).append("',");
+            sql.append("Gender='").append(lecturer.getGender()).append("',");
+            sql.append("Degree='").append(lecturer.getCMND()).append("'");
             sql.append("Where LectuterCode='").append(lecturer.getLecturerCode()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();

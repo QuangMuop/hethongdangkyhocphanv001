@@ -15,6 +15,7 @@ public clsMapperComment() throws Exception{
             comment.setContent(rs.getString("Content"));
             comment.setAuthor(rs.getString("Author"));
             comment.setEmail(rs.getString("Email"));
+            comment.setMSSV(rs.getString("MSSV"));
             comment.setDate(rs.getString("Date"));
           }
      }
@@ -39,6 +40,7 @@ public clsMapperComment() throws Exception{
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.comment values(");
             sql.append(commnet.getId()).append(",'");
+            sql.append(commnet.getMSSV()).append("','");
             sql.append(commnet.getContent()).append("','");
             sql.append(commnet.getAuthor()).append("','");
             sql.append(commnet.getEmail()).append("','");

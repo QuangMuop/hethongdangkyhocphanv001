@@ -96,7 +96,8 @@ clsRule rule =(clsRule) session.getAttribute("rule");
                     <td align="center"><%=rule.getMarkPass()%></td>
                 </tr>
             </table>
-            </div><!--End Contents-->
+                 <p><a href="jspCaiDatQuiDinh.jsp">Thay đổi quy định</a></p>
+           </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
                  <%@include file="jspFooter.jsp" %>

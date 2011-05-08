@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import system.access.mapper.*;
 import system.bo.clsBOLecturer;
 import system.dto.*;
@@ -30,15 +31,22 @@ public class servTest extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-       try {
-           String Username=request.getParameter("txtUsername");
-           String Password=request.getParameter("txtPassword");
-           clsBOLecturer lecturerBo = new clsBOLecturer();
-           clsLecturer lecturer = lecturerBo.getLecturerInfo(Username);
-           out.println(lecturer.getAddress());
+         HttpSession session = request.getSession();
+         String isupdate = request.getParameter("isupdate");
+        try {
+           if(isupdate.equalsIgnoreCase("false")){//Xem thông tin sinh viên
+              clsMapperStudent mps=new clsMapperStudent();
+              clsStudent cls=mps.getStudentInfoByCode("07520319");
+              out.println(cls.getAddress());
+            }
        } finally { 
+
             out.close();
         }
+                   // String path = "./jsps/jspTrangChu.jsp";
+        //RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
+        //requestDispatcher.forward(req, resp);
+                  //  response.sendRedirect(path);
     } 
 
    

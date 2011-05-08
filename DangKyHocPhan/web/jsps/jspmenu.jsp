@@ -43,7 +43,7 @@
                         <li><a href="jspGhiNhanDiemSV.jsp">Ghi Nhận Điểm SV</a> </li>
                         <li><a href="jspCaiDatTaiKhoan.jsp">Cài Đặt Tài Khoản</a> </li>
                         <!--<li> <a href="jspCapNhatTaiKhoan.jsp">Cập Nhật Tài Khoản</a> </li>-->
-                        <li><a href="jspCaiDatQuiDinh.jsp">Cài Đặt Qui Định</a> </li>                        
+                        <li><a href="jspXemQuiDinh.jsp">Xem quy định</a> </li>
                     </ul>
                 </li>
                 <li><a href="#">Sinh Viên</a>
@@ -52,11 +52,22 @@
                         <li><a href="jspXemChuongTrinhDaoTao.jsp">Xem Chương Trình Đào Tạo</a> </li>
                         <li><a href="../ViewSchedule">Xem TKB</a> </li>
                         <li> <a href="jspXemKQHocTap.jsp">Xem KQ Học Tập</a> </li>
-                        <li><a href="jspThongTinSinhVien.jsp">Thông Tin SV</a> </li>
-                        <li> <a href="jspGuiYeuCau.jsp">Gửi Yêu Cầu</a> </li>
+                        <li><a href="../servUpdateInfo?isupdate=false">Thông tin sinh viên</a> </li>
+                        <li> <a href="../servSendComment?guest=notlogin">Gửi Yêu Cầu</a> </li>
                     </ul>
                 </li>
-                <li><a href="jspLogin.jsp">Login</a></li>                
+                <%
+                HttpSession sesstion = request.getSession();
+                String username = (String) session.getAttribute("username");
+                if(username == null){
+                %>
+                    <li><a href="jspLogin.jsp">Đăng nhập</a></li>
+                <%}
+                else{
+                %>
+                <li><a href="../servLogin?login=false">Đăng xuất</a></li>
+                <%}%>
+
                 <li><a href="jspLienHe.jsp">Liên Hệ</a></li>
             </ul>
         </div>       
