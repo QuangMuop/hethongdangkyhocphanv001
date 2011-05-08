@@ -52,7 +52,7 @@
                         <li><a href="jspXemChuongTrinhDaoTao.jsp">Xem Chương Trình Đào Tạo</a> </li>
                         <li><a href="../ViewSchedule">Xem TKB</a> </li>
                         <li> <a href="jspXemKQHocTap.jsp">Xem KQ Học Tập</a> </li>
-                        <li><a href="jspCapNhatThongTin.jsp">Cập Nhật Thông Tin</a> </li>
+                        <li><a href="jspThongTinSinhVien.jsp">Thông Tin SV</a> </li>
                         <li> <a href="jspGuiYeuCau.jsp">Gửi Yêu Cầu</a> </li>
                     </ul>
                 </li>

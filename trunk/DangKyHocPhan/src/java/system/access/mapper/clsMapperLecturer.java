@@ -26,21 +26,21 @@ public class clsMapperLecturer extends clsMapperDb {
      clsLecturer lecturer=new clsLecturer();
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select * from dangkyhocphan.lecturer");
-            //sql.append("Select * from dangkyhocphan.lecturer Where ");
-            //sql.append("FullName = '").append(name).append("'");//có dấu tiếng việt thì chưa lấy được
+            //sql.append("Select * from dangkyhocphan.lecturer");
+            sql.append("Select * from dangkyhocphan.lecturer Where ");
+            sql.append("FullName = '").append(name).append("'");//có dấu tiếng việt thì chưa lấy được
             //sql.append("FullName LIKE '%Anh%'");//có dấu tiếng việt thì chưa lấy được
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-//            if((rs!=null) && rs.next()){
-//                IniLecturerDTOFromRs(lecturer, rs);
-//            }
-            while((rs!=null) && rs.next()){
-                if(rs.getString("FullName").toString().equalsIgnoreCase(name)){
-                    IniLecturerDTOFromRs(lecturer, rs);
-                    break;
-                }
+            if((rs!=null) && rs.next()){
+                IniLecturerDTOFromRs(lecturer, rs);
             }
+//            while((rs!=null) && rs.next()){
+//              if(rs.getString("FullName").toString().equalsIgnoreCase(name)){
+//                IniLecturerDTOFromRs(lecturer, rs);
+//              break;
+//              }
+ //           }
         }catch(Exception ex){
             throw ex;
         }
