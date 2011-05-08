@@ -10,13 +10,13 @@ private int MaxStudentAge;
 private int MinStudentAge;
 private int MaxOfStudent;
 private int MinOfStudent;
-private int MarkPass;
+private float MarkPass;
 private int MaxLecturerAge;
 private int MinLecturerAge;
 public clsRule(){
     this.No=1;
 }
-public clsRule(int maxtc, int mintc, int maxstudentage, int minstudentage, int maxofstudent, int minofstudent, int markpass, int maxlecturerage, int minlecturerage){
+public clsRule(int maxtc, int mintc, int maxstudentage, int minstudentage, int maxofstudent, int minofstudent, float markpass, int maxlecturerage, int minlecturerage){
     this.No=1;
     this.MaxTC=maxtc;
     this.MinTC=mintc;
@@ -49,7 +49,7 @@ public void setMaxOfStudent(int maxofstudent){
 public void setMinOfStudent(int minofstudent){
     this.MinOfStudent=minofstudent;
 }
-public void setMarkPass(int markpass){
+public void setMarkPass(float markpass){
     this.MarkPass=markpass;
 }
 public void setMinLecturerge(int minlecturerage){
@@ -79,7 +79,7 @@ public int getMaxOfStudent(){
 public int getMinOfStudent(){
         return this.MinOfStudent;
 }
-public int getMarkPass(){
+public float getMarkPass(){
     return this.MarkPass;
 }
 public int getMaxLecturerAge(){

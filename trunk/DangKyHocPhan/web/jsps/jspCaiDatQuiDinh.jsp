@@ -63,7 +63,7 @@
                         Qui định chỉ được thay đổi bởi Quản lý khoa.
                     </MARQUEE>
                 </p>
-                <form action="" method="post">
+                <form action="../servViewRule?issetup=true" method="post">
                     <table>
                         <tr align="center">
                             <th>Mục</th><th>Giá Trị hiện tại</th><th>Giá Trị Mới</th>
@@ -169,7 +169,7 @@
                             <td>Số SV Tối Đa/Lớp</td>
                             <td align="center">125</td>
                             <td align="center">
-                                <select name="sTCToiDa">
+                                <select name="sSVToiDaLop">
                                     <option>100</option>
                                     <option>120</option>
                                     <option>125</option>

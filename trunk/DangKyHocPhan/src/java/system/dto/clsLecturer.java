@@ -13,10 +13,12 @@ public class clsLecturer {
     private String Address;
     private String HocHam;
     private String HocVi;
+    private String Gender;
+    private String CMND;
     public clsLecturer(){
 
     }
-    public clsLecturer(String fullname, String birthday, String email, String phone, String address, String hocham, String hocvi){
+    public clsLecturer(String fullname, String birthday, String email, String phone, String address, String hocham, String hocvi, String gender, String cmnd){
         this.FullName=fullname;
         this.BirthDay=birthday;
         this.Email=email;
@@ -24,6 +26,8 @@ public class clsLecturer {
         this.Address=address;
         this.HocHam=hocham;
         this.HocVi=hocvi;
+        this.Gender=gender;
+        this.CMND=cmnd;
     }
     public void setLecturerCode(String code){
         this.LecturerCode=code;
@@ -49,6 +53,12 @@ public void setHocHam(String hocham){
 public void setHocVi(String hocvi){
     this.HocVi=hocvi;
 }
+public void setGender(String gender){
+    this.Gender=gender;
+}
+public void setCMND(String cmnd){
+    this.CMND=cmnd;
+}
  public String getFullname(){
     return this.FullName;
 }
@@ -72,5 +82,11 @@ public String getHocHam(){
 }
 public String getHocVi(){
     return this.HocVi;
+}
+public String getGender(){
+    return this.Gender;
+}
+public String getCMND(){
+    return this.CMND;
 }
 }

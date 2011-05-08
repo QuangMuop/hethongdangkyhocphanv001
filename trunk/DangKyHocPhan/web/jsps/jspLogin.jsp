@@ -32,7 +32,7 @@
                 width: 75px;
                 border: 2px solid #175F6E;
             }
-        </style>>
+        </style>
     </head>
     <body>
         <!--Div Wrapper-->
@@ -41,18 +41,18 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <form method="post" action="../servTest">
+                <form name="myform" id="myform" method="post" action="../servLogin?login=true">
                     <table>
                         <tr>
                             <td>Tên Đăng Nhập</td>
                             <td>
-                                <input type="text" name="txtUsername"  />
+                                <input type="text" name="txtUsername" id="txtUsername" />
                             </td>
                         </tr>
                         <tr>
                             <td>Mật Khẩu</td>
                             <td>
-                                <input type="text" name="txtPassword" />
+                                <input type="password" name="txtPassword" id="txtPassword"/>
                             </td>
                         </tr>
                         <tr>
@@ -64,7 +64,7 @@
                         <tr>
                             <td></td>
                             <td>
-                                <input type="submit" name="login-submit" value="Đăng Nhập"/>
+                                <input type="button" name="login-submit" onclick="Login()" value="Đăng Nhập"/>
                             </td>
                         </tr>
                     </table>
@@ -77,4 +77,20 @@
         </div>
         <!--End Wrapper-->
     </body>
+         <script  type = "text/javascript" >
+         function Login(){
+           var txtUsername = document.myform.txtUsername.value;
+           var txtPassword = document.myform.txtPassword.value;
+          if(txtUsername.length==0){
+             alert("Bạn chưa nhập tên người dùng");
+             txtUsername.focus();
+          }else if(txtPassword.length==0){
+             alert("Bạn chưa nhập mật khẩu");
+             txtPassword.focus();
+          }
+          else{
+              document.forms["myform"].submit();
+          }
+  }
+       </script>
 </html>

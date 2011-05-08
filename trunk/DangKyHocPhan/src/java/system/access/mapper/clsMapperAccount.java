@@ -60,7 +60,7 @@ public class clsMapperAccount extends clsMapperDb {
         }
         return accountDTO;
     }
-    public void AccountInsert(clsAccount account) throws Exception{
+   public void AccountInsert(clsAccount account) throws Exception{
         try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.accounts values( ");

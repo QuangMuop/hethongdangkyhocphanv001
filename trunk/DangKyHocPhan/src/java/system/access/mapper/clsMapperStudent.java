@@ -19,8 +19,12 @@ public void IniStudentDTOFromRs(clsStudent student, ResultSet rs) throws SQLExce
             student.setPhone(rs.getString("Phone"));
             student.setAddress(rs.getString("Address"));
             student.setHome(rs.getString("Home"));
-            student.setIsStuding(Integer.parseInt(rs.getString("IsStuding")));
+            student.setIsStuding(rs.getString("IsStuding"));
             student.setCourse(Integer.parseInt(rs.getString("CourseCode")));
+            student.setGender(rs.getString("Gender"));
+            student.setCMND(rs.getString("CMND"));
+            student.setType(rs.getString("Type"));
+            student.setBacHoc(rs.getString("BacHoc"));
 
          }
      }
@@ -29,7 +33,7 @@ public void IniStudentDTOFromRs(clsStudent student, ResultSet rs) throws SQLExce
         try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.student Where ");
-            sql.append("MSSV = '").append(MSSV).append("'");//có dấu tiếng việt thì chưa lấy được
+            sql.append("MSSV = '").append(MSSV).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             if((rs!=null) && rs.next()){
@@ -67,9 +71,13 @@ public void IniStudentDTOFromRs(clsStudent student, ResultSet rs) throws SQLExce
             sql.append(student.getEmail()).append("','");
             sql.append(student.getPhone()).append("','");
             sql.append(student.getAddress()).append("','");
-            sql.append(student.getHome()).append("',");
-            sql.append(student.getIsStuding()).append(",");
-            sql.append(student.getCourse()).append(")");
+            sql.append(student.getHome()).append("','");
+            sql.append(student.getIsStuding()).append("',");
+            sql.append(student.getCourse()).append(",'");
+            sql.append(student.getGender()).append("','");//
+            sql.append(student.getCMND()).append("','");
+            sql.append(student.getType()).append("','");
+            sql.append(student.getBacHoc()).append("')");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();
@@ -113,8 +121,12 @@ public void IniStudentDTOFromRs(clsStudent student, ResultSet rs) throws SQLExce
             sql.append(" Phone='").append(student.getPhone()).append("',");
             sql.append(" Address='").append(student.getAddress()).append("',");
             sql.append(" Home='").append(student.getHome()).append("',");
-            sql.append(" IsStuding=").append(student.getIsStuding()).append(",");
-            sql.append(" CourseCode=").append(student.getCourse());
+            sql.append(" IsStuding='").append(student.getIsStuding()).append("',");
+            sql.append(" CourseCode=").append(student.getCourse()).append(",");
+            sql.append(" Gender='").append(student.getGender()).append("',");
+            sql.append(" CMND='").append(student.getCMND()).append("',");
+            sql.append(" Type='").append(student.getType()).append("',");
+            sql.append(" BacHoc='").append(student.getBacHoc()).append("' ");
             sql.append(" Where MSSV='").append(student.getCode()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
