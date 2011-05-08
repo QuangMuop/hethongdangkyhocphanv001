@@ -51,7 +51,7 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <form id="form-add-one" action="#" method="post">
+                <form id="form-add-one" action="../RegistryStudent?function=addone" method="post">
                     <u>Thêm 1 SV vào database.</u><br/><br/>
                     <table id="table-add-one">
                         <tr>
@@ -67,25 +67,34 @@
                             <td>Ngày Sinh</td>
                             <td>
                                 <select name="sDay">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                    <%for(int i = 0; i < 31; i++){%>
+                                        <option><%=(i+1)%></option>
+                                    <%}%>
                                 </select>
                                 <select name="sMonth">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                    <%for(int i = 0; i < 12; i++){%>
+                                        <option><%=(i+1)%></option>
+                                    <%}%>
                                 </select>
                                 <select name="sYear">
-                                    <option>1991</option>
-                                    <option>1992</option>
-                                    <option>1993</option>
-                                    <option>1994</option>
+                                    <%for(int i = 0; i < 50; i++){%>
+                                        <option><%=(1980+i)%></option>
+                                    <%}%>
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Lớp</td>
+                            <td>
+                            <select name="sClass">
+                                    <%for(int i = 1; i < 10; i++){%>
+                                        <option>
+                                            CNPM <% if(i<10){%>0<%}%><%=i%>
+                                        </option>
+                                    <%}%>
+                            </select>
+                            </td>
+                    </tr>
                         <tr>
                             <td>Giới Tính</td>
                             <td>
@@ -96,7 +105,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Địa chỉ</td> <td><input type="text" name="txtAddress"></td>
+                            <td>Địa chỉ thường trú</td> <td><input type="text" name="txtThuongTru"></td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ tạm trú</td> <td><input type="text" name="txtTamTru"></td>
                         </tr>
                         <tr>
                             <td>Điện thoại</td> <td><input type="text" name="txtPhoneNumber"></td>
@@ -105,7 +117,14 @@
                             <td>Email</td> <td><input type="text" name="txtEmail"></td>
                         </tr>
                         <tr>
-                            <td>Khóa</td> <td><input type="text" name="txtCourse"></td>
+                            <td>Khóa</td>
+                            <td>
+                                <select name="sCourse">
+                                    <%for(int i = 0; i < 9; i++){%>
+                                        <option><%=(1+i)%></option>
+                                    <%}%>
+                                </select>
+                            </td>
                         </tr>
                     </table>
                     <br/>
@@ -113,7 +132,7 @@
                 </form>
 
                 <br/><br/>
-                <form id="form-browse" action="#" method="post">
+                <form id="form-browse" action="../RegistryStudent?function=addlist" method="post">
                     <u>Thêm Sinh Viên Từ File</u><br/><br/>
                     <table id="table-browse">
                         <tr>
