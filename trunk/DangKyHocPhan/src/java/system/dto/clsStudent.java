@@ -19,6 +19,7 @@ public class clsStudent {
     private String CMND;
     private String Type;//loại sinh viên, chính quy hay từ xa
     private String BacHoc;//bậc học, đại học, cao học, cao đẳng
+    private String Note=null;
     public clsStudent(){
 
     }
@@ -80,6 +81,9 @@ public void setType(String type){
 public void setBacHoc(String bachoc){
     this.BacHoc=bachoc;
 }
+public void setNote(String note){
+    this.Note=note;
+}
 public String getFullname(){
     return this.FullName;
 }
@@ -121,5 +125,8 @@ public String getType(){
 }
 public String getBacHoc(){
     return this.BacHoc;
+}
+public String getNote(){
+    return this.Note;
 }
 }
