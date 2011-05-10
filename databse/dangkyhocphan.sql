@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: dangkyhocphan
 Target Host: localhost
 Target Database: dangkyhocphan
-Date: 5/9/2011 12:37:45 AM
+Date: 5/10/2011 4:57:24 PM
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -162,9 +162,10 @@ CREATE TABLE `student` (
   `IsStuding` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `CourseCode` int(11) NOT NULL,
   `Gender` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `CMND` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `CMND` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `BacHoc` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `Note` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`MSSV`),
   KEY `foreign_stu_course` (`CourseCode`),
   CONSTRAINT `foreign_stu_course` FOREIGN KEY (`CourseCode`) REFERENCES `course` (`CourseCode`)
@@ -300,10 +301,10 @@ INSERT INTO `registry` VALUES ('07520319', 'SE101.B11', '1', '2010-2011', null);
 INSERT INTO `registry` VALUES ('07520319', 'SE104.B13', '1', '2010-2011', null);
 INSERT INTO `registry` VALUES ('07520319', 'SE417.B12', '1', '2010-2011', null);
 INSERT INTO `rule` VALUES ('1', '24', '14', '30', '15', '100', '30', '4.5', '60', '26');
-INSERT INTO `student` VALUES ('Nguyễn Đức Lê', '07252190', '1989-10-23', 'CNPM02', 'ducle133@yahoo.com', '01211213478', 'Quận 1, Tp.HCm', 'Tp.HCm', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học');
-INSERT INTO `student` VALUES ('Hoàng Nam Hải', '07520106', '1989-01-01', 'CNPM02', 'namhai@gmail.com', '0978345095', 'Quận 12, Tp.HCM', 'Tỉnh Lâm Đồng', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học');
-INSERT INTO `student` VALUES ('Nguyễn Văn Lộc', '07520210', '1989-12-12', 'CNPM02', 'nguyenloc.uit@gmail.com', '01683452346', 'Tân Bình, Tp.HCM', 'Tỉnh Ninh Bình', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học');
-INSERT INTO `student` VALUES ('Nguyễn Trung Thành', '07520319', '1987-08-02', 'CNPM02', 'thanhnt28@gmail.com', '0989432371', '9/32 khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.HCm', 'Xuân Liên-Nghi Xuân-Hà Tĩnh', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học');
+INSERT INTO `student` VALUES ('Nguyễn Đức Lê', '07252190', '1989-10-23', 'CNPM02', 'ducle133@yahoo.com', '01211213478', 'Quận 1, Tp.HCm', 'Tp.HCm', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học', null);
+INSERT INTO `student` VALUES ('Hoàng Nam Hải', '07520106', '1989-01-01', 'CNPM02', 'namhai@gmail.com', '0978345095', 'Quận 12, Tp.HCM', 'Tỉnh Lâm Đồng', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học', null);
+INSERT INTO `student` VALUES ('Nguyễn Văn Lộc', '07520210', '1989-12-12', 'CNPM02', 'nguyenloc.uit@gmail.com', '01683452346', 'Tân Bình, Tp.HCM', 'Tỉnh Ninh Bình', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học', null);
+INSERT INTO `student` VALUES ('Nguyễn Trung Thành', '07520319', '1987-08-02', 'CNPM02', 'thanhnt28@gmail.com', '0989432371', '9/32 khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.HCm', 'Xuân Liên-Nghi Xuân-Hà Tĩnh', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học', '');
 INSERT INTO `studyresult` VALUES ('07520319', 'CARC1 ', '8.5');
 INSERT INTO `studyresult` VALUES ('07520319', 'CNET1', '8');
 INSERT INTO `studyresult` VALUES ('07520319', 'CSC21', '8.5');
