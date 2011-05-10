@@ -42,6 +42,7 @@ public class clsMapperStudent extends clsMapperDb{
             student.setCMND(rs.getString("CMND"));
             student.setType(rs.getString("Type"));
             student.setBacHoc(rs.getString("BacHoc"));
+            student.setNote(rs.getString("Note"));
 
          }
      }
@@ -106,7 +107,7 @@ public class clsMapperStudent extends clsMapperDb{
             sql.append(student.getGender()).append("','");//
             sql.append(student.getCMND()).append("','");
             sql.append(student.getType()).append("','");
-            sql.append(student.getBacHoc()).append("')");
+            sql.append(student.getBacHoc()).append("','')");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             result = stmt.execute();
             stmt.close();
@@ -144,10 +145,10 @@ public class clsMapperStudent extends clsMapperDb{
                 throw ex;
         }
   }
-    public void StudentUpdate(clsStudent student) throws Exception{
+    public void StudentUpdateByAdmin(clsStudent student) throws Exception{
       try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Update dangkyhocphan.lecturer set FullName = '").append(student.getFullname()).append("',");
+            sql.append("Update dangkyhocphan.student set FullName = '").append(student.getFullname()).append("',");
             sql.append(" BirthDay='").append(student.getBirthDay()).append("',");
             sql.append(" Class='").append(student.getClasss()).append("',");
             sql.append(" Email='").append(student.getEmail()).append("',");
@@ -159,8 +160,20 @@ public class clsMapperStudent extends clsMapperDb{
             sql.append(" Gender='").append(student.getGender()).append("',");
             sql.append(" CMND='").append(student.getCMND()).append("',");
             sql.append(" Type='").append(student.getType()).append("',");
-            sql.append(" BacHoc='").append(student.getBacHoc()).append("' ");
+            sql.append(" BacHoc='").append(student.getBacHoc()).append("', ");
+            sql.append(" Note=''");
             sql.append(" Where MSSV='").append(student.getCode()).append("'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            stmt.execute();
+        }catch(Exception ex){
+                throw ex;
+        }
+  }
+     public void StudentUpdateByStudent(String info, String MSSV) throws Exception{
+      try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Update dangkyhocphan.student set Note = '").append(info).append("'");
+            sql.append(" Where MSSV='").append(MSSV).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){
