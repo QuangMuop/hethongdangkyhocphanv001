@@ -66,4 +66,8 @@ public class clsBOStudent {
           clsMapperStudent mapper = new clsMapperStudent();
           return mapper.StudentCheckExistCode(MSSV);                
       }
+     public void updateStudentByStudent(String updateinfo, String code) throws Exception{
+         clsMapperStudent mps=new clsMapperStudent();
+         mps.StudentUpdateByStudent(updateinfo, code);
+     }
 }
