@@ -132,12 +132,17 @@
                 </form>
 
                 <br/><br/>
-                <form id="form-browse" action="../RegistryStudent?function=addlist" method="post">
+                <!--
+                <form action="upload-script-url" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file">
+                    <input type="submit">
+                </form>
+                -->
+                <form id="form-browse" action="../RegistryStudent?function=addlist" method="post" name="frmFile">
                     <u>Thêm Sinh Viên Từ File</u><br/><br/>
                     <table id="table-browse">
                         <tr>
-                            <td><input type="text" name="txtUrl"></td>
-                            <td><input type="submit" value="Tìm"></td>
+                            <td><input type="file" name="txtPath"></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Thêm"></td><td></td>

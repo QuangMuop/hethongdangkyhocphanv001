@@ -5,11 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import system.dto.clsStudent;
+
+
+
+
+
 public class clsMapperStudent extends clsMapperDb{
-public clsMapperStudent() throws Exception{
-    super();
-}
-public void IniStudentDTOFromRs(clsStudent student, ResultSet rs) throws SQLException{
+    
+    /**
+     * Constructor
+     * @throws Exception
+     */
+    public clsMapperStudent() throws Exception{
+        super();
+    }
+
+    /**
+     * Initial a student object from DTO data
+     * @param student return value
+     * @param rs source
+     * @throws SQLException
+     */
+    public void IniStudentDTOFromRs(clsStudent student, ResultSet rs) throws SQLException{
          if((rs!=null) && (student!=null)){
             student.setFullName(rs.getString("FullName"));
             student.setCode(rs.getString("MSSV"));
@@ -28,8 +45,15 @@ public void IniStudentDTOFromRs(clsStudent student, ResultSet rs) throws SQLExce
 
          }
      }
- public clsStudent getStudentInfoByCode(String MSSV) throws Exception{
-     clsStudent student=new clsStudent();
+    
+    /**
+     * 
+     * @param MSSV
+     * @return
+     * @throws Exception
+     */
+    public clsStudent getStudentInfoByCode(String MSSV) throws Exception{
+        clsStudent student=new clsStudent();
         try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.student Where ");
@@ -43,9 +67,11 @@ public void IniStudentDTOFromRs(clsStudent student, ResultSet rs) throws SQLExce
             throw ex;
         }
         return student;
- }
- public clsStudent getStudentInfoByName(String name) throws Exception{
-     clsStudent student=new clsStudent();
+    }
+    
+    
+    public clsStudent getStudentInfoByName(String name) throws Exception{
+        clsStudent student=new clsStudent();
         try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.student Where ");
@@ -59,9 +85,12 @@ public void IniStudentDTOFromRs(clsStudent student, ResultSet rs) throws SQLExce
             throw ex;
         }
         return student;
- }
-  public void StudentInsert(clsStudent student) throws Exception{
-     try {
+    }
+    
+    
+    public boolean StudentInsert(clsStudent student) throws Exception{
+        boolean result = false;
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.student values('");
             sql.append(student.getFullname()).append("','");
@@ -79,14 +108,18 @@ public void IniStudentDTOFromRs(clsStudent student, ResultSet rs) throws SQLExce
             sql.append(student.getType()).append("','");
             sql.append(student.getBacHoc()).append("')");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-            stmt.execute();
+            result = stmt.execute();
             stmt.close();
         }
         catch (Exception e) {
                 throw e;
         }
-}
-   public boolean StudentCheckExistCode(String code) throws Exception{
+        return result;
+    }
+
+
+
+    public boolean StudentCheckExistCode(String code) throws Exception{
       boolean result = false;
        try{
             StringBuffer sql = new StringBuffer();

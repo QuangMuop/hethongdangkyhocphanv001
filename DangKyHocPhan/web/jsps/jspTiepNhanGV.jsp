@@ -137,8 +137,7 @@
                     <u>Thêm Giảng Viên Từ File</u><br/><br/>
                     <table id="table-browse">
                         <tr>
-                            <td><input type="text" name="txtUrl"></td>
-                            <td><input type="submit" value="Tìm"></td>
+                            <td><input type="file" name="txtUrl"></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Thêm"></td><td></td>
