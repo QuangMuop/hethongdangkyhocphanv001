@@ -16,7 +16,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Thông tin sinh viên</title>
         <style media="all" type="text/css">
-            #frminfomation{
+            #myform{
                 background-color: #E3E4FA;
                 width: 400px;
                 float: left;
@@ -45,68 +45,94 @@ clsStudent student =(clsStudent) session.getAttribute("student");
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-            <form action="#" method="post" id="frminfomation">
+            <form action="../servUpdateInfo?isupdate=true" method="post" id="myform" name="myform">
                 <br>
                 <h3>Thông tin sinh viên</h3>
                 <h1>MSSV:<%=student.getCode()%></h1>
                  <br>
                 <table id="infomation">
                     <tr>
-                        <td>Họ và tên</td>
-                        <td><%=student.getFullname()%></td>
+                        <td width="200px">Họ và tên:</td>
+                        <td><input  type="text" size="25" name="name" value="<%=student.getFullname()%>"/></td>
                     </tr>
                     <tr>
-                        <td>Ngày sinh</td>
-                        <td><%=student.getBirthDay()%></td>
+                        <td>Ngày sinh:</td>
+                        <td>Ngày:
+                                <select name="day">
+                                    <%for(int i = 1; i < 32; i++){%>
+                                    <option value="<%=i%>"><%=i%></option>
+                                    <%}%>
+                                </select>
+                               Tháng: <select name="month">
+                                    <%for(int i = 1; i < 13; i++){%>
+                                    <option value="<%=i%>"><%=i%></option>
+                                    <%}%>
+                                </select>
+                               Năm: <select name="year">
+                                    <%for(int i = 1970; i <2021; i++){%>
+                                    <option value="<%=i%>"><%=i%></option>
+                                    <%}%>
+                                </select>
+                            </td>
                     </tr>
                      <tr>
-                        <td>Giới tính</td>
-                        <td><%=student.getGender()%></td>
+                        <td>Giới tính:</td>
+                        <td>
+                            <select name="gender">
+                                   <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Lớp</td>
-                        <td><%=student.getClasss()%></td>
+                        <td>Lớp:</td>
+                        <td><input type="text" id="classs" name="classs" size="25" value="<%=student.getClasss()%>"></td>
                     </tr>
                      <tr>
-                        <td>Khóa</td>
-                        <td><%=student.getCourse()%></td>
+                        <td>Khóa:</td>
+                        <td><input type="text" id="course" name="course" size="25" value="<%=student.getCourse()%>"></td>
                     </tr>
                     <tr>
-                        <td>Loại hình học</td>
-                        <td><%=student.getType()%></td>
+                        <td>Loại hình học:</td>
+                        <td>
+                            <select  name="type">
+                                   <option value="Chính quy">---------Chính quy----------</option>
+                                    <option value="Từ xa qua mạng">------Từ xa qua mạng-----</option>
+                           </select>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Bậc học</td>
-                        <td><%=student.getBacHoc()%></td>
+                        <td>Bậc học:</td>
+                        <td>
+                            <select  name="bachoc">
+                                   <option value="Đại học">-----------Đại học-----------</option>
+                                   <option value="Cao học">-----------Cao học-----------</option>
+                           </select></td>
                     </tr>
                     <tr>
-                        <td>Email</td>
-                        <td><%=student.getEmail()%></td>
+                        <td>Email:</td>
+                        <td><input type="text" id="email" name="email" size="25" value="<%=student.getEmail()%>"></td>
                     </tr>
                     <tr>
-                        <td>Điện thoại</td>
-                        <td><%=student.getPhone()%></td>
+                        <td>Điện thoại:</td>
+                        <td><input type="text" name="phone" size="25" value="<%=student.getPhone()%>"></td>
                     </tr>
                     <tr>
-                        <td>Địa chỉ liên lạc</td>
-                        <td><%=student.getAddress()%></td>
+                        <td>Địa chỉ liên lạc:</td>
+                        <td><input type="text" name="address" size="50" value="<%=student.getAddress()%>"></td>
                     </tr>
                     <tr>
-                        <td>Địa chỉ thường trú</td>
-                        <td><%=student.getHome()%></td>
+                        <td>Địa chỉ thường trú:</td>
+                        <td><input type="text" id="home" name="home" size="50" value="<%=student.getHome()%>"></td>
                     </tr>
                     <tr>
-                        <td>CMND</td>
-                        <td><%=student.getCMND()%></td>
+                        <td>CMND:</td>
+                        <td><input type="text" name="cmnd" size="25" value="<%=student.getCMND()%>"></td>
                     </tr>
-                     <tr>
-                        <td>Tình trạng</td>
-                        <td><%=student.getIsStuding()%></td>
-                    </tr>
-                 </table>
+                  </table>
             </form>
                     <form id="frmaction" action="#" method="post">
-                        <input type="submit" name="update" value="Hoàn tất cập nhật"/>
+                        <input type="button" onclick="UpdateInfo()" name="update" value="Hoàn tất cập nhật"/>
                     </form>
             </div><!--End Contents-->
             <div id="footer"><!--Footer-->
@@ -115,4 +141,25 @@ clsStudent student =(clsStudent) session.getAttribute("student");
         </div>
         <!--End Wrapper-->
     </body>
+        <script  type = "text/javascript" >
+         function UpdateInfo(){
+           var lop = document.myform.classs.value;
+           var name = document.myform.name.value;
+           var course = document.myform.course.value;
+            var home = document.myform.home.value;
+         if(name.length==0){
+             alert("Họ và tên không thể để trống");
+          }
+          else if(lop.length==0){
+              alert("Lớp học không thể để trống");
+          }else if(course.length==0){
+             alert("Khóa học không thể để trống");
+          } else if(home.length==0){
+              alert("Địa chỉ thường trú không được để trống");
+          }
+          else{
+           document.forms["myform"].submit();
+          }
+  }
+       </script>
 </html>
