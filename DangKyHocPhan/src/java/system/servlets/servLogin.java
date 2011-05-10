@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Message;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,10 +54,6 @@ private void Login(HttpSession session, HttpServletRequest request, HttpServletR
             clsBOAccount BOAccount=new clsBOAccount();
             if(BOAccount.Login(user, pass)){
                 session.setAttribute("username", user);
-                int AccountType=BOAccount.getAccountType(user);
-                session.setAttribute("accounttype", AccountType);
-                int accountType=BOAccount.getAccountType(user);
-                 session.setAttribute("accountType", accountType);
                 String path = "./jsps/jspTrangChu.jsp";
                 response.sendRedirect(path);
 
