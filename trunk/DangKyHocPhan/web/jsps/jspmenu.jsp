@@ -39,6 +39,7 @@
                     <ul>
                         <li> <a href="jspTiepNhanSV.jsp">Tiếp Nhận SV</a> </li>
                         <li><a href="jspTiepNhanGV.jsp">Tiếp Nhận GV</a> </li>
+                        <li><a href="jspDanhSachSinhVien.jsp">Danh sách SV</a> </li>
                         <li><a href="jspTaoLopHoc.jsp">Tạo Lớp Học</a> </li>
                         <li><a href="jspGhiNhanDiemSV.jsp">Ghi Nhận Điểm SV</a> </li>
                         <li><a href="jspCaiDatTaiKhoan.jsp">Cài Đặt Tài Khoản</a> </li>
