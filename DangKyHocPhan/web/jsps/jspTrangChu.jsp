@@ -4,10 +4,12 @@
     Author     : ngloc_it
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
     <head>
         <link href="../csss/general.css" rel="stylesheet" type="text/css" media="screen">

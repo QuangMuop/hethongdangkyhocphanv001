@@ -27,6 +27,23 @@ public class clsBOLecturer {
     }
 
     /**
+     * Get lecturer from his id
+     * @param lecturerId id for search
+     * @return lecturere object get from database or null if not found any instance
+     * @throws Exception
+     */
+    public clsLecturer getLecturereByCode(String lecturerId) throws Exception{
+        clsLecturer lecturer = new clsLecturer();
+        try{
+            clsMapperLecturer mapper = new clsMapperLecturer();
+            lecturer = mapper.getLecturerInfoById(lecturerId);
+        }catch(Exception e){
+            throw e;
+        }
+        return lecturer;
+    }
+
+    /**
      * Insert a lecturer into database
      * @param lecturer Lecturer for insert
      * @throws Exception
