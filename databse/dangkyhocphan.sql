@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: dangkyhocphan
 Target Host: localhost
 Target Database: dangkyhocphan
-Date: 5/10/2011 4:57:24 PM
+Date: 5/11/2011 4:55:59 PM
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -179,6 +179,8 @@ CREATE TABLE `studyresult` (
   `MSSV` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `SubCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `Mark` float NOT NULL,
+  `Year` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Semester` tinyint(4) NOT NULL,
   PRIMARY KEY (`MSSV`,`SubCode`),
   KEY `foreign_res_subject` (`SubCode`),
   CONSTRAINT `foreign_res_stu` FOREIGN KEY (`MSSV`) REFERENCES `student` (`MSSV`),
@@ -305,33 +307,33 @@ INSERT INTO `student` VALUES ('Nguyễn Đức Lê', '07252190', '1989-10-23', '
 INSERT INTO `student` VALUES ('Hoàng Nam Hải', '07520106', '1989-01-01', 'CNPM02', 'namhai@gmail.com', '0978345095', 'Quận 12, Tp.HCM', 'Tỉnh Lâm Đồng', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học', null);
 INSERT INTO `student` VALUES ('Nguyễn Văn Lộc', '07520210', '1989-12-12', 'CNPM02', 'nguyenloc.uit@gmail.com', '01683452346', 'Tân Bình, Tp.HCM', 'Tỉnh Ninh Bình', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học', null);
 INSERT INTO `student` VALUES ('Nguyễn Trung Thành', '07520319', '1987-08-02', 'CNPM02', 'thanhnt28@gmail.com', '0989432371', '9/32 khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.HCm', 'Xuân Liên-Nghi Xuân-Hà Tĩnh', 'Đang học', '2', 'Nam', '12345678', 'Chính quy', 'Đại học', '');
-INSERT INTO `studyresult` VALUES ('07520319', 'CARC1 ', '8.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'CNET1', '8');
-INSERT INTO `studyresult` VALUES ('07520319', 'CSC21', '8.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'DBSS1', '8.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'DSAL1', '7');
-INSERT INTO `studyresult` VALUES ('07520319', 'ITEM1', '5.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'ITEW1', '10');
-INSERT INTO `studyresult` VALUES ('07520319', 'LIA01', '6.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'MAT04', '7.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'MAT21', '5');
-INSERT INTO `studyresult` VALUES ('07520319', 'MAT22', '8.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'OOPT1', '9');
-INSERT INTO `studyresult` VALUES ('07520319', 'OSYS1', '8.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'PHIL2', '5');
-INSERT INTO `studyresult` VALUES ('07520319', 'PHY01', '8');
-INSERT INTO `studyresult` VALUES ('07520319', 'PHY02', '8');
-INSERT INTO `studyresult` VALUES ('07520319', 'SE101', '9');
-INSERT INTO `studyresult` VALUES ('07520319', 'SE102', '5');
-INSERT INTO `studyresult` VALUES ('07520319', 'SE103', '7');
-INSERT INTO `studyresult` VALUES ('07520319', 'SE104', '7.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'SE105', '7.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'SE106', '7');
-INSERT INTO `studyresult` VALUES ('07520319', 'SE207', '6');
-INSERT INTO `studyresult` VALUES ('07520319', 'SE208', '6.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'SE209', '6.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'STA01', '8.5');
-INSERT INTO `studyresult` VALUES ('07520319', 'WINP1', '7.5');
+INSERT INTO `studyresult` VALUES ('07520319', 'CARC1 ', '8.5', '2008-2009', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'CNET1', '8', '2008-2009', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'CSC21', '8.5', '2008-2009', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'DBSS1', '8.5', '2008-2009', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'DSAL1', '7', '2008-2009', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'ITEM1', '5.5', '2008-2009', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'ITEW1', '10', '2008-2009', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'LIA01', '6.5', '2008-2009', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'MAT04', '7.5', '2008-2009', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'MAT21', '5', '2008-2009', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'MAT22', '8.5', '2008-2009', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'OOPT1', '9', '2008-2009', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'OSYS1', '8.5', '2009-2010', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'PHIL2', '5', '2009-2010', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'PHY01', '8', '2009-2010', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'PHY02', '8', '2009-2010', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE101', '9', '2009-2010', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE102', '5', '2009-2010', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE103', '7', '2009-2010', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE104', '7.5', '2009-2010', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE105', '7.5', '2009-2010', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE106', '7', '2009-2010', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE207', '6', '2009-2010', '2');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE208', '6.5', '2010-2011', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE209', '6.5', '2010-2011', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'STA01', '8.5', '2010-2011', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'WINP1', '7.5', '2010-2011', '1');
 INSERT INTO `subject` VALUES ('Kiến trúc máy tính', 'CARC1', '3', '3', '0');
 INSERT INTO `subject` VALUES ('Mạng máy tính', 'CNET1', '4', '3', '1');
 INSERT INTO `subject` VALUES ('Tin học đại cương', 'CSC21', '4', '3', '1');
