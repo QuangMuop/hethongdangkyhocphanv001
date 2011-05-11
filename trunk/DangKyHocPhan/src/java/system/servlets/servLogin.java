@@ -64,8 +64,8 @@ private void Login(HttpSession session, HttpServletRequest request, HttpServletR
 }
 private void LogOut(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException{
                session.removeAttribute("username");
-               session.removeAttribute("accounttype");
-                String path = "./jsps/jspTrangChu.jsp";
+               session.removeAttribute("student");
+               String path = "./jsps/jspTrangChu.jsp";
                 response.sendRedirect(path);
 }
   /**
