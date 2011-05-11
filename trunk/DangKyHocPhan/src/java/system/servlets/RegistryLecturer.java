@@ -3,6 +3,7 @@ package system.servlets;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,17 +23,16 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import system.bo.clsBOAccount;
-import system.bo.clsBOStudent;
+import system.bo.clsBOLecturer;
 import system.dto.clsAccount;
-import system.dto.clsStudent;
+import system.dto.clsLecturer;
 
 /**
  *
  * @author ngloc_it
  */
-@WebServlet(name="RegistryStudent", urlPatterns={"/RegistryStudent"})
-public class RegistryStudent extends HttpServlet {
-      
+@WebServlet(name="RegistryLecturer", urlPatterns={"/RegistryLecturer"})
+public class RegistryLecturer extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -57,96 +57,85 @@ public class RegistryStudent extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
+    throws ServletException, IOException {       
     }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.service(req, resp);        
+        super.service(req, resp);
+
+        PrintWriter out = resp.getWriter();
         HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
-         try{
+        String function = (String)req.getParameter("function");
+        String path = "./jsps/jspTiepNhanGV.jsp";
+
+        try{
             session.removeAttribute("listinfomation");
         }catch(Exception ex){
-            Logger.getLogger(RegistryStudent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistryLecturer.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        String function = (String)req.getParameter("function");
-        String path = "./jsps/jspTiepNhanSV.jsp";
-
         ArrayList<String> result = new ArrayList<String>();
         if(function.equals("addone")){
             result = AddOne(req);
-            path = "./jsps/jspTiepNhanSV.jsp?result=added";
+            path = "./jsps/jspTiepNhanGV.jsp?result=added";            
         }else if(function.equals("addlist")){
             result = AddList(req);
-            path = "./jsps/jspTiepNhanSV.jsp?result=added";
+            path = "./jsps/jspTiepNhanGV.jsp?result=added";            
         }else{
-            path = "./jsps/jspTiepNhanSV.jsp?result=failed";
+            path = "./jsps/jspTiepNhanGV.jsp?result=failed";            
         }
         session.setAttribute("listinfomation", result);
         resp.sendRedirect(path);
     }
 
-
     /**
-     * Add one student into databse, infomations about that one are entered normally
+     * Add one lecturer into databse, infomations about that one are entered normally
      * @param req
-     * @param session
-     */   
+     */
     private ArrayList<String> AddOne(HttpServletRequest req){
-        //CELL 1// FullName//CELL2: MSSV//CELL3: BirthDay//CELL4: Lop - Class//CELL5: Email
-    //CELL6: PhoneNumber//CELL7: TamTru/CELL8: ThuongTru
-    //CELL: Status: Đang học, đang bảo lưu, đang ...
-    //CELL10: CourseNumber//CELL11: Sex//CELL12: ID (CMND)
-    //CELL13: Hình thức: Chính qui, tại chức, ...
-    //CELL14: Bậc học : đại học, cao đẳng, cử nhân, trung cấp,...
+        //1. LecturerCode,   2. FullName,     3. BirthDay, 4. Email, 5. Phone
+        //6. Address,   7. HocHam,  8. Degree,  9.Gender,   10. CMND.
         ArrayList<String> listInfomation = new ArrayList<String>();
-        try {            
+        try {
+            listInfomation.add((String)req.getParameter("txtLecturerCode"));
             listInfomation.add((String) req.getParameter("txtFirstName") + " " +
-                                                (String) req.getParameter("txtLastName"));
-            listInfomation.add((String)req.getParameter("txtMSSV"));
+                                                (String) req.getParameter("txtLastName"));            
             listInfomation.add((String) req.getParameter("sYear") + "-" +
                                (String) req.getParameter("sMonth") + "-" +
-                               (String) req.getParameter("sDay"));
-            listInfomation.add((String)req.getParameter("sClass"));
+                               (String) req.getParameter("sDay"));            
             listInfomation.add((String)req.getParameter("txtEmail"));
             listInfomation.add((String)req.getParameter("txtPhoneNumber"));
-            listInfomation.add((String)req.getParameter("txtTamTru"));
-            listInfomation.add((String)req.getParameter("txtThuongTru"));
-            listInfomation.add((String)req.getParameter("sIsStuding"));
-            listInfomation.add((String)req.getParameter("sCourse"));
+            listInfomation.add((String)req.getParameter("txtAddress"));
+            listInfomation.add((String)req.getParameter("sHocHam"));
+            listInfomation.add((String)req.getParameter("sHocVi"));
             listInfomation.add((String)req.getParameter("sSex"));
             listInfomation.add((String)req.getParameter("txtCMND"));
-            listInfomation.add((String)req.getParameter("sType"));
-            listInfomation.add((String)req.getParameter("sBachoc"));
-
-            return UpdateStudent(listInfomation);
+            
+            return UpdateLecturer(listInfomation);
 
         } catch (Exception ex) {
-            Logger.getLogger(RegistryStudent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistryLecturer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listInfomation;
     }
 
 
     /**
-     * Add a list of student into database, infomations get from excell file, and load from local
-     * machince
-     * @param req
-     * @param session
+     * Add a list of Lecturer into database, infomations get from excell file,
+     * and load from local machince
+     * @param req     
      */
     private ArrayList<String> AddList(HttpServletRequest req){
-        HSSFWorkbook wb = GetWorkbook(req);        
+        HSSFWorkbook wb = GetWorkbook(req);
         ArrayList<String> listStudentGetFromFile = GetList(wb);
 
         try {
-             return UpdateStudent(listStudentGetFromFile);
+             return UpdateLecturer(listStudentGetFromFile);
         } catch (Exception ex) {
-            Logger.getLogger(RegistryStudent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistryLecturer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return listStudentGetFromFile;
@@ -154,9 +143,10 @@ public class RegistryStudent extends HttpServlet {
 
 
     /**
-     * Check excell file in request from client, if there are some file (just check for one until now)
-     * then create a new workbook from that data, and return it for create student object
-     * for insertion into database
+     * Check excell file in request from client,
+     * if there are some file (just check for one until now)
+     * then create a new workbook from that data, and return
+     * it for create Lecturer objects for insertion into database
      * @param req
      * @return
      */
@@ -191,29 +181,23 @@ public class RegistryStudent extends HttpServlet {
                     }
                 }
             } catch (FileUploadException ex) {
-                Logger.getLogger(RegistryStudent.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegistryLecturer.class.getName()).log(Level.SEVERE, null, ex);
             }catch (IOException ex) {
-                Logger.getLogger(RegistryStudent.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegistryLecturer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return null;
     }
 
     /**
-     * Get infomation of students in excell file
+     * Get infomation of lecturers in excell file
      * @param wb workbook hold data
-     * @return information about student as format:
-     *                  CELL 1// FullName//CELL2: MSSV//CELL3: BirthDay//CELL4: Lop - Class//CELL5: Email
-     *                  CELL6: PhoneNumber//CELL7: TamTru/CELL8: ThuongTru
-     *                  CELL: Status: Đang học, đang bảo lưu, đang ...
-     *                  CELL10: CourseNumber//CELL11: Sex//CELL12: ID (CMND)
-     *                  CELL13: Hình thức: Chính qui, tại chức, ...
-     *                  CELL14: Bậc học : đại học, cao đẳng, cử nhân, trung cấp,...
+     * @return information about student as format:     
      */
 
     private ArrayList<String> GetList(HSSFWorkbook wb){
          int i = 0;
-        ArrayList<String> listStudentInfo = new ArrayList<String>();
+        ArrayList<String> listInfo = new ArrayList<String>();
          int n = wb.getNumberOfSheets();
 
          for (int k = 0; k < n; k++){
@@ -233,79 +217,70 @@ public class RegistryStudent extends HttpServlet {
                  if(cellType != HSSFCell.CELL_TYPE_NUMERIC){
                      continue;
                  }
-                //CELL 1// FullName//CELL2: MSSV//CELL3: BirthDay//CELL4: Lop - Class//CELL5: Email
-                //CELL6: PhoneNumber//CELL7: TamTru/CELL8: ThuongTru
-                //CELL: Status: Đang học, đang bảo lưu, đang ...
-                //CELL10: CourseNumber//CELL11: Sex//CELL12: ID (CMND)
-                //CELL13: Hình thức: Chính qui, tại chức, ...
-                //CELL14: Bậc học : đại học, cao đẳng, cử nhân, trung cấp,...
-                 for(int j = 1; j < 15; j++){
+                //1. LecturerCode,   2. FullName,     3. BirthDay, 4. Email, 5. Phone
+                //6. Address,   7. HocHam,  8. Degree,  9.Gender,   10. CMND.
+                 for(int j = 1; j < 11; j++){
                      cellTemp = rowTemp.getCell(j);
                      cellTemp.setCellType(HSSFCell.CELL_TYPE_STRING);
                      strValue = cellTemp.getStringCellValue();
-                     listStudentInfo.add(strValue);
+                     listInfo.add(strValue);
                  }
              }
          }
-         return listStudentInfo;
+         return listInfo;
     }
 
-
-    
     /**
      * Create students with infomation get from list, then insert them into database
      * this also init account for that students
      * @param listStudentInfomation hold information about students get from excel file
      * @throws Exception
      */
-    private ArrayList<String> UpdateStudent(ArrayList<String> listStudentInfomation) throws Exception{
-        String FullName = "";       String MSSV = "";        String Birthday = "";
-        String Class = "";          String Email = "";       String Phone = "";
-        String Address = "";        String Home = "";        String IsStuding = "";
-        String CourseCode = "";     String Gender = "";      String CMND = "";
-        String Type = "";           String BacHoc = "";
-
+    private ArrayList<String> UpdateLecturer(ArrayList<String> listInfomation) throws Exception{
+        //1. LecturerCode,   2. FullName,     3. BirthDay, 4. Email, 5. Phone
+        //6. Address,   7. HocHam,  8. Degree,  9.Gender,   10. CMND.
+        String LecturerCode = "";
+        String FullName = "";
+        String Birthday = "";
+        String Email = "";
+        String Phone = "";
+        String Address = "";
+        String HocHam = "";
+        String Degree = "";
+        String Gender = "";
+        String CMND = "";
+        
         int i = 0;
-        int n = listStudentInfomation.size();
-        clsBOStudent studentBO = new clsBOStudent();
-        clsBOAccount accountBO = new clsBOAccount();
-        //CELL 1// FullName//CELL2: MSSV//CELL3: BirthDay//CELL4: Lop - Class//CELL5: Email
-        //CELL6: PhoneNumber//CELL7: TamTru/CELL8: ThuongTru
-        //CELL: Status: Đang học, đang bảo lưu, đang ...
-        //CELL10: CourseNumber//CELL11: Sex//CELL12: ID (CMND)
-        //CELL13: Hình thức: Chính qui, tại chức, ...
-        //CELL14: Bậc học : đại học, cao đẳng, cử nhân, trung cấp,...
+        int n = listInfomation.size();
+        clsBOLecturer lecturerBo = new clsBOLecturer();
+        clsBOAccount accountBO = new clsBOAccount();        
         while(i < n){
-            FullName = listStudentInfomation.get(i++);
-            MSSV = listStudentInfomation.get(i++);
-            Birthday = listStudentInfomation.get(i++);
-            Birthday = "2000-5-4";
-            Class = listStudentInfomation.get(i++);
-            Email = listStudentInfomation.get(i++);
-            Phone = listStudentInfomation.get(i++);
-            Address = listStudentInfomation.get(i++);
-            Home = listStudentInfomation.get(i++);
-            IsStuding = listStudentInfomation.get(i++);
-            CourseCode = listStudentInfomation.get(i++);
-            Gender = listStudentInfomation.get(i++);
-            CMND = listStudentInfomation.get(i++);
-            Type = listStudentInfomation.get(i++);
-            BacHoc = listStudentInfomation.get(i++);          
-            
+            LecturerCode = listInfomation.get(i++);
+            FullName = listInfomation.get(i++);
+            Birthday = "1975-5-10";
+            i++;
+            //Birthday = listInfomation.get(i++);
+            Email = listInfomation.get(i++);
+            Phone = listInfomation.get(i++);
+            Address = listInfomation.get(i++);
+            HocHam = listInfomation.get(i++);
+            Degree = listInfomation.get(i++);
+            Gender = listInfomation.get(i++);
+            CMND = listInfomation.get(i++);
+
             String error = "";
-            if(studentBO.CheckExistedCode(MSSV) == true){
-                error = "MSSV đã tồn tại";
+            if(lecturerBo.LecturerCheckExistCode(LecturerCode) == true){
+                error = "Ma GV đã tồn tại";
             }else{
                 error = "Thành công";
-                clsStudent student = new clsStudent(FullName, Birthday, MSSV, Class, Email, Phone, Address, Home,
-                                            IsStuding, Integer.parseInt(CourseCode), Gender, CMND, Type, BacHoc);
-                clsAccount account = new clsAccount(MSSV, MSSV, FullName, 0, 0, 0);
-                
-                studentBO.Insert(student);
+                clsLecturer lecturer = new clsLecturer(FullName, Birthday, Email, Phone, Address, HocHam, Degree, Gender, CMND);
+                lecturer.setLecturerCode(LecturerCode);
+                clsAccount account = new clsAccount(LecturerCode, LecturerCode, FullName, 0, 0, 0);
+                lecturerBo.LecturerInsert(lecturer);
                 accountBO.Insert(account);
             }
-            listStudentInfomation.add(i++, error);
+            listInfomation.add(i++, error);
         }
-        return listStudentInfomation;
+        return listInfomation;
     }
 }

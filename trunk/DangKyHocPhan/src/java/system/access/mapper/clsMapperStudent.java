@@ -107,7 +107,8 @@ public class clsMapperStudent extends clsMapperDb{
             sql.append(student.getGender()).append("','");//
             sql.append(student.getCMND()).append("','");
             sql.append(student.getType()).append("','");
-            sql.append(student.getBacHoc()).append("','')");
+            sql.append(student.getBacHoc()).append("',')");
+            sql.append(student.getNote()).append("')");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             result = stmt.execute();
             stmt.close();
