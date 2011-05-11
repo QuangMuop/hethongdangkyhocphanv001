@@ -3,6 +3,7 @@ package system.access.mapper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import system.dto.clsStudyResult;
 
 public class clsMapperStudyResult extends clsMapperDb {
@@ -14,6 +15,8 @@ public void IniStudyResultDTOFromRs(clsStudyResult studyresult, ResultSet rs) th
             studyresult.setStudentCode(rs.getString("MSSV"));
             studyresult.setSubjectCode(rs.getString("SubCode"));
             studyresult.setMark(Float.parseFloat(rs.getString("Mark")));
+            studyresult.setYear(rs.getString("Year"));
+            studyresult.setSemester(Integer.parseInt(rs.getString("Semester")));
          }
      }
 public ResultSet getStudyResultInfoByCode(String MSSV) throws Exception{
@@ -32,8 +35,8 @@ public ResultSet getStudyResultInfoByCode(String MSSV) throws Exception{
 public ResultSet getStudyResultInfoByName(String name) throws Exception{
      try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select * from dangkyhocphan.studyresult Where ");
-            sql.append("FullName = '").append(name).append("'");
+            sql.append("Select * from dangkyhocphan.studyresult, dangkyhocphan.student Where dangkyhocphan.studyresult.MSSV=dangkyhocphan.student.MSSV and ");
+            sql.append("dangkyhocphan.student.FullName = '").append(name).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             return rs;
@@ -48,7 +51,9 @@ public ResultSet getStudyResultInfoByName(String name) throws Exception{
             sql.append("Insert into dangkyhocphan.studyresult values('");
             sql.append(studyresult.getStudentCode()).append("','");
             sql.append(studyresult.getSubjectCode()).append("',");
-            sql.append(studyresult.getMark()).append(")");
+            sql.append(studyresult.getMark()).append(",'");
+            sql.append(studyresult.getYear()).append("',");
+            sql.append(studyresult.getSemester()).append(")");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();
@@ -74,7 +79,7 @@ public ResultSet getStudyResultInfoByName(String name) throws Exception{
        try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.studyresult Where MSSV ='");
-            sql.append(res.getStudentCode()).append("' and ClassName='");
+            sql.append(res.getStudentCode()).append("' and SubCode='");
             sql.append(res.getSubjectCode()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
@@ -90,7 +95,9 @@ public ResultSet getStudyResultInfoByName(String name) throws Exception{
       try{
             StringBuffer sql = new StringBuffer();
             sql.append("Update dangkyhocphan.studyresult set Mark =");
-            sql.append(res.getMark()).append(" where MSSV='");
+            sql.append(res.getMark()).append(", year='");
+            sql.append(res.getYear()).append("', Semester=");
+            sql.append(res.getSemester()).append(" where MSSV='");
             sql.append(res.getStudentCode()).append("' and SubCode='");
             sql.append(res.getSubjectCode()).append("' ");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
@@ -98,5 +105,24 @@ public ResultSet getStudyResultInfoByName(String name) throws Exception{
         }catch(Exception ex){
                 throw ex;
         }
+  }
+  public ArrayList<clsStudyResult> getYear(String MSSV) throws Exception{
+      ArrayList<clsStudyResult> sr=new ArrayList<clsStudyResult>();
+      try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("select DISTINCT Year from dangkyhocphan.studyresult where MSSV='");
+            sql.append(MSSV).append("' ");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+             while((rs!=null) && rs.next()){
+                clsStudyResult classTemp = new clsStudyResult();
+               classTemp.setYear(rs.getString("Year"));
+                sr.add(classTemp);
+            }
+           stmt.close();
+        }catch(Exception ex){
+                throw ex;
+        }
+      return sr;
   }
 }
