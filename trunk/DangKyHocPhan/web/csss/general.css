@@ -18,7 +18,7 @@ ol, ul{
 
 #wrapper{
     width: 1020px;
-    margin: 0 auto;    
+    margin: 0 auto;
 }
 #header{
     margin-top: -140px;
@@ -47,6 +47,7 @@ ol, ul{
     width: 764px;
     background: #ffd8c3;
     float: right;
+    border: 5px solid #488AC7;
 }
 
 #footer{
