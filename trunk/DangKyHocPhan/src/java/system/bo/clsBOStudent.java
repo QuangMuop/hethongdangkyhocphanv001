@@ -1,5 +1,6 @@
 package system.bo;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import system.access.mapper.clsMapperStudent;
@@ -41,7 +42,30 @@ public class clsBOStudent {
                 throw ex;
          }
     }
-     
+
+     /**
+      * searh all student in database
+      * @param strWhere search condition
+      * @param strOrder order by codition
+      * @return list of student found
+      * @throws Exception
+      */
+    public ArrayList<clsStudent> GetAllStudent(String strOrder) throws Exception{
+        clsMapperStudent mapper = new clsMapperStudent();
+        return mapper.GetAllStudent(strOrder);
+    }
+
+    /**
+     * Get all student in a class by name of class
+     * @param className name of class for search
+     * @param strOrder Order by condition
+     * @return list of student in class
+     * @throws Exception
+     */
+    public ArrayList<clsStudent> GetStudentsByClass(String className, String strOrder)throws Exception{
+        clsMapperStudent mapper = new clsMapperStudent();
+        return mapper.GetStudentsByClass(className, strOrder);
+    }
 
      /**
       * Insert infomation of a student into database

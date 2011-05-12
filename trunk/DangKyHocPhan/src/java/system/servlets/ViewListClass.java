@@ -37,11 +37,6 @@ public class ViewListClass extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-//        session.removeAttribute("listclass");
-//        session.removeAttribute("listsubject");
-//        session.removeAttribute("listlecturername");
-//        session.removeAttribute("listsubjectnamefull");
-//        session.removeAttribute("listlecturernamefull");
 
         String isSearchEngine = (String) req.getParameter("searchengine");
 
@@ -53,9 +48,7 @@ public class ViewListClass extends HttpServlet {
             SetDataWithoutSearchEngine(req, resp, session);           
         }
 
-        String path = "./jsps/jspXemDSLop.jsp";
-        //RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
-        //requestDispatcher.forward(req, resp);
+        String path = "./jsps/jspXemDSLop.jsp";        
         resp.sendRedirect(path);
     }
 
@@ -77,7 +70,7 @@ public class ViewListClass extends HttpServlet {
             clsBOLecturer lecturerBo = new clsBOLecturer();
             clsBOSubject subjectBo = new clsBOSubject();
 
-            ArrayList<clsClass> listClass = classBo.GetAllClass("");
+            ArrayList<clsClass> listClass = classBo.GetAllClass("ClassName");
             n = listClass.size();
             for(i = 0; i < n; i++){
                 String subjectId = listClass.get(i).getSubCode();
@@ -115,7 +108,7 @@ public class ViewListClass extends HttpServlet {
             clsBOLecturer lecturerBo = new clsBOLecturer();
             clsBOSubject subjectBo = new clsBOSubject();
 
-            listClass = classBo.GetAllClass("");
+            listClass = classBo.GetAllClass("ClassName");
             n = listClass.size();
             for(i = 0; i < n; i++){
                 String subjectId = listClass.get(i).getSubCode();
