@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import system.access.mapper.clsMapperComment;
 import system.bo.clsBOComment;
-import system.bo.clsBOStudent;
 import system.dto.clsComment;
-import system.dto.clsStudent;
 @WebServlet(name="servSendComment", urlPatterns={"/servSendComment"})
 public class servSendComment extends HttpServlet {
    
