@@ -9,7 +9,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-clsStudent student =(clsStudent) session.getAttribute("student");
+String user=(String) session.getAttribute("username");
 %>
 <html>
     <head>
@@ -55,18 +55,14 @@ clsStudent student =(clsStudent) session.getAttribute("student");
                         </tr>
                         <tr>
                             <td><a>MSSV</a></td>
-                            <td><input type="text" name="txtMSSV" value="<%=student.getCode()%>" readonly="true" id="txt-info"></td>
+                            <td><input type="text" name="txtMSSV" value="<%=user%>" readonly="true" id="txt-info"></td>
                         </tr>
                         <tr>
                             <td><a>Email</a></td>
                             <td><input type="text" name="txtEmail" id="txt-info"></td>
                         </tr>
                         <tr>
-                            <td><a>Nội dung:</a></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
+                            <td>Nội dung:</td>
                             <td><textarea type="textarea" name="txtContent" rows="12" cols="50"></textarea></td>
                         </tr>
                         <tr>

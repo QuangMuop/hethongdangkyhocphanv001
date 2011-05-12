@@ -43,7 +43,7 @@ public class clsMapperStudent extends clsMapperDb{
             student.setType(rs.getString("Type"));
             student.setBacHoc(rs.getString("BacHoc"));
             student.setNote(rs.getString("Note"));
-
+            student.setNhapHoc(rs.getString("NhapHoc"));
          }
      }
     
@@ -104,7 +104,8 @@ public class clsMapperStudent extends clsMapperDb{
             sql.append(student.getHome()).append("','");
             sql.append(student.getIsStuding()).append("',");
             sql.append(student.getCourse()).append(",'");
-            sql.append(student.getGender()).append("','");//
+            sql.append(student.getNhaphoc()).append("','");
+            sql.append(student.getGender()).append("','");
             sql.append(student.getCMND()).append("','");
             sql.append(student.getType()).append("','");
             sql.append(student.getBacHoc()).append("',')");
@@ -162,6 +163,7 @@ public class clsMapperStudent extends clsMapperDb{
             sql.append(" CMND='").append(student.getCMND()).append("',");
             sql.append(" Type='").append(student.getType()).append("',");
             sql.append(" BacHoc='").append(student.getBacHoc()).append("', ");
+            sql.append(" NhapHoc='").append(student.getNhaphoc()).append("', ");
             sql.append(" Note=''");
             sql.append(" Where MSSV='").append(student.getCode()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());

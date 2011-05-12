@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import system.access.mapper.clsMapperStudyResult;
+import system.bo.clsBODetailResult;
 import system.bo.clsBOStudent;
 import system.dto.clsStudent;
 import system.dto.clsStudyResult;
-
+import system.bo.clsBOStudyResult;
+import system.dto.clsDetailResult;
 @WebServlet(name="servStudyResult", urlPatterns={"/servStudyResult"})
 public class servStudyResult extends HttpServlet {
    
@@ -38,11 +39,18 @@ public class servStudyResult extends HttpServlet {
         try {
             String login=(String) session.getAttribute("username");
             if(login==null){
-              String path = "./jsps/jspChuaDangNhap.jsp";
-              response.sendRedirect(path);
+             session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+             String path = "./jsps/jspThongBao.jsp";
+             response.sendRedirect(path);
             }
             else {
-              getStudyResult(request, response, session,login);
+                String first=request.getParameter("first");
+                if(first.equalsIgnoreCase("true"))
+                    getStudyResult(response, session,login);
+                else if(first.equalsIgnoreCase("false")){
+                   reloadResult(request, response, session, login);
+                    
+                }
                }
             
           
@@ -50,16 +58,38 @@ public class servStudyResult extends HttpServlet {
             out.close();
         }
     } 
-private void getStudyResult(HttpServletRequest request, HttpServletResponse response,HttpSession session, String user) throws Exception{
-    clsMapperStudyResult mps=new clsMapperStudyResult();
-              ArrayList<clsStudyResult> sr=mps.getYear(user);
+private void getStudyResult( HttpServletResponse response,HttpSession session, String user) throws Exception{
+              clsBOStudyResult BOS=new clsBOStudyResult();
+              ArrayList<clsStudyResult> sr=BOS.getYear(user);
               session.setAttribute("year", sr);
               clsBOStudent BOStudent=new clsBOStudent();
               clsStudent student =new clsStudent();
               student=BOStudent.getStudentInfoByCode(user);
               session.setAttribute("student", student);
+              clsBODetailResult BOResult=new clsBODetailResult();
+              ArrayList<clsDetailResult> result=BOResult.getResult(user,"All",0);
+               session.setAttribute("result", result);
               String path = "./jsps/jspXemKQHocTap.jsp";
                response.sendRedirect(path);
+}
+private void reloadResult(HttpServletRequest request, HttpServletResponse response,HttpSession session, String user) throws Exception{{
+              int numTC=0;
+              float SumMark=0;
+              float Average=0;
+              PrintWriter out = response.getWriter();
+              String year=request.getParameter("year");
+              int semester=Integer.parseInt(request.getParameter("semester"));
+              clsBODetailResult BOResult=new clsBODetailResult();
+              ArrayList<clsDetailResult> result=BOResult.getResult(user,year,semester);
+              out.println("<tr><th align='center' width='100px'>Năm học</th><th align='center' width='70px'>Học kỳ</th><th align='center' width='100px'>Mã môn</th><th align='center' width='300px'>Tên môn học</th><th align='center' width='70px'>Số TC</th><th align='center' width='80px'>Điểm</th><th align='center' width='100px'>Nhân hệ số</th></tr>");
+              for(int i=0;i<result.size();i++){
+              out.println("<tr><td align='center'>"+result.get(i).getYear()+"</td><td align='center'>"+result.get(i).getSemester()+"</td><td align='left'>"+result.get(i).getSubCode()+"</td><td align='left'>"+result.get(i).getSubName()+"</td><td align='center'>"+result.get(i).getNumTC()+"</td><td align='center'>"+result.get(i).getMark()+"</td><td align='center'>"+result.get(i).getNumTC()*result.get(i).getMark()+"</td></tr>");
+              numTC+=result.get(i).getNumTC();
+              SumMark+=(result.get(i).getNumTC()*result.get(i).getMark());
+              Average=(float)Math.round(SumMark*100/numTC)/100;
+              }
+              out.println("<tr><td align='center'><h1>Tổng kết</h1></td><td></td><td></td><td align='center'><h1>Trung bình: "+ Average +"</h1></td><td align='center'><h1>"+numTC+"</h1></td><td></td><td align='center'><h1>"+SumMark+"</h1></td></tr>");
+           }
 }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -35,12 +35,12 @@ public class RegistryStudent extends HttpServlet {
       
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,12 +48,12 @@ public class RegistryStudent extends HttpServlet {
         
     } 
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -134,10 +134,10 @@ public class RegistryStudent extends HttpServlet {
 
 
     /**
-     * Add a list of student into database, infomations get from excell file, and load from local
-     * machince
+     *
      * @param req
      * @param session
+     * @return
      */
     private ArrayList<String> AddList(HttpServletRequest req){
         HSSFWorkbook wb = GetWorkbook(req);        
@@ -298,7 +298,7 @@ public class RegistryStudent extends HttpServlet {
             }else{
                 error = "Thành công";
                 clsStudent student = new clsStudent(FullName, Birthday, MSSV, Class, Email, Phone, Address, Home,
-                                            IsStuding, Integer.parseInt(CourseCode), Gender, CMND, Type, BacHoc);
+                                            IsStuding, Integer.parseInt(CourseCode),"", Gender, CMND, Type, BacHoc);
                 clsAccount account = new clsAccount(MSSV, MSSV, FullName, 0, 0, 0);
                 
                 studentBO.Insert(student);

@@ -15,6 +15,7 @@ public class clsStudent {
     private String Home;
     private String IsStuding;
     private int Course;
+    private String NhapHoc;
     private String Gender;
     private String CMND;
     private String Type;//loại sinh viên, chính quy hay từ xa
@@ -23,7 +24,7 @@ public class clsStudent {
     public clsStudent(){
 
     }
-    public clsStudent(String fullname, String birthday, String code, String classs, String email, String phone, String address, String home, String isstuding, int course, String gender, String cmnd, String type, String bachoc){
+    public clsStudent(String fullname, String birthday, String code, String classs, String email, String phone, String address, String home, String isstuding, int course,String nhaphoc, String gender, String cmnd, String type, String bachoc){
         this.FullName=fullname;
         this.BirthDay=birthday;
         this.Code=code;
@@ -39,6 +40,7 @@ public class clsStudent {
         this.Type=type;
         this.BacHoc=bachoc;
         this.Note = "";
+        this.NhapHoc=nhaphoc;
     }
     public void setFullName(String name){
     this.FullName=name;
@@ -66,6 +68,9 @@ public void setAddress(String add){
 }
 public void setHome(String home){
     this.Home=home;
+}
+public void setNhapHoc(String nhaphoc){
+    this.NhapHoc=nhaphoc;
 }
 public void setIsStuding(String studing){
     this.IsStuding=studing;
@@ -129,5 +134,8 @@ public String getBacHoc(){
 }
 public String getNote(){
     return this.Note;
+}
+public String getNhaphoc(){
+    return this.NhapHoc;
 }
 }

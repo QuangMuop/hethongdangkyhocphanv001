@@ -42,8 +42,9 @@ public class servSendComment extends HttpServlet {
             else if(guest.equalsIgnoreCase("notlogin")){
                String login=(String) session.getAttribute("username");
                if(login==null){
-              String path = "./jsps/jspChuaDangNhap.jsp";
-              response.sendRedirect(path);
+              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+                   String path = "./jsps/jspThongBao.jsp";
+                    response.sendRedirect(path);
             } else {
                     String path = "./jsps/jspGuiYeuCau.jsp";
                     response.sendRedirect(path);
@@ -54,6 +55,7 @@ public class servSendComment extends HttpServlet {
         }
     } 
 private void sendCommentByGuest(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    HttpSession session=request.getSession();
      clsMapperComment mpc=new clsMapperComment();
             int id=mpc.getMaxId()+1;
             String content=request.getParameter("txtContent");
@@ -66,8 +68,9 @@ private void sendCommentByGuest(HttpServletRequest request, HttpServletResponse 
            clsComment cls=new clsComment(id, content, author, email, date,MSSV);
            clsBOComment clsBo=new clsBOComment();
            clsBo.CommnetInsert(cls);
-           String path = "./jsps/CommentOK.jsp";
-             response.sendRedirect(path);
+          session.setAttribute("mes", "Ý kiến của bạn đã được gửi tới quản, xin cảm ơn!");
+          String path = "./jsps/jspThongBao.jsp";
+          response.sendRedirect(path);
 }
 private void sendCommentByStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
      clsMapperComment mpc=new clsMapperComment();
@@ -82,8 +85,9 @@ private void sendCommentByStudent(HttpServletRequest request, HttpServletRespons
            clsComment cls=new clsComment(id, content, author, email, date,MSSV);
            clsBOComment clsBo=new clsBOComment();
            clsBo.CommnetInsert(cls);
-           String path = "./jsps/CommentOK.jsp";
-             response.sendRedirect(path);
+           session.setAttribute("mes", "Ý kiến của bạn đã được gửi tới quản lý, xin cảm ơn!");
+          String path = "./jsps/jspThongBao.jsp";
+          response.sendRedirect(path);
 }
     
     @Override

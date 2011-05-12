@@ -34,7 +34,7 @@ public class servLogin extends HttpServlet {
             Login(session, request, response);
               }
             else if(login.equalsIgnoreCase("false")){//logout
-            LogOut(session, request, response);
+            LogOut(session,  response);
              }
            
         } finally { 
@@ -52,21 +52,35 @@ private void Login(HttpSession session, HttpServletRequest request, HttpServletR
               String user=request.getParameter("txtUsername");
              String pass=request.getParameter("txtPassword");
             clsBOAccount BOAccount=new clsBOAccount();
-            if(BOAccount.Login(user, pass)){
-                session.setAttribute("username", user);
-                String path = "./jsps/jspTrangChu.jsp";
-                response.sendRedirect(path);
+             if(BOAccount.Login(user, pass)){
+                if(BOAccount.checkLogin(user)){
+                    session.setAttribute("mes", "Tài khoản của bạn đang được đăng nhập ở một máy khác!");
+                   String path = "./jsps/jspThongBao.jsp";
+                    response.sendRedirect(path);
+                }else if(BOAccount.checkLock(user)){
+                   session.setAttribute("mes", "Tài khoản của bạn đang bị khóa vui lòng liên hệ quản lý khoa để giải quyết!");
+                   String path = "./jsps/jspThongBao.jsp";
+                    response.sendRedirect(path);
+                        }else {
+                             session.setAttribute("username", user);
+                             //BOAccount.updateLogin(user);
+                             String path = "./jsps/jspTrangChu.jsp";
+                             response.sendRedirect(path);
+                }
 
             } else {
                 String path = "./jsps/jspLoginFail.jsp";
                 response.sendRedirect(path);
             }
 }
-private void LogOut(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException{
+private void LogOut(HttpSession session, HttpServletResponse response) throws IOException, Exception{
+              // String user=(String) session.getAttribute("username");
+              // clsBOAccount BOAccount=new clsBOAccount();
+              // BOAccount.updateLogin(user);
                session.removeAttribute("username");
                session.removeAttribute("student");
                String path = "./jsps/jspTrangChu.jsp";
-                response.sendRedirect(path);
+               response.sendRedirect(path);
 }
   /**
    *

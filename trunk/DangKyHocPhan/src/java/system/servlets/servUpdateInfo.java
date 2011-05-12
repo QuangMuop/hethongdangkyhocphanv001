@@ -36,8 +36,9 @@ public class servUpdateInfo extends HttpServlet {
         try {
             String login=(String) session.getAttribute("username");
             if(login==null){
-              String path = "./jsps/jspChuaDangNhap.jsp";
-              response.sendRedirect(path);
+              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+             String path = "./jsps/jspThongBao.jsp";
+             response.sendRedirect(path);
             }
             else {
                if(isupdate.equalsIgnoreCase("false")){//Xem thông tin sinh viên
@@ -82,8 +83,9 @@ private void updateStudentInfo(HttpSession session,HttpServletRequest request,Ht
             ", Địa chỉ liên lạc: "+address+", Thường trú: "+home+", CMND: "+cmnd;
     clsBOStudent student=new clsBOStudent();
     student.updateStudentByStudent(updateinfo, username);
-     String path = "./jsps/jspCapNhatThongTinOK.jsp";
-     response.sendRedirect(path);
+     session.setAttribute("mes", "Thông tin cập nhật của bạn đã đươc gửi tới quản lý khoa!");
+             String path = "./jsps/jspThongBao.jsp";
+             response.sendRedirect(path);
 }
     /**
      *
