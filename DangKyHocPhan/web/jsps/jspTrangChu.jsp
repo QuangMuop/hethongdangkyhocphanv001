@@ -14,7 +14,13 @@
     <head>
         <link href="../csss/general.css" rel="stylesheet" type="text/css" media="screen">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Trang Chủ</title>        
+        <title>Trang Chủ</title>
+        <style media="all" type="text/css">
+            #frmimg{
+                margin-left: 50px;
+                border: 5px solid #98AFC7;
+            }
+        </style>
     </head>
     <body>
         <!--Div Wrapper-->
@@ -26,6 +32,7 @@
                 <p>
                     Một số nội dung ở trang chủ....
                 </p>
+                <img src="../imgs/hpimg.JPG" alt="Angry face" id="frmimg"/>
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
