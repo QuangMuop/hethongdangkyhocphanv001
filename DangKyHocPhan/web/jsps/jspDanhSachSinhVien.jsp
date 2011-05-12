@@ -1,8 +1,9 @@
-<%-- 
+<%--
     Document   : jspDanhSachSinhVien
     Created on : 10-05-2011, 11:23:56
     Author     : ngloc_it
 --%>
+<%@page import="java.util.ArrayList"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -37,52 +38,149 @@
                 margin-top: 40px;
             }
         </style>
+        <script language="javascript">
+            function processSearchClass(){
+                document.forms["frmSearchByClass"].submit();
+             }
+            function processSearchFullName(){
+                var name = document.frmSearchByFullName.txtFullName.value;
+                if(name.length == 0)
+                    alert("Hãy Nhập Họ Tên Đầy Đủ Và Nhấn Tìm");
+                else
+                    document.forms["frmSearchByFullName"].submit();
+             }
+             function processSearchMSSV(){
+                 var mssv = document.frmSearchByMSSV.txtMSSV.value;
+                 if(mssv.length == 0)
+                    alert("Hãy Nhập MSSV Và Nhấn Tìm");
+                else
+                    document.forms["frmSearchByMSSV"].submit();
+             }
+        /*     var content = document.myform.txtContent.value;
+           var name = document.myform.txtName.value;
+           var email = document.myform.txtEmail.value;
+         if(content.length==0){
+             alert("Bạn chưa nhập nội dung");
+          }
+          else if(name.length==0){
+             alert("Bạn chưa nhập tên");
+          }else if(email.length==0){
+             alert("Bạn chưa nhập email");
+          }
+          else{
+           document.forms["myform"].submit();*/
+        </script>
     </head>
     <body>
+        <%
+            String strErr = "";
+            int n = 0;
+            int i = 0;
+            ArrayList<String> listInfomation = new ArrayList<String>();
+            try{
+                listInfomation = (ArrayList<String>) session.getAttribute("listinfomation");
+                n = listInfomation.size();
+                strErr = "Ok";
+            }catch(Exception ex){
+                strErr = ex.toString();
+            }
+        %>
         <!--Div Wrapper-->
         <div id="wrapper">
             <div id="mainNav"><!--Main Navigation-->
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <form action="#" method="post" id="frmsearch">
-                    <h3>Gồm tất cả các SV của trường ĐH CNTT - ĐHQG Hồ Chí Minh từ 1002 năm trước</h3>
-                    <b>Lớp</b>
-                    <select name="sSearch">
-                        <option>CNMP01</option>
-                        <option>CNMP02</option>
-                        <option>CNMP03</option>
-                        <option>CNMP04</option>
-                        <option>CNMP05</option>
-                        <option>CNMP06</option>
-                        <option>CNMP07</option>
-                        <option>CNMP08</option>
-                    </select>
-                    <input type="submit" value="|  Tìm  |">
-                </form>
+                <!--FORM SEARCH By CLASS -->
+                <h3>Gồm tất cả các SV của trường ĐH CNTT - ĐHQG Hồ Chí Minh từ 1002 năm trước</h3>
+                <table>
+                    <tr>
+                        <td>
+                            <b>Tìm Theo Lớp</b>
+                        </td>
+                        <td>
+                            <form action="../ViewListStudent?search=yes&order=FullName" method="post" name="frmSearchByClass">
 
+                                <select name="sSearch" onchange="processSearchClass()">
+                                    <%
+                                    String[] options = {"ALL", "CNPM01", "CNPM02", "CNPM03", "CNPM04", "CNPM05"
+                                    , "CNPM06", "CNPM07", "CNPM08", "CNPM09", "CNPM10"};
+                                    String selected = "";
+                                    try{
+                                        selected = (String) session.getAttribute("classnametemp");
+                                    }catch(Exception ex){
+                                        strErr += ex.toString();
+                                    }
+                                    for(int j = 0; j < options.length; j++){
+                                    %>
+                                    <option <%if(options[j].equals(selected)){%>selected ="yes"<%}%>><%=options[j]%></option>
+                                    <%}%>
+                                </select>
+                            </form>
+                        </td>
+                    </tr>
+                    <!--FORM SEARCH By MSSV -->
+                    <tr>
+                        <td>
+                            <b>Tìm Theo MSSV  </b>
+                        </td>
+                        <td>
+                            <form action="../ViewListStudent?search=frmMSSV" method="post" name="frmSearchByMSSV">
+                                <input type="text" name="txtMSSV">
+                                <input type="button" onclick="processSearchMSSV()" value="|  Tìm  |">
+                            </form>
+                        </td>
+                    </tr>
+                    <!--FORM SEARCH By FULLNAME -->
+                    <tr>
+                        <td>
+                            <b>Tìm Theo Tên  </b>
+                        </td>
+                        <td>
+                            <form action="../ViewListStudent?search=frmFullName" method="post" name="frmSearchByFullName">
+                                <input type="text" name="txtFullName">
+                                <input type="button" onclick="processSearchFullName()" value="|  Tìm  |">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                <!-- This hold list of students found by search engine. -->
                 <form action="#" method="post" id="frmlststudent">
-                    <h3>Danh sách SV</h3>
+                    <h3><u>Danh sách SV</u></h3>
                     <table id="infomation">
                         <tr>
-                            <th>Họ Và Tên</th><th>MSSV</th><th>Lớp</th><th>Email</th><th></th><th></th>
+                            <th><a href="../ViewListStudent?search=yes&order=FullName">Họ Và Tên</a></th>
+                            <th><a href="../ViewListStudent?search=yes&order=MSSV">MSSV</a></th>
+                            <th><a href="../ViewListStudent?search=yes&order=Class">Lớp</a></th>
+                            <th><a href="../ViewListStudent?search=yes&order=Email">Email</a></th>
+                            <th></th>
+                            <th></th>
                         </tr>
+                        <!--
+                            //Fullname, MSSV, BirthDay, ClassName, Email, Phone, Address,Home,
+                            //IsStudying, courseCode, gender, CMND, Type, Bac hoc, Note
+                        -->
+                        <%if(n>0){
+                            while(i<n){%>
+                            <tr>
+                                <td><%=listInfomation.get(i++)%></td><!--FullName-->
+                                <td><a href="../StudentDetail?MSSV=<%=listInfomation.get(i)%>"><%=listInfomation.get(i++)%></a></td><!--MSSV-->
+                                <%i++;%><td><%=listInfomation.get(i++)%></td><!--ClassName-->
+                                <td><%=listInfomation.get(i++)%></td><!--Email-->
+                                <%i+=10;%>
+                                <td><a href="#">Cập nhật</a></td>
+                                <td><a href="#">Xóa</a></td>
+                            </tr>
+                          <%}%>
+                        <%}%>
+                            <!--
                         <tr>
                             <td>Nguyễn Văn Lộc</td><td>07520210</td><td>CNPM02</td><td>locnv.uit@gmail.com</td><td><a href="#">Cập nhật</a></td><td><a href="#">Xóa</a></td>
-                        </tr>
-                        <tr>
-                            <td>Nguyễn Văn Lộc</td><td>07520210</td><td>CNPM02</td><td>locnv.uit@gmail.com</td><td><a href="#">Cập nhật</a></td><td><a href="#">Xóa</a></td>
-                        </tr>
-                        <tr>
-                            <td>Nguyễn Văn Lộc</td><td>07520210</td><td>CNPM02</td><td>locnv.uit@gmail.com</td><td><a href="#">Cập nhật</a></td><td><a href="#">Xóa</a></td>
-                        </tr>
-                        <tr>
-                            <td>Nguyễn Văn Lộc</td><td>07520210</td><td>CNPM02</td><td>locnv.uit@gmail.com</td><td><a href="#">Cập nhật</a></td><td><a href="#">Xóa</a></td>
-                        </tr>
+                        </tr> -->
                     </table>
                 </form>
                 <form action="" method="post" id="frmexport">
-                        <input type="submit" value="| Xuất File |">
+                    <input type="button" onclick="processSearchClass()" value="| Xuất File |">
                 </form>
             </div><!--End Contents-->
 

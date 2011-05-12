@@ -3,6 +3,8 @@ package system.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,40 +56,17 @@ public class StudentDetail extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");        
         HttpSession session = req.getSession();
 
-        String MSSV = req.getParameter("MSSV");
-        String strErr = "";
-        ArrayList<String> listInfomation = new ArrayList<String>();
-        /**
-     *     CELL 1// FullName//CELL2: MSSV//CELL3: BirthDay//CELL4: Lop - Class//CELL5: Email
-     *     CELL6: PhoneNumber//CELL7: TamTru/CELL8: ThuongTru
-     *     CELL: Status: Đang học, đang bảo lưu, đang ...
-     *     CELL10: CourseNumber//CELL11: Sex//CELL12: ID (CMND)
-     *     CELL13: Hình thức: Chính qui, tại chức, ...
-     *     CELL14: Bậc học : đại học, cao đẳng, cử nhân, trung cấp,...
-     */
+        String MSSV = req.getParameter("MSSV");        
+
+        clsStudent student = new clsStudent();
         try{
             clsBOStudent studentBo = new clsBOStudent();
-            clsStudent student = studentBo.getStudentInfoByCode(MSSV);
-            listInfomation.add(student.getFullname());
-            listInfomation.add(student.getCode());
-            listInfomation.add(student.getBirthDay());
-            listInfomation.add(student.getClasss());
-            listInfomation.add(student.getEmail());
-            listInfomation.add(student.getPhone());
-            listInfomation.add(student.getAddress());
-            listInfomation.add(student.getHome());
-            listInfomation.add(student.getIsStuding());
-            listInfomation.add(Integer.toString(student.getCourse()));
-            listInfomation.add(student.getGender());
-            listInfomation.add(student.getCMND());
-            listInfomation.add(student.getType());
-            listInfomation.add(student.getBacHoc());
+            student = studentBo.getStudentInfoByCode(MSSV);            
         }catch(Exception ex){
-            strErr = ex.toString();
+            Logger.getLogger(StudentDetail.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        session.setAttribute("listinfomation", listInfomation);
-        String path = "./jsps/jspChiTietSinhVien.jsp?";
+        session.setAttribute("student", student);        
+        String path = "./jsps/jspThongTinSinhVien.jsp";
         resp.sendRedirect(path);
     }
 }

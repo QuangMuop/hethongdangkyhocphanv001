@@ -4,6 +4,7 @@ package system.access.mapper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import system.dto.clsStudent;
 
 
@@ -87,7 +88,63 @@ public class clsMapperStudent extends clsMapperDb{
         }
         return student;
     }
-    
+
+    /**
+     * Get all student in database
+     * @param strWhere search codition
+     * @param strOrder order by codition
+     * @return list of student found
+     * @throws Exception
+     */
+    public ArrayList<clsStudent> GetAllStudent(String strOrder) throws Exception{
+        ArrayList<clsStudent> listStudent = new ArrayList<clsStudent>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.student ");
+            sql.append(" Order by ");
+            sql.append(strOrder);
+
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsStudent student = new clsStudent();
+                IniStudentDTOFromRs(student, rs);
+                listStudent.add(student);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listStudent;
+    }
+
+    /**
+     * Get all student in database by class
+     * @param clssName String for search
+     * @param strOrder order condition
+     * @return list of student found
+     * @throws Exception
+     */
+    public ArrayList<clsStudent> GetStudentsByClass(String className, String strOrder) throws Exception{
+        ArrayList<clsStudent> listStudent = new ArrayList<clsStudent>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.student Where Class = '");
+            sql.append(className).append("'");
+            sql.append(" Order by ");
+            sql.append(strOrder);
+
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsStudent student = new clsStudent();
+                IniStudentDTOFromRs(student, rs);
+                listStudent.add(student);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listStudent;
+    }
     
     public boolean StudentInsert(clsStudent student) throws Exception{
         boolean result = false;
