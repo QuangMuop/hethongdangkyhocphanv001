@@ -42,7 +42,7 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <form name="myform" id="myform" method="post" action="../servLogin?login=true">
-                    <p>Tên tài khoản hay mật khẩu không đúng, vui lòng nhập lại</p>
+                    <h3>Tên tài khoản hay mật khẩu không đúng, vui lòng nhập lại</h3>
                    <table>
                         <tr>
                             <td>Tên Đăng Nhập</td>

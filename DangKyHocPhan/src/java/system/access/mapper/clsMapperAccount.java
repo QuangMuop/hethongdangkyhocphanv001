@@ -44,6 +44,46 @@ public class clsMapperAccount extends clsMapperDb {
         }
         return result;
     }
+    public boolean AccountCheckLogin(String username) throws Exception{
+      int login=0;
+     try{
+            StringBuffer sql = new StringBuffer();
+           sql.append("SELECT IsLogin FROM dangkyhocphan.ACCOUNTS WHERE ");
+            sql.append(" username = '").append(username).append("'");
+           PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+           while ((rs != null) && (rs.next())) {
+                login = Integer.parseInt(rs.getString("IsLogin"));
+
+            }
+            stmt.close();
+        }catch(Exception ex){
+            throw ex;
+        }
+      if(login==1)
+      return true;
+      else return false;
+    }
+    public boolean AccountCheckLock(String username) throws Exception{
+      int lock=0;
+     try{
+            StringBuffer sql = new StringBuffer();
+           sql.append("SELECT IsLocked FROM dangkyhocphan.ACCOUNTS WHERE ");
+            sql.append(" username = '").append(username).append("'");
+           PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+           while ((rs != null) && (rs.next())) {
+                lock = Integer.parseInt(rs.getString("IsLocked"));
+
+            }
+            stmt.close();
+        }catch(Exception ex){
+            throw ex;
+        }
+      if(lock==1)
+      return true;
+      else return false;
+    }
     public clsAccount getAccountInfo(String username) throws Exception{
         clsAccount accountDTO=new clsAccount();
         try{
@@ -116,18 +156,10 @@ public void AccountChangePass(String username, String password) throws Exception
 public void AccountUpdateLogin(String username) throws Exception{
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select IsLogin from dangkyhocphan.Accounts Where username = '").append(username).append("'");
-            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-             ResultSet rs=stmt.executeQuery();
-            int login=Integer.parseInt(rs.getString("IsLogin"));
-            sql=new StringBuffer();
-            if(login==0)
-                sql.append("Update dangkyhocphan.Accounts set IsLogin=1 where UserName='").append(username).append("'");
-            else
-                sql.append("Update dangkyhocphan.Accounts set IsLogin=0 where UserName='").append(username).append("'");
-             stmt = getConnection().prepareStatement(sql.toString());
-            boolean execute = stmt.execute();
-;
+            sql.append("update dangkyhocphan.accounts set IsLogin=(IsLogin+1)%2 where UserName='");
+            sql.append(username).append("'");
+           PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            stmt.execute();
         }catch(Exception ex){
                 throw ex;
         }

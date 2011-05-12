@@ -16,9 +16,9 @@ public class clsBOAccount {
     }
     
     /**
-     * Get account type: admin or normal
+     *
      * @param username
-     * @return type of username
+     * @return
      * @throws Exception
      */
     public int getAccountType(String username) throws Exception{
@@ -28,9 +28,9 @@ public class clsBOAccount {
     }
     
     /**
-     * Insert an account into database
+     *
      * @param account
-     * @return true if successfull, false if fail
+     * @return
      * @throws Exception
      */
     public boolean Insert(clsAccount account) throws Exception{
@@ -44,5 +44,17 @@ public class clsBOAccount {
                 throw e;
         }
         return true;
+    }
+    public void updateLogin(String user) throws Exception{
+        clsMapperAccount mpa=new clsMapperAccount();
+        mpa.AccountUpdateLogin(user);
+    }
+    public boolean checkLogin(String user) throws Exception{
+        clsMapperAccount mpa=new clsMapperAccount();
+        return mpa.AccountCheckLogin(user);
+    }
+    public boolean checkLock(String user) throws Exception{
+        clsMapperAccount mpa=new clsMapperAccount();
+        return mpa.AccountCheckLock(user);
     }
 }

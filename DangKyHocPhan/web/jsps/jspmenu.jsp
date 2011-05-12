@@ -52,7 +52,7 @@
                         <li> <a href="jspDangKyMonHoc.jsp">Đăng Ký Môn Học</a> </li>
                         <li><a href="jspXemChuongTrinhDaoTao.jsp">Xem Chương Trình Đào Tạo</a> </li>
                         <li><a href="../ViewSchedule">Xem TKB</a> </li>
-                        <li> <a href="jspXemKQHocTap.jsp">Xem KQ Học Tập</a> </li>
+                        <li> <a href="../servStudyResult?first=true">Xem kết quả học tập</a> </li>
                         <li><a href="../servUpdateInfo?isupdate=false">Thông tin sinh viên</a> </li>
                         <li> <a href="../servSendComment?guest=notlogin">Gửi Yêu Cầu</a> </li>
                     </ul>

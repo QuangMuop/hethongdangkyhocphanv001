@@ -68,7 +68,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
-                               Năm: <select name="year">
+                               Năm: <select  name="year">
                                     <%for(int i = 1970; i <2021; i++){%>
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
@@ -78,7 +78,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
                      <tr>
                         <td>Giới tính:</td>
                         <td>
-                            <select name="gender">
+                            <select style="width:160px"  name="gender">
                                    <option value="Nam">Nam</option>
                                     <option value="Nữ">Nữ</option>
                             </select>
@@ -95,18 +95,18 @@ clsStudent student =(clsStudent) session.getAttribute("student");
                     <tr>
                         <td>Loại hình học:</td>
                         <td>
-                            <select  name="type">
-                                   <option value="Chính quy">---------Chính quy----------</option>
-                                    <option value="Từ xa qua mạng">------Từ xa qua mạng-----</option>
+                            <select style="width:160px" name="type">
+                                   <option value="Chính quy">Chính quy</option>
+                                    <option value="Từ xa qua mạng">Từ xa qua mạng</option>
                            </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Bậc học:</td>
                         <td>
-                            <select  name="bachoc">
-                                   <option value="Đại học">-----------Đại học-----------</option>
-                                   <option value="Cao học">-----------Cao học-----------</option>
+                            <select style="width:160px" name="bachoc">
+                                   <option value="Đại học">Đại học</option>
+                                   <option value="Cao học">Cao học</option>
                            </select></td>
                     </tr>
                     <tr>
