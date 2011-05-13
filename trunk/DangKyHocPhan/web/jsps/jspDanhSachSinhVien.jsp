@@ -164,12 +164,12 @@
                             while(i<n){%>
                             <tr>
                                 <td><%=listInfomation.get(i++)%></td><!--FullName-->
-                                <td><a href="../StudentDetail?MSSV=<%=listInfomation.get(i)%>"><%=listInfomation.get(i++)%></a></td><!--MSSV-->
+                                <%String mssv =  listInfomation.get(i);%><td><a href="../StudentDetail?MSSV=<%=listInfomation.get(i)%>"><%=listInfomation.get(i++)%></a></td><!--MSSV-->
                                 <%i++;%><td><%=listInfomation.get(i++)%></td><!--ClassName-->
                                 <td><%=listInfomation.get(i++)%></td><!--Email-->
                                 <%i+=10;%>
-                                <td><a href="#">Cập nhật</a></td>
-                                <td><a href="#">Xóa</a></td>
+                                <td><a href="../StudentDetail?MSSV=<%=mssv%>">Cập nhật</a></td>
+                                <td><a href="../UpdateStudent?functionname=delete&mssv=<%=mssv%>">Xóa</a></td>
                             </tr>
                           <%}%>
                         <%}%>

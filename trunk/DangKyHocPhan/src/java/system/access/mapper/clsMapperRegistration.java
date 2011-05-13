@@ -45,70 +45,110 @@ public clsMapperRegistration() throws Exception{
         return listStudentCode;
      }
 
-public ResultSet getRegistrationInfo(clsRegistration reg) throws Exception{//lấy chưa được thông tin các lớp học của một sinh viên
-     try{
-            StringBuffer sql = new StringBuffer();
-            sql.append("Select ClassName from dangkyhocphan.registry Where ");
-            sql.append("MSSV = '").append(reg.getStudentCode()).append("' and Semester=");
-            sql.append(reg.getSemester()).append(" and Year='");
-            sql.append(reg.getYear()).append("'");
-            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-            ResultSet rs = stmt.executeQuery();
-            return rs;
-        }catch(Exception ex){
-            throw ex;
-        }
-        
-}
- public void RegistrationInsert(clsRegistration reg) throws Exception{
-       try {
-            StringBuffer sql = new StringBuffer();
-            sql.append("Insert into dangkyhocphan.registry values('");
-            sql.append(reg.getStudentCode()).append("','");
-            sql.append(reg.getClassName()).append("',");
-            sql.append(reg.getSemester()).append(",'");
-            sql.append(reg.getYear()).append("',");
-            sql.append(reg.getMark()).append(")");
-            
-            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-            stmt.execute();
-            stmt.close();
-        }
-        catch (Exception e) {
-                throw e;
-        }
-   }
- public void RegistrationDelete(clsRegistration reg) throws Exception{
-       try{
-    StringBuffer sql = new StringBuffer();
-            sql.append("delete from dangkyhocphan.registry where MSSV='");
-            sql.append(reg.getStudentCode()).append("' and ClassName='");
-            sql.append(reg.getClassName()).append("' and Semester=");
-            sql.append(reg.getSemester()).append(" and Year='");
-            sql.append(reg.getYear()).append("'");
-            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-            stmt.execute();
-        }catch(Exception ex){
-                throw ex;
-        }
-}
- public boolean RegistrationCheckExits(clsRegistration reg) throws Exception{
-     boolean result = false;
-       try{
-            StringBuffer sql = new StringBuffer();
-            sql.append("Select * from dangkyhocphan.registry Where MSSV ='");
-            sql.append(reg.getStudentCode()).append("' and ClassName='");
-            sql.append(reg.getClassName()).append("' and Semester=");
-            sql.append(reg.getSemester()).append(" and Year='");
-            sql.append(reg.getYear()).append("'");
-            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-            ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && (rs.next()))
-                result = true;
-            stmt.close();
-        }catch(Exception ex){
-                throw ex;
-        }
-        return result;
-}
+     /**
+      *
+      * @param reg
+      * @return
+      * @throws Exception
+      */
+     public ResultSet getRegistrationInfo(clsRegistration reg) throws Exception{//lấy chưa được thông tin các lớp học của một sinh viên
+         try{
+             StringBuffer sql = new StringBuffer();
+             sql.append("Select ClassName from dangkyhocphan.registry Where ");
+             sql.append("MSSV = '").append(reg.getStudentCode()).append("' and Semester=");
+             sql.append(reg.getSemester()).append(" and Year='");
+             sql.append(reg.getYear()).append("'");
+             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+             ResultSet rs = stmt.executeQuery();
+             return rs;
+         }catch(Exception ex){
+             throw ex;
+         }
+     }
+     
+     
+     /**
+      * 
+      * @param reg
+      * @throws Exception
+      */
+     public void RegistrationInsert(clsRegistration reg) throws Exception{
+         try {
+             StringBuffer sql = new StringBuffer();
+             sql.append("Insert into dangkyhocphan.registry values('");
+             sql.append(reg.getStudentCode()).append("','");
+             sql.append(reg.getClassName()).append("',");
+             sql.append(reg.getSemester()).append(",'");
+             sql.append(reg.getYear()).append("',");
+             sql.append(reg.getMark()).append(")");
+             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+             stmt.execute();
+             stmt.close();
+         }catch (Exception e) {
+             throw e;
+         }
+     }
+     
+     /**
+      * 
+      * @param reg
+      * @throws Exception
+      */
+     public void RegistrationDelete(clsRegistration reg) throws Exception{
+         try{
+             StringBuffer sql = new StringBuffer();
+             sql.append("delete from dangkyhocphan.registry where MSSV='");
+             sql.append(reg.getStudentCode()).append("' and ClassName='");
+             sql.append(reg.getClassName()).append("' and Semester=");
+             sql.append(reg.getSemester()).append(" and Year='");
+             sql.append(reg.getYear()).append("'");
+             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+             stmt.execute();
+         }catch(Exception ex){
+             throw ex;
+         }
+     }
+
+     /**
+      * Delete all subject registed by a student
+      * @param mssv id of student you want to delete registration
+      * @throws Exception
+      */
+     public void RegistrationDeleteByStudentId(String mssv) throws Exception{
+         try{
+             StringBuffer sql = new StringBuffer();
+             sql.append("delete from dangkyhocphan.registry where MSSV = '");
+             sql.append(mssv).append("'");
+             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+             stmt.execute();
+         }catch(Exception ex){
+             throw ex;
+         }
+     }
+     
+     /**
+      * 
+      * @param reg
+      * @return
+      * @throws Exception
+      */
+     public boolean RegistrationCheckExits(clsRegistration reg) throws Exception{
+         boolean result = false;
+         try{
+             StringBuffer sql = new StringBuffer();
+             sql.append("Select * from dangkyhocphan.registry Where MSSV ='");
+             sql.append(reg.getStudentCode()).append("' and ClassName='");
+             sql.append(reg.getClassName()).append("' and Semester=");
+             sql.append(reg.getSemester()).append(" and Year='");
+             sql.append(reg.getYear()).append("'");
+             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+             ResultSet rs = stmt.executeQuery();
+             if((rs!=null) && (rs.next()))
+                 result = true;
+             stmt.close();
+         }catch(Exception ex){
+             throw ex;
+         }
+         return result;
+     }
 }

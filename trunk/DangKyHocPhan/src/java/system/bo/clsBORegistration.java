@@ -22,4 +22,18 @@ public class clsBORegistration {
             throw ex;
         }
      }
+
+     /**
+      * Delte all registraion of student by id
+      * @param mssv id of student
+      * @throws Exception
+      */
+     public void Delete(String mssv) throws Exception{
+         try{
+             clsMapperRegistration mapper = new clsMapperRegistration();
+             mapper.RegistrationDeleteByStudentId(mssv);
+         }catch(Exception ex){
+             throw ex;
+         }
+     }
 }
