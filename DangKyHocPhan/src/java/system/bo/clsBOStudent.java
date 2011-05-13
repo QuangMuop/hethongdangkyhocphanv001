@@ -90,6 +90,22 @@ public class clsBOStudent {
           clsMapperStudent mapper = new clsMapperStudent();
           return mapper.StudentCheckExistCode(MSSV);                
       }
+
+      /**
+       * Delete a student by student id (mssv)
+       * @param mssv
+       * @throws Exception
+       */
+      public void Delete(String mssv) throws Exception{
+        try{
+            clsMapperStudent mapper = new clsMapperStudent();
+            mapper.Delete(mssv);
+        }catch(Exception ex){
+            throw ex;
+        }
+      }
+
+
      public void updateStudentByStudent(String updateinfo, String code) throws Exception{
          clsMapperStudent mps=new clsMapperStudent();
          mps.StudentUpdateByStudent(updateinfo, code);

@@ -193,17 +193,26 @@ public class clsMapperStudent extends clsMapperDb{
                 throw ex;
         }
         return result;
-}
-   public void LecturerDelete(String code) throws Exception{
+    }
+
+
+    /**
+     * Delte a student by student id (mssv)
+     * @param mssv
+     * @throws Exception
+     */
+    public void Delete(String mssv) throws Exception{
         try{
-    StringBuffer sql = new StringBuffer();
-            sql.append("Delete from dangkyhocphan.student Where MSSV = '").append(code).append("'");
+            StringBuffer sql = new StringBuffer();
+            sql.append("Delete from dangkyhocphan.student Where MSSV = '").append(mssv).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){
-                throw ex;
+            throw ex;
         }
-  }
+    }
+
+
     public void StudentUpdateByAdmin(clsStudent student) throws Exception{
       try{
             StringBuffer sql = new StringBuffer();

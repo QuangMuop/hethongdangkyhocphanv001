@@ -45,14 +45,48 @@ public class clsBOAccount {
         }
         return true;
     }
+
+    /**
+     * 
+     * @param username
+     * @throws Exception
+     */
+    public void Delete(String username) throws Exception{
+        try{
+            clsMapperAccount mapper = new clsMapperAccount();
+            mapper.AccountDelete(username);
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
+
+    /**
+     *
+     * @param user
+     * @throws Exception
+     */
     public void updateLogin(String user) throws Exception{
         clsMapperAccount mpa=new clsMapperAccount();
         mpa.AccountUpdateLogin(user);
     }
+    
+    /**
+     * 
+     * @param user
+     * @return
+     * @throws Exception
+     */
     public boolean checkLogin(String user) throws Exception{
         clsMapperAccount mpa=new clsMapperAccount();
         return mpa.AccountCheckLogin(user);
     }
+
+    /**
+     *
+     * @param user
+     * @return
+     * @throws Exception
+     */
     public boolean checkLock(String user) throws Exception{
         clsMapperAccount mpa=new clsMapperAccount();
         return mpa.AccountCheckLock(user);
