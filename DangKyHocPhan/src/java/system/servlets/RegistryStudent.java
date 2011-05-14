@@ -1,6 +1,7 @@
 package system.servlets;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -22,8 +23,11 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import system.bo.clsBOAccount;
+import system.bo.clsBOClass;
+import system.bo.clsBOCourse;
 import system.bo.clsBOStudent;
 import system.dto.clsAccount;
+import system.dto.clsCourse;
 import system.dto.clsStudent;
 
 /**
@@ -83,10 +87,21 @@ public class RegistryStudent extends HttpServlet {
             path = "./jsps/jspTiepNhanSV.jsp?result=added";
         }else if(function.equals("addlist")){
             result = AddList(req);
-            path = "./jsps/jspTiepNhanSV.jsp?result=added";
+            path = "./jsps/jspTiepNhanSV.jsp?result=added";        
         }else{
             path = "./jsps/jspTiepNhanSV.jsp?result=failed";
         }
+
+        clsBOCourse courseBo = new clsBOCourse();
+        int n = 0;
+        try {
+            ArrayList<clsCourse> listCourse = courseBo.GetAllCorse();
+            n = listCourse.size();
+        } catch (Exception ex) {
+            Logger.getLogger(RegistryStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        session.setAttribute("numcourse", Integer.toString(n));
         session.setAttribute("listinfomation", result);
         resp.sendRedirect(path);
     }
@@ -308,4 +323,5 @@ public class RegistryStudent extends HttpServlet {
         }
         return listStudentInfomation;
     }
+ 
 }

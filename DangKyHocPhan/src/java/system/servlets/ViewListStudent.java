@@ -1,5 +1,7 @@
 package system.servlets;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -10,6 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import system.bo.clsBOStudent;
 import system.dto.clsStudent;
 
@@ -54,17 +62,23 @@ public class ViewListStudent extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = req.getSession();
+
+        String exportFile = (String) req.getParameter("exportfile");
+        if(exportFile == null)
+            exportFile = "Not export file";
+
         try {
              session.removeAttribute("listinfomation");
+             session.removeAttribute("exportfile");
         } catch (Exception ex) {
             Logger.getLogger(ViewListStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        String search = (String) req.getParameter("search");        
-        String order = (String) req.getParameter("order");
-        String className = (String) req.getParameter("sSearch");
         String mssv = "";
         String fullName = "";
+
+        String search = (String) req.getParameter("search");     //Yes or no
+        String order = (String) req.getParameter("order");       // default = MSSV
+        String className = (String) req.getParameter("sSearch");        
         mssv = (String) req.getParameter("txtMSSV");
         fullName = (String) req.getParameter("txtFullName");
 
@@ -72,6 +86,16 @@ public class ViewListStudent extends HttpServlet {
             session.setAttribute("classnametemp", className);
         }else{
             className = (String) session.getAttribute("classnametemp");
+            if(className == null)
+                className = "ALL"; //set default
+        }
+
+        if(order != null){
+            session.setAttribute("ordertemp", order);
+        }else{
+            order = (String) session.getAttribute("ordertemp");
+            if(order == null)
+                order = "MSSV";
         }
 
         if((className!=null && className.equals("ALL") && search.equals("yes")))
@@ -79,17 +103,25 @@ public class ViewListStudent extends HttpServlet {
 
         ArrayList<String> listInfomation = new ArrayList<String>();
         try {
-             listInfomation = PrepareDate(search, className, order, mssv, fullName);
+             listInfomation = PrepareData(search, className, order, mssv, fullName);
         } catch (Exception ex) {
             Logger.getLogger(ViewListStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
 
         String path = "./jsps/jspDanhSachSinhVien.jsp";
-        session.setAttribute("listinfomation", listInfomation);
+        session.setAttribute("listinfomation", listInfomation);       
+
+        if(exportFile.equals("true")){
+            String err = ExportFile(req, resp, listInfomation);
+            session.setAttribute("mes", err);
+            path = "jsps/jspThongBao.jsp";
+        }
+
         resp.sendRedirect(path);
     }
 
-    private ArrayList<String> PrepareDate(String search, String className, String order, String mssv, String fullName) throws Exception{
+    private ArrayList<String> PrepareData(String search, String className, String order, String mssv, String fullName) throws Exception{
         ArrayList<String> listInfomation = new ArrayList<String>();
         ArrayList<clsStudent> listStudent = new ArrayList<clsStudent>();
         clsBOStudent studentBo = new clsBOStudent();
@@ -112,7 +144,7 @@ public class ViewListStudent extends HttpServlet {
         int n = listStudent.size();
         int i = 0;
         //Fullname, MSSV, BirthDay, ClassName, Email, Phone, Address,Home,
-        //IsStudying, courseCode, gender, CMND, Type, Bac hoc, Note
+        //IsStudying, courseCode, NhapHoc, gender, CMND, Type, Bac hoc, Note
         for(i = 0; i < n; i++){
             clsStudent studentTemp = listStudent.get(i);
             listInfomation.add(studentTemp.getFullname());
@@ -125,6 +157,7 @@ public class ViewListStudent extends HttpServlet {
             listInfomation.add(studentTemp.getHome());
             listInfomation.add(studentTemp.getIsStuding());
             listInfomation.add(Integer.toString(studentTemp.getCourse()));
+            listInfomation.add(studentTemp.getNhaphoc());
             listInfomation.add(studentTemp.getGender());
             listInfomation.add(studentTemp.getCMND());
             listInfomation.add(studentTemp.getType());
@@ -132,5 +165,68 @@ public class ViewListStudent extends HttpServlet {
             listInfomation.add(studentTemp.getNote());
         }
         return listInfomation;
+    }
+
+    /**
+     * Export list student to excell file, save it
+     * on server side
+     * @param req
+     */
+    private String ExportFile(HttpServletRequest req, HttpServletResponse resp, ArrayList<String> listInfo){
+        String result = "";
+        try{
+            HSSFWorkbook hwb = new HSSFWorkbook();
+            HSSFSheet sheet = hwb.createSheet("DS Sinh Vien");
+            HSSFCellStyle style = hwb.createCellStyle();
+
+            boolean done = false;
+            int count = 0;
+            int j = 0;
+            int n = listInfo.size();
+            while(j < n){
+                HSSFRow row = sheet.createRow((short) +(count++));
+                HSSFCell cell = null;
+                for(int i = 0; i < 16 && j<n; i++){
+                    cell = row.createCell((short) +i);
+                    cell.setCellStyle(style);
+                    cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                    String test = listInfo.get(j++);
+                    cell.setCellValue(test);
+                }
+            }
+
+            style.setFillBackgroundColor(HSSFColor.AQUA.index);
+            style.setFillPattern(HSSFCellStyle.BIG_SPOTS);
+            style.setFillForegroundColor(HSSFColor.AQUA.index);
+            style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+
+            FileOutputStream fileOut = new FileOutputStream("DS.xls");
+            hwb.write(fileOut);
+            fileOut.close();
+            DownloadFile("DS.xls", resp);
+            result = "Tao file thanh cong";
+        }
+        catch (Exception ex){
+            result = ex.toString();
+        }
+        return result;
+    }
+
+    private void DownloadFile(String filename, HttpServletResponse resp){
+        try{
+            resp.reset();
+            resp.setContentType("application/xls");
+            resp.setHeader("Content-disposition","attachment; filename=" +filename);
+
+            FileInputStream in = new FileInputStream(filename);
+            int i;
+            while ((i = in.read()) != -1){
+                resp.getOutputStream().write(i);
+            }
+            in.close();
+            resp.getOutputStream().flush();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
