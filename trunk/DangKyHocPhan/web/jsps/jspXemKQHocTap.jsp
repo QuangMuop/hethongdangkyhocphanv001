@@ -115,29 +115,44 @@ for(j=0;j<m;j++){
 		</form>
                 
 		<form id="formdetail" name="formdetail">
-			<u>Chi tiết</u>
-                        <table id="detail" name="detail" border="2" bordercolor="yellow" >
+                    <u>Chi tiết</u>
+                    <table id="detail" name="detail" border="2" bordercolor="yellow" >
+                        <tr>
+                            <th align="center" width="100px">Năm học</th><th align="center" width="70px">Học kỳ</th><th align="center" width="100px">Mã môn</th><th align="center" width="300px">Tên môn học</th><th align="center" width="70px">Số TC</th><th align="center" width="80px">Điểm</th><th align="center" width="100px">Nhân hệ số</th>
+                        </tr>
+                        <%
+                            numTC=0;
+                            SumMark=0;
+                            Average=0;
+                            for(j=0;j<m;j++){%>
 				<tr>
-                                    <th align="center" width="100px">Năm học</th><th align="center" width="70px">Học kỳ</th><th align="center" width="100px">Mã môn</th><th align="center" width="300px">Tên môn học</th><th align="center" width="70px">Số TC</th><th align="center" width="80px">Điểm</th><th align="center" width="100px">Nhân hệ số</th>
-				</tr>
-                                <%
-                                numTC=0;
-                                SumMark=0;
-                                Average=0;
-                                for(j=0;j<m;j++){%>
-				<tr>
-                                    <td align="center"><%=result.get(j).getYear()%></td><td align="center"><%=result.get(j).getSemester()%></td><td align="left"><%=result.get(j).getSubCode()%></td><td align="left"><%=result.get(j).getSubName()%></td><td align="center"><%=result.get(j).getNumTC()%></td><td align="center"><%=result.get(j).getMark()%></td><td align="center"><%=result.get(j).getNumTC()*result.get(j).getMark()%></td>
-				</tr>
-				<%
-                                numTC+=result.get(j).getNumTC();
-                                SumMark+=(result.get(j).getNumTC()*result.get(j).getMark());
-                                Average=(float)Math.round(SumMark*100/numTC)/100;
-                                }%>
-                                <tr><td align="center"><h1>Tổng kết</h1></td><td ></td><td></td><td align="center"><h1>Trung bình: <%= Average %></h1></td><td align="center"><h1><%=numTC%></h1></td><td></td><td align="center"><h1><%=SumMark%></h1></td></tr>
+                                    <td align="center"><%=result.get(j).getYear()%></td>
+                                    <td align="center"><%=result.get(j).getSemester()%></td>
+                                    <td align="left"><%=result.get(j).getSubCode()%></td>
+                                    <td align="left"><%=result.get(j).getSubName()%></td>
+                                    <td align="center"><%=result.get(j).getNumTC()%></td>
+                                    <td align="center"><%=result.get(j).getMark()%></td>
+                                    <td align="center"><%=result.get(j).getNumTC()*result.get(j).getMark()%></td>
+                                </tr>
+                        <%
+                            numTC+=result.get(j).getNumTC();
+                            SumMark+=(result.get(j).getNumTC()*result.get(j).getMark());
+                            Average=(float)Math.round(SumMark*100/numTC)/100;
+                            }%>
+                            <tr>
+                                <td align="center">
+                                    <h1>Tổng kết</h1>
+                                </td>
+                                <td ></td>
+                                <td></td>
+                                <td align="center"><h1>Trung bình: <%= Average %></h1></td>
+                                <td align="center"><h1><%=numTC%></h1></td>
+                                <td></td>
+                                <td align="center"><h1><%=SumMark%></h1></td>
+                            </tr>
 			</table>
 			<br/>
-			
-		</form>
+                </form>
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
@@ -149,37 +164,38 @@ for(j=0;j<m;j++){
     <script  type = "text/javascript" >
         function createRequestObject(){
             var req;
-                    if(window.XMLHttpRequest){
-                        //For Firefox, Safari, Opera
-                     req = new XMLHttpRequest();
-                        }
-                        else if(window.ActiveXObject){
-                            //For IE 5+
-                            req = new ActiveXObject("Microsoft.XMLHTTP");
-                            }
-                            else{
-                                //Error for an old browser
-                                  alert('Your browser is not IE 5 or higher, or Firefox or Safari or Opera');
-                                 }
+            if(window.XMLHttpRequest){
+                //For Firefox, Safari, Opera
+                req = new XMLHttpRequest();
+            }
+            else if(window.ActiveXObject){
+                //For IE 5+
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            else{
+                //Error for an old browser
+                alert('Your browser is not IE 5 or higher, or Firefox or Safari or Opera');
+            }
+            return req;
+        }
 
-                                return req;
-}
         //Make the XMLHttpRequest Object
         var http = createRequestObject();
-         function reloadResult(){
-             if(http){
-             var year=document.formstudent.year.value;
-             var semester=document.formstudent.semester.value;
-             http.open("GET","../servStudyResult?first="+false+"&year="+year+"&semester="+semester,true);
-             http.onreadystatechange = handleResponse;
-             http.send(null);
-           }
-      }
-      function handleResponse(){
-        if(http.readyState == 4 && http.status == 200){
-              var detail=document.getElementById("detail");
-              detail.innerHTML=http.responseText;
+        function reloadResult(){
+            if(http){
+                var year=document.formstudent.year.value;
+                var semester=document.formstudent.semester.value;
+                http.open("GET","../servStudyResult?first="+false+"&year="+year+"&semester="+semester,true);
+                http.onreadystatechange = handleResponse;
+                http.send(null);
             }
-   }
-       </script>
+        }
+
+        function handleResponse(){
+            if(http.readyState == 4 && http.status == 200){
+                var detail=document.getElementById("detail");
+                detail.innerHTML=http.responseText;
+            }
+        }
+    </script>
 </html>

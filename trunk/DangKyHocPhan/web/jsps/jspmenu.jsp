@@ -37,7 +37,7 @@
                 <li><a href="../ViewSchedule">Xem TKB</a></li>
                 <li><a href="#">Quản Lý Khoa</a>
                     <ul>
-                        <li> <a href="jspTiepNhanSV.jsp">Tiếp Nhận SV</a> </li>
+                        <li> <a href="../RegistryStudent?function=nothing">Tiếp Nhận SV</a> </li>
                         <li><a href="jspTiepNhanGV.jsp">Tiếp Nhận GV</a> </li>
                         <li><a href="../ViewListStudent?search=no&order=FullName">Danh sách SV</a> </li>
                         <li><a href="jspTaoLopHoc.jsp">Tạo Lớp Học</a> </li>

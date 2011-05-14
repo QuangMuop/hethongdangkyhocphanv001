@@ -21,6 +21,10 @@
      }catch(Exception ex){
         strErr = ex.toString();
      }
+    String cMax = (String)session.getAttribute("numcourse");
+    if(cMax == null)
+           cMax = "1";
+    int CourseMax = Integer.parseInt(cMax);
 %>
 
 <html>
@@ -73,8 +77,34 @@
                 padding-left: 5px;
                 padding-right: 5px;
             }
-
         </style>
+        <script  type = "text/javascript" >
+         function PreCheckStudentOne(){
+            var MSSV = document.frmAddOne.txtMSSV.value;
+            var FirstName = document.frmAddOne.txtFirstName.value;
+            var LastName = document.frmAddOne.txtLastName.value;
+            var Address = document.frmAddOne.txtThuongTru.value;
+            var Home = document.frmAddOne.txtTamTru.value;
+            var Phone = document.frmAddOne.txtPhoneNumber.value;
+            var Email = document.frmAddOne.txtEmail.value;
+            var CMND = document.frmAddOne.txtCMND.value;
+
+            if((MSSV.length == 0)|| (FirstName.length == 0)|| (LastName.length == 0)
+                || (Address.length == 0)|| (Home.length == 0)|| (Phone.length == 0)
+                || (Email.length == 0)|| (CMND.length == 0)){
+                alert("Vui Lòng nhập đầy đủ thông tin trược khi submit");
+            }else
+                document.forms["frmAddOne"].submit();
+         }
+
+         function PreCheckStudentFile(){
+            var filename = document.frmFileS.txtPath.value;
+                if(filename.length == 0){
+                    alert("Vui Lòng file trược khi submit");
+            }else
+                document.forms["frmFileS"].submit();
+         }
+       </script>
     </head>
     <body>
         <!--Div Wrapper-->
@@ -83,7 +113,7 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->                
-                <form id="form-add-one" action="../RegistryStudent?function=addone" method="post">
+                <form id="form-add-one" name="frmAddOne" action="../RegistryStudent?function=addone" method="post">
                     <u>Thêm 1 SV vào database.</u><br/><br/>
                     <table id="table-add-one">
                         <tr>
@@ -119,7 +149,7 @@
                             <td>Lớp</td>
                             <td>
                             <select name="sClass">
-                                    <%for(i = 1; i < 10; i++){%>
+                                    <%for(i = 1; i <= CourseMax; i++){%>
                                         <option>
                                             CNPM <% if(i<10){%>0<%}%><%=i%>
                                         </option>
@@ -127,6 +157,26 @@
                             </select>
                             </td>
                     </tr>
+                    <tr>
+                            <td>Ngày Nhập học</td>
+                            <td>
+                                <select name="sDayn">
+                                    <%for(i = 0; i < 31; i++){%>
+                                        <option><%=(i+1)%></option>
+                                    <%}%>
+                                </select>
+                                <select name="sMonthn">
+                                    <%for(i = 0; i < 12; i++){%>
+                                        <option><%=(i+1)%></option>
+                                    <%}%>
+                                </select>
+                                <select name="sYearn">
+                                    <%for(i = 0; i < 50; i++){%>
+                                        <option><%=(1980+i)%></option>
+                                    <%}%>
+                                </select>
+                            </td>
+                        </tr>
                     <tr>
                         <td>Giới Tính</td>
                         <td>
@@ -152,8 +202,8 @@
                         <td>Khóa</td>
                         <td>
                             <select name="sCourse">
-                                <%for(i = 0; i < 9; i++){%>
-                                    <option><%=(1+i)%></option>
+                                <%for(i = 1; i <= CourseMax; i++){%>
+                                    <option><%=i%></option>
                                 <%}%>
                             </select>
                         </td>
@@ -197,19 +247,19 @@
                     <!-- isStuding, CMND,Type, Bachoc-->
                 </table>
                 <br/>
-                <input type="submit" value="Thêm">
+                <input type="button" value="Thêm" onclick="PreCheckStudentOne()">
             </form>
 
             <br/><br/>
             <form id="form-browse" action="../RegistryStudent?function=addlist"
-                      method="post" name="frmFile" enctype="multipart/form-data">
+                      method="post" name="frmFileS" enctype="multipart/form-data">
                     <u>Thêm Sinh Viên Từ File</u><br/><br/>
                     <table id="table-browse">
                         <tr>
                             <td><input type="file" name="txtPath"></td>
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Thêm"></td><td></td>
+                            <td><input type="button" onclick="PreCheckStudentFile()" value="Thêm"></td><td></td>
                         </tr>
                     </table>
                 </form>

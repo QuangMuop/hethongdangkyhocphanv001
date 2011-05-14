@@ -71,6 +71,31 @@
                     margin-right: 5px;
                 }
             </style>
+            <script  type = "text/javascript" >
+         function PreCheckLecturerOne(){
+            var MaGV = document.frmAddOne.txtLecturerCode.value;
+            var FirstName = document.frmAddOne.txtFirstName.value;
+            var LastName = document.frmAddOne.txtLastName.value;
+            var Address = document.frmAddOne.txtAddress.value;
+            var Phone = document.frmAddOne.txtPhoneNumber.value;
+            var Email = document.frmAddOne.txtEmail.value;            
+
+            if((MaGV.length == 0)|| (FirstName.length == 0)|| (LastName.length == 0)
+                || (Address.length == 0) || (Phone.length == 0)
+                || (Email.length == 0)){
+                alert("Vui Lòng nhập đầy đủ thông tin trược khi submit");
+            }else
+                document.forms["frmAddOne"].submit();
+         }
+
+         function PreCheckLecturerFile(){
+                var filename = document.frmFile.txtPath.value;
+                if(filename.length == 0){
+                    alert("Vui Lòng file trược khi submit");
+            }else
+                document.forms["frmFile"].submit();
+         }
+       </script>
     </head>
     <body>
         <!--Div Wrapper-->
@@ -79,7 +104,7 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <form id="form-add-one" action="../RegistryLecturer?function=addone" method="post">
+                <form id="form-add-one" name="frmAddOne" action="../RegistryLecturer?function=addone" method="post">
                     <u>Thêm 1 GV vào database.</u><br/><br/>
                     <table id="table-add-one">
                         <tr>
@@ -161,11 +186,11 @@
                             <td><input type="text" name="txtCMND"></td>
                         </tr>
                     </table>
-                    <input type="submit" value="Thêm">
+                    <input type="button" value="Thêm" onclick="PreCheckLecturerOne()">
                 </form>
 
                 <br/><br/>
-                <form id="form-browse" action="../RegistryLecturer?function=addlist" 
+                <form id="form-browse" name="frmFile" action="../RegistryLecturer?function=addlist"
                       method="post" enctype="multipart/form-data">
                     <u>Thêm Giảng Viên Từ File</u><br/><br/>
                     <table id="table-browse">
@@ -173,7 +198,7 @@
                             <td><input type="file" name="txtPath"></td>
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Thêm"></td><td></td>
+                            <td><input type="button" onclick="PreCheckLecturerFile()" value="Thêm"></td><td></td>
                         </tr>
                     </table>
                     <br/><br/><br/>

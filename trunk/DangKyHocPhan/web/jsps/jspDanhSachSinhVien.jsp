@@ -158,7 +158,7 @@
                         </tr>
                         <!--
                             //Fullname, MSSV, BirthDay, ClassName, Email, Phone, Address,Home,
-                            //IsStudying, courseCode, gender, CMND, Type, Bac hoc, Note
+                            //IsStudying, courseCode, nhap hoc, gender, CMND, Type, Bac hoc, Note
                         -->
                         <%if(n>0){
                             while(i<n){%>
@@ -167,7 +167,7 @@
                                 <%String mssv =  listInfomation.get(i);%><td><a href="../StudentDetail?MSSV=<%=listInfomation.get(i)%>"><%=listInfomation.get(i++)%></a></td><!--MSSV-->
                                 <%i++;%><td><%=listInfomation.get(i++)%></td><!--ClassName-->
                                 <td><%=listInfomation.get(i++)%></td><!--Email-->
-                                <%i+=10;%>
+                                <%i+=11;%>
                                 <td><a href="../StudentDetail?MSSV=<%=mssv%>">Cập nhật</a></td>
                                 <td><a href="../UpdateStudent?functionname=delete&mssv=<%=mssv%>">Xóa</a></td>
                             </tr>
@@ -179,8 +179,8 @@
                         </tr> -->
                     </table>
                 </form>
-                <form action="" method="post" id="frmexport">
-                    <input type="button" onclick="processSearchClass()" value="| Xuất File |">
+                <form action="../ViewListStudent?search=yes&exportfile=true" method="post" id="frmexport">
+                    <a href="../ViewListStudent?search=yes&exportfile=true">Download file</a>                    
                 </form>
             </div><!--End Contents-->
 
