@@ -63,7 +63,7 @@ private void Login(HttpSession session, HttpServletRequest request, HttpServletR
                     response.sendRedirect(path);
                         }else {
                              session.setAttribute("username", user);
-                             //BOAccount.updateLogin(user);
+                            BOAccount.updateLogin(user);
                              String path = "./jsps/jspTrangChu.jsp";
                              response.sendRedirect(path);
                 }
@@ -74,9 +74,9 @@ private void Login(HttpSession session, HttpServletRequest request, HttpServletR
             }
 }
 private void LogOut(HttpSession session, HttpServletResponse response) throws IOException, Exception{
-              // String user=(String) session.getAttribute("username");
-              // clsBOAccount BOAccount=new clsBOAccount();
-              // BOAccount.updateLogin(user);
+               String user=(String) session.getAttribute("username");
+               clsBOAccount BOAccount=new clsBOAccount();
+               BOAccount.updateLogin(user);
                session.removeAttribute("username");
                session.removeAttribute("student");
                String path = "./jsps/jspTrangChu.jsp";
