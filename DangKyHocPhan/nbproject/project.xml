@@ -8,7 +8,6 @@
             <web-module-libraries>
                 <library dirs="200">
                     <file>${file.reference.poi-3.8-beta2-20110408.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-fileupload-1.2.2.jar}</file>
