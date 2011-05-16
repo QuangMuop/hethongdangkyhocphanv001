@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: dangkyhocphan
 Target Host: localhost
 Target Database: dangkyhocphan
-Date: 5/12/2011 2:42:43 PM
+Date: 5/16/2011 4:38:52 PM
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,6 +34,9 @@ CREATE TABLE `class` (
   `Room` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `NumOfStudent` int(11) NOT NULL,
   `Time` tinyint(4) NOT NULL,
+  `TestDate` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TestTime` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TestRoom` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ClassName`),
   KEY `foreign_class_lec` (`LectuerCode`),
   KEY `foreign_class_sub` (`SubCode`),
@@ -107,6 +110,7 @@ DROP TABLE IF EXISTS `program`;
 CREATE TABLE `program` (
   `ProCode` int(11) NOT NULL,
   `SubCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Semester` tinyint(4) NOT NULL,
   PRIMARY KEY (`ProCode`,`SubCode`),
   KEY `foreign_pro_sub` (`SubCode`),
   CONSTRAINT `foreign_pro_sub` FOREIGN KEY (`SubCode`) REFERENCES `subject` (`SubCode`)
@@ -233,9 +237,9 @@ INSERT INTO `accounts` VALUES ('07520020', '07520020', 'Đặng Bảo Ân', '0',
 INSERT INTO `accounts` VALUES ('07520210', '07520210', 'Nguyễn Văn Lộc', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('07520319', '07520319', 'Nguyễn Trung Thành', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('admin', 'admin', 'admin', '0', '0', '1');
-INSERT INTO `class` VALUES ('SE101.B11', 'SE101', 'GV01', '2', '106', '0', '1');
-INSERT INTO `class` VALUES ('SE104.B13', 'SE104', 'GV02', '3', '201', '0', '1');
-INSERT INTO `class` VALUES ('SE417.B12', 'SE417', 'GV01', '5', '108', '0', '1');
+INSERT INTO `class` VALUES ('SE101.B11', 'SE101', 'GV01', '2', '106', '3', '1', null, null, null);
+INSERT INTO `class` VALUES ('SE104.B13', 'SE104', 'GV02', '3', '201', '120', '1', null, null, null);
+INSERT INTO `class` VALUES ('SE417.B12', 'SE417', 'GV01', '5', '108', '121', '1', null, null, null);
 INSERT INTO `comment` VALUES ('1', '########', 'Nguyen Thanh', 'thanhnt28@gmail.com', 'Comment 1', '2011-05-07');
 INSERT INTO `comment` VALUES ('2', '########', 'Nguyen Thanh', 'thanhtrung.xl@gmail.com', 'Comment 2', '2011-05-07');
 INSERT INTO `comment` VALUES ('3', '########', 'Nguyen Thanh', 'thanhtrung.xl@gmail.com', 'Comment 3', '2011-05-07');
@@ -251,51 +255,51 @@ INSERT INTO `course` VALUES ('5', '2010', '2015', '111', '2');
 INSERT INTO `lecturer` VALUES ('GV01', 'Vũ Thanh Nguyên', '1956-12-13', 'nguyenvt@yut.edu.vn', '0989567432', 'Tp.HCM', 'null', 'Tiến Sĩ', '', '');
 INSERT INTO `lecturer` VALUES ('GV02', 'Trần Anh Dũng', '1976-02-03', 'dungta@uit.edu.vn', '0977346123', 'Tp.HCm', 'null', 'Cao Học', '', '');
 INSERT INTO `lecturer` VALUES ('GV03', 'Nguyễn Trung Thành', '1975-05-10', 'thanhtrung.xl@gmail.com', '09876543210', 'Hà tĩnh', 'P.Giáo Sư', 'Tiến Sĩ', 'Nam', '14353543643645');
-INSERT INTO `program` VALUES ('2', 'CARC1');
-INSERT INTO `program` VALUES ('2', 'CNET1');
-INSERT INTO `program` VALUES ('2', 'CSC21');
-INSERT INTO `program` VALUES ('2', 'DBSS1');
-INSERT INTO `program` VALUES ('2', 'DSAL1');
-INSERT INTO `program` VALUES ('2', 'HCMT1');
-INSERT INTO `program` VALUES ('2', 'ITEM1');
-INSERT INTO `program` VALUES ('2', 'ITEW1');
-INSERT INTO `program` VALUES ('2', 'LIA01');
-INSERT INTO `program` VALUES ('2', 'MAT04');
-INSERT INTO `program` VALUES ('2', 'MAT21');
-INSERT INTO `program` VALUES ('2', 'MAT22');
-INSERT INTO `program` VALUES ('2', 'OOPT1');
-INSERT INTO `program` VALUES ('2', 'OSYS1');
-INSERT INTO `program` VALUES ('2', 'PHIL2');
-INSERT INTO `program` VALUES ('2', 'PHY01');
-INSERT INTO `program` VALUES ('2', 'PHY02');
-INSERT INTO `program` VALUES ('2', 'SE101');
-INSERT INTO `program` VALUES ('2', 'SE102');
-INSERT INTO `program` VALUES ('2', 'SE103');
-INSERT INTO `program` VALUES ('2', 'SE104');
-INSERT INTO `program` VALUES ('2', 'SE105');
-INSERT INTO `program` VALUES ('2', 'SE106');
-INSERT INTO `program` VALUES ('2', 'SE207');
-INSERT INTO `program` VALUES ('2', 'SE208');
-INSERT INTO `program` VALUES ('2', 'SE209');
-INSERT INTO `program` VALUES ('2', 'SE210');
-INSERT INTO `program` VALUES ('2', 'SE211');
-INSERT INTO `program` VALUES ('2', 'SE212');
-INSERT INTO `program` VALUES ('2', 'SE213');
-INSERT INTO `program` VALUES ('2', 'SE31*');
-INSERT INTO `program` VALUES ('2', 'SE32*');
-INSERT INTO `program` VALUES ('2', 'SE33*');
-INSERT INTO `program` VALUES ('2', 'SE34*');
-INSERT INTO `program` VALUES ('2', 'SE417');
-INSERT INTO `program` VALUES ('2', 'SE418');
-INSERT INTO `program` VALUES ('2', 'SE501');
-INSERT INTO `program` VALUES ('2', 'SE502');
-INSERT INTO `program` VALUES ('2', 'SE503');
-INSERT INTO `program` VALUES ('2', 'SE504');
-INSERT INTO `program` VALUES ('2', 'SE505');
-INSERT INTO `program` VALUES ('2', 'SMET2');
-INSERT INTO `program` VALUES ('2', 'STA01');
-INSERT INTO `program` VALUES ('2', 'VCPL1');
-INSERT INTO `program` VALUES ('2', 'WINP1');
+INSERT INTO `program` VALUES ('2', 'CARC1', '2');
+INSERT INTO `program` VALUES ('2', 'CNET1', '4');
+INSERT INTO `program` VALUES ('2', 'CSC21', '1');
+INSERT INTO `program` VALUES ('2', 'DBSS1', '3');
+INSERT INTO `program` VALUES ('2', 'DSAL1', '2');
+INSERT INTO `program` VALUES ('2', 'HCMT1', '4');
+INSERT INTO `program` VALUES ('2', 'ITEM1', '3');
+INSERT INTO `program` VALUES ('2', 'ITEW1', '2');
+INSERT INTO `program` VALUES ('2', 'LIA01', '1');
+INSERT INTO `program` VALUES ('2', 'MAT04', '4');
+INSERT INTO `program` VALUES ('2', 'MAT21', '1');
+INSERT INTO `program` VALUES ('2', 'MAT22', '2');
+INSERT INTO `program` VALUES ('2', 'OOPT1', '3');
+INSERT INTO `program` VALUES ('2', 'OSYS1', '3');
+INSERT INTO `program` VALUES ('2', 'PHIL2', '2');
+INSERT INTO `program` VALUES ('2', 'PHY01', '1');
+INSERT INTO `program` VALUES ('2', 'PHY02', '2');
+INSERT INTO `program` VALUES ('2', 'SE101', '5');
+INSERT INTO `program` VALUES ('2', 'SE102', '5');
+INSERT INTO `program` VALUES ('2', 'SE103', '5');
+INSERT INTO `program` VALUES ('2', 'SE104', '5');
+INSERT INTO `program` VALUES ('2', 'SE105', '5');
+INSERT INTO `program` VALUES ('2', 'SE106', '6');
+INSERT INTO `program` VALUES ('2', 'SE207', '6');
+INSERT INTO `program` VALUES ('2', 'SE208', '6');
+INSERT INTO `program` VALUES ('2', 'SE209', '6');
+INSERT INTO `program` VALUES ('2', 'SE210', '7');
+INSERT INTO `program` VALUES ('2', 'SE211', '7');
+INSERT INTO `program` VALUES ('2', 'SE212', '7');
+INSERT INTO `program` VALUES ('2', 'SE213', '7');
+INSERT INTO `program` VALUES ('2', 'SE31*', '6');
+INSERT INTO `program` VALUES ('2', 'SE32*', '7');
+INSERT INTO `program` VALUES ('2', 'SE33*', '8');
+INSERT INTO `program` VALUES ('2', 'SE34*', '8');
+INSERT INTO `program` VALUES ('2', 'SE417', '7');
+INSERT INTO `program` VALUES ('2', 'SE418', '8');
+INSERT INTO `program` VALUES ('2', 'SE501', '8');
+INSERT INTO `program` VALUES ('2', 'SE502', '9');
+INSERT INTO `program` VALUES ('2', 'SE503', '9');
+INSERT INTO `program` VALUES ('2', 'SE504', '9');
+INSERT INTO `program` VALUES ('2', 'SE505', '9');
+INSERT INTO `program` VALUES ('2', 'SMET2', '8');
+INSERT INTO `program` VALUES ('2', 'STA01', '5');
+INSERT INTO `program` VALUES ('2', 'VCPL1', '3');
+INSERT INTO `program` VALUES ('2', 'WINP1', '4');
 INSERT INTO `registry` VALUES ('07520106', 'SE101.B11', '1', '2010-2011', null);
 INSERT INTO `registry` VALUES ('07520106', 'SE104.B13', '1', '2010-2011', null);
 INSERT INTO `registry` VALUES ('07520106', 'SE417.B12', '1', '2010-2011', null);
@@ -315,6 +319,7 @@ INSERT INTO `studyresult` VALUES ('07520319', 'CNET1', '8', '2008-2009', '1');
 INSERT INTO `studyresult` VALUES ('07520319', 'CSC21', '8.5', '2008-2009', '1');
 INSERT INTO `studyresult` VALUES ('07520319', 'DBSS1', '8.5', '2008-2009', '1');
 INSERT INTO `studyresult` VALUES ('07520319', 'DSAL1', '7', '2008-2009', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'HCMT1', '8', '2010-2011', '2');
 INSERT INTO `studyresult` VALUES ('07520319', 'ITEM1', '5.5', '2008-2009', '1');
 INSERT INTO `studyresult` VALUES ('07520319', 'ITEW1', '10', '2008-2009', '2');
 INSERT INTO `studyresult` VALUES ('07520319', 'LIA01', '6.5', '2008-2009', '2');
@@ -335,7 +340,11 @@ INSERT INTO `studyresult` VALUES ('07520319', 'SE106', '7', '2009-2010', '2');
 INSERT INTO `studyresult` VALUES ('07520319', 'SE207', '6', '2009-2010', '2');
 INSERT INTO `studyresult` VALUES ('07520319', 'SE208', '6.5', '2010-2011', '1');
 INSERT INTO `studyresult` VALUES ('07520319', 'SE209', '6.5', '2010-2011', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE210', '4.5', '2010-2011', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE31*', '8', '2010-2011', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'SE32*', '10', '2010-2011', '2');
 INSERT INTO `studyresult` VALUES ('07520319', 'STA01', '8.5', '2010-2011', '1');
+INSERT INTO `studyresult` VALUES ('07520319', 'VCPL1', '6.5', '2008-2009', '2');
 INSERT INTO `studyresult` VALUES ('07520319', 'WINP1', '7.5', '2010-2011', '1');
 INSERT INTO `subject` VALUES ('Kiến trúc máy tính', 'CARC1', '3', '3', '0');
 INSERT INTO `subject` VALUES ('Mạng máy tính', 'CNET1', '4', '3', '1');
