@@ -40,7 +40,7 @@
                         <li> <a href="../RegistryStudent?function=nothing">Tiếp Nhận SV</a> </li>
                         <li><a href="jspTiepNhanGV.jsp">Tiếp Nhận GV</a> </li>
                         <li><a href="../ViewListStudent?search=no&order=FullName">Danh sách SV</a> </li>
-                        <li><a href="jspTaoLopHoc.jsp">Tạo Lớp Học</a> </li>
+                        <li><a href="../CreateNewClass?function=loaddata">Tạo Lớp Học</a> </li>
                         <li><a href="jspGhiNhanDiemSV.jsp">Ghi Nhận Điểm SV</a> </li>
                         <li><a href="jspCaiDatTaiKhoan.jsp">Cài Đặt Tài Khoản</a> </li>
                         <!--<li> <a href="jspCapNhatTaiKhoan.jsp">Cập Nhật Tài Khoản</a> </li>-->
