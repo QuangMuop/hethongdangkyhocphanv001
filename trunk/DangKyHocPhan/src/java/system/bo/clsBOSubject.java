@@ -1,5 +1,6 @@
 package system.bo;
 
+import java.util.ArrayList;
 import system.access.mapper.clsMapperSubject;
 import system.dto.clsSubject;
 
@@ -8,6 +9,20 @@ import system.dto.clsSubject;
  * @author ngloc_it
  */
 public class clsBOSubject {
+
+    /**
+     * Get all subject in dsatabse
+     * @return list result
+     * @throws Exception
+     */
+    public ArrayList<clsSubject> GetListSubject()throws Exception{
+        try{
+            clsMapperSubject mapper = new clsMapperSubject();
+            return mapper.GetListSubject();
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
 
     /**
      * Get an Subject object by it's name

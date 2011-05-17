@@ -1,5 +1,6 @@
 package system.bo;
 
+import java.util.ArrayList;
 import system.access.mapper.clsMapperLecturer;
 import system.dto.clsLecturer;
 
@@ -8,6 +9,20 @@ import system.dto.clsLecturer;
  * @author ngloc_it
  */
 public class clsBOLecturer {
+
+    /**
+     * Get all lecturer in database
+     * @return list of lecturer
+     * @throws Exception
+     */
+    public ArrayList<clsLecturer> GetAllLecturer()throws Exception{
+        try{
+            clsMapperLecturer mapper = new clsMapperLecturer();
+            return mapper.GetAllLecturer();
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
     
     /**
      * Get a lecturer object from name of teacher

@@ -1,15 +1,17 @@
-
 package system.access.mapper;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import system.dto.clsLecturer;
 public class clsMapperLecturer extends clsMapperDb {
     public clsMapperLecturer() throws Exception{
         super();
     }
+
+    
  public void IniLecturerDTOFromRs(clsLecturer lecturer, ResultSet rs) throws SQLException{
          if((rs!=null) && (lecturer!=null)){
             lecturer.setFullName(rs.getString("FullName"));
@@ -36,7 +38,7 @@ public class clsMapperLecturer extends clsMapperDb {
         try{
             StringBuffer sql = new StringBuffer();
 
-            sql.append("Select * from dangkyhocphan.lecturer");
+            //sql.append("Select * from dangkyhocphan.lecturer");
            // sql.append("Select * from dangkyhocphan.lecturer Where ");
             //sql.append("FullName like '%Thanh Nguyen'");//.append(name).append("' order by FullName COLLATE utf8_unicode_ci DESC");//có dấu tiếng việt thì chưa lấy được
 
@@ -61,6 +63,29 @@ public class clsMapperLecturer extends clsMapperDb {
         return lecturer;
  }
 
+    /**
+     * Get all lecturer in database
+     * @return list of lecturer
+     * @throws Exception
+     */
+    public ArrayList<clsLecturer> GetAllLecturer()throws Exception{
+        ArrayList<clsLecturer> listResult = new ArrayList<clsLecturer>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.lecturer");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+
+            while((rs!=null) && rs.next()){
+                clsLecturer lecturer = new clsLecturer();
+                IniLecturerDTOFromRs(lecturer, rs);
+                listResult.add(lecturer);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listResult;
+    }
 
     /**
      * Get lecturer object from his id
