@@ -40,32 +40,33 @@ for(j=0;j<m;j++){
                 padding-left: 5px;
                 padding-right: 5px;
                 }
-                #formdetail detail{
+                #formdetail table{
                 width: 100%;
                     padding-left: 10px;
                         padding-right: 10px;
                         
                 }
-                #formdetail detail th{
-                background-color: #7F38EC;
+                #formdetail table th{
+                background-color:#00ff00;
                 height: 30px;
-                border-color: #5F5B26;
+                border-color: black;
                 }
 
-                #formdetail detail td{
+                #formdetail table td{
+                text-align: center;
                 background-color: #ffe2ff
                 }
 
 
                 #form-result{
-                margin-left: 200px;
+                margin-left: 20px;
                 margin-bottom: 20px;
                 padding-top: 20px;
                 padding-bottom: 20px;
                 padding-right: 10px;
                 padding-left: 10px;                
                 border: 3px solid #7F38EC;
-                width: 300px;
+                width: 500px;
                 }
         </style>
     </head>
@@ -113,32 +114,26 @@ for(j=0;j<m;j++){
                        
                     </table>
 		</form>
-                
+                <hr/><hr/>
 		<form id="formdetail" name="formdetail">
-                    <u>Chi tiết</u>
+                 <u>Chi tiết</u>
                     <table id="detail" name="detail" border="2" bordercolor="yellow" >
                         <tr>
                             <th align="center" width="100px">Năm học</th><th align="center" width="70px">Học kỳ</th><th align="center" width="100px">Mã môn</th><th align="center" width="300px">Tên môn học</th><th align="center" width="70px">Số TC</th><th align="center" width="80px">Điểm</th><th align="center" width="100px">Nhân hệ số</th>
                         </tr>
-                        <%
-                            numTC=0;
-                            SumMark=0;
-                            Average=0;
-                            for(j=0;j<m;j++){%>
+                             <%
+                                numTC=0;
+                                SumMark=0;
+                                Average=0;
+                                for(j=0;j<m;j++){%>
 				<tr>
-                                    <td align="center"><%=result.get(j).getYear()%></td>
-                                    <td align="center"><%=result.get(j).getSemester()%></td>
-                                    <td align="left"><%=result.get(j).getSubCode()%></td>
-                                    <td align="left"><%=result.get(j).getSubName()%></td>
-                                    <td align="center"><%=result.get(j).getNumTC()%></td>
-                                    <td align="center"><%=result.get(j).getMark()%></td>
-                                    <td align="center"><%=result.get(j).getNumTC()*result.get(j).getMark()%></td>
-                                </tr>
-                        <%
-                            numTC+=result.get(j).getNumTC();
-                            SumMark+=(result.get(j).getNumTC()*result.get(j).getMark());
-                            Average=(float)Math.round(SumMark*100/numTC)/100;
-                            }%>
+                                    <td><%=result.get(j).getYear()%></td><td><%=result.get(j).getSemester()%></td><td><%=result.get(j).getSubCode()%></td><td><%=result.get(j).getSubName()%></td><td><%=result.get(j).getNumTC()%></td><td><%=result.get(j).getMark()%></td><td><%=result.get(j).getNumTC()*result.get(j).getMark()%></td>
+				</tr>
+				<%
+                                numTC+=result.get(j).getNumTC();
+                                SumMark+=(result.get(j).getNumTC()*result.get(j).getMark());
+                                Average=(float)Math.round(SumMark*100/numTC)/100;
+                                }%>
                             <tr>
                                 <td align="center">
                                     <h1>Tổng kết</h1>
