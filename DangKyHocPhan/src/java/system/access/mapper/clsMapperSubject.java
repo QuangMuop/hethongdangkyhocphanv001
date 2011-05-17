@@ -1,24 +1,30 @@
-
 package system.access.mapper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import system.dto.clsSubject;
+
+
 public class clsMapperSubject extends clsMapperDb {
-public clsMapperSubject() throws Exception{
-    super();
-}
-public void IniSubjectDTOFromRs(clsSubject subject, ResultSet rs) throws SQLException{
-         if((rs!=null) && (subject!=null)){
+
+    public clsMapperSubject() throws Exception{
+        super();
+    }
+    
+    public void IniSubjectDTOFromRs(clsSubject subject, ResultSet rs) throws SQLException{
+        if((rs!=null) && (subject!=null)){
             subject.setSubName(rs.getString("SubName"));
             subject.setSubCode(rs.getString("SubCode"));
             subject.setNumTC(Integer.parseInt(rs.getString("NumTC")));
             subject.setTCLT(Integer.parseInt(rs.getString("NumTCLT")));
             subject.setTCTH(Integer.parseInt(rs.getString("NumTCTH")));
         }
-     }
-public clsSubject getSubjectinfoByName(String subname) throws Exception{
-         clsSubject subject=new clsSubject();
+    }
+    
+    
+    public clsSubject getSubjectinfoByName(String subname) throws Exception{
+        clsSubject subject=new clsSubject();
         try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.subject Where");
@@ -32,9 +38,28 @@ public clsSubject getSubjectinfoByName(String subname) throws Exception{
             throw ex;
         }
         return subject;
-     }
-public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
-         clsSubject subject=new clsSubject();
+    }
+    
+    public ArrayList<clsSubject> GetListSubject()throws Exception{
+        ArrayList<clsSubject> listResult = new ArrayList<clsSubject>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.subject");            
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsSubject subject = new clsSubject();
+                IniSubjectDTOFromRs(subject, rs);
+                listResult.add(subject);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listResult;        
+    }
+    
+    public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
+        clsSubject subject=new clsSubject();
         try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.subject Where");
@@ -48,9 +73,10 @@ public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
             throw ex;
         }
         return subject;
-     }
- public void SubjectInsert(clsSubject subject) throws Exception{
-         try {
+    }
+    
+    public void SubjectInsert(clsSubject subject) throws Exception{
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.subject values('");
             sql.append(subject.getSubName()).append("','");
@@ -65,8 +91,10 @@ public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
         catch (Exception e) {
                 throw e;
         }
-     }
-  public boolean SubCheckExitsByName(String subname) throws Exception{
+    }
+
+
+    public boolean SubCheckExitsByName(String subname) throws Exception{
          boolean result = false;
         try{
             StringBuffer sql = new StringBuffer();
@@ -80,8 +108,9 @@ public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
                 throw ex;
         }
         return result;
-     }
-  public boolean SubCheckExitsByCode(String subcode) throws Exception{
+    }
+
+    public boolean SubCheckExitsByCode(String subcode) throws Exception{
          boolean result = false;
         try{
             StringBuffer sql = new StringBuffer();
@@ -95,29 +124,32 @@ public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
                 throw ex;
         }
         return result;
-     }
-  public void SubjectDeleteByName(String subname) throws Exception{
-          try{
-    StringBuffer sql = new StringBuffer();
+    }
+    
+    public void SubjectDeleteByName(String subname) throws Exception{
+        try{
+            StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.subject Where subname = '").append(subname).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){
                 throw ex;
         }
-     }
-   public void SubjectDeleteByCode(String subcode) throws Exception{
-          try{
-    StringBuffer sql = new StringBuffer();
+    }
+    
+    public void SubjectDeleteByCode(String subcode) throws Exception{
+        try{
+            StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.subject Where subcode = '").append(subcode).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){
                 throw ex;
         }
-     }
-   public void SubjectUpdateByName(clsSubject subject) throws Exception{
-           try{
+    }
+    
+    public void SubjectUpdateByName(clsSubject subject) throws Exception{
+        try{
             StringBuffer sql = new StringBuffer();
             sql.append("Update dangkyhocphan.subject set SubCode = '").append(subject.getSubCode()).append("',");
             sql.append(" NumTC=").append(subject.getNumTC()).append(",");
@@ -129,9 +161,11 @@ public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
         }catch(Exception ex){
                 throw ex;
         }
-     }
+    }
+    
+    
     public void SubjectUpdateByCode(clsSubject subject) throws Exception{
-           try{
+        try{
             StringBuffer sql = new StringBuffer();
             sql.append("Update dangkyhocphan.subject set SubName = '").append(subject.getSubName()).append("',");
             sql.append(" NumTC=").append(subject.getNumTC()).append(",");

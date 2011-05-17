@@ -21,12 +21,12 @@ public class clsMapperClass extends clsMapperDb{
             classs.setRoom(rs.getString("Room"));
             classs.setNumOfStudent(Integer.parseInt(rs.getString("NumOfStudent")));
             classs.setShift(Integer.parseInt(rs.getString("Time")));
-            classs.setNumTC(Integer.parseInt(rs.getString("NumTC")));
+            //classs.setNumTC(Integer.parseInt(rs.getString("NumTC")));
             classs.setTestDate(rs.getString("TestDate"));
             classs.setTestTime(rs.getString("TestTime"));
             classs.setTestRoom(rs.getString("TestRoom"));
-            classs.setSubName(rs.getString("SubName"));
-            classs.setLectureName(rs.getString("FullName"));
+            //classs.setSubName(rs.getString("SubName"));
+            //classs.setLectureName(rs.getString("FullName"));
          }
      }
      
@@ -35,7 +35,9 @@ public class clsMapperClass extends clsMapperDb{
          ArrayList<clsClass> listResult = new ArrayList<clsClass>();
          try{
             StringBuffer sql = new StringBuffer();
-            sql.append("select ClassName,dangkyhocphan.class.SubCode,FullName, SubName,NumTC, LectuerCode, DateOfWeek, Room, NumOfStudent, Time, TestDate, TestTime, TestRoom from dangkyhocphan.class, dangkyhocphan.subject, dangkyhocphan.lecturer where class.SubCode=subject.SubCode and dangkyhocphan.class.LectuerCode=dangkyhocphan.lecturer.LectuterCode order by ");
+            //sql.append("select ClassName,dangkyhocphan.class.SubCode,FullName,
+            //SubName,NumTC, LectuerCode, DateOfWeek, Room, NumOfStudent, Time, TestDate, TestTime, TestRoom from dangkyhocphan.class, dangkyhocphan.subject, dangkyhocphan.lecturer where class.SubCode=subject.SubCode and dangkyhocphan.class.LectuerCode=dangkyhocphan.lecturer.LectuterCode order by ");
+            sql.append("select * from dangkyhocphan.class order by ");
             sql.append(strOrderBy);
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
@@ -83,7 +85,11 @@ public class clsMapperClass extends clsMapperDb{
             sql.append(classDTO.getDate()).append("','");
             sql.append(classDTO.getRoom()).append("',");
             sql.append(classDTO.getNumOfStudent()).append(",");
-            sql.append(classDTO.getShift()).append(" ) ");
+            sql.append(classDTO.getShift()).append(",'");
+            sql.append(classDTO.getTestDate()).append("','");
+            sql.append(classDTO.getTestTime()).append("','");
+            sql.append(classDTO.getTestRoom()).append("')");
+            
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();

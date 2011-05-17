@@ -1,6 +1,5 @@
 
 package system.access.mapper;
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
