@@ -51,7 +51,8 @@ public clsMapperRegistration() throws Exception{
       * @return
       * @throws Exception
       */
-     public ResultSet getRegistrationInfo(clsRegistration reg) throws Exception{//lấy chưa được thông tin các lớp học của một sinh viên
+     public ArrayList<String> getRegistrationInfo(clsRegistration reg) throws Exception{//lấy chưa được thông tin các lớp học của một sinh viên
+      ArrayList<String> result = new ArrayList<String>();
          try{
              StringBuffer sql = new StringBuffer();
              sql.append("Select ClassName from dangkyhocphan.registry Where ");
@@ -60,7 +61,11 @@ public clsMapperRegistration() throws Exception{
              sql.append(reg.getYear()).append("'");
              PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
              ResultSet rs = stmt.executeQuery();
-             return rs;
+               while(rs!=null && rs.next()){
+                String idTemp = rs.getString("ClassName");
+                result.add(idTemp);
+            }
+             return result;
          }catch(Exception ex){
              throw ex;
          }
@@ -75,12 +80,11 @@ public clsMapperRegistration() throws Exception{
      public void RegistrationInsert(clsRegistration reg) throws Exception{
          try {
              StringBuffer sql = new StringBuffer();
-             sql.append("Insert into dangkyhocphan.registry values('");
+             sql.append("Insert into dangkyhocphan.registry(MSSV,ClassName,Semester,Year) values('");
              sql.append(reg.getStudentCode()).append("','");
              sql.append(reg.getClassName()).append("',");
              sql.append(reg.getSemester()).append(",'");
-             sql.append(reg.getYear()).append("',");
-             sql.append(reg.getMark()).append(")");
+             sql.append(reg.getYear()).append("')");
              PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
              stmt.execute();
              stmt.close();
@@ -102,6 +106,26 @@ public clsMapperRegistration() throws Exception{
              sql.append(reg.getClassName()).append("' and Semester=");
              sql.append(reg.getSemester()).append(" and Year='");
              sql.append(reg.getYear()).append("'");
+             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+             stmt.execute();
+         }catch(Exception ex){
+             throw ex;
+         }
+     }
+     /**
+      * 
+      * @param MSSV
+      * @param semester
+      * @param year
+      * @throws Exception
+      */
+     public void DeleteAllRegistry(String MSSV, int semester, String year) throws Exception{
+           try{
+             StringBuffer sql = new StringBuffer();
+             sql.append("delete from dangkyhocphan.registry where MSSV='");
+             sql.append(MSSV).append("'  and Semester=");
+             sql.append(semester).append(" and Year='");
+             sql.append(year).append("'");
              PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
              stmt.execute();
          }catch(Exception ex){
