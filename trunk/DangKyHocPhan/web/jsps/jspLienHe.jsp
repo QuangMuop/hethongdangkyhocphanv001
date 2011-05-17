@@ -64,7 +64,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td align="right"><input type="button" name="btnSend" onclick="sendcomment()" value="Gửi"></td>
+                           <td align="right"><input type="button" name="btnSend" onclick="sendcomment()" value="Gửi ý kiến"></td>
                         </tr>
                     </table>
                 </form>

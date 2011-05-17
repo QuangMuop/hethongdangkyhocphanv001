@@ -194,7 +194,7 @@
                     <input id="button-update" type="submit" name="btnChange" value="Update">
                 </form>
 
-                <br/><br/><br/><br/><br/><br/>
+              <br/><br/>
             </div> <!--End Content-->
             <div id="footer">
                 <%@include file="jspFooter.jsp" %>
