@@ -82,7 +82,7 @@ public clsMapperRegistration() throws Exception{
              StringBuffer sql = new StringBuffer();
              sql.append("Insert into dangkyhocphan.registry(MSSV,ClassName,Semester,Year) values('");
              sql.append(reg.getStudentCode()).append("','");
-             sql.append(reg.getClassName()).append("',");
+             sql.append(reg.getClassName()).append("',");             
              sql.append(reg.getSemester()).append(",'");
              sql.append(reg.getYear()).append("')");
              PreparedStatement stmt = getConnection().prepareStatement(sql.toString());

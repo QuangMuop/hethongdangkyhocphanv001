@@ -8,6 +8,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
+<%
+    ArrayList<String> listInfo = (ArrayList<String>) session.getAttribute("listinfomation");
+    int n = 0;
+   if(listInfo != null)
+    n = listInfo.size();
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -52,6 +58,16 @@
             width: 100%;
             }
         </style>
+        <script  type = "text/javascript" >
+         function UpdateScore(){                  
+           var FilePath = document.frmInput.filePath.value;
+            
+            if(FilePath.length == 0){                
+                alert("Vui Lòng chọn file trước khi submit");
+            }else                
+                document.forms["frmInput"].submit();
+         }         
+       </script>
     </head>
     <body>
         <!--Div Wrapper-->
@@ -67,35 +83,30 @@
 
                 <br/><br/>
 
-		<form action="#" method="post" name="frm_Input_Score">
-			<table>
-				<tr>
-					<th></th><th>Mã Lớp</th><th>Tên Lớp</th><th></th>
-				</tr>
-				<tr>
-					<td>Chọn Lớp</td>
-					<td>
-						<select name="sClassId">
-							<option>SE001</option>
-						</select>
-					</td>
-					<td>
-						<select name="sClassName">
-							<option>Lập trình hướng đối tượng</option>
-						</select>
-					</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td><td></td><td></td><td></td>
-				</tr>
-				<tr>
-					<td>Chọn File</td><td colspan="2"><input id="txtinput" type="text" name="txtFilePath"></td><td><input type="submit" value="Tìm File"></td>
-				</tr>
-				<tr>
-					<td colspan="4"><input id="btn" type="submit" value="Nhập điểm."></td>
-				</tr>
-			</table>
+		<form action="../UpdateScore?function=process" method="post" name="frmInput" enctype="multipart/form-data">
+                    <table>
+                        <tr>
+                            <td>Chọn Lớp</td>
+                            <td>
+                                <select name="sClassId">
+                                <%for(int i = 0; i < n; i++){%>
+                                <option><%=listInfo.get(i)%></option>
+                                <%}%>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Chọn File</td>
+                            <td>
+                                <input id="txtinput" type="file" name="filePath"><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                            <input id="btn" type="button" onclick="UpdateScore()" value="Nhập điểm.">
+                            </td>
+                        </tr>
+                    </table>
 		</form>
             </div><!--End Contents-->
 
