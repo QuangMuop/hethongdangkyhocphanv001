@@ -4,6 +4,7 @@
     Author     : ngloc_it
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -41,7 +42,7 @@
                         <li><a href="jspTiepNhanGV.jsp">Tiếp Nhận GV</a> </li>
                         <li><a href="../ViewListStudent?search=no&order=FullName">Danh sách SV</a> </li>
                         <li><a href="../CreateNewClass?function=loaddata">Tạo Lớp Học</a> </li>
-                        <li><a href="jspGhiNhanDiemSV.jsp">Ghi Nhận Điểm SV</a> </li>
+                        <li><a href="../UpdateScore?function=loaddata">Ghi Nhận Điểm SV</a> </li>
                         <li><a href="jspCaiDatTaiKhoan.jsp">Cài Đặt Tài Khoản</a> </li>
                         <!--<li> <a href="jspCapNhatTaiKhoan.jsp">Cập Nhật Tài Khoản</a> </li>-->
                         <li><a href="jspXemQuiDinh.jsp">Xem quy định</a> </li>
