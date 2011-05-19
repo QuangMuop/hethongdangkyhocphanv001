@@ -252,21 +252,24 @@
 
             <br/><br/>
             <form id="form-browse" action="../RegistryStudent?function=addlist"
-                      method="post" name="frmFileS" enctype="multipart/form-data">
-                    <u>Thêm Sinh Viên Từ File</u><br/><br/>
-                    <table id="table-browse">
-                        <tr>
-                            <td><input type="file" name="txtPath"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="button" onclick="PreCheckStudentFile()" value="Thêm"></td><td></td>
-                        </tr>
-                    </table>
-                </form>
-
+                  method="post" name="frmFileS" enctype="multipart/form-data">
+                <u>Thêm Sinh Viên Từ File</u><br/><br/>
+                <table id="table-browse">
+                    <tr>
+                        <td><input type="file" name="txtPath"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" onclick="PreCheckStudentFile()" value="Thêm"></td><td></td>
+                    </tr>
+                </table>
+            </form>
+            
             <br/><br/>
 
+
             <form action="#" method="post" id="form-result">
+                <h4><a href="../ViewListStudent?search=no&order=FullName">Xem Danh sách SV</a></h4>
+                <br/>
                 <%if(listResult != null){%>
                 <u>Kết quả:</u>
                 <table>

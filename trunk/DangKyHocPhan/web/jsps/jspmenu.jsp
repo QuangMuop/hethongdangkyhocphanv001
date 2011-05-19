@@ -38,13 +38,16 @@
                 <li><a href="../ViewSchedule">Xem TKB</a></li>
                 <li><a href="#">Quản Lý Khoa</a>
                     <ul>
+                        <!--
                         <li> <a href="../RegistryStudent?function=nothing">Tiếp Nhận SV</a> </li>
                         <li><a href="jspTiepNhanGV.jsp">Tiếp Nhận GV</a> </li>
                         <li><a href="../ViewListStudent?search=no&order=FullName">Danh sách SV</a> </li>
-                        <li><a href="../CreateNewClass?function=loaddata">Tạo Lớp Học</a> </li>
                         <li><a href="../UpdateScore?function=loaddata">Ghi Nhận Điểm SV</a> </li>
-                        <li><a href="jspCaiDatTaiKhoan.jsp">Cài Đặt Tài Khoản</a> </li>
-                        <!--<li> <a href="jspCapNhatTaiKhoan.jsp">Cập Nhật Tài Khoản</a> </li>-->
+                        -->
+                        <li><a href="../ManageLecturer?function=loaddata">Quản lý GV</a> </li>
+                        <li><a href="../ManageStudent?function=loaddata">Quản lý SV</a> </li>
+                        <li><a href="../CreateNewClass?function=loaddata">Tạo Lớp Học</a> </li>                        
+                        <li><a href="jspCaiDatTaiKhoan.jsp">Cài Đặt Tài Khoản</a> </li>                        
                         <li><a href="jspXemQuiDinh.jsp">Xem quy định</a> </li>
                     </ul>
                 </li>
