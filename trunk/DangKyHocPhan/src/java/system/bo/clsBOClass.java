@@ -3,6 +3,7 @@ package system.bo;
 import java.util.ArrayList;
 import system.access.mapper.clsMapperClass;
 import system.dto.clsClass;
+import system.dto.clsStudent;
 
 /**
  *
@@ -62,13 +63,10 @@ public class clsBOClass {
      * @param classDTO Object to insert
      * @throws Exception
      */
-     public void ClassInsert(clsClass classDTO) throws Exception{
-        try{
+     public int  ClassInsert(clsClass classDTO) throws Exception{
             clsMapperClass mapper = new clsMapperClass();
-            mapper.ClassInsert(classDTO);
-        }catch(Exception e){
-            throw e;
-        }
+          return mapper.ClassInsert(classDTO);
+       
      }
 
      /**
@@ -93,12 +91,13 @@ public class clsBOClass {
       * @param classname which class will be delete
       * @throws Exception
       */
-     public void ClassDelete(String classname) throws Exception{
+     public boolean  ClassDelete(String classname) throws Exception{
         try{
             clsMapperClass mapper = new clsMapperClass();
             mapper.ClassDelete(classname);
+            return true;
         }catch(Exception e){
-            throw e;
+            return false;
         }
      }
 
@@ -107,10 +106,14 @@ public class clsBOClass {
       * @param classDTO
       * @throws Exception
       */
-     public void ClassUpdate(clsClass classDTO) throws Exception{
-
+     public void ClassUpdateInfo(clsClass classDTO) throws Exception{
+      clsMapperClass mpc=new clsMapperClass();
+      mpc.ClassUpdateInfo(classDTO);
      }
-
+     public ArrayList<clsStudent> getAllStudentOfClass(String classname) throws Exception{
+         clsMapperClass mpc=new clsMapperClass();
+         return mpc.getAllStudentOfClass(classname);
+     }
      /**
       *
       * @param classname
