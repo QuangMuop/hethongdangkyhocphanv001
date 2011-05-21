@@ -3,7 +3,6 @@ package system.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.String;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +39,6 @@ public class servRegistration extends HttpServlet {
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
         try {
-            //session.setAttribute("username", "07520319");
             login=(String) session.getAttribute("username");
             if(login==null){
              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
@@ -50,12 +48,12 @@ public class servRegistration extends HttpServlet {
             else {
                 String first=request.getParameter("reg");
                 if(first.equalsIgnoreCase("view")){
-                   forward(request, response, session);
+                   forward(response, session);
                 } else if(first.equalsIgnoreCase("registry")){
                     registry(request, response, session);
              }
                 else if(first.equalsIgnoreCase("reset")){
-                   getAllClass(request, response, session);
+                   getAllClass(response, session);
                 }
                 else if(first.equalsIgnoreCase("complete")){
                     completeReg(login,response, session);
@@ -67,14 +65,14 @@ public class servRegistration extends HttpServlet {
             out.close();
         }
     }
-    private void forward(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws Exception{
+    private void forward(HttpServletResponse resp, HttpSession session) throws Exception{
        clsRegistration cls=new clsRegistration(login, "", SystemProperities.Curentsemester, SystemProperities.CurentYear, 0);
        clsBORegistration BOreg=new clsBORegistration();
        ArrayList<String> reged=BOreg.getRegistrationInfo(cls);
        if(reged.isEmpty()){
-           getAllClass(req, resp, session);
+           getAllClass(resp, session);
        }else{
-               showreg(reged, req, resp, session);
+               showreg(reged,resp, session);
        }
     }
      /**
@@ -105,7 +103,7 @@ public class servRegistration extends HttpServlet {
     private void registry(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException, Exception{
         registry=req.getParameterValues("check");
         if(req.getParameterValues("check")==null){
-            getAllClass(req, resp, session);
+            getAllClass(resp, session);
         }else{
         int n=registry.length;
         ArrayList<clsClass> reg=new ArrayList<clsClass>();
@@ -128,7 +126,7 @@ public class servRegistration extends HttpServlet {
      * @throws IOException
      * @throws Exception
      */
-private void getAllClass(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException, Exception{
+private void getAllClass(HttpServletResponse resp, HttpSession session) throws IOException, Exception{
              clsBOStudent BOStudent=new clsBOStudent();
              clsStudent student=BOStudent.getStudentInfoByCode(login);
              session.setAttribute("student", student);
@@ -139,14 +137,21 @@ private void getAllClass(HttpServletRequest req, HttpServletResponse resp, HttpS
              String path = "./jsps/jspDangKyMonHoc.jsp";
              resp.sendRedirect(path);
     }
- private void showreg(ArrayList<String> reged,HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException, Exception{
+ private void showreg(ArrayList<String> reged, HttpServletResponse resp, HttpSession session) throws IOException, Exception{
+        clsBOStudent BOStudent=new clsBOStudent();
+        clsStudent student=BOStudent.getStudentInfoByCode(login);
+        session.setAttribute("student", student);
+        session.setAttribute("time", "Học kỳ "+SystemProperities.Curentsemester +" năm học "+SystemProperities.CurentYear);
         int n=reged.size();
+        registry=new String[n];
         ArrayList<clsClass> reg=new ArrayList<clsClass>();
         clsClass temp=new clsClass();
         clsBOClass BOC=new clsBOClass();
         for(int i=0; i<n; i++){
             temp=BOC.getClassFromId(reged.get(i));
             reg.add(temp);
+            registry[i]=reged.get(i);
+
         }
         session.setAttribute("reg", reg);
         String path = "./jsps/jspPreviewRegistry.jsp";
