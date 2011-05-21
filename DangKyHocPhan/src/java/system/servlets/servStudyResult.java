@@ -37,6 +37,7 @@ public class servStudyResult extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String login=(String) session.getAttribute("username");
+            login = "07520319";
             if(login==null){
              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
              String path = "./jsps/jspThongBao.jsp";

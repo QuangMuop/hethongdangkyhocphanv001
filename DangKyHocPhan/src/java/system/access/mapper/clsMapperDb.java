@@ -13,11 +13,12 @@ import system.communication.database.ConnectionServer;
  * @author Ultimate
  */
 public class clsMapperDb {
-  private Connection connection;
+  private static Connection connection;
 
     public clsMapperDb()throws Exception{
         try{
-            connection = ConnectionServer.getConnection();
+            if(connection == null)
+                connection = ConnectionServer.getConnection();
         }catch(Exception e){
             System.out.println(e.toString());
             throw e;

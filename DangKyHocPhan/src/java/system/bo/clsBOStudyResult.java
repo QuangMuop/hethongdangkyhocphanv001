@@ -21,4 +21,19 @@ public class clsBOStudyResult {
         clsMapperStudyResult mapper = new clsMapperStudyResult();
         mapper.StudyResultnInsert(studyresult);
     }
+
+    /**
+     * Get result of student
+     * @param mssv id of student whom getting result
+     * @return list result order by year
+     * @throws Exception
+     */
+    public ArrayList<clsStudyResult> GetListStudyResult(String mssv, String year) throws Exception{
+        try{
+            clsMapperStudyResult mapper = new clsMapperStudyResult();
+            return mapper.GetListStudyResult(mssv, year);
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
 }
