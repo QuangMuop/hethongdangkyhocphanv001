@@ -56,19 +56,6 @@
                 else
                     document.forms["frmSearchByMSSV"].submit();
              }
-        /*     var content = document.myform.txtContent.value;
-           var name = document.myform.txtName.value;
-           var email = document.myform.txtEmail.value;
-         if(content.length==0){
-             alert("Bạn chưa nhập nội dung");
-          }
-          else if(name.length==0){
-             alert("Bạn chưa nhập tên");
-          }else if(email.length==0){
-             alert("Bạn chưa nhập email");
-          }
-          else{
-           document.forms["myform"].submit();*/
         </script>
     </head>
     <body>
@@ -92,11 +79,11 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <!--FORM SEARCH By CLASS -->
-                <h3>Gồm tất cả các SV của trường ĐH CNTT - ĐHQG Hồ Chí Minh từ 1002 năm trước</h3>
+                <h3>Danh sách sinh viên khoa công nghệ phần mềm</h3>
                 <table>
                     <tr>
                         <td>
-                            <b>Tìm Theo Lớp</b>
+                            <b>Tìm theo lớp</b>
                         </td>
                         <td>
                             <form action="../ViewListStudent?search=yes&order=FullName" method="post" name="frmSearchByClass">
@@ -149,10 +136,10 @@
                     <h3><u>Danh sách SV</u></h3>
                     <table id="infomation">
                         <tr>
-                            <th><a href="../ViewListStudent?search=yes&order=FullName">Họ Và Tên</a></th>
-                            <th><a href="../ViewListStudent?search=yes&order=MSSV">MSSV</a></th>
-                            <th><a href="../ViewListStudent?search=yes&order=Class">Lớp</a></th>
-                            <th><a href="../ViewListStudent?search=yes&order=Email">Email</a></th>
+                            <th>Họ Tên</th>
+                            <th>MSSV</th>
+                            <th>Lớp</th>
+                            <th>Email</th>
                             <th></th>
                             <th></th>
                         </tr>

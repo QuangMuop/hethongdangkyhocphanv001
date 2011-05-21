@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : jspXemDSLop
     Created on : Apr 23, 2011, 4:29:09 PM
     Author     : ngloc_it
@@ -49,7 +49,7 @@ int j=0;
     </head>
     <body>
         <!--Get data from controller-->
-        
+
         <!--Div Wrapper-->
         <div id="wrapper">
             <div id="mainNav"><!--Main Navigation-->
@@ -61,7 +61,7 @@ int j=0;
                 <form id="classlist">
                   <table id="tablelistclass">
                     <tr>
-                        <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Số TC</th><th>Ngày</th><th>Phòng</th><th>Ca</th><th>Sửa</th><th>Xóa</th>
+                        <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Số TC</th><th>Ngày</th><th>Phòng</th><th>Ca</th>
                     </tr>
                      <%for(j=0;j<n;j++){%>
                      <tr>
@@ -73,9 +73,7 @@ int j=0;
                          <td>Thứ <%=clases.get(j).getDate()%></td>
                          <td><%=clases.get(j).getRoom()%></td>
                          <td><%=clases.get(j).getShift()%></td>
-                         <td><a href="../servClassView?action=edit&classname=<%=clases.get(j).getClassName()%>">Sửa</a></td>
-                         <td><a href="../servClassView?action=delete&classname=<%=clases.get(j).getClassName()%>">Xóa</a></td>
-                     </tr>
+                         </tr>
                      <%}%>
                 </table>
                 </form>
@@ -106,8 +104,7 @@ int j=0;
                         </tr>
                     </table>
                 </form>
-                <p align="right"><b><a href="../servClassView?action=create">Mở lớp học mới</a></b></p>
-            </div><!--End Contents-->
+               </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
                  <%@include file="jspFooter.jsp" %>
