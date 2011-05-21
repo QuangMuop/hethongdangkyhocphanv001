@@ -11,6 +11,8 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 <%
 ArrayList<clsClass> clases=(ArrayList<clsClass>) session.getAttribute("clases");
+ArrayList<clsLecturer> lec=(ArrayList<clsLecturer>) session.getAttribute("lec");
+ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sub");
 String time=(String) session.getAttribute("time");
 int n=clases.size();
 int j=0;
@@ -39,11 +41,11 @@ int j=0;
                 padding: 2 5 2 5;
             }
             #formsearch{
-                margin-top: 10px;
+                 margin-top: 10px;
                 margin-left: 20px;
                 padding: 5 10 5 10;
                 background-color: #f29de3;
-                width: 220px;
+                width: 280px;
             }
         </style>
     </head>
@@ -79,28 +81,36 @@ int j=0;
                 </form>
                 <hr><hr>
                 <h1>Tìm kiếm lớp học:</h1>
-                <form id = "formsearch" action="../ViewListClass?searchengine=true" method="post">
+               <form id = "formsearch" name="formsearch" action="../ViewListClass?searchengine=true" method="post">
                      <table>
+                         <tr>
+                             <td><input type="radio" name="radiooption" id="rsubject" checked="true" onclick="selectAll()" ></td>
+                             <td>All</td>
+                         </tr>
                         <tr>
-                            <td><input type="checkbox" name="chkSearchByName"></td>
+                            <td><input type="radio" name="radiooption" id="rsubject" onclick="selectsub()"></td>
                             <td>
-                                <select name="sName">
-                                   <option>Đồ án mã nguồn mở</option>
+                                <select name="ssubject" id="ssubject">
+                                   <%for(int i=0;i<sub.size();i++){%>
+                                    <option value="<%=sub.get(i).getSubCode()%>"><%=sub.get(i).getSubName()%></option>
+                                    <%}%>
                                 </select>
                             </td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" name="chkSearchByTeacher"></td>
+                            <td><input type="radio" name="radiooption" id="rlecturer" onclick="selectLec()"></td>
                             <td>
-                                <select name="sTeacherName">
-                                  <option>Nguyễn Trung Thành</option>
+                                <select name="sLecturer" id="sLecturer">
+                                    <%for(int i=0;i<lec.size();i++){%>
+                                    <option value="<%=lec.get(i).getLecturerCode()%>"><%=lec.get(i).getFullname()%></option>
+                                    <%}%>
                                </select>
                             </td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><input type="submit" value="Tìm Kiếm"></td>
+                            <td colspan="2"><input type="button" onclick="search()" value="Tìm Kiếm"></td>
                         </tr>
                     </table>
                 </form>
@@ -112,4 +122,59 @@ int j=0;
         </div>
         <!--End Wrapper-->
     </body>
+    <script  type = "text/javascript" >
+        typesearch="All";
+        name="";
+        action="search";
+        actor="SV";
+          function createRequestObject(){
+            var req;
+            if(window.XMLHttpRequest){
+                //For Firefox, Safari, Opera
+                req = new XMLHttpRequest();
+            }
+            else if(window.ActiveXObject){
+                //For IE 5+
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            else{
+                //Error for an old browser
+                alert('Your browser is not IE 5 or higher, or Firefox or Safari or Opera');
+            }
+            return req;
+        }
+
+        //Make the XMLHttpRequest Object
+        var http = createRequestObject();
+        function search(){
+            if(http){
+                if(typesearch=="subname"){
+                    name=document.getElementById("ssubject").value;
+                }
+                else{
+                    name=document.formsearch.sLecturer.value;
+                }
+                http.open("GET","../servClassView?action="+action+"&type="+typesearch+"&name="+name+"&actor="+actor,true);
+                http.onreadystatechange = handleResponse;
+                http.send(null);
+            }
+        }
+
+        function handleResponse(){
+            if(http.readyState == 4 && http.status == 200){
+                var detail=document.getElementById("tablelistclass");
+                detail.innerHTML=http.responseText;
+            }
+        }
+         function selectLec(){
+             typesearch="lecturer";
+
+         }
+         function selectsub(){
+             typesearch="subname";
+         }
+        function selectAll(){
+           typesearch="All";
+        }
+       </script>
 </html>
