@@ -3,6 +3,8 @@
     Created on : 26-04-2011, 11:14:32
     Author     : ngloc_it
 --%>
+<%@page import="system.dto.clsStudent"%>
+<%@page import="system.dto.clsClass"%>
 <%@page import="java.util.ArrayList"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,47 +16,57 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Chi tiêt lớp học</title>
         <style media="all" type="text/css">
-            #form-class-info{
-            margin-left: 50px;
+            #formclassinfo{
+            margin-left: 10px;
             margin-top: 20px;
-            width: 350px;
-            border: 2px solid;
-            background-color: #f3df02;
+            width: 740px;
+            }
+            #formclassinfo table{
+                width: 100%;
+               font-weight: bold
             }
 
-            #form-class-info table td{
-            font-weight: bold
+            #formliststudent{
+            margin-left: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            width: 740px;
+                      
             }
 
-            #form-list-student{
-            margin-left: 20px;
-            margin-top: 20px;
-            margin-bottom: 120px;
-            width: 650px;
-            border-left: 2px solid;
-            border-right: 2px solid;
-            background-color: #f3df02;
+            #formliststudent table{
+                margin-left: 10px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                width: 730px;
+                border-left: 2px solid;
+                border-right: 2px solid;
+                border-top: 2px solid;
+                border-bottom:  2px solid;
             }
 
-            #form-list-student table{
-            width: 100%
-            }
-
-            #form-list-student table th{
-            background-color: #ff02ed;
-            border: 1px solid;
-            }
+            #formliststudent table th{
+                height: 22px;
+                background-color: #F9B7FF;
+                border-left: 1px solid;
+                border-right: 1px solid;
+                border-bottom:  1px solid;
+                border-top:  1px solid;
+          }
+          #formliststudent table td{
+               background-color: #b1B700;
+                padding: 2 5 2 5;
+                text-align: center;
+          }
         </style>
 
     </head>
     <body>
         <%
-        ArrayList<String> classInfomation;
-        ArrayList<String> studentInfomation;
-
-        classInfomation = (ArrayList<String>)session.getAttribute("classinfomation");
-        studentInfomation = (ArrayList<String>)session.getAttribute("studentinfomation");
-        int i =0, n;
+       clsClass cls=(clsClass) session.getAttribute("classdetail");
+       ArrayList<clsStudent> studentlist=(ArrayList<clsStudent>) session.getAttribute("studentlist");
+       int n=studentlist.size();
+       int i=0;
         %>
         <!--Div Wrapper-->
         <div id="wrapper">
@@ -62,58 +74,45 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <p>
-            trong trang này: SV có thể xem DS SV, thông tin của lớp học đó.<br/>
-            Quản lý khoa được quyền xuất DS SV ra file.
-        </p>
-        <br/><br/>  
-		<form id="form-class-info" action="#" method="post">
-			<u>Phần cung cấp thông tin về lớp học.</u><br/><br/>
+              <form id="formclassinfo" action="#" method="post">
+			<u>Thông tin lớp học:</u><br/>
 			<table>
 				<tr>
 					<td>Mã lớp: </td>
-                                        <td><%=classInfomation.get(i++)%></td>
+                                        <td><%=cls.getClassName()%></td>
+                                        <td>Môn học:</td>
+                                        <td><%=cls.getSubName()%></td>
 				</tr>
 				<tr>
-					<td>Tên Lớp:</td>
-                                        <td><%=classInfomation.get(i++)%></td>
+					<td>Giảng viên: </td>
+                                        <td><%=cls.getLecturerName()%></td>
+                                        <td>Ngày học: </td>
+                                        <td>Thứ <%=cls.getDate()%></td>
 				</tr>
-				<tr>
-					<td>Mã GV: </td>
-                                        <td><%=classInfomation.get(i++)%></td>
+				 <tr>
+					<td>Ca: </td>
+                                        <td><%=cls.getShift()%></td>
+                                        <td>Phòng: </td>
+                                        <td><%=cls.getRoom()%></td>
 				</tr>
-				<tr>
-					<td>Tên GV: </td>
-                                        <td><%=classInfomation.get(i++)%></td>
-				</tr>
-				<tr>
-					<td>Số Lượng SV: </td>
-                                        <td><%=classInfomation.get(i++)%></td>
-				</tr>
+                                
 			</table>
-			<br/><br/>
-		</form>
-		<br/><br/>
-		<u>Phần này liệt Danh sach SV trong lớp.</u><br/><br/>
-		<form name="form_list_student" id="form-list-student" action="#" method="post">
-                    <table id="table-list-class">
+			</form>
+		<br/><hr><hr>
+                <u>Danh sách các sinh viên đăng ký lớp học: <%=n%> sinh viên</u>
+		<form name="formliststudent" id="formliststudent" action="#" method="post">
+                    <table id="tableliststudent">
                         <tr>
-                            <th><a href="#">STT</a></th><th><a href="#">MSSV</a></th><th><a href="#">Họ Và Tên</a></th><th><a href="#">Khoa</a></th><th><a href="#">TG ĐK</a></th>
+                            <th>STT</th><th>MSSV</th><th>Họ Và Tên</th><th>Lớp</th>
                         </tr>
-                        <!--MSSV, HotenSV, Khoa, TGDK-->
-                        <%
-                        int STT = 1; i = 0;
-                        n = studentInfomation.size();
-                        while(i < n){
-                        %>
-                        <tr>
-                            <td><%=STT++%></td>
-                            <td><%=studentInfomation.get(i++)%></td>
-                            <td><%=studentInfomation.get(i++)%></td>
-                            <td>CNPM<%=studentInfomation.get(i++)%></td>
-                            <td><%=studentInfomation.get(i++)%></td>
-                        </tr>
-                        <%}%>
+                       <%for(i=0;i<n;i++){%>
+                       <tr>
+                           <td><%=i+1%></td>
+                           <td><%=studentlist.get(i).getCode()%></td>
+                           <td><%=studentlist.get(i).getFullname()%></td>
+                           <td><%=studentlist.get(i).getClasss()%></td>
+                       </tr>
+                       <%}%>
                     </table>
                     <br/>
                     <input type="submit" value="   Xuất file   ">

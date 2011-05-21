@@ -3,6 +3,9 @@
     Created on : Apr 23, 2011, 4:30:16 PM
     Author     : ngloc_it
 --%>
+<%@page import="system.dto.clsClass"%>
+<%@page import="system.dto.clsSubject"%>
+<%@page import="system.dto.clsLecturer"%>
 <%@page import="java.util.ArrayList"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,90 +13,65 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-    ArrayList<String> lecturerNames = null;
-    ArrayList<String> subjectInfo = null;
-    ArrayList<String> classExisted = null;
-    String err = "";
-    int numL = 0, numS = 0, numC = 0, i = 0, count = 0;
-    try{
-       lecturerNames = (ArrayList<String>)session.getAttribute("lecturernames");
-       subjectInfo = (ArrayList<String>) session.getAttribute("subjectinfo");
-       classExisted = (ArrayList<String>) session.getAttribute("classexisted");
-    }catch(Exception ex){
-        err = ex.toString();
-    }
-
-    if(lecturerNames != null)
-        numL = lecturerNames.size();
-
-    if(subjectInfo != null)
-        numS = subjectInfo.size();
-
-    if(classExisted != null)
-        numC = classExisted.size();
+    ArrayList<clsClass> classlist=(ArrayList<clsClass>) session.getAttribute("clases");
+    ArrayList<clsLecturer> leclist=(ArrayList<clsLecturer>) session.getAttribute("leclist");
+    ArrayList<clsSubject> sublist=(ArrayList<clsSubject>) session.getAttribute("sublist");
+    int i,j=0;
+    int n=leclist.size();
+    int m=sublist.size();
+    int l=classlist.size();
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tạo lớp học</title>
         <style media="all" type="text/css">
-            #form-info{
+            #frmInfo{
                 margin-left: 20px;
-                margin-top: 20px;
+                margin-top: 10px;
                 width: 350px;
                 padding-top: 20px;
-                padding-bottom: 20px;
+                padding-bottom: 10px;
                 padding-right: 10px;
                 padding-left: 10px;
                 background-color: #92C7C7;
                 border: 3px solid #7F38EC;
             }
-            #select-long{
-                width: 150px;
+            #ClassName{
+                width: 200px;
             }
-            #table-list-class{
-                margin-left: 20px;
-                margin-top: 20px;
-                margin-bottom: 120px;
-                width: 650px;
+            #LecturerName{
+                width: 200px;
+            }
+             #txtClassId{
+                width: 200px;
+            }
+            #tablelistclass{
+                margin-left: 10px;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                width: 740px;
                 border-left: 2px solid;
                 border-right: 2px solid;
+                border-bottom:  2px solid;
+                border-top:  2px solid;
             }
 
-            #table-list-class th{
-                height: 32px;
-                font-weight: bold;
+            #tablelistclass th{
+                height: 22px;
                 background-color: #F9B7FF;
+                border-left: 1px solid;
+                border-right: 1px solid;
+                border-bottom:  1px solid;
+                border-top:  1px solid;
             }
-            #table-list-class td{
+            #tablelistclass td{
                 background-color: #b1B700;
                 padding: 2 5 2 5;
+                text-align: center;
             }
         </style>
-        <script  type = "text/javascript" >
-
-         function InsertNewClass(){
-              
-            var ClassId = document.frmInfo.txtClassId.value;
-            var tclt = document.frmInfo.txtSoTCLT.value;                      
-            var tcth = document.frmInfo.txtSoTCTH.value;
-            var Room = document.frmInfo.txtRoom.value;
-            var SLSV = document.frmInfo.txtSLSV.value;
-            
-  
-
-    
-            if(ClassId.length==0 || tclt.length==0 || tcth.length==0 ||
-                Room.length==0 || SLSV.length == 0){
-                alert("Vui Lòng nhập đầy đủ thông tin trược khi submit");
-            }else
-                //alert("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-                document.forms["frmInfo"].submit();
-        
-    }
-         
-       </script>
-    </head>
+        </head>
     <body>
         <!--Div Wrapper-->
         <div id="wrapper">
@@ -101,60 +79,42 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <u>Cần bổ sung cơ chế kiểm tra lịch giảng viên, lịch phòng trống</u><br/><br/>
-                <form id="form-info" action="../CreateNewClass?function=registry" method="post" name="frmInfo">
-                    <u>Phần cung cấp thông tin về lớp học sẽ tạo.</u><br/><br/>
-                    <table id="table-info">
+                <u>Mở một lớp học mới trong học kỳ  hiện tại:</u><br/>
+                <form id="frmInfo" action="../servClassView?action=createcomplete" method="post" name="frmInfo">
+                    <u>Thông tin lớp học.</u><br/>
+                    <table id="tableinfo">
                         <tr>
-                            <td>Mã lớp</td>
+                            <td>Lớp học</td>
                             <td>
-                                <input type="text" name="txtClassId">
+                                <input type="text" name="txtClassId" id="txtClassId">
                             </td>
                         </tr>
                         <tr>
-                            <td>Tên Môn học</td>
+                            <td>Môn học</td>
                             <td>
-                                <select name="sClassName" id="select-long">
-                                    <%for(i = 0; i < numS; i++){%>
-                                    <option><%=subjectInfo.get(count++)%></option>
+                                <select name="ClassName" id="ClassName">
+                                    <%for(i = 0; i < m; i++){%>
+                                    <option value="<%=sublist.get(i).getSubCode()%>"><%=sublist.get(i).getSubName()%></option>
                                     <%}%>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td>Giảng viên</td>
+                            <td>Giảng viên</td>
                             <td>
-                                <select name="sLecturerName">
-                                    <%for(i = 0; i < numL; i++){%>
-                                    <option><%=lecturerNames.get(i)%></option>
+                                <select name="LecturerName" id="LecturerName">
+                                    <%for(j = 0; j < n; j++){%>
+                                    <option value="<%=leclist.get(j).getLecturerCode()%>"><%=leclist.get(j).getFullname()%></option>
                                     <%}%>
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Số tín chỉ LT</td>
-                            <td>
-                                <input type="text" name="txtSoTCLT" width="250px">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Số tín chỉ TH</td>
-                            <td>
-                                <input type="text" name="txtSoTCTH" width="250px">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Số lượng SV</td>
-                            <td>
-                                <input type="text" name="txtSLSV" width="250px">
-                            </td>
-                        </tr>
-                        <tr>
+                         <tr>
                             <td>Thứ</td>
                             <td>                                
-                                <select name="sDay">
+                                <select name="Day">
                                     <%for(i = 2; i <= 7; i++){%>
-                                        <option><%=i%></option>
+                                    <option value="<%=i%>"> Thứ <%=i%></option>
                                     <%}%>
                                 </select>                                
                             </td>
@@ -163,48 +123,39 @@
                             <td>Ca học</td>
                             <td>
                                 <select name="sTime">
-                                    <option>Sáng</option>
-                                    <option>Chiều</option>
+                                    <option value="1">Sáng</option>
+                                    <option value="2">Chiều</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>Phòng học</td>
                             <td>
-                                <input type="text" name="txtRoom">
+                                <input type="text" name="txtRoom" id="txtRoom">
                             </td>
                         </tr>
                     </table>
-                    <br/><br/>
-                    <!--<input type="submit" value="Kiểm tra" width="120px">-->
-                    <input type="button" value="Thêm" onclick="InsertNewClass()">
+                    <br/>
+                    <input type="button" value="Tạo lớp học" onclick="insertClass()">
 		</form>
-
-		<br/><br/>
-		<u>Phần này liệt kê các lớp hiện có.</u><br/><br/>
-		<table id="table-list-class">
-                    <%i=0;%>
-                    <tr>
-                        <th>Mã</th><th>Tên Lớp</th><th>Giảng Viên</th><th>Số TC LT</th><th>Số TC TH</th><th>Phòng</th><th>Thứ</th><th>Ca</th><th>
-                    </tr>
-                    <%while(i<numC){%>
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001"><%=classExisted.get(i++)%></a></td>
-                        <td><%=classExisted.get(i++)%></td>
-                        <td><%=classExisted.get(i++)%></td>
-                        <td><%=classExisted.get(i++)%></td>
-                        <td><%=classExisted.get(i++)%></td>
-                        <td><%=classExisted.get(i++)%></td>
-                        <td><%=classExisted.get(i++)%></td>
-                        <td><%=classExisted.get(i++)%></td>
-                    </tr>
-                    <%}%>
-                    <!--
-                    <tr>
-                        <td><a href="jspChiTietLopHoc.jsp?id=SE001">SE001</a></td><td>PP Mô hình hóa</td><td>Ts. Vũ Thanh Nguyễn</td><td>2</td><td>0</td><td>201</td><td>3</td><td>Sáng</td>
-                    </tr>
-                    -->
-                </table>
+               	<u>Danh sách các lớp hiện có.</u>
+		<table id="tablelistclass">
+                      <tr>
+                       <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Số TC</th><th>Ngày</th><th>Phòng</th><th>Ca</th>
+                      </tr>
+                      <%for(i=0;i<l;i++){%>
+                      <tr>
+                       <td><%=i+1%></td>
+                       <td><%=classlist.get(i).getClassName()%></td>
+                       <td><%=classlist.get(i).getSubName()%></td>
+                       <td><%=classlist.get(i).getLecturerName()%></td>
+                       <td><%=classlist.get(i).getNumTC()%></td>
+                       <td><%=classlist.get(i).getDate()%></td>
+                       <td><%=classlist.get(i).getRoom()%></td>
+                       <td><%=classlist.get(i).getShift()%></td>
+                      </tr>
+                      <%}%>
+                    </table>
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
@@ -213,4 +164,19 @@
         </div>
         <!--End Wrapper-->
     </body>
+     <script  type = "text/javascript" >
+         function insertClass(){
+         var classname = document.frmInfo.txtClassId.value;
+         var room = document.frmInfo.txtRoom.value;
+         if(classname.length==0){
+             alert("Bạn chưa nhập lớp học");
+          }
+          else if(room.length==0){
+             alert("Bạn chưa nhập phòng học");
+          }
+          else{
+           document.forms["frmInfo"].submit();
+          }
+  }
+       </script>
 </html>

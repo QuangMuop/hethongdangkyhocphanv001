@@ -34,33 +34,33 @@
             <ul>
                 <li><a href="jspTrangChu.jsp"> Trang chủ </a>
                 </li>
-                <li><a href="../ViewListClass?searchengine=false">Xem DS Lớp Học</a> </li>
-                <li><a href="../ViewSchedule">Xem TKB</a></li>
                 <li><a href="#">Quản Lý Khoa</a>
                     <ul>
-                        <!--
-                        <li> <a href="../RegistryStudent?function=nothing">Tiếp Nhận SV</a> </li>
-                        <li><a href="jspTiepNhanGV.jsp">Tiếp Nhận GV</a> </li>
+                         <li><a href="../servClassView?action=view">Danh sách lớp học</a> </li>
                         <li><a href="../ViewListStudent?search=no&order=FullName">Danh sách SV</a> </li>
                         <li><a href="../UpdateScore?function=loaddata">Ghi Nhận Điểm SV</a> </li>
-                        -->
                         <li><a href="../ManageLecturer?function=loaddata">Quản lý GV</a> </li>
                         <li><a href="../ManageStudent?function=loaddata">Quản lý SV</a> </li>
                         <li><a href="../CreateNewClass?function=loaddata">Tạo Lớp Học</a> </li>                        
                         <li><a href="jspCaiDatTaiKhoan.jsp">Cài Đặt Tài Khoản</a> </li>                        
-                        <li><a href="jspXemQuiDinh.jsp">Xem quy định</a> </li>
+                        <li><a href="../servViewRule?issetup=false">Xem quy định</a> </li>
                     </ul>
+                </li>
+                <li><a href="#">Giảng Viên</a>
+
                 </li>
                 <li><a href="#">Sinh Viên</a>
                 <ul>
+                        <li><a href="../servClassView?action=student">Danh sách lớp học</a> </li>
                         <li> <a href="../servRegistration?reg=view">Đăng Ký Môn Học</a> </li>
                         <li><a href="../servProgram">Xem Chương Trình Đào Tạo</a> </li>
-                        <li><a href="../ViewSchedule">Xem TKB</a> </li>
                         <li> <a href="../servStudyResult?first=true">Xem kết quả học tập</a> </li>
                         <li><a href="../servUpdateInfo?isupdate=false">Thông tin sinh viên</a> </li>
+                         <li> <a href="../servChangePass?change=firts">Đổi mật khẩu</a> </li>
                         <li> <a href="../servSendComment?guest=notlogin">Gửi Yêu Cầu</a> </li>
                     </ul>
                 </li>
+                <li><a href="../ViewSchedule">Thời khóa biểu</a></li>
                 <%
                 HttpSession sesstion = request.getSession();
                 String username = (String) session.getAttribute("username");
