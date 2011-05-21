@@ -56,11 +56,54 @@ public class servClassView extends HttpServlet {
             }else if(action.equalsIgnoreCase("createcomplete")){
                 insertClass(request, response, session);
             }
-
+            else if(action.equalsIgnoreCase("search")){
+                searchClass(request, response);
+            }
         } finally { 
             out.close();
         }
     }
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    private void searchClass(HttpServletRequest request,HttpServletResponse response) throws Exception{
+         PrintWriter out = response.getWriter();
+        String type=request.getParameter("type");
+        String name=request.getParameter("name");
+        clsBOClass BOC=new clsBOClass();
+        ArrayList<clsClass> classlist=new ArrayList<clsClass>();
+        if(type.equalsIgnoreCase("subname")){
+            classlist=BOC.GetAllClassBySub(name);
+        }
+        else if(type.equalsIgnoreCase("lecturer")) {
+            classlist=BOC.GetAllClassByLecturer(name);
+        }
+        else{
+            classlist=BOC.GetAllClass("ClassName");
+        }
+        if(request.getParameter("actor").equalsIgnoreCase("Admin")){
+        out.println("<tr><th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Số TC</th><th>Ngày</th><th>Phòng</th><th>Ca</th><th>Sửa</th><th>Xóa</th></tr>");
+        for(int i=0;i<classlist.size();i++){
+         out.println("<tr><td>"+(i+1)+"</td><td><a href='../servClassView?action=detail&classname="+classlist.get(i).getClassName()+"'>"+classlist.get(i).getClassName()+"</a></td><td>"+classlist.get(i).getSubName()+"</td><td>"+classlist.get(i).getLecturerName()+"</td><td>"+classlist.get(i).getNumTC()+"</td><td>Thứ " +classlist.get(i).getDate()+"</td><td>"+classlist.get(i).getRoom()+"</td><td>"+classlist.get(i).getShift()+"</td><td><a href='../servClassView?action=edit&classname="+classlist.get(i).getClassName()+"'>Sửa</a></td><td><a href='../servClassView?action=delete&classname="+classlist.get(i).getClassName()+"'>Xóa</a></td></tr>");
+        }
+        }
+        else{
+           out.println("<tr><th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Số TC</th><th>Ngày</th><th>Phòng</th><th>Ca</th></tr>");
+        for(int i=0;i<classlist.size();i++){
+         out.println("<tr><td>"+(i+1)+"</td><td><a href='../servClassView?action=detail&classname="+classlist.get(i).getClassName()+"'>"+classlist.get(i).getClassName()+"</a></td><td>"+classlist.get(i).getSubName()+"</td><td>"+classlist.get(i).getLecturerName()+"</td><td>"+classlist.get(i).getNumTC()+"</td><td>Thứ " +classlist.get(i).getDate()+"</td><td>"+classlist.get(i).getRoom()+"</td><td>"+classlist.get(i).getShift()+"</td></tr>");
+        }
+        }
+    }
+    /**
+     *
+     * @param request
+     * @param response
+     * @param session
+     * @throws Exception
+     */
     private void insertClass(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
         String ClassName=request.getParameter("txtClassId");
         String SubCode=request.getParameter("ClassName");
@@ -88,6 +131,13 @@ public class servClassView extends HttpServlet {
              response.sendRedirect(path);
         }
     }
+    /**
+     *
+     * @param request
+     * @param response
+     * @param session
+     * @throws Exception
+     */
     private void createClass(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
        clsBOLecturer BOL=new clsBOLecturer();
        ArrayList<clsLecturer> leclist=BOL.GetAllLecturer();
@@ -101,6 +151,13 @@ public class servClassView extends HttpServlet {
         String path = "./jsps/jspTaoLopHoc.jsp";
         response.sendRedirect(path);
     }
+    /**
+     *
+     * @param request
+     * @param response
+     * @param session
+     * @throws Exception
+     */
     private void ClassDetail(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
          String classname=request.getParameter("classname");
          clsBOClass BOC=new clsBOClass();
@@ -113,6 +170,11 @@ public class servClassView extends HttpServlet {
           response.sendRedirect(path);
 
     }
+    /**
+     *
+     * @param request
+     * @throws Exception
+     */
     private void updateClass(HttpServletRequest request) throws Exception{
         String className=request.getParameter("classname");
         String subcode=request.getParameter("subcode");
@@ -124,6 +186,13 @@ public class servClassView extends HttpServlet {
         clsBOClass BOC=new clsBOClass();
         BOC.ClassUpdateInfo(cls);
     }
+    /**
+     *
+     * @param request
+     * @param response
+     * @param session
+     * @throws Exception
+     */
     private void editClass(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
         String classname=request.getParameter("classname");
         clsBOClass BOC=new clsBOClass();
@@ -136,6 +205,13 @@ public class servClassView extends HttpServlet {
         String path = "./jsps/jspSuaLopHoc.jsp";
         response.sendRedirect(path);
     }
+    /**
+     *
+     * @param request
+     * @param response
+     * @param session
+     * @throws Exception
+     */
     private void deleteClass(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
           String classname=request.getParameter("classname");
           clsBOClass BOC=new clsBOClass();
@@ -147,6 +223,13 @@ public class servClassView extends HttpServlet {
              response.sendRedirect(path);
          }
     }
+    /**
+     *
+     * @param request
+     * @param response
+     * @param session
+     * @throws Exception
+     */
     private void getClassInfo(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
         String classname=request.getParameter("classname");
         clsBOClass BOC=new clsBOClass();
@@ -168,14 +251,33 @@ private void getAllClass(HttpServletResponse resp, HttpSession session) throws I
              clsBOClass BOClass=new clsBOClass();
              ArrayList<clsClass> result=BOClass.GetAllClass("ClassName");
              session.setAttribute("clases", result);
+             clsBOLecturer BOL=new clsBOLecturer();
+             ArrayList<clsLecturer> leclist=BOL.GetAllLecturer();
+             session.setAttribute("lec", leclist);
+             clsBOSubject BOS=new clsBOSubject();
+             ArrayList<clsSubject> sublist=BOS.GetListSubject();
+             session.setAttribute("sub", sublist);
              String path = "./jsps/jspXemDSLop.jsp";
              resp.sendRedirect(path);
     }
+/**
+ *
+ * @param resp
+ * @param session
+ * @throws IOException
+ * @throws Exception
+ */
 private void getAllClassSV(HttpServletResponse resp, HttpSession session) throws IOException, Exception{
              session.setAttribute("time", "Học kỳ "+SystemProperities.Curentsemester +" năm học "+SystemProperities.CurentYear);
              clsBOClass BOClass=new clsBOClass();
              ArrayList<clsClass> result=BOClass.GetAllClass("ClassName");
              session.setAttribute("clases", result);
+              clsBOLecturer BOL=new clsBOLecturer();
+             ArrayList<clsLecturer> leclist=BOL.GetAllLecturer();
+             session.setAttribute("lec", leclist);
+             clsBOSubject BOS=new clsBOSubject();
+             ArrayList<clsSubject> sublist=BOS.GetListSubject();
+             session.setAttribute("sub", sublist);
              String path = "./jsps/jspXemDSLopSV.jsp";
              resp.sendRedirect(path);
     }
