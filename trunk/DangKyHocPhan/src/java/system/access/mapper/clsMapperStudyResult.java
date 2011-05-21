@@ -45,23 +45,50 @@ public ResultSet getStudyResultInfoByName(String name) throws Exception{
         }
 
 }
- public void StudyResultnInsert(clsStudyResult studyresult) throws Exception{
-       try {
+
+
+    public ArrayList<clsStudyResult> GetListStudyResult(String mssv, String year) throws Exception{
+        ArrayList<clsStudyResult> listResult = new ArrayList<clsStudyResult>();
+        try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Insert into dangkyhocphan.studyresult values('");
-            sql.append(studyresult.getStudentCode()).append("','");
-            sql.append(studyresult.getSubjectCode()).append("',");
-            sql.append(studyresult.getMark()).append(",'");
-            sql.append(studyresult.getYear()).append("',");
-            sql.append(studyresult.getSemester()).append(")");
+            sql.append("Select * from dangkyhocphan.studyresult Where MSSV = '");
+            sql.append(mssv).append("'");
+            //sql.append(" And Year = '").append(year).append("'");
+            //sql.append("order by Year");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-            stmt.execute();
-            stmt.close();
+            ResultSet rs = stmt.executeQuery();
+
+            while((rs != null) && (rs.next())){
+                clsStudyResult str = new clsStudyResult();
+                IniStudyResultDTOFromRs(str, rs);
+                listResult.add(str);
+            }
+
+        }catch(Exception ex){
+            throw ex;
         }
-        catch (Exception e) {
-                throw e;
-        }
-   }
+        return listResult;
+    }
+
+
+     public void StudyResultnInsert(clsStudyResult studyresult) throws Exception{
+         try {
+             StringBuffer sql = new StringBuffer();
+             sql.append("Insert into dangkyhocphan.studyresult values('");
+             sql.append(studyresult.getStudentCode()).append("','");
+             sql.append(studyresult.getSubjectCode()).append("',");
+             sql.append(studyresult.getMark()).append(",'");
+             sql.append(studyresult.getYear()).append("',");
+             sql.append(studyresult.getSemester()).append(")");
+             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+             stmt.execute();
+             stmt.close();
+         }
+         catch (Exception e) {
+             throw e;
+         }
+     }
+
   public void RegistrationDelete(clsStudyResult res) throws Exception{
        try{
     StringBuffer sql = new StringBuffer();
