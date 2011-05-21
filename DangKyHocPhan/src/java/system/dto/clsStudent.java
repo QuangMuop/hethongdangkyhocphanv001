@@ -1,9 +1,6 @@
 
 package system.dto;
 
-import java.sql.Date;
-
-
 public class clsStudent {
     private String FullName;
     private String BirthDay;
