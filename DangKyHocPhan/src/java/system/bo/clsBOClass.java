@@ -26,7 +26,26 @@ public class clsBOClass {
          }
          return listResult;
      }
-
+    public ArrayList<clsClass> GetAllClassByLecturer(String Leccode) throws Exception{
+         ArrayList<clsClass> listResult = new ArrayList<clsClass>();
+         try{
+            clsMapperClass mapper = new clsMapperClass();
+            listResult = mapper.GetAllClassByLecturer(Leccode);
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+     }
+     public ArrayList<clsClass> GetAllClassBySub(String subcode) throws Exception{
+         ArrayList<clsClass> listResult = new ArrayList<clsClass>();
+         try{
+            clsMapperClass mapper = new clsMapperClass();
+            listResult = mapper.GetAllClassBySubname(subcode);
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+     }
 
     /**
      * Get Class Object from class name
