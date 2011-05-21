@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import system.dto.clsClass;
+import system.dto.clsStudent;
 public class clsMapperClass extends clsMapperDb{
 
      public clsMapperClass() throws Exception{
@@ -68,14 +69,52 @@ public class clsMapperClass extends clsMapperDb{
         }
         return classDTO;
      }
-
+private boolean  CheckDateRoomTime(clsClass classDTO) throws Exception{
+     try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.class Where DateOfWeek = '");
+            sql.append(classDTO.getDate()).append("' and Room='");
+            sql.append(classDTO.getRoom()).append("' and Time=");
+            sql.append(classDTO.getShift()).append("");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            if((rs!=null) && (rs.next()))
+                return true;
+            stmt.close();
+        }catch(Exception ex){
+                throw ex;
+        }
+    return false;
+}
+private boolean  CheckLecDateTime(clsClass classDTO) throws Exception{
+   try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.class Where DateOfWeek = '");
+            sql.append(classDTO.getDate()).append("' and LectuerCode='");
+            sql.append(classDTO.getLectureCode()).append("' and Time=");
+            sql.append(classDTO.getShift()).append("");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            if((rs!=null) && (rs.next()))
+                return true;
+            stmt.close();
+        }catch(Exception ex){
+                throw ex;
+        }
+    return false;
+}
      /**
       *
       * @param classDTO
+      * @return: 1 ton tai, 2 trung phong-ngay-ca, 3 trung Gv-Ngay-Ca
       * @throws Exception
       */
-     public void ClassInsert(clsClass classDTO) throws Exception{
-         try {
+     public int ClassInsert(clsClass classDTO) throws Exception{
+         if(ClassCheckExits(classDTO.getClassName())) return 1;
+         else if(CheckDateRoomTime(classDTO)) return 2;
+         else if(CheckLecDateTime(classDTO)) return 3;
+         else{
+           try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.class values('");
             sql.append(classDTO.getClassName()).append("','");
@@ -88,14 +127,15 @@ public class clsMapperClass extends clsMapperDb{
             sql.append(classDTO.getTestDate()).append("','");
             sql.append(classDTO.getTestTime()).append("','");
             sql.append(classDTO.getTestRoom()).append("')");
-            
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();
+            return 0;
         }
         catch (Exception e) {
                 throw e;
         }
+          }
      }
      public boolean ClassCheckExits(String classname) throws Exception{
          boolean result = false;
@@ -122,14 +162,28 @@ public class clsMapperClass extends clsMapperDb{
                 throw ex;
         }
      }
-     public void ClassUpdate(clsClass classDTO) throws Exception{
+     public void ClassUpdateInfo(clsClass classDTO) throws Exception{
            try{
             StringBuffer sql = new StringBuffer();
-            sql.append(" Update dangkyhocphan.class set SubCode = '").append(classDTO.getSubCode()).append("',");
-            sql.append(" LectuerCode='").append(classDTO.getLectureCode()).append("',");
+            sql.append(" Update dangkyhocphan.class set LectuerCode='");
+            sql.append(classDTO.getLectureCode()).append("',");
             sql.append(" DateOfWeek='").append(classDTO.getDate()).append("',");
             sql.append(" Room='").append(classDTO.getRoom()).append("',");
             sql.append(" Time=").append(classDTO.getShift());
+            sql.append(" where ClassName='").append(classDTO.getClassName()).append("'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            stmt.execute();
+        }catch(Exception ex){
+                throw ex;
+        }
+     }
+      public void ClassUpdateTest(clsClass classDTO) throws Exception{
+           try{
+            StringBuffer sql = new StringBuffer();
+            sql.append(" Update dangkyhocphan.class set TestDate='");
+            sql.append(classDTO.getTestDate()).append("',");
+            sql.append(" TestTime='").append(classDTO.getTestTime()).append("',");
+            sql.append(" TestRoom='").append(classDTO.getTestRoom()).append("'");
             sql.append(" where ClassName='").append(classDTO.getClassName()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
@@ -146,5 +200,25 @@ public class clsMapperClass extends clsMapperDb{
         }catch(Exception ex){
                 throw ex;
         }
+     }
+     public ArrayList<clsStudent> getAllStudentOfClass(String Classname) throws Exception{
+          ArrayList<clsStudent> listResult = new ArrayList<clsStudent>();
+         try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select dangkyhocphan.student.MSSV,FullName,Class from dangkyhocphan.student, dangkyhocphan.registry where dangkyhocphan.student.MSSV=dangkyhocphan.registry.MSSV and dangkyhocphan.registry.ClassName='");
+            sql.append(Classname).append("' ");
+             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsStudent classTemp = new clsStudent();
+                classTemp.setCode(rs.getString("MSSV"));
+                classTemp.setFullName(rs.getString("FullName"));
+                classTemp.setClass(rs.getString("Class"));
+                listResult.add(classTemp);
+            }
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
      }
 }
