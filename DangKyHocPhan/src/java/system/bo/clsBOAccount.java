@@ -91,4 +91,8 @@ public class clsBOAccount {
         clsMapperAccount mpa=new clsMapperAccount();
         return mpa.AccountCheckLock(user);
     }
+    public void changePass(String user, String newpass) throws Exception{
+        clsMapperAccount mpa=new clsMapperAccount();
+        mpa.AccountChangePass(user, newpass);
+    }
 }
