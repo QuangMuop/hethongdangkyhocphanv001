@@ -51,6 +51,42 @@ public class clsMapperClass extends clsMapperDb{
          }
          return listResult;
      }
+      public ArrayList<clsClass> GetAllClassByLecturer(String LecCode) throws Exception{
+         ArrayList<clsClass> listResult = new ArrayList<clsClass>();
+         try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("select ClassName,dangkyhocphan.class.SubCode,FullName,SubName,NumTC, LectuerCode, DateOfWeek, Room, NumOfStudent, Time, TestDate, TestTime, TestRoom from dangkyhocphan.class, dangkyhocphan.subject, dangkyhocphan.lecturer where class.SubCode=subject.SubCode and dangkyhocphan.class.LectuerCode=dangkyhocphan.lecturer.LectuterCode and dangkyhocphan.class.LectuerCode='");
+            sql.append(LecCode).append("' ");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsClass classTemp = new clsClass();
+                IniClassDTOFromRs(classTemp, rs);
+                listResult.add(classTemp);
+            }
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+     }
+       public ArrayList<clsClass> GetAllClassBySubname(String subcode) throws Exception{
+         ArrayList<clsClass> listResult = new ArrayList<clsClass>();
+         try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("select ClassName,dangkyhocphan.class.SubCode,FullName,SubName,NumTC, LectuerCode, DateOfWeek, Room, NumOfStudent, Time, TestDate, TestTime, TestRoom from dangkyhocphan.class, dangkyhocphan.subject, dangkyhocphan.lecturer where class.SubCode=subject.SubCode and dangkyhocphan.class.LectuerCode=dangkyhocphan.lecturer.LectuterCode and dangkyhocphan.class.SubCode='");
+            sql.append(subcode).append("' ");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsClass classTemp = new clsClass();
+                IniClassDTOFromRs(classTemp, rs);
+                listResult.add(classTemp);
+            }
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+     }
 
     
      public clsClass getClassinfo(String classname) throws Exception{
