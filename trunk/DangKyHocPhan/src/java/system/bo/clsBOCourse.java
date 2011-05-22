@@ -22,4 +22,8 @@ public class clsBOCourse {
             throw ex;
         }
     }
+     public boolean CourseInsert(clsCourse cls) throws Exception{
+         clsMapperCourse mpc=new clsMapperCourse();
+         return mpc.CourseInsert(cls);
+     }
 }

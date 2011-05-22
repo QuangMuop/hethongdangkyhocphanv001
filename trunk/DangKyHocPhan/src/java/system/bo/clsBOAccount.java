@@ -14,7 +14,6 @@ public class clsBOAccount {
         clsMapperAccount account=new clsMapperAccount();
         return account.AccountLogin(username, pass);
     }
-    
     /**
      *
      * @param username
