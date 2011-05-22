@@ -23,6 +23,17 @@ public class clsBOLecturer {
             throw ex;
         }
     }
+
+    /**
+     * Get lecturer by nam
+     * @param name
+     * @return
+     * @throws Exception
+     */
+     public ArrayList<clsLecturer> GetLecturerByName(String name) throws Exception{
+        clsMapperLecturer mapper = new clsMapperLecturer();
+        return mapper.GetLecturerByName(name);
+     }
     
     /**
      * Get a lecturer object from name of teacher
@@ -147,5 +158,7 @@ public class clsBOLecturer {
      * @throws Exception
      */
     public void LecturerUpdate(clsLecturer lecturer) throws Exception{
+        clsMapperLecturer mapper = new clsMapperLecturer();
+        mapper.LecturerUpdate(lecturer);
     }
 }

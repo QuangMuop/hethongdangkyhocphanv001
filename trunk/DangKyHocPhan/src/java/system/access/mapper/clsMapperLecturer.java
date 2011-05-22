@@ -63,6 +63,25 @@ public class clsMapperLecturer extends clsMapperDb {
         return lecturer;
  }
 
+    public ArrayList<clsLecturer> GetLecturerByName(String name) throws Exception{
+        ArrayList<clsLecturer> listResult = new ArrayList<clsLecturer>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.lecturer where FullName like '%");
+            sql.append(name).append("%'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+
+            while((rs!=null) && rs.next()){
+                clsLecturer lecturer = new clsLecturer();
+                IniLecturerDTOFromRs(lecturer, rs);
+                listResult.add(lecturer);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listResult;
+    }
     /**
      * Get all lecturer in database
      * @return list of lecturer
@@ -189,11 +208,11 @@ public class clsMapperLecturer extends clsMapperDb {
             sql.append("BirthDay='").append(lecturer.getBirthDay()).append("',");
             sql.append("Email='").append(lecturer.getEmail()).append("',");
             sql.append("Phone='").append(lecturer.getPhone()).append("',");
-            sql.append("Address=,").append(lecturer.getAddress()).append("',");
+            sql.append("Address='").append(lecturer.getAddress()).append("',");
             sql.append("HocHam='").append(lecturer.getHocHam()).append("',");
             sql.append("Degree='").append(lecturer.getHocVi()).append("',");
             sql.append("Gender='").append(lecturer.getGender()).append("',");
-            sql.append("Degree='").append(lecturer.getCMND()).append("'");
+            sql.append("CMND='").append(lecturer.getCMND()).append("'");
             sql.append("Where LectuterCode='").append(lecturer.getLecturerCode()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
