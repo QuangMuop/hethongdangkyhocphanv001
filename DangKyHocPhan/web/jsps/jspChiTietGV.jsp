@@ -14,7 +14,7 @@
     int i = 0;
     int n = 0;
     String strErr = "";
-    ArrayList<String> listResult = null;
+    ArrayList<String> listResult = new ArrayList<String>();
     try{
         listResult = (ArrayList<String>) session.getAttribute("listinfomation");
         session.removeAttribute("listinfomation");
@@ -30,7 +30,28 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Chi tiết giảng viên</title>
         <style media="all" type="text/css">
-
+            #tableinfo{
+                margin-left: 10px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                width: 400px;
+                border-left: 2px solid;
+                border-right: 2px solid;
+                text-align: left;
+            }
+            #tableinfo th{
+                height: 32px;
+                font-weight: bold;
+                background-color: #F9B7FF;
+            }
+            #tableinfo td{
+                background-color: #b1B700;
+                padding: 2 5 2 5;
+            }            
+            #frminfo{
+                margin-left: 25px;
+                width: 400px;
+            }
         </style>
     </head>
     <body>
@@ -41,15 +62,16 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <p>
-                    Thông tin chi tiết về giảng viên....
+                    Thông tin chi tiết về giảng viên
+                    <%=listResult.get(1)%>
                 </p>
                 <!--
                     //1. LecturerCode,   2. FullName,     3. BirthDay, 4. Email, 5. Phone
                     //6. Address,   7. HocHam,  8. Degree,  9.Gender,   10. CMND.
                 -->
-                <form action="#" id="frm-detail">
+                <form action="#" id="frminfo">
                     <%if(n>0){%>
-                        <table>
+                    <table id="tableinfo">
                             <tr>
                                 <td>Mã GV</td> <td><%=listResult.get(i++)%></td>
                             </tr>
@@ -84,10 +106,11 @@
                             <td>Tình Trang hôn nhân</td> <td>KXĐ</td>
                             </tr>                            
                         </table>
+                                <a href="../UpdateLecturer?id=<%=listResult.get(0)%>">Cập nhật thông tin</a>
                      <%}%>
 
                      <br/><br/><br/>
-                    <h3><u>Những hoạt động của SV ...</u></h3>
+                     <h3><u>Những hoạt động của GV <%=listResult.get(1)%></u></h3>
                     <br/><br/><br/><br/><br/>
                 </form>
 

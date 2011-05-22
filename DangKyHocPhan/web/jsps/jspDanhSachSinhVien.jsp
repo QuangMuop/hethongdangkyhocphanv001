@@ -136,10 +136,10 @@
                     <h3><u>Danh sách SV</u></h3>
                     <table id="infomation">
                         <tr>
-                            <th>Họ Tên</th>
-                            <th>MSSV</th>
-                            <th>Lớp</th>
-                            <th>Email</th>
+                            <th><a href="../ViewListStudent?search=yes&order=FullName">Họ Và Tên</a></th>
+                            <th><a href="../ViewListStudent?search=yes&order=MSSV">MSSV</a></th>
+                            <th><a href="../ViewListStudent?search=yes&order=Class">Lớp</a></th>
+                            <th><a href="../ViewListStudent?search=yes&order=Email">Email</a></th>
                             <th></th>
                             <th></th>
                         </tr>
