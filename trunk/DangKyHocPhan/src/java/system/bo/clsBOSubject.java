@@ -23,6 +23,14 @@ public class clsBOSubject {
             throw ex;
         }
     }
+     public ArrayList<clsSubject> SearchSubjectByName(String subname)throws Exception{
+        try{
+            clsMapperSubject mapper = new clsMapperSubject();
+            return mapper.SearchSubjectByName(subname);
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
 
     /**
      * Get an Subject object by it's name
@@ -38,13 +46,20 @@ public class clsBOSubject {
             throw ex;
         }        
      }
-
+public void updateSubject(clsSubject subject) throws Exception{
+    clsMapperSubject mps=new clsMapperSubject();
+    mps.SubjectUpdate(subject);
+}
     /**
      * Get an Subject object by it's Id
      * @param subcode Id for search
      * @return Subject found or null
      * @throws Exception
      */
+public int getNumTCByClassName(String Classname) throws Exception{
+     clsMapperSubject mapper = new clsMapperSubject();
+     return mapper.getNumTCByClassName(Classname);
+}
     public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
         try{
             clsMapperSubject mapper = new clsMapperSubject();
@@ -75,16 +90,18 @@ public class clsBOSubject {
     /**
      *
      * @param subject
+     * @return
      * @throws Exception
      */
-    public void SubjectInsert(clsSubject subject) throws Exception{
-
+    public int SubjectInsert(clsSubject subject) throws Exception{
+        clsMapperSubject mps=new clsMapperSubject();
+        return mps.SubjectInsert(subject);
      }
 
     /**
-     * Check if one subject's name is already existed in databse
-     * @param subname Name for test
-     * @return true if existed and false for other
+     *
+     * @param subname
+     * @return
      * @throws Exception
      */
     public boolean SubCheckExitsByName(String subname) throws Exception{
@@ -128,7 +145,9 @@ public class clsBOSubject {
      * @param subcode
      * @throws Exception
      */
-    public void SubjectDeleteByCode(String subcode) throws Exception{
+    public boolean  SubjectDeleteByCode(String subcode) throws Exception{
+        clsMapperSubject mps=new clsMapperSubject();
+        return mps.SubjectDeleteByCode(subcode);
     }
 
 
