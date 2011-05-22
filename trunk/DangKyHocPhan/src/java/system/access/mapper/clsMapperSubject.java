@@ -44,7 +44,7 @@ public class clsMapperSubject extends clsMapperDb {
         ArrayList<clsSubject> listResult = new ArrayList<clsSubject>();
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select * from dangkyhocphan.subject");            
+            sql.append("Select * from dangkyhocphan.subject order by SubName");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while((rs!=null) && rs.next()){
@@ -62,8 +62,8 @@ public class clsMapperSubject extends clsMapperDb {
         clsSubject subject=new clsSubject();
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select * from dangkyhocphan.subject Where");
-            sql.append(" SubCode = '").append(subcode).append("'");
+            sql.append("Select * from dangkyhocphan.subject Where SubCode='");
+            sql.append(subcode).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             if((rs!=null) && rs.next()){
@@ -74,8 +74,25 @@ public class clsMapperSubject extends clsMapperDb {
         }
         return subject;
     }
-    
-    public void SubjectInsert(clsSubject subject) throws Exception{
+    public int getNumTCByClassName(String classname) throws Exception{
+        int numTC=0;
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("select NumTC from dangkyhocphan.subject, dangkyhocphan.class where dangkyhocphan.subject.SubCode=dangkyhocphan.class.SubCode and dangkyhocphan.class.ClassName='");
+            sql.append(classname).append("'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            if((rs!=null) && rs.next()){
+               numTC=Integer.parseInt(rs.getString("NumTC"));
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return numTC;
+    }
+    public int SubjectInsert(clsSubject subject) throws Exception{
+        if(SubCheckExitsByName(subject.getSubName())) return 1;//subname already exist
+        else if(SubCheckExitsByCode(subject.getSubCode())) return 2;// subcode already exist
         try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.subject values('");
@@ -87,6 +104,7 @@ public class clsMapperSubject extends clsMapperDb {
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();
+            return 0;
         }
         catch (Exception e) {
                 throw e;
@@ -137,41 +155,44 @@ public class clsMapperSubject extends clsMapperDb {
         }
     }
     
-    public void SubjectDeleteByCode(String subcode) throws Exception{
+    public boolean  SubjectDeleteByCode(String subcode) throws Exception{
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Delete from dangkyhocphan.subject Where subcode = '").append(subcode).append("'");
+            sql.append("Delete from dangkyhocphan.subject Where SubCode = '").append(subcode).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
+            return true;
         }catch(Exception ex){
-                throw ex;
+                return  false;
         }
     }
-    
-    public void SubjectUpdateByName(clsSubject subject) throws Exception{
-        try{
+    public ArrayList<clsSubject> SearchSubjectByName(String subname) throws Exception{
+         ArrayList<clsSubject> listResult = new ArrayList<clsSubject>();
+         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Update dangkyhocphan.subject set SubCode = '").append(subject.getSubCode()).append("',");
-            sql.append(" NumTC=").append(subject.getNumTC()).append(",");
-            sql.append(" NumTCLT=").append(subject.getTCLT()).append(",");
-            sql.append(" NumTCTH=").append(subject.getTCTH()).append(",");
-            sql.append(" where SubName='").append(subject.getSubName()).append("'");
+            sql.append("select * from dangkyhocphan.subject where dangkyhocphan.subject.SubName like '");
+            sql.append(subname).append("%' order by SubName");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-            stmt.execute();
-        }catch(Exception ex){
-                throw ex;
-        }
-    }
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsSubject classTemp = new clsSubject();
+                IniSubjectDTOFromRs(classTemp, rs);
+                listResult.add(classTemp);
+            }
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+     }
     
-    
-    public void SubjectUpdateByCode(clsSubject subject) throws Exception{
+    public void SubjectUpdate(clsSubject subject) throws Exception{
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Update dangkyhocphan.subject set SubName = '").append(subject.getSubName()).append("',");
-            sql.append(" NumTC=").append(subject.getNumTC()).append(",");
-            sql.append(" NumTCLT=").append(subject.getTCLT()).append(",");
-            sql.append(" NumTCTH=").append(subject.getTCTH()).append(",");
-            sql.append(" where SubCode='").append(subject.getSubCode()).append("'");
+            sql.append("update dangkyhocphan.subject set NumTC=");
+            sql.append(subject.getNumTC()).append(", NumTCLT=");
+            sql.append(subject.getTCLT()).append(", NumTCTH=");
+            sql.append(subject.getTCTH()).append(" where SubCode='");
+            sql.append(subject.getSubCode()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){
