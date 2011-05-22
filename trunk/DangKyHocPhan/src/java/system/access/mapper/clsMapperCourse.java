@@ -56,7 +56,7 @@ public class clsMapperCourse extends clsMapperDb {
         return listCourse;
     }
     
-    public void CourseInsert(clsCourse courseDTO) throws Exception{
+    public boolean  CourseInsert(clsCourse courseDTO) throws Exception{
         try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.Course values(");
@@ -68,9 +68,10 @@ public class clsMapperCourse extends clsMapperDb {
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();
+            return true;
         }
         catch (Exception e) {
-                throw e;
+                return  false;
         }
     }
     
