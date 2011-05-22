@@ -89,6 +89,26 @@ public class clsMapperStudent extends clsMapperDb{
         return student;
     }
 
+    public ArrayList<clsStudent> getStudentsByName(String name) throws Exception{
+        ArrayList<clsStudent> listResult = new ArrayList<clsStudent>();
+        clsStudent student = null;
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.student Where ");
+            sql.append("FullName = '").append(name).append("'");//có dấu tiếng việt thì chưa lấy được
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                student = new clsStudent();
+                IniStudentDTOFromRs(student, rs);
+                listResult.add(student);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listResult;
+    }
+
     /**
      * Get all student in database
      * @param strWhere search codition
