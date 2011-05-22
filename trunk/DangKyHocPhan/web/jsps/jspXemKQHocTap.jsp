@@ -148,6 +148,10 @@ for(j=0;j<m;j++){
 			</table>
 			<br/>
                 </form>
+                <form action="../DownloadFile?action=studentresult&mssv=<%=student.getCode()%>" method="post" id="frmexport">
+                    <a href="../DownloadFile?action=studentresult&mssv=<%=student.getCode()%>"> Tải file</a>
+                </form>
+                
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
