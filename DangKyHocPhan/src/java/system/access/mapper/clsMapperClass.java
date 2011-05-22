@@ -190,7 +190,7 @@ private boolean  CheckLecDateTime(clsClass classDTO) throws Exception{
      }
      public void ClassDelete(String classname) throws Exception{
           try{
-    StringBuffer sql = new StringBuffer();
+            StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.class Where ClassName = '").append(classname).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
