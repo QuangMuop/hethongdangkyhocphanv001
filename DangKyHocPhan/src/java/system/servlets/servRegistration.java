@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import system.bo.clsBOClass;
 import system.bo.clsBORegistration;
+import system.bo.clsBORule;
 import system.bo.clsBOStudent;
+import system.bo.clsBOSubject;
 import system.dto.clsClass;
 import system.dto.clsRegistration;
 import system.dto.clsStudent;
@@ -31,15 +33,14 @@ public class servRegistration extends HttpServlet {
      * @throws IOException
      */
     String[] registry;
-    String login;
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException, Exception {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
         try {
-            login=(String) session.getAttribute("username");
+           String login=(String) session.getAttribute("username");
             if(login==null){
              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
              String path = "./jsps/jspThongBao.jsp";
@@ -48,12 +49,12 @@ public class servRegistration extends HttpServlet {
             else {
                 String first=request.getParameter("reg");
                 if(first.equalsIgnoreCase("view")){
-                   forward(response, session);
+                   forward(response, session,login);
                 } else if(first.equalsIgnoreCase("registry")){
-                    registry(request, response, session);
+                    registry(request, response, session,login);
              }
                 else if(first.equalsIgnoreCase("reset")){
-                   getAllClass(response, session);
+                   getAllClass(response, session,login);
                 }
                 else if(first.equalsIgnoreCase("complete")){
                     completeReg(login,response, session);
@@ -65,14 +66,14 @@ public class servRegistration extends HttpServlet {
             out.close();
         }
     }
-    private void forward(HttpServletResponse resp, HttpSession session) throws Exception{
+    private void forward(HttpServletResponse resp, HttpSession session, String login) throws Exception{
        clsRegistration cls=new clsRegistration(login, "", SystemProperities.Curentsemester, SystemProperities.CurentYear, 0);
        clsBORegistration BOreg=new clsBORegistration();
        ArrayList<String> reged=BOreg.getRegistrationInfo(cls);
        if(reged.isEmpty()){
-           getAllClass(resp, session);
+           getAllClass(resp, session,login);
        }else{
-               showreg(reged,resp, session);
+               showreg(reged,resp, session,login);
        }
     }
      /**
@@ -81,9 +82,25 @@ public class servRegistration extends HttpServlet {
      * @throws Exception
      */
     private void completeReg(String username,HttpServletResponse resp, HttpSession session) throws Exception{
+        clsBOSubject BOS=new clsBOSubject();
+        clsBORule BOL= new clsBORule();
+        int n=registry.length;
+        int numTC=0;
+        for(int i=0;i<n;i++){
+            numTC+=BOS.getNumTCByClassName(registry[i]);
+        }
+        if(numTC<BOL.getRuleInfo().getMinTC()){
+            session.setAttribute("mes", "Số tín chỉ chưa đủ, số TC tối thiểu cho một học kỳ là :"+BOL.getRuleInfo().getMinTC() +"SOTC "+numTC);
+             String path = "./jsps/jspThongBao.jsp";
+             resp.sendRedirect(path);
+        }else if(numTC>BOL.getRuleInfo().getMaxTC()){
+            session.setAttribute("mes", "Số tín chỉ quá qui định, số TC tối đa cho một học kỳ là :"+BOL.getRuleInfo().getMaxTC());
+             String path = "./jsps/jspThongBao.jsp";
+             resp.sendRedirect(path);
+        } else{
         clsBORegistration BOReg=new clsBORegistration();
         BOReg.deleteAll(username, SystemProperities.Curentsemester, SystemProperities.CurentYear);
-        int n=registry.length;
+       
         for(int i=0;i<n;i++){
             clsRegistration temp=new clsRegistration(username, registry[i], SystemProperities.Curentsemester, SystemProperities.CurentYear, 0);
             BOReg.insert(temp);
@@ -91,6 +108,7 @@ public class servRegistration extends HttpServlet {
             session.setAttribute("mes", "Đăng ký thành công!");
              String path = "./jsps/jspThongBao.jsp";
              resp.sendRedirect(path);
+        }
     }
     /**
      *
@@ -100,10 +118,10 @@ public class servRegistration extends HttpServlet {
      * @throws IOException
      * @throws Exception
      */
-    private void registry(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException, Exception{
+    private void registry(HttpServletRequest req, HttpServletResponse resp, HttpSession session, String login) throws IOException, Exception{
         registry=req.getParameterValues("check");
         if(req.getParameterValues("check")==null){
-            getAllClass(resp, session);
+            getAllClass(resp, session,login);
         }else{
         int n=registry.length;
         ArrayList<clsClass> reg=new ArrayList<clsClass>();
@@ -126,7 +144,7 @@ public class servRegistration extends HttpServlet {
      * @throws IOException
      * @throws Exception
      */
-private void getAllClass(HttpServletResponse resp, HttpSession session) throws IOException, Exception{
+private void getAllClass(HttpServletResponse resp, HttpSession session, String login) throws IOException, Exception{
              clsBOStudent BOStudent=new clsBOStudent();
              clsStudent student=BOStudent.getStudentInfoByCode(login);
              session.setAttribute("student", student);
@@ -137,7 +155,7 @@ private void getAllClass(HttpServletResponse resp, HttpSession session) throws I
              String path = "./jsps/jspDangKyMonHoc.jsp";
              resp.sendRedirect(path);
     }
- private void showreg(ArrayList<String> reged, HttpServletResponse resp, HttpSession session) throws IOException, Exception{
+ private void showreg(ArrayList<String> reged, HttpServletResponse resp, HttpSession session, String login) throws IOException, Exception{
         clsBOStudent BOStudent=new clsBOStudent();
         clsStudent student=BOStudent.getStudentInfoByCode(login);
         session.setAttribute("student", student);
