@@ -170,7 +170,6 @@ public class clsMapperAccount extends clsMapperDb {
         }
     }
     
-    
     /**
      * 
      * @param username

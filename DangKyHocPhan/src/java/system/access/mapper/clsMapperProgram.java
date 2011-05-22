@@ -4,6 +4,7 @@ package system.access.mapper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import system.dto.clsProgram;
 public class clsMapperProgram extends clsMapperDb {
     public clsMapperProgram() throws Exception{
@@ -16,18 +17,21 @@ public void IniProgramDTOFromRs(clsProgram prog, ResultSet rs) throws SQLExcepti
 
          }
      }
-public ResultSet getProgramInfo(int procode) throws Exception{//lấy chưa được thông tin các môn học của mỗi chương trình
-    try{
+ public ArrayList<Integer> GetAllProCode() throws Exception{
+         ArrayList<Integer> listResult = new ArrayList<Integer>();
+         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select SubCode from dangkyhocphan.program Where ");
-            sql.append("ProCode = ").append(procode);
+            sql.append("select DISTINCT ProCode from dangkyhocphan.program");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            return rs;
-        }catch(Exception ex){
+            while((rs!=null) && rs.next()){
+                listResult.add(Integer.parseInt(rs.getString("Procode")));
+            }
+         }catch(Exception ex){
             throw ex;
-        }
- }
+         }
+         return listResult;
+     }
 public void ProgramInsert(clsProgram prog) throws Exception{
     try {
             StringBuffer sql = new StringBuffer();
