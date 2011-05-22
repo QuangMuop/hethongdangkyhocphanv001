@@ -138,6 +138,7 @@
                     <br/>
                     <input type="button" value="Tạo lớp học" onclick="insertClass()">
 		</form>
+                                <br>  <hr><hr>
                	<u>Danh sách các lớp hiện có.</u>
 		<table id="tablelistclass">
                       <tr>
