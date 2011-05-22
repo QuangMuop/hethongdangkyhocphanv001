@@ -41,6 +41,8 @@
                         <li><a href="../UpdateScore?function=loaddata">Ghi Nhận Điểm SV</a> </li>
                         <li><a href="../ManageLecturer?function=loaddata">Quản lý GV</a> </li>
                         <li><a href="../ManageStudent?function=loaddata">Quản lý SV</a> </li>
+                         <li><a href="../servSubject?action=view">Quản môn học</a> </li>
+                          <li><a href="../servSubject?action=view">Quản lý khóa học</a> </li>
                          <li><a href="jspCaiDatTaiKhoan.jsp">Cài Đặt Tài Khoản</a> </li>                        
                         <li><a href="../servViewRule?issetup=false">Xem quy định</a> </li>
                     </ul>

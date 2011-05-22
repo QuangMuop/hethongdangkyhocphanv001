@@ -25,7 +25,7 @@ int j=0;
             #tablelistclass{
                 margin-left: 10px;
                 margin-top: 20px;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
                 width: 740px;
                 border-left: 2px solid;
                 border-right: 2px solid;
@@ -59,28 +59,7 @@ int j=0;
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <br>
-                <h3>Danh sách các môn học trong <%=time%>:</h3>
-                <form id="classlist">
-                  <table id="tablelistclass">
-                    <tr>
-                        <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Số TC</th><th>Ngày</th><th>Phòng</th><th>Ca</th>
-                    </tr>
-                     <%for(j=0;j<n;j++){%>
-                     <tr>
-                         <td><%=j+1%></td>
-                         <td><a href="../servClassView?action=detail&classname=<%=clases.get(j).getClassName()%>"><%=clases.get(j).getClassName() %></a></td>
-                         <td><%=clases.get(j).getSubName()%></td>
-                         <td><%=clases.get(j).getLecturerName()%></td>
-                         <td><%=clases.get(j).getNumTC()%></td>
-                         <td>Thứ <%=clases.get(j).getDate()%></td>
-                         <td><%=clases.get(j).getRoom()%></td>
-                         <td><%=clases.get(j).getShift()%></td>
-                         </tr>
-                     <%}%>
-                </table>
-                </form>
-                <hr><hr>
-                <h1>Tìm kiếm lớp học:</h1>
+                 <h1>Tìm kiếm lớp học:</h1>
                <form id = "formsearch" name="formsearch" action="../ViewListClass?searchengine=true" method="post">
                      <table>
                          <tr>
@@ -113,8 +92,29 @@ int j=0;
                             <td colspan="2"><input type="button" onclick="search()" value="Tìm Kiếm"></td>
                         </tr>
                     </table>
+                </form><br><hr><hr>
+                <h3>Danh sách các lớp học trong <%=time%>:</h3>
+                <form id="classlist">
+                  <table id="tablelistclass">
+                    <tr>
+                        <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Số TC</th><th>Ngày</th><th>Phòng</th><th>Ca</th>
+                    </tr>
+                     <%for(j=0;j<n;j++){%>
+                     <tr>
+                         <td><%=j+1%></td>
+                         <td><a href="../servClassView?action=detail&classname=<%=clases.get(j).getClassName()%>"><%=clases.get(j).getClassName() %></a></td>
+                         <td><%=clases.get(j).getSubName()%></td>
+                         <td><%=clases.get(j).getLecturerName()%></td>
+                         <td><%=clases.get(j).getNumTC()%></td>
+                         <td>Thứ <%=clases.get(j).getDate()%></td>
+                         <td><%=clases.get(j).getRoom()%></td>
+                         <td><%=clases.get(j).getShift()%></td>
+                         </tr>
+                     <%}%>
+                </table>
                 </form>
-               </div><!--End Contents-->
+                <hr><hr>
+                </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
                  <%@include file="jspFooter.jsp" %>

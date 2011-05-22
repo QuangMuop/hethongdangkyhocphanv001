@@ -92,7 +92,7 @@
                         <tr>
                             <td>Môn học</td>
                             <td>
-                                <select name="ClassName" id="ClassName">
+                                <select name="ClassName" id="ClassName" onchange="getClassName()">
                                     <%for(i = 0; i < m; i++){%>
                                     <option value="<%=sublist.get(i).getSubCode()%>"><%=sublist.get(i).getSubName()%></option>
                                     <%}%>
@@ -165,6 +165,11 @@
         <!--End Wrapper-->
     </body>
      <script  type = "text/javascript" >
+         function getClassName(){
+             var classname = document.frmInfo.ClassName.value;
+             document.frmInfo.txtClassId.value=classname;
+
+         }
          function insertClass(){
          var classname = document.frmInfo.txtClassId.value;
          var room = document.frmInfo.txtRoom.value;
