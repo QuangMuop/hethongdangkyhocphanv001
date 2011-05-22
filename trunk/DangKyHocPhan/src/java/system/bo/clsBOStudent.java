@@ -43,6 +43,11 @@ public class clsBOStudent {
          }
     }
 
+     public ArrayList<clsStudent> getStudentsByName(String name) throws Exception{
+        clsMapperStudent mapper = new clsMapperStudent();
+        return mapper.getStudentsByName(name);
+    }
+
      /**
       * searh all student in database
       * @param strWhere search condition
