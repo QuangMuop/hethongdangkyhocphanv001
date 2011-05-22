@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import system.access.mapper.clsMapperViewProgram;
+import system.bo.clsBOAccount;
 import system.bo.clsBOStudent;
 import system.dto.clsStudent;
 import system.dto.clsViewProgram;
@@ -32,6 +33,7 @@ public class servProgram extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
+        clsBOAccount BOA=new clsBOAccount();
         try {
            String login=(String) session.getAttribute("username");
             if(login==null){
@@ -40,7 +42,13 @@ public class servProgram extends HttpServlet {
              response.sendRedirect(path);
            }
             else {
+               if( BOA.getAccountType(login)==0)
               getProgram(response, session, login);
+               else {
+                   session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản sinh viên!");
+             String path = "./jsps/jspThongBao.jsp";
+             response.sendRedirect(path);
+               }
                }
         } finally { 
             out.close();

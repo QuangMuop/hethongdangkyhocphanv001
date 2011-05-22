@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import system.bo.clsBOAccount;
 import system.bo.clsBOClass;
 import system.bo.clsBORegistration;
 import system.bo.clsBORule;
@@ -39,9 +40,10 @@ public class servRegistration extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
+        clsBOAccount BOA=new clsBOAccount();
         try {
            String login=(String) session.getAttribute("username");
-            if(login==null){
+            if(login==null ){
              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
              String path = "./jsps/jspThongBao.jsp";
              response.sendRedirect(path);
@@ -49,7 +51,13 @@ public class servRegistration extends HttpServlet {
             else {
                 String first=request.getParameter("reg");
                 if(first.equalsIgnoreCase("view")){
+                    if(BOA.getAccountType(login)==0)
                    forward(response, session,login);
+                    else{
+                        session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản sinh viên!");
+             String path = "./jsps/jspThongBao.jsp";
+             response.sendRedirect(path);
+                    }
                 } else if(first.equalsIgnoreCase("registry")){
                     registry(request, response, session,login);
              }

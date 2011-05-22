@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import system.bo.clsBOAccount;
 import system.bo.clsBODetailResult;
 import system.bo.clsBOStudent;
 import system.dto.clsStudent;
@@ -35,9 +36,9 @@ public class servStudyResult extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
+        clsBOAccount BOA=new clsBOAccount();
         try {
             String login=(String) session.getAttribute("username");
-            login = "07520319";
             if(login==null){
              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
              String path = "./jsps/jspThongBao.jsp";
@@ -46,7 +47,13 @@ public class servStudyResult extends HttpServlet {
             else {
                 String first=request.getParameter("first");
                 if(first.equalsIgnoreCase("true"))
+                    if( BOA.getAccountType(login)==0)
                     getStudyResult(response, session,login);
+                    else{
+                    session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản sinh viên!");
+                    String path = "./jsps/jspThongBao.jsp";
+                     response.sendRedirect(path);
+                    }
                 else if(first.equalsIgnoreCase("false")){
                    reloadResult(request, response, session, login);
                     

@@ -25,6 +25,7 @@ public class servChangePass extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException, Exception {
+        clsBOAccount BOA=new clsBOAccount();
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
          HttpSession session = request.getSession();
@@ -38,8 +39,14 @@ public class servChangePass extends HttpServlet {
             else {
                String change=request.getParameter("change");
                if(change.equalsIgnoreCase("firts")){
+                   if(BOA.getAccountType(login)==0){
                    String path = "./jsps/jspDoiMatKhau.jsp";
                      response.sendRedirect(path);
+                   }else{
+                         session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản sinh viên!");
+                          String path = "./jsps/jspThongBao.jsp";
+                         response.sendRedirect(path);
+                   }
                }
                else if(change.equalsIgnoreCase("change")){
                    changepass(login, session, request, response);

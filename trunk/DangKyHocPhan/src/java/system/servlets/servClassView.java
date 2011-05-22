@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import system.bo.clsBOAccount;
 import system.bo.clsBOClass;
 import system.bo.clsBOLecturer;
 import system.bo.clsBOSubject;
@@ -30,35 +31,55 @@ public class servClassView extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
-         String action =request.getParameter("action");
+        clsBOAccount BOA=new clsBOAccount();
+        String login=(String) session.getAttribute("username");
+        String action =request.getParameter("action");
         try {
-            if(action.equalsIgnoreCase("view")){
-             getAllClass(response, session);
+            if(login==null){
+               session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+             String path = "./jsps/jspThongBao.jsp";
+             response.sendRedirect(path);
             }
-            else if(action.equalsIgnoreCase("detail")){
-               ClassDetail(request, response, session);
-            }
-            else if(action.equalsIgnoreCase("delete")){
-                getClassInfo(request, response, session);
-            }
-            else if(action.equalsIgnoreCase("deletecom")){
-               deleteClass(request, response, session);
-               
-            }else if(action.equalsIgnoreCase("edit")){
-                editClass(request, response, session);
-            }
-            else if(action.equalsIgnoreCase("student")){
-                getAllClassSV(response, session);
-            } else if(action.equalsIgnoreCase("update")){
-                updateClass(request);
-                getAllClass(response, session);
-            }else if(action.equalsIgnoreCase("create")){
-                createClass(request, response, session);
-            }else if(action.equalsIgnoreCase("createcomplete")){
-                insertClass(request, response, session);
-            }
-            else if(action.equalsIgnoreCase("search")){
-                searchClass(request, response);
+            else{
+                      if(action.equalsIgnoreCase("view")) {
+                          if(BOA.getAccountType(login)==1)
+                       getAllClass(response, session);
+                          else {
+                              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản quản lý!");
+                             String path = "./jsps/jspThongBao.jsp";
+                              response.sendRedirect(path);
+                          }
+                      }
+                      else if(action.equalsIgnoreCase("detail")){
+                       ClassDetail(request, response, session);
+                          }
+                      else if(action.equalsIgnoreCase("delete")){
+                         getClassInfo(request, response, session);
+                     }
+                       else if(action.equalsIgnoreCase("deletecom")){
+                          deleteClass(request, response, session);
+                 }else if(action.equalsIgnoreCase("edit")){
+                            editClass(request, response, session);
+                  }
+                      else if(action.equalsIgnoreCase("student")){
+                        if(BOA.getAccountType(login)==0)
+                          getAllClassSV(response, session);
+                         else {
+                    session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản sinh viên!");
+                    String path = "./jsps/jspThongBao.jsp";
+                    response.sendRedirect(path);
+                           }
+                     } else if(action.equalsIgnoreCase("update")){
+                              updateClass(request);
+                         getAllClass(response, session);
+                      }else if(action.equalsIgnoreCase("create")){
+                         createClass(request, response, session);
+                       }else if(action.equalsIgnoreCase("createcomplete")){
+                      insertClass(request, response, session);
+                    }
+                     else if(action.equalsIgnoreCase("search")){
+                           searchClass(request, response);
+                     }
             }
         } finally { 
             out.close();

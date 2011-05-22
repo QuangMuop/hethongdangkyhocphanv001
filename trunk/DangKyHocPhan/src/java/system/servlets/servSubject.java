@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import system.bo.clsBOAccount;
 import system.bo.clsBOSubject;
 import system.dto.clsSubject;
 
@@ -32,11 +33,26 @@ public class servSubject extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
-         String action =request.getParameter("action");
+        clsBOAccount BOA=new clsBOAccount();
+        String action =request.getParameter("action");
+         String user=(String) session.getAttribute("username");
         try {
+            if(user==null){
+                session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+                  String path = "./jsps/jspThongBao.jsp";
+                response.sendRedirect(path);
+            }
+            else{
             if(action.equalsIgnoreCase("view")){
-            getAllSubject(response, session);
-            }else if(action.equalsIgnoreCase("search")){
+                if(BOA.getAccountType(user)==1)
+                    getAllSubject(response, session);
+                else{
+                      session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản quản lý!");
+                  String path = "./jsps/jspThongBao.jsp";
+                response.sendRedirect(path);
+                }
+            }
+            else if(action.equalsIgnoreCase("search")){
                 searchSubject(request, response);
             }
             else if(action.equalsIgnoreCase("createcomplete")){
@@ -56,6 +72,7 @@ public class servSubject extends HttpServlet {
             else if(action.equalsIgnoreCase("deletecomplete")){
               deleteSubject(request, response, session);
 
+            }
             }
         } finally {
             out.close();
