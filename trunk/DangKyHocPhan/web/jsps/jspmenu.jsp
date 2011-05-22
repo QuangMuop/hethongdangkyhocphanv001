@@ -38,7 +38,7 @@
                     <ul>
                          <li><a href="../servClassView?action=view">Danh sách lớp học</a> </li>
                         <li><a href="../ViewListStudent?search=no&order=FullName">Danh sách SV</a> </li>
-                        <li><a href="../UpdateScore?function=loaddata">Ghi Nhận Điểm SV</a> </li>
+                        <!--<li><a href="../UpdateScore?function=loaddata">Ghi Nhận Điểm SV</a> </li>-->
                         <li><a href="../ManageLecturer?function=loaddata">Quản lý GV</a> </li>
                         <li><a href="../ManageStudent?function=loaddata">Quản lý SV</a> </li>
                          <li><a href="../servSubject?action=view">Quản môn học</a> </li>

@@ -106,7 +106,7 @@
                             <td>Tình Trang hôn nhân</td> <td>KXĐ</td>
                             </tr>                            
                         </table>
-                                <a href="../UpdateLecturer?id=<%=listResult.get(0)%>">Cập nhật thông tin</a>
+                                <a href="../UpdateLecturer?id=<%=listResult.get(0)%>&function=update">Cập nhật thông tin</a>
                      <%}%>
 
                      <br/><br/><br/>

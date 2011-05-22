@@ -74,11 +74,11 @@
                              <td>All</td>
                          </tr>
                         <tr>
-                            <td><input type="radio" name="radiooption" id="rsubject" checked="false" onclick="selectId()"></td>
+                            <td><input type="radio" name="radiooption" id="rsubject" onclick="selectId()"></td>
                             <td><input type="text" name="txtId"> Tìm theo mã GV</td>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="radiooption" id="rlecturer" checked="false" onclick="selectName()"></td>
+                            <td><input type="radio" name="radiooption" id="rlecturer" onclick="selectName()"></td>
                             <td><input type="text" name="txtName"> Tìm theo tên GV</td>
                         </tr>
                         <tr>
