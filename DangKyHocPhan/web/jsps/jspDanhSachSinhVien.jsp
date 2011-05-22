@@ -23,15 +23,23 @@
                 margin-top: 20px;
             }
             #frmlststudent table{
+                margin-left: 10px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                width: 720px;
                 border-left: 2px solid;
-                border-right: 2px solid;
+                border-right: 2px solid;                
             }
             #frmlststudent table th{
-                background-color: #d456ff;
+                height: 32px;
+                font-weight: bold;
+                background-color: #F9B7FF;
+                text-align: center;
             }
             #frmlststudent table td{
-                padding-left: 7px;
-                padding-right: 7px;
+                background-color: #b1B700;
+                padding: 2 5 2 5;
+                text-align: left;
             }
             #frmexport{
                 margin-left: 20px;
@@ -131,6 +139,7 @@
                         </td>
                     </tr>
                 </table>
+                <hr/><hr/>
                 <!-- This hold list of students found by search engine. -->
                 <form action="#" method="post" id="frmlststudent">
                     <h3><u>Danh sách SV</u></h3>
