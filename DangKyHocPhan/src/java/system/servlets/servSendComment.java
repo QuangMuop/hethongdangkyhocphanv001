@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import system.access.mapper.clsMapperComment;
+import system.bo.clsBOAccount;
 import system.bo.clsBOComment;
 import system.dto.clsComment;
 @WebServlet(name="servSendComment", urlPatterns={"/servSendComment"})
@@ -30,6 +31,7 @@ public class servSendComment extends HttpServlet {
         String guest = request.getParameter("guest");
          HttpSession session = request.getSession();
          PrintWriter out = response.getWriter();
+         clsBOAccount BOA=new clsBOAccount();
         try {
             if(guest.equalsIgnoreCase("true")){//khách liên hệ
            sendCommentByGuest(request, response);
@@ -38,8 +40,8 @@ public class servSendComment extends HttpServlet {
             }
             else if(guest.equalsIgnoreCase("notlogin")){
                String login=(String) session.getAttribute("username");
-               if(login==null){
-              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+               if(login==null ||BOA.getAccountType(login)!=0 ){
+              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản sinh viên!");
                    String path = "./jsps/jspThongBao.jsp";
                     response.sendRedirect(path);
             } else {

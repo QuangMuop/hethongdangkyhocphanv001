@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import system.bo.clsBOAccount;
 import system.bo.clsBOStudent;
 import system.dto.clsStudent;
 
@@ -32,6 +33,7 @@ public class servUpdateInfo extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
+        clsBOAccount BOA=new clsBOAccount();
         String isupdate = request.getParameter("isupdate");
         try {
             String login=(String) session.getAttribute("username");
@@ -42,7 +44,13 @@ public class servUpdateInfo extends HttpServlet {
             }
             else {
                if(isupdate.equalsIgnoreCase("false")){//Xem thông tin sinh viên
+                   if(BOA.getAccountType(login)==0)
                    getStudentInfo(session, response);
+                   else {
+                        session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản sinh viên!");
+                        String path = "./jsps/jspThongBao.jsp";
+                        response.sendRedirect(path);
+                   }
                 }
                else if(isupdate.equalsIgnoreCase("true")){//cập nhật thông tin sinh viên
                   updateStudentInfo(session, request, response);
