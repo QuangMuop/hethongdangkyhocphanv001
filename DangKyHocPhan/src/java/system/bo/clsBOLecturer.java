@@ -16,12 +16,9 @@ public class clsBOLecturer {
      * @throws Exception
      */
     public ArrayList<clsLecturer> GetAllLecturer()throws Exception{
-        try{
-            clsMapperLecturer mapper = new clsMapperLecturer();
-            return mapper.GetAllLecturer();
-        }catch(Exception ex){
-            throw ex;
-        }
+        clsMapperLecturer mapper = new clsMapperLecturer();
+         return mapper.GetAllLecturer();
+      
     }
 
     /**

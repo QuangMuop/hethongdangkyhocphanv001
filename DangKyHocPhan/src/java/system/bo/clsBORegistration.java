@@ -42,6 +42,10 @@ public class clsBORegistration {
          clsMapperRegistration mpr=new clsMapperRegistration();
          mpr.RegistrationInsert(cls);
      }
+     public String insertCheck(clsRegistration cls) throws Exception{
+         clsMapperRegistration mpr=new clsMapperRegistration();
+        return mpr.RegistrationInsertCheck(cls);
+     }
      public void deleteAll(String MSSV, int semester, String year) throws Exception{
          clsMapperRegistration mpr=new clsMapperRegistration();
          mpr.DeleteAllRegistry(MSSV, semester, year);
