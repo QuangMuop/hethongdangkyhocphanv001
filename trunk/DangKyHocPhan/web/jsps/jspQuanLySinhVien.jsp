@@ -11,21 +11,14 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-    String error = "OK";
-    int n = 0, i;
-    ArrayList<clsStudent> listStudent = new ArrayList<clsStudent>();
-    try{
-        listStudent = (ArrayList<clsStudent>) session.getAttribute("liststudent");
-    }catch(Exception ex){
-        error = ex.toString();
-    }
-    if(listStudent != null)
-        n = listStudent.size();
+    ArrayList<clsStudent> listStudent = (ArrayList<clsStudent>) session.getAttribute("liststudent");
+    ArrayList<String> listClass = (ArrayList<String>) session.getAttribute("listClass");
+   
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Quản lý sinh viên</title>
+        <title>Quản lý sinh viên</title>
         <style media="all" type="text/css">
             #tableliststudent{
                 margin-left: 10px;
@@ -79,29 +72,29 @@
                 <form id = "formsearch" name="formsearch" action="#" method="post">
                      <table>
                          <tr>
-                             <td><input type="radio" name="radiooption" id="rsubject" checked="true" onclick="selectAll()" ></td>
+                             <td><input type="radio" name="radiooption" checked="true" onclick="selectAll()" ></td>
                              <td>All</td>
                          </tr>
                         <tr>
-                            <td><input type="radio" name="radiooption" id="rsubject" onclick="selectClass()"></td>
+                            <td><input type="radio" name="radiooption" onclick="selectClass()"></td>
                             <td>
-                                <select name="sClass" id="ssubject">
-                                   <%for(i = 0; i < 10; i++){%>
-                                   <option>CNPM<%if(i < 9){%><%=0%><%}%><%=(i+1)%></option>
+                                <select name="sClass" id="sClass">
+                                   <%for(int i = 0; i < listClass.size(); i++){%>
+                                   <option value="<%=listClass.get(i)%>"><%=listClass.get(i)%></option>
                                     <%}%>
-                                </select>
+                                </select> Tìm theo lớp
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="radiooption" id="rlecturer" onclick="selectId()"></td>
+                            <td><input type="radio" name="radiooption" onclick="selectCode()"></td>
                             <td>
-                                <input type="text" name="txtId"> Tìm theo mã số SV
+                                <input type="text" name="txtcode" id="txtcode"> Tìm theo MSSV
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="radiooption" id="rlecturer" onclick="selectName()"></td>
+                            <td><input type="radio" name="radiooption" onclick="selectName()"></td>
                             <td>
-                                <input type="text" name="txtName"> Tìm theo tên
+                                <input type="text" name="txtName" id="txtName"> Tìm theo tên
                             </td>
                         </tr>
                         <tr>
@@ -109,29 +102,30 @@
                         </tr>
                     </table>
                 </form>
+                 <p align="right"><b><a href="../servStudentManager?action=create">Tiếp nhận sinh viên</a></b></p>
                 <hr><hr>
                 <form method="#">
                     Danh sách sinh viên:<br/>                    
                     <table id="tableliststudent" name="tableliststudent">
                         <tr>
-                            <th>STT</th><th>Họ và tên</th><th>MSSV</th><th>Lớp</th><th>Ngày Sinh</th><th>Sửa</th><th>Xóa</th>
+                            <th>STT</th><th>MSSV</th><th>Họ Tên</th><th>Lớp</th><th>Ngày sinh</th><th>Giới tính</th><th>Loại</th><th>Sửa</th><th>Xóa</th>
                         </tr>
-                        <%for(i = 0; i < n; i++){%>
+                        <%for(int i = 0; i < listStudent.size(); i++){%>
                             <tr>
                                 <td><%=(i+1)%></td>
+                                <td><%=listStudent.get(i).getCode()%></td>
                                 <td><%=listStudent.get(i).getFullname()%></td>
-                                <td><a href="#"><%=listStudent.get(i).getCode()%></a></td>
                                 <td><%=listStudent.get(i).getClasss()%></td>
                                 <td><%=listStudent.get(i).getBirthDay()%></td>
-                                <td><a href="../StudentDetail?MSSV=<%=listStudent.get(i).getCode()%>">Sửa</a></td>
-                                <td><a href="../UpdateStudent?functionname=delete&mssv=<%=listStudent.get(i).getCode()%>">Xóa</a></td>
+                                <td><%=listStudent.get(i).getGender()%></td>
+                                 <td><%=listStudent.get(i).getType()%></td>
+                                <td><a href="../servStudentManager?action=edit&MSSV=<%=listStudent.get(i).getCode()%>">Sửa</a></td>
+                                <td><a href="../servStudentManager?action=delete&MSSV=<%=listStudent.get(i).getCode()%>">Xóa</a></td>
                             </tr>
                         <%}%>
                     </table>
-                    <a href="#">Tải file</a>
-                    <a href="../RegistryStudent?function=nothing">Tiếp nhận sinh viên</a>
-                    <a href="../UpdateScore?function=loaddata">Ghi Nhận Điểm SV</a>
-                </form>
+                    <a href="#">Tải file</a>
+                    </form>
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
@@ -142,10 +136,9 @@
     </body>
     <script  type = "text/javascript" >
         typesearch="All";
-        name="";
+        name="All";
         action="search";
-        actor="Admin";
-          function createRequestObject(){
+        function createRequestObject(){
             var req;
             if(window.XMLHttpRequest){
                 //For Firefox, Safari, Opera
@@ -168,12 +161,12 @@
             if(http){
                 if(typesearch=="name"){
                     name=document.formsearch.txtName.value;
-                }else if(typesearch == "mssv"){
-                    name=document.formsearch.txtId.value;
+               }else if(typesearch == "mssv"){
+                    name=document.formsearch.txtcode.value;
                 }else if(typesearch == "classname"){
                     name = document.formsearch.sClass.value;
                 }
-                http.open("GET","../ManageStudent?action="+action+"&type="+typesearch+"&name="+name+"&actor="+actor,true);
+                http.open("GET","../servStudentManager?action="+action+"&type="+typesearch+"&name="+name,true);
                 http.onreadystatechange = handleResponse;
                 http.send(null);
             }
@@ -185,7 +178,7 @@
                 detail.innerHTML=http.responseText;
             }
         }
-         function selectId(){
+         function selectCode(){
              typesearch="mssv";
 
          }

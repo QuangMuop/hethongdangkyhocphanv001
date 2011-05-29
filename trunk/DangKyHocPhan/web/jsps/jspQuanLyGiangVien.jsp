@@ -11,22 +11,12 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-    int nLecturer = 0, i = 0, j = 0;
-    String error = "OK";
-    ArrayList<clsLecturer> listLecturer = null;
-    try{
-       listLecturer = (ArrayList<clsLecturer>) session.getAttribute("listlecturer");
-    }catch(Exception ex){
-        error = ex.toString();
-    }
-
-    if(listLecturer != null)
-        nLecturer = listLecturer.size();
+    ArrayList<clsLecturer> leclist=(ArrayList<clsLecturer>) session.getAttribute("leclist");
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Quản lý giảng viên</title>
+        <title>Quản lý giảng viên</title>
         <style media="all" type="text/css">
             #tablelistlecturer{
                 margin-left: 10px;
@@ -62,10 +52,8 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <h4><a href="../RegistryLecturer?function=nothing">Thêm giảng viên</a></h4>
-
                 <br>
-                <h3>Danh sách Giảng viên khoa công nghệ phần mềm</h3>
+                <u>Tìm kiếm giảng viên:</u>
                 <br/>
                  <form id = "formsearch" name="formsearch" action="../ManageLecturer?searchengine=true" method="post">
                      <table>
@@ -86,36 +74,32 @@
                         </tr>
                     </table>
                 </form>
+                <p align="right"><a href="#"><b>Thêm giảng viên</b></a></p>
                 <hr/><hr/>
-
+                <u><b>Danh sách các giảng viên khoa công nghệ phần mềm:</b></u>
                 <form id="classlist">
                   <table id="tablelistlecturer" name="tablelistlecturer">
                     <tr>
-                        <th>STT</th><th>Mã GV</th><th>Họ và tên</th><th>Ngày Sinh</th><th>Học Hàm</th><th>Học Vị</th><th>ĐT</th><th>Địa chỉ</th><th>Sửa</th><th>Xóa</th>
+                        <th>STT</th><th>Mã GV</th><th>Họ Tên</th><th>Ngày Sinh</th><th>Giới tính</th><th>Học hàm</th><th>Học vị</th><th>Chi tiết</th><th>Sửa</th><th>Xóa</th>
                     </tr>
-                    <%if(nLecturer > 0){
-                        for(i = 0; i < nLecturer; i++){
-                    %>
+                    <%for(int i=0; i<leclist.size();i++){%>
                     <tr>
-                        <td><%=(i+1)%></td>
-                        <td><a href="../LecturerDetail?lecturerecode=<%=listLecturer.get(i).getLecturerCode()%>"><%=listLecturer.get(i).getLecturerCode()%></a></td>
-                        <td><%=listLecturer.get(i).getFullname()%></td>
-                        <td><%=listLecturer.get(i).getBirthDay()%></td>
-                        <td><%=listLecturer.get(i).getHocHam()%></td>
-                        <td><%=listLecturer.get(i).getHocVi()%></td>
-                        <td><%=listLecturer.get(i).getPhone()%></td>
-                        <td><%=listLecturer.get(i).getAddress()%></td>
-                        <td><a href="../UpdateLecturer?id=<%=listLecturer.get(i).getLecturerCode()%>&function=update"> Sửa</a></td>
-                        <td><a href="../UpdateLecturer?id=<%=listLecturer.get(i).getLecturerCode()%>&function=delete">Xóa</a></td>
+                        <td><%=i+1%></td>
+                        <td><%=leclist.get(i).getLecturerCode()%></td>
+                        <td><%=leclist.get(i).getFullname()%></td>
+                        <td><%=leclist.get(i).getBirthDay()%></td>
+                        <td><%=leclist.get(i).getGender()%></td>
+                        <td><%=leclist.get(i).getHocHam()%></td>
+                        <td><%=leclist.get(i).getHocVi()%></td>
+                         <td><a href="">Chi tiết</a></td>
+                        <td><a href="">Sửa</a></td>
+                        <td><a href="">Xóa</a></td>
                     </tr>
-                        <%}%>
-                     <%}%>
+                    <%}%>
                 </table>
                 </form>
-                <h4><a href="../RegistryLecturer?function=nothing">Thêm giảng viên</a></h4>
-            </div><!--End Contents-->
-
-            <div id="footer"><!--Footer-->
+              </div><!--End Contents-->
+              <div id="footer"><!--Footer-->
                  <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
