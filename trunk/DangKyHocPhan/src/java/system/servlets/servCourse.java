@@ -38,15 +38,21 @@ public class servCourse extends HttpServlet {
         clsBOAccount BOA=new clsBOAccount();
         String user=(String) session.getAttribute("username");
         try {
-           // if(user==null){
-             //   session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
-             //    String path = "./jsps/jspThongBao.jsp";
-              //  response.sendRedirect(path);
-          //  }
-          //  else{
+            if(user==null){
+               session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+                 String path = "./jsps/jspThongBao.jsp";
+                response.sendRedirect(path);
+            }
+            else{
                 String action=request.getParameter("action");
                 if(action.equalsIgnoreCase("view")){
+                    if(BOA.getAccountType(user)==1)
                   ViewAllCourse(response, session);
+                    else {
+                        session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản quản lý!");
+                        String path = "./jsps/jspThongBao.jsp";
+                         response.sendRedirect(path);
+                    }
                }
                 else if(action.equalsIgnoreCase("create")){
                 CreateCourse(response, session);
@@ -55,19 +61,23 @@ public class servCourse extends HttpServlet {
                 InsertCoure(request, response, session);
                 }
 
-            //}
+            }
         } finally { 
             out.close();
         }
     }
     private void InsertCoure(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
-       int CourseCode=Integer.parseInt(request.getParameter("courseID"));
+       String classname="";
+        int CourseCode=Integer.parseInt(request.getParameter("courseID"));
+       if(CourseCode<10)
+           classname="CNPM0"+request.getParameter("courseID");
+       else classname="CNPM"+request.getParameter("courseID");
        int YearIn=Integer.parseInt(request.getParameter("yearIn"));
        int YearOut=Integer.parseInt(request.getParameter("yearOut"));
        int ProCode=Integer.parseInt(request.getParameter("ProCode"));
        clsCourse cls=new clsCourse(CourseCode, YearIn, YearOut, 0, ProCode);
        clsBOCourse BOC=new clsBOCourse();
-       if(BOC.CourseInsert(cls))
+       if(BOC.CourseInsert(cls,classname))
            CreateCourse(response, session);
        else {
            session.setAttribute("mes", "Khóa học đã tồn tại, xin kiểm tra lại!");

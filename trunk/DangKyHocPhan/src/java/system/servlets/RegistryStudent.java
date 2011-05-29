@@ -77,7 +77,7 @@ public class RegistryStudent extends HttpServlet {
             Logger.getLogger(RegistryStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String function = (String)req.getParameter("function");
+        String function = req.getParameter("action");
         String path = "./jsps/jspTiepNhanSV.jsp";
 
         ArrayList<String> result = new ArrayList<String>();
