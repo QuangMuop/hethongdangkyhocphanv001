@@ -14,9 +14,29 @@ public void IniProgramDTOFromRs(clsProgram prog, ResultSet rs) throws SQLExcepti
          if((rs!=null) && (prog!=null)){
             prog.setProgramCode(Integer.parseInt(rs.getString("ProCode")));
             prog.setSubjectCode(rs.getString("SubCode"));
+            prog.setSemester(Integer.parseInt(rs.getString("Semester")));
+            prog.setSubName(rs.getString("SubName"));
 
          }
      }
+  public ArrayList<clsProgram> GetAllProByCode(int procode) throws Exception{
+        ArrayList<clsProgram> listpro = new ArrayList<clsProgram>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select ProCode, program.SubCode, SubName, Semester from dangkyhocphan.program, dangkyhocphan.subject where program.SubCode=subject.SubCode and ProCode=");
+            sql.append(procode).append(" order by Semester");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsProgram pro = new clsProgram();
+                IniProgramDTOFromRs(pro, rs);
+                listpro.add(pro);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listpro;
+    }
  public ArrayList<Integer> GetAllProCode() throws Exception{
          ArrayList<Integer> listResult = new ArrayList<Integer>();
          try{
@@ -37,7 +57,8 @@ public void ProgramInsert(clsProgram prog) throws Exception{
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.program values(");
             sql.append(prog.getProgramCode()).append(",'");
-            sql.append(prog.getSubjectCode()).append("')");
+            sql.append(prog.getSubjectCode()).append("',");
+            sql.append(prog.getSemester()).append(")");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();
@@ -48,7 +69,7 @@ public void ProgramInsert(clsProgram prog) throws Exception{
 }
 public void ProgramDelete(clsProgram prog) throws Exception{
        try{
-    StringBuffer sql = new StringBuffer();
+            StringBuffer sql = new StringBuffer();
             sql.append("delete from dangkyhocphan.program where ProCode=");
             sql.append(prog.getProgramCode()).append(" and SubCode='");
             sql.append(prog.getSubjectCode()).append("'");

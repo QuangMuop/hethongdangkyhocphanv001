@@ -94,7 +94,6 @@ public class clsMapperLecturer extends clsMapperDb {
             sql.append("Select * from dangkyhocphan.lecturer");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-
             while((rs!=null) && rs.next()){
                 clsLecturer lecturer = new clsLecturer();
                 IniLecturerDTOFromRs(lecturer, rs);

@@ -71,7 +71,27 @@ public clsMapperRegistration() throws Exception{
          }
      }
      
-     
+     public boolean checkPreSub(clsRegistration reg) throws Exception{
+         clsMapperRule Rule=new clsMapperRule();
+         clsMapperViewProgram mpv=new clsMapperViewProgram();
+         float PassMark=Rule.getRuleInfo().getMarkPass();
+         try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select  PreSubCode From dangkyhocphan.subjectdetail where SubCode in(Select SubCode from dangkyhocphan.class where ClassName='"+reg.getClassName()+"')");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+             ResultSet rs = stmt.executeQuery();
+             if(rs==null) return true;//môn học không có môn học tiên quyết
+             else {
+             while(rs!=null && rs.next()){
+                    if(mpv.getMark(reg.getStudentCode(), rs.getString("PreSubCode"))<PassMark)
+                    return false;//môn tiên quyết học chưa qua hay chưa học
+               }
+             return true;//đã học qua các môn học tiên quyết của môn học này
+             }
+           }catch(Exception ex){
+            throw ex;
+         }
+     }
      /**
       * 
       * @param reg
@@ -91,6 +111,25 @@ public clsMapperRegistration() throws Exception{
          }catch (Exception e) {
              throw e;
          }
+     }
+     public String RegistrationInsertCheck(clsRegistration reg) throws Exception{
+         if(checkPreSub(reg)){
+         try {
+             StringBuffer sql = new StringBuffer();
+             sql.append("Insert into dangkyhocphan.registry(MSSV,ClassName,Semester,Year) values('");
+             sql.append(reg.getStudentCode()).append("','");
+             sql.append(reg.getClassName()).append("',");
+             sql.append(reg.getSemester()).append(",'");
+             sql.append(reg.getYear()).append("')");
+             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+             stmt.execute();
+             stmt.close();
+             return "OK";
+         }catch (Exception e) {
+             throw e;
+         }
+         }
+         else return reg.getClassName();//return tên lớp học
      }
      
      /**

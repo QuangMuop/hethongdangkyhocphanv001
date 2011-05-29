@@ -38,7 +38,7 @@ public class clsMapperCourse extends clsMapperDb {
         return courseDTO;
     }
 
-    public ArrayList<clsCourse> GetAllCorse() throws Exception{
+   public ArrayList<clsCourse> GetAllCorse() throws Exception{
         ArrayList<clsCourse> listCourse = new ArrayList<clsCourse>();
         try{
             StringBuffer sql = new StringBuffer();
@@ -55,9 +55,36 @@ public class clsMapperCourse extends clsMapperDb {
         }
         return listCourse;
     }
-    
-    public boolean  CourseInsert(clsCourse courseDTO) throws Exception{
+    private void InsertClassName(String classname) throws Exception{
         try {
+            StringBuffer sql = new StringBuffer();
+            sql.append("insert into dangkyhocphan.classname values('"+classname+"')");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            stmt.execute();
+            stmt.close();
+        }
+        catch (Exception e) {
+               throw e;
+        }
+    }
+    public ArrayList<String> getAllClassName() throws Exception{
+         ArrayList<String> listClassName = new ArrayList<String>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.classname");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                listClassName.add(rs.getString("Class"));
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listClassName;
+    }
+    public boolean CourseInsert(clsCourse courseDTO, String classname) throws Exception{
+        try {
+            InsertClassName(classname);
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.Course values(");
             sql.append(courseDTO.getCourseCode()).append(",");

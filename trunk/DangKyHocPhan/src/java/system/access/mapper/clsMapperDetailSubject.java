@@ -4,6 +4,7 @@ package system.access.mapper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import system.dto.*;
 public class clsMapperDetailSubject extends clsMapperDb {
     public clsMapperDetailSubject() throws Exception{
@@ -11,10 +12,27 @@ public class clsMapperDetailSubject extends clsMapperDb {
     }
      public void IniClassDTOFromRs(clsDetailSubject detailsubject, ResultSet rs) throws SQLException{
          if((rs!=null) && (detailsubject!=null)){
-            detailsubject.setSubjectCode(rs.getString("SubCode"));
-            detailsubject.setPreSubjectCode(rs.getString("PreSubCode"));
+            detailsubject.setSubName(rs.getString("SubName"));
+            detailsubject.setPreSubName(rs.getString("PreSubName"));
          }
      }
+      public ArrayList<clsDetailSubject> GetListDetailSubject()throws Exception{
+        ArrayList<clsDetailSubject> listResult = new ArrayList<clsDetailSubject>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select A.SubName as SubName, C.SubName as PreSubName from dangkyhocphan.subject A, dangkyhocphan.subjectdetail B, dangkyhocphan.subject C where A.subcode=B.SubCode and B.preSubCode=C.subCode ORDER by A.Subname");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsDetailSubject detail = new clsDetailSubject();
+                IniClassDTOFromRs(detail, rs);
+                listResult.add(detail);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listResult;
+    }
 public clsDetailSubject getDetailSubjectInfo(String SubjectCode) throws Exception{
  clsDetailSubject detailsubjectDTO=new clsDetailSubject();
         try{

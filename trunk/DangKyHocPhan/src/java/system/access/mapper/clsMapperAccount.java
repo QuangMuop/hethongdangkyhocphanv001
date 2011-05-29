@@ -7,6 +7,7 @@ package system.access.mapper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import system.dto.*;
 /**
  *
@@ -39,7 +40,41 @@ public class clsMapperAccount extends clsMapperDb {
             accountDTO.setType(Integer.parseInt(rs.getString("Type")));
          }
     }
-    
+    public ArrayList<clsAccount> getAllAccount() throws Exception{
+          ArrayList<clsAccount> listResult = new ArrayList<clsAccount>();
+         try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select DISTINCT * from dangkyhocphan.accounts");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsAccount classTemp = new clsAccount();
+                InitAccountDTOFromRs(classTemp, rs);
+                listResult.add(classTemp);
+            }
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+    }
+    public ArrayList<clsAccount> SearchAccByUser(String username) throws Exception{
+          ArrayList<clsAccount> listResult = new ArrayList<clsAccount>();
+         try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select DISTINCT * from dangkyhocphan.accounts where UserName like'");
+            sql.append(username).append("%'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsAccount classTemp = new clsAccount();
+                InitAccountDTOFromRs(classTemp, rs);
+                listResult.add(classTemp);
+            }
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+    }
     /**
      * 
      * @param username
@@ -93,8 +128,6 @@ public class clsMapperAccount extends clsMapperDb {
             return true;
         else return false;
     }
-    
-    
     /**
      * 
      * @param username
@@ -121,9 +154,7 @@ public class clsMapperAccount extends clsMapperDb {
             return true;
         else return false;
     }
-
-
-    /**
+   /**
      *
      * @param username
      * @return
@@ -151,19 +182,21 @@ public class clsMapperAccount extends clsMapperDb {
      * @param account
      * @throws Exception
      */
-    public void AccountInsert(clsAccount account) throws Exception{
+    public boolean  AccountInsert(clsAccount account) throws Exception{
+        if(AccountCheckExits(account.getUserName())) return false;
         try {
             StringBuffer sql = new StringBuffer();
-            sql.append("Insert into dangkyhocphan.accounts values( ");
-            sql.append("'").append(account.getUserName()).append("', ");
-            sql.append("'").append(account.getPassWord()).append("', ");
-            sql.append("N'").append(account.getFullName()).append("', ");
-            sql.append(account.getIsLocked()).append(", ");
-            sql.append(account.getLogin()).append(", ");
-            sql.append(account.getType()).append(") ");
+            sql.append("insert INTO dangkyhocphan.accounts values('");
+            sql.append(account.getUserName()).append("','");
+            sql.append(account.getPassWord()).append("','");
+            sql.append(account.getFullName()).append("',");
+            sql.append(account.getIsLocked()).append(",");
+            sql.append(account.getLogin()).append(",");
+            sql.append(account.getType()).append(")");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();
+            return true;
         }
         catch (Exception e) {
             throw e;
@@ -248,10 +281,10 @@ public class clsMapperAccount extends clsMapperDb {
      * @param islocked
      * @throws Exception
      */
-    public void AccoutUpdateStatus(String username, int islocked) throws Exception{
+    public void AccoutUpdateStatus(String username) throws Exception{
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Update dangkyhocphan.accounts set IsLocked='").append(islocked).append("' Where username = '").append(username).append("'");
+            sql.append("update dangkyhocphan.accounts set IsLocked=(IsLocked+1)%2 where UserName='").append(username).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             boolean execute = stmt.execute();
         }catch(Exception ex){
