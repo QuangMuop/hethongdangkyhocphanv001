@@ -93,6 +93,7 @@ public class servRegistration extends HttpServlet {
         clsBOSubject BOS=new clsBOSubject();
         clsBORule BOL= new clsBORule();
         int n=registry.length;
+        String[] classList=new String[n];
         int numTC=0;
         for(int i=0;i<n;i++){
             numTC+=BOS.getNumTCByClassName(registry[i]);
@@ -111,12 +112,33 @@ public class servRegistration extends HttpServlet {
        
         for(int i=0;i<n;i++){
             clsRegistration temp=new clsRegistration(username, registry[i], SystemProperities.Curentsemester, SystemProperities.CurentYear, 0);
-            BOReg.insert(temp);
+            //BOReg.insert(temp);
+            String message=BOReg.insertCheck(temp);
+           classList[i]=message;
         }
+        int num=0;
+         for(int i=0;i<n;i++){
+           if(classList[i].equalsIgnoreCase("OK")==false)
+           num++;
+         }
+        if(num==0){
             session.setAttribute("mes", "Đăng ký thành công!");
              String path = "./jsps/jspThongBao.jsp";
              resp.sendRedirect(path);
+          }else {
+            StringBuffer mes = new StringBuffer();
+            mes.append("Đăng ký các lớp học: ");
+            for(int i=0;i<n;i++){
+           if(classList[i].equalsIgnoreCase("OK")==false)
+           mes.append(classList[i]+", ");
+            }
+             mes.append("không thành công do bạn chưa học qua các môn học tiên quyết của các môn học này.");
+             mes.append(" Hãy qua trang xem chi tiết các môn học tiên quyết để biết chi tiết. Các lớp học khác đăng ký thành công.");
+             session.setAttribute("mes", mes.toString());
+             String path = "./jsps/jspThongBao.jsp";
+             resp.sendRedirect(path);
         }
+       }
     }
     /**
      *

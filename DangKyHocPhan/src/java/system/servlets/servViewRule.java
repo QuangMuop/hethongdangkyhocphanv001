@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import system.bo.clsBOAccount;
 import system.bo.clsBORule;
 import system.dto.clsRule;
 
@@ -25,14 +26,29 @@ public class servViewRule extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
-        String issetup = (String) request.getParameter("issetup");
+        clsBOAccount BOA=new clsBOAccount();
+        String user=(String) session.getAttribute("username");
+        
         try {
+            if(user==null){
+                session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+                 String path = "./jsps/jspThongBao.jsp";
+                response.sendRedirect(path);
+            }else{
+            String issetup = (String) request.getParameter("issetup");
             if(issetup.equalsIgnoreCase("false")){//xem qui định
+                if(BOA.getAccountType(user)==1)
             getRule(session,response);
+                else{
+                     session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập bằng tài khoản quản lý!");
+                 String path = "./jsps/jspThongBao.jsp";
+                response.sendRedirect(path);
+                }
             }
             else if(issetup.equalsIgnoreCase("true")){//sửa qui định
              UpdateRule(request, response,session);
             
+            }
             }
         } finally { 
             out.close();

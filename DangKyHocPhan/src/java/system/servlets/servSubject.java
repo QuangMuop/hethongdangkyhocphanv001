@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import system.bo.clsBOAccount;
+import system.bo.clsBODetailSubject;
 import system.bo.clsBOSubject;
+import system.dto.clsDetailSubject;
 import system.dto.clsSubject;
 
 @WebServlet(name="servSubject", urlPatterns={"/servSubject"})
@@ -73,17 +75,42 @@ public class servSubject extends HttpServlet {
               deleteSubject(request, response, session);
 
             }
+            else if(action.equalsIgnoreCase("presub")){
+              chosePreSub(request, response, session);
+            }
+
             }
         } finally {
             out.close();
         }
     }
+    private void chosePreSub(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception{
+        clsBODetailSubject BOD=new clsBODetailSubject();
+       String Subcode=request.getParameter("subcode");
+       String[] registry=request.getParameterValues("check");
+       if(registry.length==0);
+       else{
+           for(int i=0;i<registry.length;i++){
+            clsDetailSubject temp=new clsDetailSubject(Subcode, registry[i], "", "");
+            BOD.insertDetailSub(temp);
+           }
+       }
+       getAllSubject(response, session);
+
+    }
+    /**
+     *
+     * @param request
+     * @param response
+     * @param session
+     * @throws Exception
+     */
     private void deleteSubject(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception{
         String subcode=request.getParameter("subcode");
         clsBOSubject BOS =new clsBOSubject();
        if(BOS.SubjectDeleteByCode(subcode)){
            getAllSubject(response, session);
-       }
+        }
        else {
             session.setAttribute("mes", "Môn học này không thể xóa vì còn có các thông tin liên quan khác");
              String path = "./jsps/jspThongBao.jsp";
@@ -156,7 +183,13 @@ public class servSubject extends HttpServlet {
          response.sendRedirect(path);
     }
      else {
-         getAllSubject(response, session);
+             session.setAttribute("subname", subname);
+             session.setAttribute("subcode", subcode);
+             ArrayList<clsSubject> sublist=BOS.GetListSubject();
+             session.setAttribute("sub", sublist);
+             String path = "./jsps/jspChonMonHocTienQuyet.jsp";
+             response.sendRedirect(path);
+        
      }
     }
     /**
