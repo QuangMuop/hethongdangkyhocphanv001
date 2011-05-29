@@ -80,6 +80,7 @@ int j=0;
                 <b>MSSV: <%=student.getCode()%> </b><br>
                 <b>Họ Tên: <%=student.getFullname()%></b><br>
                 <u>Đăng ký học phần:<%=time%></u><br>
+                <i>Lưu ý: Mỗi sinh viên đưang ký học phần không dưới 14 tín chỉ và không quá 25 tín chỉ.</i>
                 <form id="registry" name="registry" action="../servRegistration?reg=registry" method="post">
                 <table id="tablelistclass">
                     <tr>

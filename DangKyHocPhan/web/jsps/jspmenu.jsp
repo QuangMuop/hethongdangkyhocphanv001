@@ -37,13 +37,14 @@
                 <li><a href="#">Quản Lý Khoa</a>
                     <ul>
                          <li><a href="../servClassView?action=view">Danh sách lớp học</a> </li>
-                        <li><a href="../ViewListStudent?search=no&order=FullName">Danh sách SV</a> </li>
                         <!--<li><a href="../UpdateScore?function=loaddata">Ghi Nhận Điểm SV</a> </li>-->
-                        <li><a href="../ManageLecturer?function=loaddata">Quản lý GV</a> </li>
-                        <li><a href="../ManageStudent?function=loaddata">Quản lý SV</a> </li>
+                        <li><a href="../servLecturerManager?action=view">Quản lý GV</a> </li>
+                        <li><a href="../servStudentManager?action=view">Quản lý SV</a> </li>
                          <li><a href="../servSubject?action=view">Quản môn học</a> </li>
-                          <li><a href="../servSubject?action=view">Quản lý khóa học</a> </li>
-                         <li><a href="jspCaiDatTaiKhoan.jsp">Cài Đặt Tài Khoản</a> </li>                        
+                         <li> <a href="../servDetailSubject?action=viewQL">Môn học tiên quyết</a> </li>
+                          <li><a href="../servCourse?action=view">Quản lý khóa học</a> </li>
+                          <li><a href="../servProManage?action=view">Chương trình đào tạo</a> </li>
+                         <li><a href="../servAccount?action=view">Quản lý Tài Khoản</a> </li>
                         <li><a href="../servViewRule?issetup=false">Xem quy định</a> </li>
                     </ul>
                 </li>
@@ -56,6 +57,7 @@
                         <li> <a href="../servRegistration?reg=view">Đăng Ký Môn Học</a> </li>
                         <li><a href="../servProgram">Xem Chương Trình Đào Tạo</a> </li>
                         <li> <a href="../servStudyResult?first=true">Xem kết quả học tập</a> </li>
+                        <li> <a href="../servDetailSubject?action=view">Môn học tiên quyết</a> </li>
                         <li><a href="../servUpdateInfo?isupdate=false">Thông tin sinh viên</a> </li>
                          <li> <a href="../servChangePass?change=firts">Đổi mật khẩu</a> </li>
                         <li> <a href="../servSendComment?guest=notlogin">Gửi Yêu Cầu</a> </li>

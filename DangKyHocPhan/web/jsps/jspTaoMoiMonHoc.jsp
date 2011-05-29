@@ -29,19 +29,19 @@
                     <u>Thông tin môn học.</u><br/>
                     <table id="tableinfo">
                         <tr>
-                            <td>Môn học</td>
+                            <td>Môn học(*):</td>
                             <td>
                                 <input type="text" name="txtsubname" id="txtsubname">
                             </td>
                         </tr>
                          <tr>
-                            <td>Mã môn</td>
+                            <td>Mã môn(*):</td>
                             <td>
                                 <input type="text" name="txtsuncode" id="txtsuncode">
                             </td>
                          </tr>
                           <tr>
-                            <td>Số Tín chỉ</td>
+                            <td>Số Tín chỉ:</td>
                             <td>
                                 <select name="snumTC" id="snumTC" onchange="numtcchange()">
                                     <%for(int i=1;i<11;i++){%>
@@ -52,7 +52,7 @@
                             </td>
                          </tr>
                           <tr>
-                            <td>Số tín chỉ lý thuyết</td>
+                            <td>Số tín chỉ lý thuyết:</td>
                             <td>
                                 <select name="snumTCLT" id="snumTCLT" onchange="numtcltchange()">
                                     <%for(int i=0;i<11;i++){%>
@@ -63,9 +63,9 @@
                             </td>
                          </tr>
                           <tr>
-                            <td>Số tín chỉ thực hành</td>
+                            <td>Số tín chỉ thực hành:</td>
                             <td>
-                                <input type="text" name="txtTCTH" id="txtTCTH" readonly>
+                                <input type="text" name="txtTCTH" value="1" id="txtTCTH" readonly>
                             </td>
                          </tr>
                      

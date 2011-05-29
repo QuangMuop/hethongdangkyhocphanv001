@@ -106,6 +106,10 @@ ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course"
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Tạo mới chương trình</td>
+                            <td><a href="../servProManage?action=create">Click</a></td>
+                        </tr>
                      </table>
                     <br/>
                     <input type="button" value="Tạo khóa học" onclick="insertCourse()">

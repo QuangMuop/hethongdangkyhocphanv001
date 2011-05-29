@@ -84,13 +84,13 @@
                     <u>Thông tin lớp học.</u><br/>
                     <table id="tableinfo">
                         <tr>
-                            <td>Lớp học</td>
+                            <td>Lớp học(*):</td>
                             <td>
                                 <input type="text" name="txtClassId" id="txtClassId">
                             </td>
                         </tr>
                         <tr>
-                            <td>Môn học</td>
+                            <td>Môn học:</td>
                             <td>
                                 <select name="ClassName" id="ClassName" onchange="getClassName()">
                                     <%for(i = 0; i < m; i++){%>
@@ -100,7 +100,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Giảng viên</td>
+                            <td>Giảng viên:</td>
                             <td>
                                 <select name="LecturerName" id="LecturerName">
                                     <%for(j = 0; j < n; j++){%>
@@ -110,7 +110,7 @@
                             </td>
                         </tr>
                          <tr>
-                            <td>Thứ</td>
+                            <td>Thứ:</td>
                             <td>                                
                                 <select name="Day">
                                     <%for(i = 2; i <= 7; i++){%>
@@ -120,7 +120,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Ca học</td>
+                            <td>Ca học:</td>
                             <td>
                                 <select name="sTime">
                                     <option value="1">Sáng</option>
@@ -129,7 +129,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Phòng học</td>
+                            <td>Phòng học(*):</td>
                             <td>
                                 <input type="text" name="txtRoom" id="txtRoom">
                             </td>
