@@ -47,42 +47,42 @@ public class clsBOStudent {
         clsMapperStudent mapper = new clsMapperStudent();
         return mapper.getStudentsByName(name);
     }
-
+      public ArrayList<clsStudent> getStudentsByCode(String Code) throws Exception{
+        clsMapperStudent mapper = new clsMapperStudent();
+        return mapper.getStudentsByCode(Code);
+    }
      /**
-      * searh all student in database
-      * @param strWhere search condition
-      * @param strOrder order by codition
-      * @return list of student found
+      *
+      * @return
       * @throws Exception
       */
-    public ArrayList<clsStudent> GetAllStudent(String strOrder) throws Exception{
-        clsMapperStudent mapper = new clsMapperStudent();
-        return mapper.GetAllStudent(strOrder);
-    }
 
-    /**
+    public ArrayList<clsStudent> GetAllStudent() throws Exception{
+        clsMapperStudent mapper = new clsMapperStudent();
+        return mapper.GetAllStudent();
+    }
+       /**
      * Get all student in a class by name of class
      * @param className name of class for search
      * @param strOrder Order by condition
      * @return list of student in class
      * @throws Exception
      */
-    public ArrayList<clsStudent> GetStudentsByClass(String className, String strOrder)throws Exception{
+    public ArrayList<clsStudent> GetStudentsByClass(String className)throws Exception{
         clsMapperStudent mapper = new clsMapperStudent();
-        return mapper.GetStudentsByClass(className, strOrder);
+        return mapper.GetStudentsByClass(className);
     }
 
      /**
-      * Insert infomation of a student into database
-      * @param student data for insert into databse
-      * @return true if insert successfull, false for othewise
+      *
+      * @param student
+      * @return
       * @throws Exception
       */
       public boolean Insert(clsStudent student) throws Exception{
-          boolean result = false;
-          clsMapperStudent mapper = new clsMapperStudent();
-          result = mapper.StudentInsert(student);
-          return result;
+           clsMapperStudent mapper = new clsMapperStudent();
+          return  mapper.StudentInsert(student);
+         
       }
 
       /**

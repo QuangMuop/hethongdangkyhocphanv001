@@ -23,6 +23,14 @@ public class clsBOSubject {
             throw ex;
         }
     }
+    public ArrayList<clsSubject> GetSubjectFree(int procode)throws Exception{
+        try{
+            clsMapperSubject mapper = new clsMapperSubject();
+            return mapper.GetSubjectFree(procode);
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
      public ArrayList<clsSubject> SearchSubjectByName(String subname)throws Exception{
         try{
             clsMapperSubject mapper = new clsMapperSubject();

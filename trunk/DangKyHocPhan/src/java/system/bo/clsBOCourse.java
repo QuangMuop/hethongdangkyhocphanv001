@@ -22,8 +22,13 @@ public class clsBOCourse {
             throw ex;
         }
     }
-     public boolean CourseInsert(clsCourse cls) throws Exception{
+     public boolean CourseInsert(clsCourse cls, String Classname) throws Exception{
          clsMapperCourse mpc=new clsMapperCourse();
-         return mpc.CourseInsert(cls);
+         return mpc.CourseInsert(cls,Classname);
      }
+     public ArrayList<String> getAllClassName() throws Exception{
+          clsMapperCourse mpc=new clsMapperCourse();
+         return mpc.getAllClassName();
+     }
+
 }
