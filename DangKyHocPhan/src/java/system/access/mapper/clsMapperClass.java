@@ -36,8 +36,7 @@ public class clsMapperClass extends clsMapperDb{
          ArrayList<clsClass> listResult = new ArrayList<clsClass>();
          try{
             StringBuffer sql = new StringBuffer();
-            sql.append("select ClassName,dangkyhocphan.class.SubCode,FullName,SubName,NumTC, LectuerCode, DateOfWeek, Room, NumOfStudent, Time, TestDate, TestTime, TestRoom from dangkyhocphan.class, dangkyhocphan.subject, dangkyhocphan.lecturer where class.SubCode=subject.SubCode and dangkyhocphan.class.LectuerCode=dangkyhocphan.lecturer.LectuterCode order by ");
-           // sql.append("select * from dangkyhocphan.class order by ");
+            sql.append("select ClassName,dangkyhocphan.class.SubCode,FullName,SubName,NumTC, LectuerCode, DateOfWeek, Room, NumOfStudent, Time, TestDate, TestTime, TestRoom from dangkyhocphan.class, dangkyhocphan.subject, dangkyhocphan.lecturer where class.SubCode=subject.SubCode and dangkyhocphan.class.LectuerCode=dangkyhocphan.lecturer.LectuterCode and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"' order by ");
             sql.append(strOrderBy);
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
@@ -56,7 +55,7 @@ public class clsMapperClass extends clsMapperDb{
          try{
             StringBuffer sql = new StringBuffer();
             sql.append("select ClassName,dangkyhocphan.class.SubCode,FullName,SubName,NumTC, LectuerCode, DateOfWeek, Room, NumOfStudent, Time, TestDate, TestTime, TestRoom from dangkyhocphan.class, dangkyhocphan.subject, dangkyhocphan.lecturer where class.SubCode=subject.SubCode and dangkyhocphan.class.LectuerCode=dangkyhocphan.lecturer.LectuterCode and dangkyhocphan.class.LectuerCode='");
-            sql.append(LecCode).append("' ");
+            sql.append(LecCode).append("' and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"' ");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while((rs!=null) && rs.next()){
@@ -74,7 +73,7 @@ public class clsMapperClass extends clsMapperDb{
          try{
             StringBuffer sql = new StringBuffer();
             sql.append("select ClassName,dangkyhocphan.class.SubCode,FullName,SubName,NumTC, LectuerCode, DateOfWeek, Room, NumOfStudent, Time, TestDate, TestTime, TestRoom from dangkyhocphan.class, dangkyhocphan.subject, dangkyhocphan.lecturer where class.SubCode=subject.SubCode and dangkyhocphan.class.LectuerCode=dangkyhocphan.lecturer.LectuterCode and dangkyhocphan.class.SubCode='");
-            sql.append(subcode).append("' ");
+            sql.append(subcode).append("' and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"' ");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while((rs!=null) && rs.next()){
@@ -94,7 +93,7 @@ public class clsMapperClass extends clsMapperDb{
         try{
             StringBuffer sql = new StringBuffer();
            sql.append("select ClassName,dangkyhocphan.class.SubCode,FullName, SubName,NumTC, LectuerCode, DateOfWeek, Room, NumOfStudent, Time, TestDate, TestTime, TestRoom from dangkyhocphan.class, dangkyhocphan.subject, dangkyhocphan.lecturer where class.SubCode=subject.SubCode and dangkyhocphan.class.LectuerCode=dangkyhocphan.lecturer.LectuterCode and ");
-            sql.append(" Classname = '").append(classname).append("'");
+            sql.append(" Classname = '").append(classname).append("' and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             if((rs!=null) && rs.next()){
@@ -153,7 +152,7 @@ private boolean  CheckLecDateTime(clsClass classDTO) throws Exception{
            try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.class values('");
-            sql.append(classDTO.getClassName()).append("','");
+            sql.append(classDTO.getClassName()).append("',"+system.utilities.SystemProperities.Curentsemester+",'"+system.utilities.SystemProperities.CurentYear+"','");
             sql.append(classDTO.getSubCode()).append("','");
             sql.append(classDTO.getLectureCode()).append("','");
             sql.append(classDTO.getDate()).append("','");
@@ -177,7 +176,7 @@ private boolean  CheckLecDateTime(clsClass classDTO) throws Exception{
          boolean result = false;
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select * from dangkyhocphan.class Where ClassName = '").append(classname).append("'");
+            sql.append("Select * from dangkyhocphan.class Where ClassName = '").append(classname).append("' and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             if((rs!=null) && (rs.next()))
@@ -191,7 +190,7 @@ private boolean  CheckLecDateTime(clsClass classDTO) throws Exception{
      public void ClassDelete(String classname) throws Exception{
           try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Delete from dangkyhocphan.class Where ClassName = '").append(classname).append("'");
+            sql.append("Delete from dangkyhocphan.class Where ClassName = '").append(classname).append("' and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){
@@ -206,7 +205,7 @@ private boolean  CheckLecDateTime(clsClass classDTO) throws Exception{
             sql.append(" DateOfWeek='").append(classDTO.getDate()).append("',");
             sql.append(" Room='").append(classDTO.getRoom()).append("',");
             sql.append(" Time=").append(classDTO.getShift());
-            sql.append(" where ClassName='").append(classDTO.getClassName()).append("'");
+            sql.append(" where ClassName='").append(classDTO.getClassName()).append("' and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){
@@ -220,7 +219,7 @@ private boolean  CheckLecDateTime(clsClass classDTO) throws Exception{
             sql.append(classDTO.getTestDate()).append("',");
             sql.append(" TestTime='").append(classDTO.getTestTime()).append("',");
             sql.append(" TestRoom='").append(classDTO.getTestRoom()).append("'");
-            sql.append(" where ClassName='").append(classDTO.getClassName()).append("'");
+            sql.append(" where ClassName='").append(classDTO.getClassName()).append("' and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){
@@ -230,7 +229,7 @@ private boolean  CheckLecDateTime(clsClass classDTO) throws Exception{
      public void ClassUpdateStudent(String classname) throws Exception{
          try{
     StringBuffer sql = new StringBuffer();
-            sql.append("Update dangkyhocphan.class set NumOfStudent=NumOfStudent+1 where ClassName='").append(classname).append("'");
+            sql.append("Update dangkyhocphan.class set NumOfStudent=NumOfStudent+1 where ClassName='").append(classname).append("' and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
         }catch(Exception ex){
@@ -242,7 +241,7 @@ private boolean  CheckLecDateTime(clsClass classDTO) throws Exception{
          try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select dangkyhocphan.student.MSSV,FullName,Class from dangkyhocphan.student, dangkyhocphan.registry where dangkyhocphan.student.MSSV=dangkyhocphan.registry.MSSV and dangkyhocphan.registry.ClassName='");
-            sql.append(Classname).append("' ");
+            sql.append(Classname).append("' and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"' ");
              PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while((rs!=null) && rs.next()){

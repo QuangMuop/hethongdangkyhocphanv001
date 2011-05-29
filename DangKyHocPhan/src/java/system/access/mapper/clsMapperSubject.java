@@ -21,9 +21,7 @@ public class clsMapperSubject extends clsMapperDb {
             subject.setTCTH(Integer.parseInt(rs.getString("NumTCTH")));
         }
     }
-    
-    
-    public clsSubject getSubjectinfoByName(String subname) throws Exception{
+      public clsSubject getSubjectinfoByName(String subname) throws Exception{
         clsSubject subject=new clsSubject();
         try{
             StringBuffer sql = new StringBuffer();
@@ -57,7 +55,24 @@ public class clsMapperSubject extends clsMapperDb {
         }
         return listResult;        
     }
-    
+    public ArrayList<clsSubject> GetSubjectFree(int procode)throws Exception{
+        ArrayList<clsSubject> listResult = new ArrayList<clsSubject>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("select * from dangkyhocphan.subject where subcode not in(select subcode from dangkyhocphan.program where procode=");
+            sql.append(procode).append(")");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsSubject subject = new clsSubject();
+                IniSubjectDTOFromRs(subject, rs);
+                listResult.add(subject);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listResult;
+    }
     public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
         clsSubject subject=new clsSubject();
         try{
@@ -154,16 +169,28 @@ public class clsMapperSubject extends clsMapperDb {
                 throw ex;
         }
     }
-    
+    public void DeleteDetailSub(String subcode) throws Exception{
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("delete from dangkyhocphan.subjectdetail where SubCode='");
+            sql.append(subcode).append("'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            stmt.execute();
+
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
     public boolean  SubjectDeleteByCode(String subcode) throws Exception{
         try{
+            DeleteDetailSub(subcode);
             StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.subject Where SubCode = '").append(subcode).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             return true;
         }catch(Exception ex){
-                return  false;
+               return  false;
         }
     }
     public ArrayList<clsSubject> SearchSubjectByName(String subname) throws Exception{

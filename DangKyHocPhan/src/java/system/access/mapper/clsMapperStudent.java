@@ -94,8 +94,8 @@ public class clsMapperStudent extends clsMapperDb{
         clsStudent student = null;
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select * from dangkyhocphan.student Where ");
-            sql.append("FullName = '").append(name).append("'");//có dấu tiếng việt thì chưa lấy được
+            sql.append("select * from dangkyhocphan.student where FullName like '");
+            sql.append(name).append("%' Order by MSSV");//có dấu tiếng việt thì chưa lấy được
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while((rs!=null) && rs.next()){
@@ -108,22 +108,36 @@ public class clsMapperStudent extends clsMapperDb{
         }
         return listResult;
     }
-
+   public ArrayList<clsStudent> getStudentsByCode(String code) throws Exception{
+        ArrayList<clsStudent> listResult = new ArrayList<clsStudent>();
+        clsStudent student = null;
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("select * from dangkyhocphan.student where MSSV like '");
+            sql.append(code).append("%' Order by MSSV");//có dấu tiếng việt thì chưa lấy được
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                student = new clsStudent();
+                IniStudentDTOFromRs(student, rs);
+                listResult.add(student);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listResult;
+    }
     /**
-     * Get all student in database
-     * @param strWhere search codition
-     * @param strOrder order by codition
-     * @return list of student found
+     *
+     * @return
      * @throws Exception
      */
-    public ArrayList<clsStudent> GetAllStudent(String strOrder) throws Exception{
+    public ArrayList<clsStudent> GetAllStudent() throws Exception{
         ArrayList<clsStudent> listStudent = new ArrayList<clsStudent>();
         try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.student ");
-            sql.append(" Order by ");
-            sql.append(strOrder);
-
+            sql.append(" Order by MSSV");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while((rs!=null) && rs.next()){
@@ -138,21 +152,17 @@ public class clsMapperStudent extends clsMapperDb{
     }
 
     /**
-     * Get all student in database by class
-     * @param clssName String for search
-     * @param strOrder order condition
-     * @return list of student found
+     *
+     * @param className
+     * @return
      * @throws Exception
      */
-    public ArrayList<clsStudent> GetStudentsByClass(String className, String strOrder) throws Exception{
+    public ArrayList<clsStudent> GetStudentsByClass(String className) throws Exception{
         ArrayList<clsStudent> listStudent = new ArrayList<clsStudent>();
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("Select * from dangkyhocphan.student Where Class = '");
-            sql.append(className).append("'");
-            sql.append(" Order by ");
-            sql.append(strOrder);
-
+            sql.append("select * from dangkyhocphan.student where Class = '");
+            sql.append(className).append("' Order by MSSV");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while((rs!=null) && rs.next()){
@@ -167,7 +177,6 @@ public class clsMapperStudent extends clsMapperDb{
     }
     
     public boolean StudentInsert(clsStudent student) throws Exception{
-        boolean result = false;
         try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.student values('");
@@ -188,31 +197,29 @@ public class clsMapperStudent extends clsMapperDb{
             sql.append(student.getBacHoc()).append("',')");
             sql.append(student.getNote()).append("')");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-            result = stmt.execute();
+            stmt.execute();
             stmt.close();
+            return true;
         }
         catch (Exception e) {
-                throw e;
+               return  false;
         }
-        return result;
+       
     }
 
-
-
-    public boolean StudentCheckExistCode(String code) throws Exception{
-      boolean result = false;
-       try{
+   public boolean StudentCheckExistCode(String code) throws Exception{
+      try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.student Where MSSV = '").append(code).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             if((rs!=null) && (rs.next()))
-                result = true;
+                return  true;
             stmt.close();
         }catch(Exception ex){
                 throw ex;
         }
-        return result;
+        return false;
     }
 
 
