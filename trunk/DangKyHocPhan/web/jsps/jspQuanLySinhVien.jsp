@@ -105,22 +105,27 @@
                  <p align="right"><b><a href="../servStudentManager?action=create">Tiếp nhận sinh viên</a></b></p>
                 <hr><hr>
                 <form method="#">
-                    Danh sách sinh viên:<br/>                    
+                    Danh sách sinh viên:<br/>
                     <table id="tableliststudent" name="tableliststudent">
                         <tr>
-                            <th>STT</th><th>MSSV</th><th>Họ Tên</th><th>Lớp</th><th>Ngày sinh</th><th>Giới tính</th><th>Loại</th><th>Sửa</th><th>Xóa</th>
+                            <th>STT</th><th>MSSV</th><th>Họ Tên</th><th>Lớp</th><th>Ngày sinh</th><th>Giới tính</th><th>Loại</th><th>Sửa</th><th>Xóa</th><th>Cập nhật</th>
                         </tr>
                         <%for(int i = 0; i < listStudent.size(); i++){%>
                             <tr>
                                 <td><%=(i+1)%></td>
-                                <td><%=listStudent.get(i).getCode()%></td>
+                                <td><a href="../servStudentManager?action=detail&MSSV=<%=listStudent.get(i).getCode()%>"><%=listStudent.get(i).getCode()%></a></td>
                                 <td><%=listStudent.get(i).getFullname()%></td>
                                 <td><%=listStudent.get(i).getClasss()%></td>
                                 <td><%=listStudent.get(i).getBirthDay()%></td>
                                 <td><%=listStudent.get(i).getGender()%></td>
                                  <td><%=listStudent.get(i).getType()%></td>
                                 <td><a href="../servStudentManager?action=edit&MSSV=<%=listStudent.get(i).getCode()%>">Sửa</a></td>
-                                <td><a href="../servStudentManager?action=delete&MSSV=<%=listStudent.get(i).getCode()%>">Xóa</a></td>
+                                <td><a href="../servStudentManager?action=predelete&MSSV=<%=listStudent.get(i).getCode()%>">Xóa</a></td>
+                                <%if(listStudent.get(i).getNote().equalsIgnoreCase("null")||listStudent.get(i).getNote().equalsIgnoreCase("")){%>
+                                <td>Không</td>
+                                <%}else{%>
+                                <td>Có</td>
+                                <%}%>
                             </tr>
                         <%}%>
                     </table>

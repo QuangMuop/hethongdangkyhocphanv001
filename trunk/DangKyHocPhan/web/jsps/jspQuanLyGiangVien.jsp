@@ -74,26 +74,25 @@
                         </tr>
                     </table>
                 </form>
-                <p align="right"><a href="#"><b>Thêm giảng viên</b></a></p>
+                <p align="right"><a href="../servLecturerManager?action=add"><b>Thêm giảng viên</b></a></p>
                 <hr/><hr/>
                 <u><b>Danh sách các giảng viên khoa công nghệ phần mềm:</b></u>
                 <form id="classlist">
                   <table id="tablelistlecturer" name="tablelistlecturer">
                     <tr>
-                        <th>STT</th><th>Mã GV</th><th>Họ Tên</th><th>Ngày Sinh</th><th>Giới tính</th><th>Học hàm</th><th>Học vị</th><th>Chi tiết</th><th>Sửa</th><th>Xóa</th>
+                        <th>STT</th><th>Mã GV</th><th>Họ Tên</th><th>Ngày Sinh</th><th>Giới tính</th><th>Học hàm</th><th>Học vị</th><th>Sửa</th><th>Xóa</th>
                     </tr>
                     <%for(int i=0; i<leclist.size();i++){%>
                     <tr>
                         <td><%=i+1%></td>
-                        <td><%=leclist.get(i).getLecturerCode()%></td>
+                        <td><a href="../servLecturerManager?action=detail&code=<%=leclist.get(i).getLecturerCode()%>"><%=leclist.get(i).getLecturerCode()%></a></td>
                         <td><%=leclist.get(i).getFullname()%></td>
                         <td><%=leclist.get(i).getBirthDay()%></td>
                         <td><%=leclist.get(i).getGender()%></td>
                         <td><%=leclist.get(i).getHocHam()%></td>
                         <td><%=leclist.get(i).getHocVi()%></td>
-                         <td><a href="">Chi tiết</a></td>
-                        <td><a href="">Sửa</a></td>
-                        <td><a href="">Xóa</a></td>
+                        <td><a href="../servLecturerManager?code=<%=leclist.get(i).getLecturerCode()%>&action=edit">Sửa</a></td>
+                        <td><a href="../servLecturerManager?code=<%=leclist.get(i).getLecturerCode()%>&action=predelete">Xóa</a></td>
                     </tr>
                     <%}%>
                 </table>
@@ -109,8 +108,7 @@
         typesearch="All";
         name="";
         action="search";
-        actor="Admin";
-          function createRequestObject(){
+         function createRequestObject(){
             var req;
             if(window.XMLHttpRequest){
                 //For Firefox, Safari, Opera
@@ -137,7 +135,7 @@
                 else{
                     name=document.formsearch.txtId.value;
                 }
-                http.open("GET","../ManageLecturer?action="+action+"&type="+typesearch+"&name="+name+"&actor="+actor,true);
+                http.open("GET","../servLecturerManager?action="+action+"&type="+typesearch+"&name="+name,true);
                 http.onreadystatechange = handleResponse;
                 http.send(null);
             }

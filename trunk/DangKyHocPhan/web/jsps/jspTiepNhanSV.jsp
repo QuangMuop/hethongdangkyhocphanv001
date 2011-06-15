@@ -3,6 +3,7 @@
     Created on : Apr 23, 2011, 4:29:43 PM
     Author     : ngloc_it
 --%>
+<%@page import="system.dto.clsRule"%>
 <%@page import="system.dto.clsCourse"%>
 <%@page import="java.util.ArrayList"%>
 <%@include file="jspmenu.jsp" %>
@@ -12,6 +13,7 @@
 <%
 ArrayList<String> listClass=(ArrayList<String>) session.getAttribute("listClass");
 ArrayList<clsCourse> listCourse=(ArrayList<clsCourse>) session.getAttribute("listCourse");
+clsRule rule=(clsRule) session.getAttribute("rule");
 %>
 <html>
     <head>
@@ -42,6 +44,17 @@ ArrayList<clsCourse> listCourse=(ArrayList<clsCourse>) session.getAttribute("lis
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <h3><b><u>Tiếp nhận sinh viên vào khoa công nghệ phần mềm</u></b></h3>
+                <u>Một số quy đinh về khi tiếp nhận sinh viên:</u>
+                <table>
+                    <tr>
+                        <td>Tuổi tối thiểu:</td>
+                        <td><input type="text" id="minage" value="<%=rule.getMinStudentAge()%>"readonly></td>
+                    </tr>
+                    <tr>
+                        <td>Tuổi tối đa:</td>
+                        <td><input type="text" id="maxage" value="<%=rule.getMaxStudentAge()%>"readonly></td>
+                    </tr>
+                </table>
                 <form id="formaddone" name="formaddone" action="../servStudentManager?action=addone" method="post">
                     <u>Thông tin sinh viên</u><br/>
                     <table id="add">
@@ -54,17 +67,17 @@ ArrayList<clsCourse> listCourse=(ArrayList<clsCourse>) session.getAttribute("lis
                             <td>
                                <select style="width:60px" name="sDay" id="sDay">
                                     <%for(int i = 0; i < 31; i++){%>
-                                        <option><%=(i+1)%></option>
+                                    <option value="<%=(i+1)%>"><%=(i+1)%></option>
                                     <%}%>
                                 </select>
                               <select style="width:60px" name="sMonth" id="sMonth">
                                     <%for(int i = 0; i < 12; i++){%>
-                                        <option><%=(i+1)%></option>
+                                    <option value="<%=(i+1)%>"><%=(i+1)%></option>
                                     <%}%>
                                 </select>
                               <select style="width:60px" name="sYear" id="sYear">
-                                    <%for(int i = 0; i < 50; i++){%>
-                                        <option><%=(1980+i)%></option>
+                                    <%for(int i = 1980; i < 2010; i++){%>
+                                    <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
                             </td>
@@ -87,7 +100,7 @@ ArrayList<clsCourse> listCourse=(ArrayList<clsCourse>) session.getAttribute("lis
                             </td>
                             <td>Khóa(*):</td>
                             <td>
-                                 <select style="width:190px" name="sCourse">
+                                 <select style="width:190px" name="sCourse" id="sCourse">
                                       <%for(int i=0;i<listCourse.size();i++){%>
                                       <option value="<%=listCourse.get(i).getCourseCode()%>"><%=listCourse.get(i).getCourseCode()%></option>
                                       <%}%>
@@ -123,17 +136,17 @@ ArrayList<clsCourse> listCourse=(ArrayList<clsCourse>) session.getAttribute("lis
                             <td>
                                 <select style="width:60px" name="sDay1" id="sDay1">
                                     <%for(int i = 0; i < 31; i++){%>
-                                        <option><%=(i+1)%></option>
+                                    <option value="<%=(i+1)%>"><%=(i+1)%></option>
                                     <%}%>
                                 </select>
                               <select style="width:60px" name="sMonth1" id="sMonth1">
                                     <%for(int i = 0; i < 12; i++){%>
-                                        <option><%=(i+1)%></option>
+                                    <option value="<%=(i+1)%>"><%=(i+1)%></option>
                                     <%}%>
                                 </select>
                               <select style="width:60px" name="sYear1" id="sYear1">
-                                    <%for(int i = 0; i < 50; i++){%>
-                                        <option><%=(1980+i)%></option>
+                                    <%for(int i = 2006; i < 2021; i++){%>
+                                    <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
                             </td>
@@ -170,6 +183,11 @@ ArrayList<clsCourse> listCourse=(ArrayList<clsCourse>) session.getAttribute("lis
     </body>
        <script  type = "text/javascript" >
          function PreCheckStudentOne(){
+             var curent=new Date().getFullYear();
+             var year=document.getElementById("sYear").value;
+             var minage=document.getElementById("minage").value;
+             var maxage=document.getElementById("maxage").value;
+             //var yearin=document.getElementById("sCourse").value+2005;
            if(document.getElementById("txtMSSV").value.length==0){
                alert("Vui lòng nhập MSSV");
            }
@@ -185,6 +203,15 @@ ArrayList<clsCourse> listCourse=(ArrayList<clsCourse>) session.getAttribute("lis
            else if(document.getElementById("txtcmnd").value.length==0){
                alert("Vui lòng nhập CMND của sinh viên");
            }
+          else if(curent-year<minage){
+               alert("Sinh viên chưa đủ tuổi quy định");
+         }
+         else if(curent-year>maxage){
+            alert("Sinh viên đã quá tuổi quy định");
+          }
+          //else if(document.getElementById("sYear1").value != yearin){
+         //   alert("Năm nhập học không hợp lý");
+         // }
            else{
               document.forms["formaddone"].submit();
            }
@@ -194,10 +221,7 @@ ArrayList<clsCourse> listCourse=(ArrayList<clsCourse>) session.getAttribute("lis
               if(filename.length==0){
                   alert("Bạn chưa chọn file");
               }
-             // else if(){
-              //    alert("Chỉ hỗ trợ thêm sinh viên từ file excel, xin chọn file khác");
-              //}
-              else{
+               else{
                   var duoi=filename.substr(filename.length-4, 4);
                   if(duoi!=".xls"&&duoi!="xlsx"){
                       alert("Chỉ hỗ trợ thêm sinh viên từ file excel, xin chọn file khác");

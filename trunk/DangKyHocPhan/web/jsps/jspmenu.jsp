@@ -36,20 +36,23 @@
                 </li>
                 <li><a href="#">Quản Lý Khoa</a>
                     <ul>
-                         <li><a href="../servClassView?action=view">Danh sách lớp học</a> </li>
-                        <!--<li><a href="../UpdateScore?function=loaddata">Ghi Nhận Điểm SV</a> </li>-->
-                        <li><a href="../servLecturerManager?action=view">Quản lý GV</a> </li>
-                        <li><a href="../servStudentManager?action=view">Quản lý SV</a> </li>
-                         <li><a href="../servSubject?action=view">Quản môn học</a> </li>
+                        <li><a href="../servClassView?action=view">Danh sách lớp học</a> </li>
+                        <li><a href="../servUpdateScore?action=view">Điểm kết thúc môn</a> </li>  
+                        <li><a href="../servLecturerManager?action=view">Quản lý GV</a> </li>
+                        <li><a href="../servStudentManager?action=view">Quản lý SV</a> </li>
+                         <li><a href="../servSubject?action=view">Quản môn học</a> </li>
                          <li> <a href="../servDetailSubject?action=viewQL">Môn học tiên quyết</a> </li>
-                          <li><a href="../servCourse?action=view">Quản lý khóa học</a> </li>
+                          <li><a href="../servCourse?action=view">Quản lý khóa học</a> </li>
                           <li><a href="../servProManage?action=view">Chương trình đào tạo</a> </li>
                          <li><a href="../servAccount?action=view">Quản lý Tài Khoản</a> </li>
+                          <li><a href="../servCommentManager?action=view">Quản lý commnent</a> </li>  
                         <li><a href="../servViewRule?issetup=false">Xem quy định</a> </li>
                     </ul>
                 </li>
                 <li><a href="#">Giảng Viên</a>
-
+                    <ul>
+                       <li><a href="../servUpdateScore?action=view">Điểm kết thúc môn</a> </li>  
+                    </ul>      
                 </li>
                 <li><a href="#">Sinh Viên</a>
                 <ul>
