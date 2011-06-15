@@ -194,7 +194,7 @@ public class clsMapperStudent extends clsMapperDb{
             sql.append(student.getGender()).append("','");
             sql.append(student.getCMND()).append("','");
             sql.append(student.getType()).append("','");
-            sql.append(student.getBacHoc()).append("',')");
+            sql.append(student.getBacHoc()).append("','");
             sql.append(student.getNote()).append("')");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
@@ -228,14 +228,15 @@ public class clsMapperStudent extends clsMapperDb{
      * @param mssv
      * @throws Exception
      */
-    public void Delete(String mssv) throws Exception{
+    public boolean Delete(String mssv) throws Exception{
         try{
             StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.student Where MSSV = '").append(mssv).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
+            return true;
         }catch(Exception ex){
-            throw ex;
+            return false;
         }
     }
 
@@ -257,7 +258,7 @@ public class clsMapperStudent extends clsMapperDb{
             sql.append(" Type='").append(student.getType()).append("',");
             sql.append(" BacHoc='").append(student.getBacHoc()).append("', ");
             sql.append(" NhapHoc='").append(student.getNhaphoc()).append("', ");
-            sql.append(" Note=''");
+            sql.append(" Note='Null'");
             sql.append(" Where MSSV='").append(student.getCode()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();

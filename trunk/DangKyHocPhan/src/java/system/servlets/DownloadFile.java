@@ -3,7 +3,6 @@ package system.servlets;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,20 +11,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.parser.DTD;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
 import system.access.mapper.clsMapperStudyResult;
 import system.access.mapper.clsMapperSubject;
 import system.bo.clsBORegistration;
 import system.bo.clsBOStudent;
 import system.bo.clsBOStudyResult;
 import system.bo.clsBOSubject;
-import system.dto.clsRegistration;
 import system.dto.clsStudent;
 import system.dto.clsStudyResult;
 import system.dto.clsSubject;
@@ -38,13 +34,12 @@ import system.dto.clsSubject;
 public class DownloadFile extends HttpServlet {
     int numTc = 0;
    
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

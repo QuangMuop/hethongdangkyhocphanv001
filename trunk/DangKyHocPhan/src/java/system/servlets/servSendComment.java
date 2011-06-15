@@ -60,7 +60,7 @@ private void sendCommentByGuest(HttpServletRequest request, HttpServletResponse 
             String content=request.getParameter("txtContent");
             String author=request.getParameter("txtName");
             String email=request.getParameter("txtEmail");
-            String MSSV="########";
+            String MSSV="visiter";
             Date todayD=new Date(System.currentTimeMillis());
            SimpleDateFormat dayFormat= new SimpleDateFormat("yyyy/MM/dd");
            String date=dayFormat.format(todayD.getTime());

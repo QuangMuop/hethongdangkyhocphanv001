@@ -18,7 +18,7 @@ public class clsLecturer {
     public clsLecturer(){
 
     }
-    public clsLecturer(String fullname, String birthday, String email, String phone, String address, String hocham, String hocvi, String gender, String cmnd){
+    public clsLecturer(String Code,String fullname, String birthday, String email, String phone, String address, String hocham, String hocvi, String gender, String cmnd){
         this.FullName=fullname;
         this.BirthDay=birthday;
         this.Email=email;
@@ -28,6 +28,7 @@ public class clsLecturer {
         this.HocVi=hocvi;
         this.Gender=gender;
         this.CMND=cmnd;
+        this.LecturerCode=Code;
     }
     public void setLecturerCode(String code){
         this.LecturerCode=code;

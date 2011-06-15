@@ -36,7 +36,7 @@ public class clsStudent {
         this.CMND=cmnd;
         this.Type=type;
         this.BacHoc=bachoc;
-        this.Note = "";
+        this.Note = "Null";
         this.NhapHoc=nhaphoc;
     }
     public void setFullName(String name){

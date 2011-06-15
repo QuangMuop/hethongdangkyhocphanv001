@@ -101,18 +101,19 @@ public class clsBOStudent {
        * @param mssv
        * @throws Exception
        */
-      public void Delete(String mssv) throws Exception{
-        try{
-            clsMapperStudent mapper = new clsMapperStudent();
-            mapper.Delete(mssv);
-        }catch(Exception ex){
-            throw ex;
-        }
+      public boolean Delete(String mssv) throws Exception{
+          clsMapperStudent mapper = new clsMapperStudent();
+           return mapper.Delete(mssv);
+        
       }
 
 
      public void updateStudentByStudent(String updateinfo, String code) throws Exception{
          clsMapperStudent mps=new clsMapperStudent();
          mps.StudentUpdateByStudent(updateinfo, code);
+     }
+     public void updateStudentByAmin(clsStudent cls) throws Exception{
+         clsMapperStudent mps=new clsMapperStudent();
+         mps.StudentUpdateByAdmin(cls);
      }
 }
