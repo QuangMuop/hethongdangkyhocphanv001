@@ -31,6 +31,10 @@ public class clsBOLecturer {
         clsMapperLecturer mapper = new clsMapperLecturer();
         return mapper.GetLecturerByName(name);
      }
+      public ArrayList<clsLecturer> GetLecturerById(String Id) throws Exception{
+        clsMapperLecturer mapper = new clsMapperLecturer();
+        return mapper.GetLecturerByID(Id);
+     }
     
     /**
      * Get a lecturer object from name of teacher
@@ -50,34 +54,25 @@ public class clsBOLecturer {
     }
 
     /**
-     * Get lecturer from his id
-     * @param lecturerId id for search
-     * @return lecturere object get from database or null if not found any instance
+     *
+     * @param lecturerId
+     * @return
      * @throws Exception
      */
     public clsLecturer getLecturereByCode(String lecturerId) throws Exception{
-        clsLecturer lecturer = new clsLecturer();
-        try{
-            clsMapperLecturer mapper = new clsMapperLecturer();
-            lecturer = mapper.getLecturerInfoById(lecturerId);
-        }catch(Exception e){
-            throw e;
-        }
-        return lecturer;
-    }
+        clsMapperLecturer mapper = new clsMapperLecturer();
+            return  mapper.getLecturerInfoById(lecturerId);
+      }
 
     /**
      * Insert a lecturer into database
      * @param lecturer Lecturer for insert
      * @throws Exception
      */
-    public void LecturerInsert(clsLecturer lecturer) throws Exception{
-         try{
-            clsMapperLecturer mapper = new clsMapperLecturer();
-            mapper.LecturerInsert(lecturer);
-        }catch(Exception e){
-            throw e;
-        }
+    public boolean LecturerInsert(clsLecturer lecturer) throws Exception{
+           clsMapperLecturer mapper = new clsMapperLecturer();
+           return mapper.LecturerInsert(lecturer);
+       
     }
 
     /**
@@ -145,8 +140,9 @@ public class clsBOLecturer {
      * @param code
      * @throws Exception
      */
-    public void LecturerDeleteByCode(String code) throws Exception{
-    
+    public boolean  LecturerDeleteByCode(String code) throws Exception{
+     clsMapperLecturer mapper = new clsMapperLecturer();
+     return mapper.LecturerDeleteByCode(code);
     }
 
     /**

@@ -4,6 +4,7 @@ package system.access.mapper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import system.dto.clsComment;
 public class clsMapperComment extends clsMapperDb{
 public clsMapperComment() throws Exception{
@@ -18,6 +19,23 @@ public clsMapperComment() throws Exception{
             comment.setMSSV(rs.getString("MSSV"));
             comment.setDate(rs.getString("Date"));
           }
+     }
+  public ArrayList<clsComment> GetAllComment() throws Exception{
+         ArrayList<clsComment> listResult = new ArrayList<clsComment>();
+         try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("select Id,MSSV,Author,Email,Content, Date from dangkyhocphan.comment");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsComment classTemp = new clsComment();
+                IniCommnetDTOFromRs(classTemp, rs);
+                listResult.add(classTemp);
+            }
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
      }
   public clsComment getCommnetInfo(int id) throws Exception{
          clsComment comment=new clsComment();

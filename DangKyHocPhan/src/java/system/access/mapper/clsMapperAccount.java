@@ -86,10 +86,12 @@ public class clsMapperAccount extends clsMapperDb {
         boolean result=false;
         try{
             StringBuffer sql = new StringBuffer();
-            sql.append("SELECT UserName, Passwords FROM dangkyhocphan.ACCOUNTS WHERE ");
-            sql.append(" username = '").append(username).append("'");
-            sql.append(" and passwords = '").append(password).append("'");
+            sql.append("SELECT UserName, Passwords FROM dangkyhocphan.ACCOUNTS WHERE username=? and passwords=? ");
+            //sql.append(" username = '").append(username).append("'");
+           // sql.append(" and passwords = '").append(password).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            stmt.setString(1, username);
+            stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
             
             if ((rs != null) && (rs.next())) {

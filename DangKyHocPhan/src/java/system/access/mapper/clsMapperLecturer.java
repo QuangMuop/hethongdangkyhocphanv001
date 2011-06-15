@@ -82,6 +82,25 @@ public class clsMapperLecturer extends clsMapperDb {
         }
         return listResult;
     }
+     public ArrayList<clsLecturer> GetLecturerByID(String Id) throws Exception{
+        ArrayList<clsLecturer> listResult = new ArrayList<clsLecturer>();
+        try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.lecturer where LectuterCode like '%");
+            sql.append(Id).append("%'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+
+            while((rs!=null) && rs.next()){
+                clsLecturer lecturer = new clsLecturer();
+                IniLecturerDTOFromRs(lecturer, rs);
+                listResult.add(lecturer);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return listResult;
+    }
     /**
      * Get all lecturer in database
      * @return list of lecturer
@@ -128,7 +147,8 @@ public class clsMapperLecturer extends clsMapperDb {
             return lecturer;
      }
 
- public void LecturerInsert(clsLecturer lecturer) throws Exception{
+ public boolean LecturerInsert(clsLecturer lecturer) throws Exception{
+     if(LecturerCheckExistCode(lecturer.getLecturerCode())) return false;
      try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.lecturer values('");
@@ -145,6 +165,7 @@ public class clsMapperLecturer extends clsMapperDb {
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();
+            return true;
         }
         catch (Exception e) {
                 throw e;
@@ -190,14 +211,15 @@ public class clsMapperLecturer extends clsMapperDb {
                 throw ex;
         }
   }
-  public void LecturerDeleteByCode(String code) throws Exception{
+  public boolean  LecturerDeleteByCode(String code) throws Exception{
         try{
-    StringBuffer sql = new StringBuffer();
+            StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.lecturer Where LectuterCode = '").append(code).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
+            return true;
         }catch(Exception ex){
-                throw ex;
+                return false;
         }
   }
   public void LecturerUpdate(clsLecturer lecturer) throws Exception{
