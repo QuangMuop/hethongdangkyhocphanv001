@@ -11,21 +11,12 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-    clsLecturer lecturer = null;
-    String error = "OK";
-    try{
-        lecturer = (clsLecturer) session.getAttribute("lecturer");
-    }catch(Exception ex){
-        error = ex.toString();
-    }
-
-    if(lecturer == null)
-        lecturer = new clsLecturer();
+    clsLecturer lec=(clsLecturer) session.getAttribute("lec");
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cập nhật giảng viên</title>
+        <title>Câp nhật thông tin giảng viên</title>
         <style media="all" type="text/css">
             #tableinfo{
                 margin-left: 10px;
@@ -45,13 +36,7 @@
                 background-color: #b1B700;                
                 padding: 2 5 2 5;
             }
-            #formsearch{
-                margin-top: 10px;
-                margin-left: 20px;
-                padding: 5 10 5 10;
-                background-color: #f29de3;
-                width: 280px;
-            }
+            
         </style>
     </head>
     <body>
@@ -62,101 +47,99 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
 
-                <form id="form-add-one" name="frmInfo" action="../UpdateLecturer?id=none&function=reupdate" method="post">
-                    <u>Cập nhật thông tin giảng viên.</u><br/>
+                <form id="formaddone" name="formaddone" action="../servLecturerManager?action=update" method="post">
+                    <u>Câp nhật thông tin giảng viên: <%=lec.getFullname()%></u><br/>
                     <table id="tableinfo">
                         <tr>
-                            <th>Thông tin</th><th>Giá trị hiện tại</th><th>Giá trị mới</th>
+                            <th>Thông tin</th><th>Giá trị hiện tại</th><th>Giá trị mới</th>
                         </tr>
                         <tr>
                             <td width="120px">Mã GV</td>
-                            <td width="200px"><input type="text" value="<%=lecturer.getLecturerCode()%>" readonly></td>
-                            <td width="200px"><input type="text" name="txtLecturerCode" value="<%=lecturer.getLecturerCode()%>" readonly></td>
+                            <td width="200px"><input type="text" value="<%=lec.getLecturerCode()%>" readonly></td>
+                            <td width="200px"><input type="text" readonly id="txtCode" name="txtCode" value="<%=lec.getLecturerCode()%>" readonly></td>
                         </tr>
                         <tr>
-                            <td>Họ và tên</td>
-                            <td><input type="text" value="<%=lecturer.getFullname()%>" readonly></td>
-                            <td><input type="text" name="txtFullName" value="<%=lecturer.getFullname()%>"></td>
+                            <td>Họ tên</td>
+                            <td><input type="text" value="<%=lec.getFullname()%>" readonly></td>
+                            <td><input type="text" id="txtName" name="txtName" value="<%=lec.getFullname()%>"></td>
                         </tr>                        
                         <tr>
                             <td>Ngày Sinh</td>
-                            <td><input type="text" name="txtBirthDay" value="<%=lecturer.getBirthDay()%>" readonly></td>
+                            <td><input type="text" name="txtBirth" value="<%=lec.getBirthDay()%>" readonly></td>
                             <td>
                                 <select name="sDay">
                                     <%for(int j = 0; j < 31; j++){%>
-                                        <option><%=(j+1)%></option>
+                                    <option value="<%=(j+1)%>"><%=(j+1)%></option>
                                     <%}%>
                                 </select>
                                 <select name="sMonth">
                                     <%for(int j = 0; j < 12; j++){%>
-                                        <option><%=(j+1)%></option>
+                                    <option value="<%=(j+1)%>"><%=(j+1)%></option>
                                     <%}%>
                                 </select>
                                 <select name="sYear">
                                     <%for(int j = 0; j < 50; j++){%>
-                                        <option><%=(1940+j)%></option>
+                                    <option value="<%=(1940+j)%>"><%=(1940+j)%></option>
                                     <%}%>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>Giới Tính</td>
-                            <td><input type="text" value="<%=lecturer.getGender()%>" readonly></td>
+                            <td><input type="text" value="<%=lec.getGender()%>" readonly></td>
                             <td>
                                 <select name="sSex">
-                                    <option>Nam</option>
-                                    <option>Nữ</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>Địa chỉ</td> 
-                            <td><input type="text" value="<%=lecturer.getAddress()%>" readonly></td>
-                            <td><input type="text" name="txtAddress" value="<%=lecturer.getAddress()%>"></td>
+                            <td><input type="text" value="<%=lec.getAddress()%>" readonly></td>
+                            <td><input type="text" id="txtAddress" name="txtAddress" value="<%=lec.getAddress()%>"></td>
                         </tr>
                         <tr>
                             <td>Điện thoại</td> 
-                            <td><input type="text" value="<%=lecturer.getPhone()%>" readonly></td>
-                            <td><input type="text" name="txtPhoneNumber" value="<%=lecturer.getPhone()%>"></td>
+                            <td><input type="text" value="<%=lec.getPhone()%>" readonly></td>
+                            <td><input type="text" id="txtPhone" name="txtPhone" value="<%=lec.getPhone()%>"></td>
                         </tr>
                         <tr>
                             <td>Email</td> 
-                            <td><input type="text" value="<%=lecturer.getEmail()%>"readonly></td>
-                            <td><input type="text" name="txtEmail" value="<%=lecturer.getEmail()%>"></td>
+                            <td><input type="text" value="<%=lec.getEmail()%>"readonly></td>
+                            <td><input type="text" id="txtEmail" name="txtEmail" value="<%=lec.getEmail()%>"></td>
                         </tr>
                         <tr>
                             <td>Học Hàm</td>
-                            <td><input type="text" value="<%=lecturer.getHocHam()%>" readonly></td>
+                            <td><input type="text" value="<%=lec.getHocHam()%>" readonly></td>
                             <td>
                                 <select name="sHocHam">
-                                    <option>Cao Học</option>
-                                    <option>Thạc sĩ</option>
-                                    <option>Tiến Sĩ</option>
-                                    <option>P.Giáo Sư</option>
-                                    <option>Khác</option>
+                                     <option value="Null">Null</option>
+                                    <option value="Giáo sư">Giáo sư</option>
+                                    <option value="P.Giáo sư">P.Giáo sư</option>
+                                    
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>Học Vị</td>
-                            <td><input type="text" value="<%=lecturer.getHocVi()%>" readonly></td>
+                            <td><input type="text" value="<%=lec.getHocVi()%>" readonly></td>
                             <td>
                                 <select name="sHocVi">
-                                    <option>Cao Học</option>
-                                    <option>Thạc sĩ</option>
-                                    <option>Tiến Sĩ</option>
-                                    <option>P.Giáo Sư</option>
-                                    <option>Khác</option>
+                                    <option value="Null">Null</option>
+                                    <option value="Cao học">Cao Học</option>
+                                    <option value="Thạc sĩ">Thạc sĩ</option>
+                                    <option value="Tiến sĩ">Tiến Sĩ</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>CMND</td>
-                            <td><input type="text" value="<%=lecturer.getCMND()%>" readonly></td>
-                            <td><input type="text" name="txtCMND" value="<%=lecturer.getCMND()%>"></td>
+                            <td><input type="text" value="<%=lec.getCMND()%>" readonly></td>
+                            <td><input type="text" id="txtCMND" name="txtCMND" value="<%=lec.getCMND()%>"></td>
                         </tr>
                     </table>
-                        <input type="submit" value="Cập Nhật">
+                        <input type="button" value="Cập Nhật" onclick="update()">
                 </form>
 
                 <br/><br/>
@@ -169,4 +152,17 @@
         </div>
         <!--End Wrapper-->
     </body>
+    <script  type = "text/javascript" >
+         function update(){
+           if(document.formaddone.txtName.value.length==0){
+             alert("Tên giảng viên không được trống");
+          }
+          else if(document.formaddone.txtCMND.value.length==0){
+             alert("CMND không được trống");
+          }
+          else{
+           document.forms["formaddone"].submit();
+          }
+  }
+       </script>
 </html>

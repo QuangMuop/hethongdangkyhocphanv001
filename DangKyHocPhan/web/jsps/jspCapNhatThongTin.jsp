@@ -57,19 +57,19 @@ clsStudent student =(clsStudent) session.getAttribute("student");
                     </tr>
                     <tr>
                         <td>Ngày sinh:</td>
-                        <td>Ngày:
+                        <td>
                                 <select name="day">
                                     <%for(int i = 1; i < 32; i++){%>
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
-                               Tháng: <select name="month">
+                                <select name="month">
                                     <%for(int i = 1; i < 13; i++){%>
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
-                               Năm: <select  name="year">
-                                    <%for(int i = 1970; i <2021; i++){%>
+                               <select  name="year">
+                                    <%for(int i = 1980; i <2010; i++){%>
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>

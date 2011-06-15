@@ -3,36 +3,24 @@
     Created on : Apr 23, 2011, 4:29:54 PM
     Author     : ngloc_it
 --%>
+<%@page import="system.dto.clsRule"%>
 <%@page import="java.util.ArrayList"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
-
 <%
-    int i = 0;
-    int n = 0;
-    int STT = 1;
-    String strErr = "";
-    ArrayList<String> listResult = null;
-    try{
-        listResult = (ArrayList<String>) session.getAttribute("listinfomation");        
-        n = listResult.size();
-        strErr = "No Error";
-     }catch(Exception ex){
-        strErr = ex.toString();
-     }
+clsRule rule=(clsRule) session.getAttribute("rule");
 %>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tiếp nhận giảng viên</title>
         <style media="all" type="text/css">
-             #form-add-one{
-                    margin-left: 50px;
+             #formaddone{
+                    margin-left: 20px;
                     margin-top: 20px;
-                    float: left;
+                    margin-bottom: 10px;
                     width: 320px;
                     padding-top: 20px;
                     padding-bottom: 20px;
@@ -41,15 +29,11 @@
                     background-color: #92C7C7;
                     border: 3px solid #7F38EC;
                 }
-                #form-add-one u{
-                    background-color: #FFFF00;
-                }
-                #form-browse{
-                    margin-right: 20px;
-                    margin-top: 20px;
-                    margin-bottom: 120px;
-                    float: right;
-                    width: 300px;
+                   #formbrowse{
+                       margin-top: 10px;
+                    margin-left: 20px;
+                    margin-bottom: 20px;
+                    width: 320px;
                     padding-top: 20px;
                     padding-bottom: 20px;
                     padding-right: 10px;
@@ -57,45 +41,9 @@
                     background-color: #92C7C7;
                     border: 3px solid #7F38EC;
                 }
-                #form-browse u{
-                    background-color: #FFFF00;
-                }
-                #form-result{
-                    clear: both;
-                }
-                #form-result table th{
-                    height: 15px;
-                }
-                #form-result table td{
-                    margin-left: 5px;
-                    margin-right: 5px;
-                }
+                 
             </style>
-            <script  type = "text/javascript" >
-         function PreCheckLecturerOne(){
-            var MaGV = document.frmAddOne.txtLecturerCode.value;
-            var FirstName = document.frmAddOne.txtFirstName.value;
-            var LastName = document.frmAddOne.txtLastName.value;
-            var Address = document.frmAddOne.txtAddress.value;
-            var Phone = document.frmAddOne.txtPhoneNumber.value;
-            var Email = document.frmAddOne.txtEmail.value;            
-
-            if((MaGV.length == 0)|| (FirstName.length == 0)|| (LastName.length == 0)
-                || (Address.length == 0) || (Phone.length == 0)
-                || (Email.length == 0)){
-                alert("Vui Lòng nhập đầy đủ thông tin trược khi submit");
-            }else
-                document.forms["frmAddOne"].submit();
-         }
-
-         function PreCheckLecturerFile(){
-                var filename = document.frmFile.txtPath.value;
-                if(filename.length == 0){
-                    alert("Vui Lòng file trược khi submit");
-            }else
-                document.forms["frmFile"].submit();
-         }
-       </script>
+           
     </head>
     <body>
         <!--Div Wrapper-->
@@ -104,132 +52,109 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <form id="form-add-one" name="frmAddOne" action="../RegistryLecturer?function=addone" method="post">
-                    <u>Thêm 1 GV vào database.</u><br/><br/>
-                    <table id="table-add-one">
+                <p><b>Tiếp nhận giảng viên vào khoa công nghệ phần mềm: </b></p>
+                <u>Một số quy đinh về khi tiếp nhận giảng viên:</u>
+                <table>
+                    <tr>
+                        <td>Tuổi tối thiểu:</td>
+                        <td><input type="text" id="minage" value="<%=rule.getMinLecturerAge()%>"readonly></td>
+                    </tr>
+                    <tr>
+                        <td>Tuổi tối đa:</td>
+                        <td><input type="text" id="maxage" value="<%=rule.getMaxLecturerAge()%>"readonly></td>
+                    </tr>
+                </table>
+                <form id="formaddone" name="frmAddOne" action="../servLecturerManager?action=addone" method="post">
+                    <u>Thêm một giảng viên.</u><br/><br/>
+                    <table id="tableaddone">
                         <tr>
-                            <td>Mã GV</td> <td><input type="text" name="txtLecturerCode"></td>
+                            <td>Mã GV(*):</td> <td><input type="text" name="txtCode" id="txtCode"></td>
                         </tr>
                         <tr>
-                            <td>Họ</td> <td><input type="text" name="txtFirstName"></td>
-                        </tr>
-                        <tr>
-                            <td>Tên</td> <td><input type="text" name="txtLastName"></td>
+                            <td>Họ Tên(*):</td> <td><input type="text" name="txtname" id="txtname"></td>
                         </tr>
                         <tr>
                             <td>Ngày Sinh</td>
                             <td>
-                                <select name="sDay">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                 <select name="sDay">
+                                    <%for(int j = 0; j < 31; j++){%>
+                                    <option value="<%=(j+1)%>"><%=(j+1)%></option>
+                                    <%}%>
                                 </select>
                                 <select name="sMonth">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                    <%for(int j = 0; j < 12; j++){%>
+                                    <option value="<%=(j+1)%>"><%=(j+1)%></option>
+                                    <%}%>
                                 </select>
-                                <select name="sYear">
-                                    <option>1991</option>
-                                    <option>1992</option>
-                                    <option>1993</option>
-                                    <option>1994</option>
+                                <select name="sYear" id="sYear">
+                                    <%for(int j = 0; j < 50; j++){%>
+                                    <option value="<%=(1940+j)%>"><%=(1940+j)%></option>
+                                    <%}%>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td>Giới Tính</td>
+                            <td>Giới tính(*):</td>
                             <td>
                                 <select name="sSex">
-                                    <option>Nam</option>
-                                    <option>Nữ</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td>Địa chỉ</td> <td><input type="text" name="txtAddress"></td>
+                            <td>Địa chỉ</td> <td><input type="text" name="txtAddress" id="txtAddress"></td>
                         </tr>
                         <tr>
-                            <td>Điện thoại</td> <td><input type="text" name="txtPhoneNumber"></td>
+                            <td>Điện thoại</td> <td><input type="text" name="txtPhone" id="txtPhone"></td>
                         </tr>
                         <tr>
-                            <td>Email</td> <td><input type="text" name="txtEmail"></td>
+                            <td>Email</td> <td><input type="text" name="txtEmail" id="txtEmail"></td>
                         </tr>
                         <tr>
                             <td>Học Hàm</td>
                             <td>
-                                <select name="sHocHam">
-                                    <option>Cao Học</option>
-                                    <option>Thạc sĩ</option>
-                                    <option>Tiến Sĩ</option>
-                                    <option>P.Giáo Sư</option>
-                                    <option>Khác</option>
-                                </select>
+                                 <select name="sHocHam">
+                                     <option value="Null">Null</option>
+                                    <option value="Giáo sư">Giáo sư</option>
+                                    <option value="P.Giáo sư">P.Giáo sư</option>
+                                  </select>
                             </td>
                         </tr>
                         <tr>
                             <td>Học Vị</td>
                             <td>
-                                <select name="sHocVi">
-                                    <option>Cao Học</option>
-                                    <option>Thạc sĩ</option>
-                                    <option>Tiến Sĩ</option>
-                                    <option>P.Giáo Sư</option>
-                                    <option>Khác</option>
+                               <select name="sHocVi">
+                                    <option value="Null">Null</option>
+                                    <option value="Cao học">Cao Học</option>
+                                    <option value="Thạc sĩ">Thạc sĩ</option>
+                                    <option value="Tiến sĩ">Tiến Sĩ</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td>CMND</td>
-                            <td><input type="text" name="txtCMND"></td>
+                            <td>CMND(*):</td>
+                            <td><input type="text" name="txtCMND" id="txtCMND"></td>
                         </tr>
                     </table>
-                    <input type="button" value="Thêm" onclick="PreCheckLecturerOne()">
-                </form>
-
-                <br/><br/>
-                <form id="form-browse" name="frmFile" action="../RegistryLecturer?function=addlist"
+                    <input type="button" value="Thêm" onclick="PreCheckOne()">
+                 </form>
+                  <hr><hr>
+                <form id="formbrowse" name="formbrowse" action="../servLecturerManager?action=addlist"
                       method="post" enctype="multipart/form-data">
                     <u>Thêm Giảng Viên Từ File</u><br/><br/>
-                    <table id="table-browse">
+                    <table id="tablebrowse">
                         <tr>
-                            <td><input type="file" name="txtPath"></td>
+                            <td><input type="file" name="txtPath" id="txtPath"></td>
                         </tr>
                         <tr>
-                            <td><input type="button" onclick="PreCheckLecturerFile()" value="Thêm"></td><td></td>
+                            <td><input type="button" onclick="precheckfile()" value="Thêm"></td><td></td>
                         </tr>
                     </table>
-                    <br/><br/><br/>
+                   <br/>
                 </form>
 
-                <form action="" id="form-result">                    
-                    <%  if(n>0){
-                            i = 0;
-                            //n = listResult.size();
-                            //1. LecturerCode,   2. FullName,     3. BirthDay, 4. Email, 5. Phone
-                            //6. Address,   7. HocHam,  8. Degree,  9.Gender,   10. CMND.
-                    %>                           
-                            <u>Kết quả:</u>
-                            <table>
-                                <tr>
-                                    <th>Mã GV</th><th>Họ Và Tên</th><th>Địa Chỉ</th><th>Giới Tính</th><th>Ghi Chú</th>
-                                </tr>
-                            <%while(i<n){%>
-                                <tr>
-                                    <td><a href="../LecturerDetail?lecturerecode=<%=listResult.get(i)%>"> <%=listResult.get(i++)%></a></td> <!--i = 1-->
-                                    <td><%=listResult.get(i++)%></td> <!--i = 2-->
-                                    <%i+=3;%> <td> <%=listResult.get(i++)%> </td> <!--i = 6-->
-                                    <%i+=2;%><td><%=listResult.get(i++)%></td> <!--i = 9-->
-                                    <%i+=1;%><td><%=listResult.get(i++)%></td> <!--i = 11-->
-                                </tr>                            
-                              <%}%>
-                              </table>
-                    <%}%>
-                     <br/><br/>
-                </form>
-            </div><!--End Contents-->
+                </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
                  <%@include file="jspFooter.jsp" %>
@@ -237,4 +162,45 @@
         </div>
         <!--End Wrapper-->
     </body>
+    <script  type = "text/javascript" >
+         function PreCheckOne(){
+             var curent=new Date().getFullYear();
+             var year=document.getElementById("sYear").value;
+             var minage=document.getElementById("minage").value;
+             var maxage=document.getElementById("maxage").value;
+           if(document.getElementById("txtCode").value.length==0){
+               alert("Vui lòng nhập mã giảng viên");
+           }
+           else if(document.getElementById("txtname").value.length==0){
+               alert("Vui lòng nhập họ tên giảng viên");
+           }
+           else if(document.getElementById("txtCMND").value.length==0){
+               alert("Vui lòng nhập CMND của giảng viên");
+           }
+           else if(curent-year<minage){
+                alert("Giảng viên chưa đut tuổi quy định");
+           }
+           else if(curent-year>maxage){
+                alert("Giảng viên đã quá tuổi quy định");
+           }
+           else{
+              document.forms["formaddone"].submit();
+           }
+        }
+      function precheckfile(){
+             var filename=document.getElementById("txtPath").value;
+              if(filename.length==0){
+                  alert("Bạn chưa chọn file");
+              }
+             else{
+                  var duoi=filename.substr(filename.length-4, 4);
+                  if(duoi!=".xls"&&duoi!="xlsx"){
+                      alert("Chỉ hỗ trợ thêm sinh viên từ file excel, xin chọn file khác");
+                  }else {
+                 document.forms["formbrowse"].submit();
+
+                  }
+              }
+      }
+       </script>
 </html>

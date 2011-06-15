@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : jspThongTinSinhVien
     Created on : 08-05-2011, 15:37:42
     Author     : ngloc_it
@@ -14,7 +14,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Thông tin sinh viên</title>
+        <title>Chi tiết sinh viên</title>
         <style media="all" type="text/css">
             #frminfomation{
                 background-color: #E3E4FA;
@@ -24,7 +24,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
             }
 
             #frminfomation table{
-               
+
                 width: 100%;
                 background-color: #ADDFFF
             }
@@ -105,7 +105,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
                     </tr>
                  </table>
             </form>
-                    <a href="jspCapNhatThongTin.jsp">Sửa đổi thông tin</a>
+                    <a href="../servStudentManager?action=edit&MSSV=<%=student.getCode()%>">Sửa đổi thông tin</a>
             </div><!--End Contents-->
             <div id="footer"><!--Footer-->
                  <%@include file="jspFooter.jsp" %>

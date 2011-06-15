@@ -4,6 +4,7 @@
     Author     : ngloc_it
 --%>
 
+<%@page import="system.dto.clsLecturer"%>
 <%@page import="java.util.ArrayList"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,24 +12,13 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-    int i = 0;
-    int n = 0;
-    String strErr = "";
-    ArrayList<String> listResult = new ArrayList<String>();
-    try{
-        listResult = (ArrayList<String>) session.getAttribute("listinfomation");
-        session.removeAttribute("listinfomation");
-        n = listResult.size();
-        strErr = "No Error";
-     }catch(Exception ex){
-        strErr = ex.toString();
-     }
+    clsLecturer lec=(clsLecturer) session.getAttribute("lec");
 %>
 <html>
     <head>
         <link href="../csss/general.css" rel="stylesheet" type="text/css" media="screen">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Chi tiết giảng viên</title>
+        <title>Chi tiết giảng viên:</title>
         <style media="all" type="text/css">
             #tableinfo{
                 margin-left: 10px;
@@ -62,56 +52,43 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <p>
-                    Thông tin chi tiết về giảng viên
-                    <%=listResult.get(1)%>
+                    Thông tin chi tiết giảng viên: <%=lec.getFullname()%>
                 </p>
-                <!--
-                    //1. LecturerCode,   2. FullName,     3. BirthDay, 4. Email, 5. Phone
-                    //6. Address,   7. HocHam,  8. Degree,  9.Gender,   10. CMND.
-                -->
                 <form action="#" id="frminfo">
-                    <%if(n>0){%>
                     <table id="tableinfo">
                             <tr>
-                                <td>Mã GV</td> <td><%=listResult.get(i++)%></td>
+                                <td>Mã GV:</td> <td><%=lec.getLecturerCode() %></td>
                             </tr>
                             <tr>
-                                <td>Họ Và Tên</td> <td><%=listResult.get(i++)%></td>
+                                <td>Họ tên:</td> <td><%=lec.getFullname()%></td>
                             </tr>
                             <tr>
-                                <td>Ngày Sinh</td> <td><%=listResult.get(i++)%></td>
+                                <td>Ngày sinh:</td> <td><%=lec.getBirthDay()%></td>
                             </tr>
                             <tr>
-                                <td>Email</td>  <td><%=listResult.get(i++)%></td>
+                                <td>Email:</td>  <td><%=lec.getEmail()%></td>
                             </tr>
                             <tr>
-                                <td>Số ĐT</td> <td><%=listResult.get(i++)%></td>
+                                <td>Điện thoại:</td> <td><%=lec.getPhone()%></td>
                             </tr>
                             <tr>
-                                <td>Địa Chỉ</td> <td><%=listResult.get(i++)%></td>
+                                <td>Địa chi:̉</td> <td><%=lec.getAddress()%></td>
                             </tr>
                             <tr>
-                                <td>Học Hàm</td> <td><%=listResult.get(i++)%></td>
+                                <td>Học Hàm:</td> <td><%=lec.getHocHam()%></td>
                             </tr>
                             <tr>
-                                <td>Học Vị</td> <td><%=listResult.get(i++)%></td>
+                                <td>Học Vị:</td> <td><%=lec.getHocVi()%></td>
                             </tr>
                             <tr>
-                                <td>Giới Tính</td> <td><%=listResult.get(i++)%></td>
+                                <td>Giới tính:</td> <td><%=lec.getGender()%></td>
                             </tr>
                             <tr>
-                                <td>CMND</td> <td><%=listResult.get(i++)%></td>
+                                <td>CMND:</td> <td><%=lec.getCMND()%></td>
                             </tr>
-                            <tr>
-                            <td>Tình Trang hôn nhân</td> <td>KXĐ</td>
-                            </tr>                            
+                                                     
                         </table>
-                                <a href="../UpdateLecturer?id=<%=listResult.get(0)%>&function=update">Cập nhật thông tin</a>
-                     <%}%>
-
-                     <br/><br/><br/>
-                     <h3><u>Những hoạt động của GV <%=listResult.get(1)%></u></h3>
-                    <br/><br/><br/><br/><br/>
+                      <a href="../servLecturerManager?code=<%=lec.getLecturerCode()%>&action=edit">Cập nhật thông tin</a>
                 </form>
 
             </div><!--End Contents-->

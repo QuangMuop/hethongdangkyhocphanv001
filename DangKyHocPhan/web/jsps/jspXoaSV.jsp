@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : jspThongTinSinhVien
     Created on : 08-05-2011, 15:37:42
     Author     : ngloc_it
@@ -14,7 +14,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Thông tin sinh viên</title>
+        <title>Xóa sinh viên</title>
         <style media="all" type="text/css">
             #frminfomation{
                 background-color: #E3E4FA;
@@ -24,7 +24,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
             }
 
             #frminfomation table{
-               
+
                 width: 100%;
                 background-color: #ADDFFF
             }
@@ -45,11 +45,12 @@ clsStudent student =(clsStudent) session.getAttribute("student");
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-            <form action="#" method="post" id="frminfomation">
+                <form id="frminfomation" name="frminfomation" action="../servStudentManager?action=delete&MSSV=<%=student.getCode()%>" method="post">
                 <br>
-                <h3>Thông tin sinh viên</h3>
+                <h3>Xóa sinh viên: <%=student.getFullname()%> </h3>
                 <h1>MSSV:<%=student.getCode()%></h1>
                  <br>
+                 <u>Thông tin sinh viên:</u>
                 <table id="infomation">
                     <tr>
                         <td>Họ và tên:</td>
@@ -104,8 +105,9 @@ clsStudent student =(clsStudent) session.getAttribute("student");
                         <td><%=student.getIsStuding()%></td>
                     </tr>
                  </table>
+                    <input type="submit" value="Xóa sinh viên">
             </form>
-                    <a href="jspCapNhatThongTin.jsp">Sửa đổi thông tin</a>
+
             </div><!--End Contents-->
             <div id="footer"><!--Footer-->
                  <%@include file="jspFooter.jsp" %>
