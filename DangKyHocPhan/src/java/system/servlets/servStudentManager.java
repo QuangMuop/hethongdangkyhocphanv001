@@ -92,6 +92,9 @@ public class servStudentManager extends HttpServlet {
             out.close();
         }
     }
+     private void InsertListStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+//lộc viết đây nha
+    }
     private void updateStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
         String MSSV=request.getParameter("txtCode");
         String FullName=request.getParameter("txtname");
@@ -164,15 +167,7 @@ public class servStudentManager extends HttpServlet {
        String path = "./jsps/jspChiTietSV.jsp";
        response.sendRedirect(path);
     }
-    /**
-     * 
-     * @param request
-     * @param response
-     * @param session
-     */
-    private void InsertListStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session){
-
-    }
+       
     /**
      *
      * @param request

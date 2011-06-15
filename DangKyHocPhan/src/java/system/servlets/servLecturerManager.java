@@ -86,7 +86,7 @@ public class servLecturerManager extends HttpServlet {
         }
     }
     private void insertListLecture(HttpServletRequest request,HttpServletResponse response,  HttpSession session){
-
+//lộc viết đây nha
     }
     /**
      *

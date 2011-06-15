@@ -56,10 +56,17 @@ public class servUpdateScore extends HttpServlet {
                // }
             // }
            }
+               else  if(action.equalsIgnoreCase("update")) {
+                   updateSocre(request, response, session);
+               }
           
         } finally {            
             out.close();
         }
+    }
+    private void updateSocre(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+      //lộc viết đây nha
+        
     }
 private void getAllClass(HttpServletResponse resp, HttpSession session) throws IOException, Exception{
              clsBOClass BOClass=new clsBOClass();
