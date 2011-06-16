@@ -17,4 +17,8 @@ public void deleteComment(int Id) throws Exception{
     clsMapperComment MPC=new clsMapperComment();
     MPC.CommentDelete(Id);
 }
+public clsComment getCommentInfo(int Id) throws Exception{
+     clsMapperComment MPC=new clsMapperComment();
+    return MPC.getCommnetInfo(Id);
+}
 }
