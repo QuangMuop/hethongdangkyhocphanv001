@@ -73,10 +73,14 @@ public clsMapperComment() throws Exception{
   }
  public void CommentDelete(int id) throws Exception{
           try{
-    StringBuffer sql = new StringBuffer();
+           StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.comment Where Id = ").append(id);
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
+            StringBuffer sql1 = new StringBuffer();
+            sql1.append("UPDATE dangkyhocphan.comment set Id=Id-1 where Id > ").append(id);
+            PreparedStatement stmt1 = getConnection().prepareStatement(sql1.toString());
+            stmt1.execute();
         }catch(Exception ex){
                 throw ex;
         }
