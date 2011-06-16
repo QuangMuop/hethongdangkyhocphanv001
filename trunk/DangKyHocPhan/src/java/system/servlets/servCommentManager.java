@@ -42,10 +42,21 @@ public class servCommentManager extends HttpServlet {
                 else if(action.equalsIgnoreCase("delete")){
                     deleteComment(request, response, session);
                 }
+                else if(action.equalsIgnoreCase("detail")){
+                    detailComment(request, response, session);
+                }
             
         } finally {            
             out.close();
         }
+    }
+ private void detailComment(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception{
+        int Id=Integer.parseInt(request.getParameter("Id"));
+        clsBOComment BOC=new clsBOComment();
+        clsComment comment=BOC.getCommentInfo(Id);
+        session.setAttribute("comment", comment);
+        String path = "./jsps/jspChiTietComment.jsp";
+        response.sendRedirect(path);
     }
     private void deleteComment(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception{
         int Id=Integer.parseInt(request.getParameter("Id"));
