@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import system.bo.clsBOAccount;
-import system.bo.clsBOClass;
 import system.bo.clsBOCourse;
 import system.bo.clsBORule;
 import system.bo.clsBOStudent;
