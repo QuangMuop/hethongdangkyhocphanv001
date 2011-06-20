@@ -92,42 +92,14 @@ ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sub");
         </div>
         <!--End Wrapper-->
     </body>
+    <script src="../javascripts/jsDanhSachMonHoc.js"></script>
      <script  type = "text/javascript" >
            action="search";
-           function createRequestObject(){
-            var req;
-            if(window.XMLHttpRequest){
-                //For Firefox, Safari, Opera
-                req = new XMLHttpRequest();
-            }
-            else if(window.ActiveXObject){
-                //For IE 5+
-                req = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            else{
-                //Error for an old browser
-                alert('Your browser is not IE 5 or higher, or Firefox or Safari or Opera');
-            }
-            return req;
-        }
-
-        //Make the XMLHttpRequest Object
-        var http = createRequestObject();
+       var http = createRequestObject();
         function search(){
-            if(http){
                 name=document.getElementById("subname").value;
-                 http.open("GET","../servSubject?action="+action+"&name="+name,true);
-                http.onreadystatechange = handleResponse;
-                http.send(null);
-            }
-        }
-
-        function handleResponse(){
-            if(http.readyState == 4 && http.status == 200){
-                var detail=document.getElementById("subjectlist");
-                detail.innerHTML=http.responseText;
-            }
-        }
-        
+                ajaxfunction("../servSubject?action="+action+"&name="+name);
+       }
+       
        </script>
 </html>

@@ -107,43 +107,15 @@ ArrayList<clsAccount> aclist=(ArrayList<clsAccount>) session.getAttribute("acc")
         </div>
         <!--End Wrapper-->
     </body>
+    <script src="../javascripts/jspCapNhatTK.js"></script>
      <script  type = "text/javascript" >
         name="";
         action="search";
-         function createRequestObject(){
-            var req;
-            if(window.XMLHttpRequest){
-                //For Firefox, Safari, Opera
-                req = new XMLHttpRequest();
-            }
-            else if(window.ActiveXObject){
-                //For IE 5+
-                req = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            else{
-                //Error for an old browser
-                alert('Your browser is not IE 5 or higher, or Firefox or Safari or Opera');
-            }
-            return req;
-        }
-
-        //Make the XMLHttpRequest Object
         var http = createRequestObject();
         function search(){
-            if(http){
-                username=document.getElementById("username").value;
-                http.open("GET","../servAccount?action="+action+"&username="+username,true);
-                http.onreadystatechange = handleResponse;
-                http.send(null);
-            }
+              username=document.getElementById("username").value;
+                 ajaxfunction("../servAccount?action="+action+"&username="+username);
         }
 
-        function handleResponse(){
-            if(http.readyState == 4 && http.status == 200){
-                var detail=document.getElementById("tableaclist");
-                detail.innerHTML=http.responseText;
-            }
-        }
-                
        </script>
 </html>

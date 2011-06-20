@@ -54,7 +54,7 @@
                 <table>
                     <!--Thu 2, clasname, sub name, phong, ca, giang vien-->
                     <tr>
-                        <td><a href="#">Thứ 2</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                        <td><a href="#">Thứ 2</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
                     </tr>
                     <%while((i<n) && listData.get(i).equals("2")){
                         i++;%>
@@ -69,7 +69,7 @@
                     <%}%>
                 </table>
                 <table>
-                    <tr><td><a href="#">Thứ 3</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <tr><td><a href="#">Thứ 3</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
                     <%while((i<n) && listData.get(i).equals("3")){
                         i++;%>
                         <tr>
@@ -83,7 +83,7 @@
                     <%}%>
                 </table>
                 <table>
-                    <tr><td><a href="#">Thứ 4</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <tr><td><a href="#">Thứ 4</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
                     <%while((i<n) && listData.get(i).equals("4")){
                         i++;%>
                         <tr>
@@ -98,7 +98,7 @@
                 </table>
 
                 <table>
-                    <tr><td><a href="#">Thứ 5</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <tr><td><a href="#">Thứ 5</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
                     <%while((i<n) && listData.get(i).equals("5")){
                         i++;%>
                         <tr>
@@ -113,7 +113,7 @@
                 </table>
 
                 <table>
-                    <tr><td><a href="#">Thứ 6</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <tr><td><a href="#">Thứ 6</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
                    <%while((i<n) && listData.get(i).equals("2")){
                         i++;%>
                         <tr>
@@ -128,7 +128,7 @@
                 </table>
 
                 <table>
-                    <tr><td><a href="#">Thứ 7</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <tr><td><a href="#">Thứ 7</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
                     <%while((i<n) && listData.get(i).equals("2")){
                         i++;%>
                         <tr>
@@ -143,7 +143,7 @@
                 </table>
 
                 <table>
-                    <tr><td><a href="#">Chủ Nhật</a></td><td>Mã lớp</td><td>Tên Môn Học</td><td>Phòng</td><td>Ca</td><td>Giảng Viên</td>
+                    <tr><td><a href="#">Chủ Nhật</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
                     <%while((i<n) && ((listData.get(i).equals("chunhat"))||(listData.get(i).equals("8")))){
                         i++;%>
                         <tr>

@@ -104,48 +104,22 @@
         </div>
         <!--End Wrapper-->
     </body>
-    <script  type = "text/javascript" >
+    <script src="../javascripts/jsGiangVien.js"></script>
+    <script type="text/javascript">
         typesearch="All";
         name="";
         action="search";
-         function createRequestObject(){
-            var req;
-            if(window.XMLHttpRequest){
-                //For Firefox, Safari, Opera
-                req = new XMLHttpRequest();
-            }
-            else if(window.ActiveXObject){
-                //For IE 5+
-                req = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            else{
-                //Error for an old browser
-                alert('Your browser is not IE 5 or higher, or Firefox or Safari or Opera');
-            }
-            return req;
-        }
-
-        //Make the XMLHttpRequest Object
         var http = createRequestObject();
         function search(){
-            if(http){
-                if(typesearch=="name"){
-                    name=document.formsearch.txtName.value;
+            //if(http){
+               if(typesearch=="name"){
+                  name=document.formsearch.txtName.value;
                 }
                 else{
                     name=document.formsearch.txtId.value;
                 }
-                http.open("GET","../servLecturerManager?action="+action+"&type="+typesearch+"&name="+name,true);
-                http.onreadystatechange = handleResponse;
-                http.send(null);
-            }
-        }
-
-        function handleResponse(){
-            if(http.readyState == 4 && http.status == 200){
-                var detail=document.getElementById("tablelistlecturer");
-                detail.innerHTML=http.responseText;
-            }
+                ajaxfunction("../servLecturerManager?action="+action+"&type="+typesearch+"&name="+name);
+           
         }
          function selectName(){
              typesearch="name";
