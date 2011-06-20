@@ -238,21 +238,30 @@ public class servStudentManager extends HttpServlet {
         PrintWriter out = response.getWriter();
         String type=request.getParameter("type");
         String name=request.getParameter("name");
+        int start=Integer.parseInt(request.getParameter("start"));
         clsBOStudent BOS=new clsBOStudent();
         ArrayList<clsStudent> studentlist=new ArrayList<clsStudent>();
+        int numstudent=0;
         if(type.equalsIgnoreCase("mssv")){
-            studentlist=BOS.getStudentsByCode(name);
+            numstudent=BOS.CountStudentByCode(name);
+            studentlist=BOS.getStudentsByCodeWithLimmit(name, start, 5);
         }else if(type.equalsIgnoreCase("name")){
-            studentlist=BOS.getStudentsByName(name);
+            numstudent=BOS.CountStudentByName(name);
+            studentlist=BOS.getStudentsByNameWithLimit(name, start, 5);
         }else if(type.equalsIgnoreCase("classname")){
-           studentlist=BOS.GetStudentsByClass(name);
+            numstudent=BOS.CountStudentByClass(name);
+           studentlist=BOS.getStudentsByClassWithLimmit(name, start, 5);
         }else if(type.equalsIgnoreCase("All")){
-            studentlist=BOS.GetAllStudent();
+            numstudent=BOS.CountAllStudent();
+            studentlist=BOS.getAllStudentWithLimit(start, 5);
         }
+        if(studentlist.isEmpty()){
+            out.println("Không có kết quả nào phù hợp");
+        }else{
         out.println("<tr><th>STT</th><th>MSSV</th><th>Họ Tên</th><th>Lớp</th><th>Ngày sinh</th><th>Giới tính</th><th>Loại</th><th>Sửa</th><th>Xóa</th><th>Cập nhật</th></tr>");
         for(int i=0;i<studentlist.size();i++){
             StringBuffer str=new StringBuffer();
-            str.append("<tr><td>").append(i + 1).append("</td>");
+            str.append("<tr><td>").append(start + 1 + i).append("</td>");
             str.append("<td><a href='../servStudentManager?action=detail&MSSV=<%="+studentlist.get(i).getCode()+"'>").append(studentlist.get(i).getCode()).append("</a></td>");
             str.append("<td>").append(studentlist.get(i).getFullname()).append("</td>");
             str.append("<td>").append(studentlist.get(i).getClasss()).append("</td>");
@@ -267,6 +276,8 @@ public class servStudentManager extends HttpServlet {
                  str.append("<td>Có</td>");
             out.println(str.toString());
         }
+        }
+         out.println("<input type='hidden' value='"+numstudent+"' id='numstuafter' />");
     }
     /**
      *
@@ -276,7 +287,9 @@ public class servStudentManager extends HttpServlet {
      */
 private void getAllStudent(HttpServletResponse response, HttpSession session) throws Exception{
         clsBOStudent BOS=new clsBOStudent();
-        ArrayList<clsStudent> listStudent=BOS.GetAllStudent();
+        int numstudent=BOS.CountAllStudent();
+        session.setAttribute("numStudent", numstudent);
+        ArrayList<clsStudent> listStudent=BOS.getAllStudentWithLimit(0, 5);
         session.setAttribute("liststudent", listStudent);
        clsBOCourse BOC=new clsBOCourse();
         ArrayList<String> listClass=BOC.getAllClassName();
