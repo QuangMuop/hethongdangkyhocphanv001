@@ -126,51 +126,23 @@ int j=0;
         </div>
         <!--End Wrapper-->
     </body>
+    <script src="../javascripts/jsDanhSachLopHoc.js"></script>
      <script  type = "text/javascript" >
         typesearch="All";
         name="";
         action="search";
         actor="Admin";
-          function createRequestObject(){
-            var req;
-            if(window.XMLHttpRequest){
-                //For Firefox, Safari, Opera
-                req = new XMLHttpRequest();
-            }
-            else if(window.ActiveXObject){
-                //For IE 5+
-                req = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            else{
-                //Error for an old browser
-                alert('Your browser is not IE 5 or higher, or Firefox or Safari or Opera');
-            }
-            return req;
-        }
-
-        //Make the XMLHttpRequest Object
-        var http = createRequestObject();
+         var http = createRequestObject();
         function search(){
-            if(http){
-                if(typesearch=="subname"){
+              if(typesearch=="subname"){
                     name=document.getElementById("ssubject").value;
                 }
                 else{
                     name=document.formsearch.sLecturer.value;
                 }
-                http.open("GET","../servClassView?action="+action+"&type="+typesearch+"&name="+name+"&actor="+actor,true);
-                http.onreadystatechange = handleResponse;
-                http.send(null);
-            }
+                ajaxfunction("../servClassView?action="+action+"&type="+typesearch+"&name="+name+"&actor="+actor);
         }
-
-        function handleResponse(){
-            if(http.readyState == 4 && http.status == 200){
-                var detail=document.getElementById("tablelistclass");
-                detail.innerHTML=http.responseText;
-            }
-        }
-         function selectLec(){
+        function selectLec(){
              typesearch="lecturer";
 
          }

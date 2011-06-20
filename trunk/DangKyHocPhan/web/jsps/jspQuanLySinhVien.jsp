@@ -1,9 +1,3 @@
-<%-- 
-    Document   : jspQuanLySinhVien
-    Created on : 19-05-2011, 22:10:10
-    Author     : ngloc_it
---%>
-
 <%@page import="system.dto.clsStudent"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,6 +7,7 @@
 <%
     ArrayList<clsStudent> listStudent = (ArrayList<clsStudent>) session.getAttribute("liststudent");
     ArrayList<String> listClass = (ArrayList<String>) session.getAttribute("listClass");
+    Integer numStudent = (Integer) session.getAttribute("numStudent");
    
 %>
 <html>
@@ -129,6 +124,11 @@
                             </tr>
                         <%}%>
                     </table>
+                    <input style="position:absolute; left:650px;" type="button" value="|<<" onclick="nprepage()">
+                    <input style="position:absolute; left:680px;" type="button" value="<<" onclick="prepage()">
+                    <input style="position:absolute; left:710px;" type="button" value=">>" onclick="nextpage()">
+                    <input style="position:absolute; left:740px;" type="button" value=">>|" onclick="nnextpage()"><br>
+                        <input type="hidden" value="<%=numStudent%>" id="numstu" />
                     <a href="#">Tải file</a>
                     </form>
             </div><!--End Contents-->
@@ -139,31 +139,17 @@
         </div>
         <!--End Wrapper-->
     </body>
+     <script src="../javascripts/jsSinhVien.js"></script>
     <script  type = "text/javascript" >
         typesearch="All";
         name="All";
         action="search";
-        function createRequestObject(){
-            var req;
-            if(window.XMLHttpRequest){
-                //For Firefox, Safari, Opera
-                req = new XMLHttpRequest();
-            }
-            else if(window.ActiveXObject){
-                //For IE 5+
-                req = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            else{
-                //Error for an old browser
-                alert('Your browser is not IE 5 or higher, or Firefox or Safari or Opera');
-            }
-            return req;
-        }
-
-        //Make the XMLHttpRequest Object
-        var http = createRequestObject();
+        start=0;
+        end=document.getElementById("numstu").value;
+           var http = createRequestObject();
         function search(){
             if(http){
+                start=0;
                 if(typesearch=="name"){
                     name=document.formsearch.txtName.value;
                }else if(typesearch == "mssv"){
@@ -171,21 +157,61 @@
                 }else if(typesearch == "classname"){
                     name = document.formsearch.sClass.value;
                 }
-                http.open("GET","../servStudentManager?action="+action+"&type="+typesearch+"&name="+name,true);
-                http.onreadystatechange = handleResponse;
-                http.send(null);
+                ajaxfunction("../servStudentManager?action="+action+"&type="+typesearch+"&name="+name+"&start="+start);
             }
         }
-
-        function handleResponse(){
-            if(http.readyState == 4 && http.status == 200){
-                var detail=document.getElementById("tableliststudent");
-                detail.innerHTML=http.responseText;
-            }
+        function nprepage(){
+           search();
         }
-         function selectCode(){
+        function prepage(){
+            start=start-5;
+            if(start<0){
+                start=0;
+            }
+             if(typesearch=="name"){
+                    name=document.formsearch.txtName.value;
+               }else if(typesearch == "mssv"){
+                    name=document.formsearch.txtcode.value;
+                }else if(typesearch == "classname"){
+                    name = document.formsearch.sClass.value;
+                }
+                ajaxfunction("../servStudentManager?action="+action+"&type="+typesearch+"&name="+name+"&start="+start);
+       
+        }
+        function nextpage(){
+            start=start+5;
+            if(start+5>end){
+                start=end-5;
+            }
+            if(start<0){
+                start=0;
+            }
+            if(typesearch=="name"){
+                    name=document.formsearch.txtName.value;
+               }else if(typesearch == "mssv"){
+                    name=document.formsearch.txtcode.value;
+                }else if(typesearch == "classname"){
+                    name = document.formsearch.sClass.value;
+                }
+                ajaxfunction("../servStudentManager?action="+action+"&type="+typesearch+"&name="+name+"&start="+start);
+        }
+        function nnextpage(){
+            start=end-5;
+            if(start<0){
+                start=0;
+            }
+                 if(typesearch=="name"){
+                    name=document.formsearch.txtName.value;
+               }else if(typesearch == "mssv"){
+                    name=document.formsearch.txtcode.value;
+                }else if(typesearch == "classname"){
+                    name = document.formsearch.sClass.value;
+                }
+                ajaxfunction("../servStudentManager?action="+action+"&type="+typesearch+"&name="+name+"&start="+start);
+       
+        }
+     function selectCode(){
              typesearch="mssv";
-
          }
          function selectName(){
              typesearch="name";
