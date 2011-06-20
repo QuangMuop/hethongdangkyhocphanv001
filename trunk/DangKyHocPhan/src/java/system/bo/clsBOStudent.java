@@ -116,4 +116,38 @@ public class clsBOStudent {
          clsMapperStudent mps=new clsMapperStudent();
          mps.StudentUpdateByAdmin(cls);
      }
+     public ArrayList<clsStudent> getStudentsByNameWithLimit(String Name, int Start, int Limmit) throws Exception {
+        clsMapperStudent mapper=new clsMapperStudent();
+        return mapper.getStudentsByNameWithLimmit(Name, Start, Limmit);
+    }
+      public Integer CountStudentByName(String Name) throws Exception {
+        clsMapperStudent mapper=new clsMapperStudent();
+        return  mapper.CountStudentsByName(Name);
+    }
+       public ArrayList<clsStudent> getStudentsByCodeWithLimmit(String Code, int Start, int Limmit) throws Exception {
+        clsMapperStudent mapper = new clsMapperStudent();
+        return  mapper.getStudentsByCodeWithLimit(Code, Start, Limmit);
+   }
+    public Integer CountStudentByCode(String Code) throws Exception {
+        clsMapperStudent mapper= new clsMapperStudent();
+        return  mapper.CountStudentsByCode(Code);
+        
+    }    
+     public Integer CountAllStudent() throws Exception {
+        clsMapperStudent mapper= new clsMapperStudent();
+          return mapper.CountAllStudents();
+    }
+      public ArrayList<clsStudent> getAllStudentWithLimit(int Start, int Limmit) throws Exception {
+         clsMapperStudent mapper = new clsMapperStudent();
+            return mapper.GetAllStudentWithLimit(Start, Limmit);
+    }
+       public ArrayList getStudentsByClassWithLimmit(String ClassName, int Start, int Limmit) throws Exception {
+        clsMapperStudent mapper = new clsMapperStudent();
+            return mapper.GetStudentsByClassWithLimmit(ClassName, Start, Limmit);
+    }
+       public Integer CountStudentByClass(String ClassName) throws Exception {
+         clsMapperStudent mapper= new clsMapperStudent();
+            return  mapper.CountStudentsByClass(ClassName);
+       
+    }
 }
