@@ -262,7 +262,10 @@ private void search(HttpServletRequest request, HttpServletResponse response) th
           {
             listLect=BOL.GetAllLecturer();
          }
-         out.println("<tr><th>STT</th><th>Mã GV</th><th>Họ Tên</th><th>Ngày Sinh</th><th>Giới tính</th><th>Học hàm</th><th>Học vị</th><th>Sửa</th><th>Xóa</th></tr>");
+         if(listLect.isEmpty()){
+             out.println("Không có kết quả phù hợp");
+         }else{
+         out.println("<tr><th>STT</th><th>Mã GV</th><th>Họ tên</th><th>Ngày Sinh</th><th>Giới tính</th><th>Học hàm</th><th>Học vị</th><th>Sửa</th><th>Xóa</th></tr>");
         for(int i=0;i<listLect.size();i++){
             out.println(""
                     + "<tr>"
@@ -276,7 +279,7 @@ private void search(HttpServletRequest request, HttpServletResponse response) th
                     + "<td><a href='../servLecturerManager?code=" + listLect.get(i).getLecturerCode() + "&action=edit'>Sửa</a></td>"
                     + "<td><a href='../servLecturerManager?code=" + listLect.get(i).getLecturerCode() + "&action=predelete'> Xóa</a></td>");
         }
-
+         }
 }
     /**
      *
