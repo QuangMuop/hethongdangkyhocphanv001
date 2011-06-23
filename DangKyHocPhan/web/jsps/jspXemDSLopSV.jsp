@@ -1,4 +1,4 @@
-<%--
+<%-- 
     Document   : jspXemDSLop
     Created on : Apr 23, 2011, 4:29:09 PM
     Author     : ngloc_it
@@ -37,21 +37,21 @@ int j=0;
                 background-color: #F9B7FF;
             }
             #tablelistclass td{
-                background-color: #b1B700;
+                background-color: #488AC7;
                 padding: 2 5 2 5;
             }
             #formsearch{
-                 margin-top: 10px;
+                margin-top: 10px;
                 margin-left: 20px;
                 padding: 5 10 5 10;
-                background-color: #f29de3;
+                background-color: #175F6E;
                 width: 280px;
             }
         </style>
     </head>
     <body>
         <!--Get data from controller-->
-
+        
         <!--Div Wrapper-->
         <div id="wrapper">
             <div id="mainNav"><!--Main Navigation-->
@@ -59,8 +59,8 @@ int j=0;
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <br>
-                 <h1>Tìm kiếm lớp học:</h1>
-               <form id = "formsearch" name="formsearch" action="../ViewListClass?searchengine=true" method="post">
+                <h1>Tìm kiếm lớp học:</h1>
+                <form id = "formsearch" name="formsearch" action="../ViewListClass?searchengine=true" method="post">
                      <table>
                          <tr>
                              <td><input type="radio" name="radiooption" id="rsubject" checked="true" onclick="selectAll()" ></td>
@@ -92,10 +92,11 @@ int j=0;
                             <td colspan="2"><input type="button" onclick="search()" value="Tìm Kiếm"></td>
                         </tr>
                     </table>
-                </form><br><hr><hr>
+                </form>
+                <hr><hr>
                 <h3>Danh sách các lớp học trong <%=time%>:</h3>
                 <form id="classlist">
-                  <table id="tablelistclass">
+                  <table id="tablelistclass" name="tablelistclass">
                     <tr>
                         <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Số TC</th><th>Ngày</th><th>Phòng</th><th>Ca</th>
                     </tr>
@@ -109,7 +110,7 @@ int j=0;
                          <td>Thứ <%=clases.get(j).getDate()%></td>
                          <td><%=clases.get(j).getRoom()%></td>
                          <td><%=clases.get(j).getShift()%></td>
-                         </tr>
+                       </tr>
                      <%}%>
                 </table>
                 </form>
@@ -122,8 +123,8 @@ int j=0;
         </div>
         <!--End Wrapper-->
     </body>
-     <script src="../javascripts/jsDanhSachLopHoc.js"></script>
-    <script  type = "text/javascript" >
+    <script src="../javascripts/jsDanhSachLopHoc.js"></script>
+     <script  type = "text/javascript" >
         typesearch="All";
         name="";
         action="search";

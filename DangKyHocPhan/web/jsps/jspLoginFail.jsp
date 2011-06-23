@@ -1,4 +1,4 @@
-<%--
+<%-- 
     Document   : jspLogin
     Created on : Apr 23, 2011, 4:34:47 PM
     Author     : ngloc_it
@@ -15,17 +15,17 @@
 
         <style media="all" type="text/css">
             table{
-                margin-left: 250px;
-                margin-top: 100px;
+                margin-left: 200px;
+                margin-top: 30px;
                 margin-bottom: 120px;
-                padding-top: 125px;
+                padding-top: 20px;
                 padding-left: 25px;
                 padding-right: 25px;
                 padding-bottom: 120px;
-                border: 2px solid #e3e4e4;
-                background: #f2d3e4 url(../imgs/login.PNG) no-repeat left top;
+                border: 1px solid #5F676D;
+                background: transparent no-repeat left top;
                 width: 340px;
-                height: 470px;
+                height: 350px;
             }
             #login-submit{
                 background-color: #ff3edf;
@@ -42,8 +42,8 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <form name="myform" id="myform" method="post" action="../servLogin?login=true">
-                    <h3>Tên tài khoản hay mật khẩu không đúng, vui lòng nhập lại</h3>
-                   <table>
+                    <h3>Tên tài khoản hoặc mật khẩu không đúng!</h3>
+                    <table>
                         <tr>
                             <td>Tên Đăng Nhập</td>
                             <td>
@@ -65,7 +65,7 @@
                         <tr>
                             <td></td>
                             <td>
-                                <input type="button" name="login-submit" onclick="Login()" value="Đăng Nhập"/>
+                                <input type="button" style="color: #000000; font-style: oblique; font-size: 15px; font-variant: inherit" name="login-submit" onclick="Login()" value="Đăng Nhập"/>
                             </td>
                         </tr>
                     </table>

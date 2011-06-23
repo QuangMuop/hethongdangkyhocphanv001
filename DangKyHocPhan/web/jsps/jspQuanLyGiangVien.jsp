@@ -33,14 +33,14 @@
                 background-color: #F9B7FF;
             }
             #tablelistlecturer td{
-                background-color: #b1B700;
+                background-color: #686;
                 padding: 2 5 2 5;
             }
             #formsearch{
                 margin-top: 10px;
                 margin-left: 20px;
                 padding: 5 10 5 10;
-                background-color: #f29de3;
+                background-color: #4792b8;
                 width: 320px;
             }
         </style>

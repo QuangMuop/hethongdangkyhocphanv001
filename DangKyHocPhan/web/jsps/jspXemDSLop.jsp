@@ -37,14 +37,14 @@ int j=0;
                 background-color: #F9B7FF;
             }
             #tablelistclass td{
-                background-color: #b1B700;
+                background-color: #488AC7;
                 padding: 2 5 2 5;
             }
             #formsearch{
                 margin-top: 10px;
                 margin-left: 20px;
                 padding: 5 10 5 10;
-                background-color: #f29de3;
+                background-color: #175F6E;
                 width: 280px;
             }
         </style>

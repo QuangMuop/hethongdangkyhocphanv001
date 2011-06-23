@@ -35,37 +35,10 @@ int numtc=0;
                 background-color: #F9B7FF;
             }
             #tablelistclass td{
-                background-color: 	#b1B700;
+                background-color:#5F676D;
                 padding: 2 5 2 5;
             }
-            #formaction{
-                margin-left: 10%;
-                margin-top: 30px;
-                padding: 0 2 0 2;
-            }
-            #formaction table{
-                width: 155px;
-            }
-            #formrequest{
-                margin-left: 10%;
-                margin-top: 10px;
-                margin-bottom: 120px;
-                padding-top: 20px;
-                padding-bottom: 20px;
-                padding-right: 10px;
-                padding-left: 10px;
-                background-color: #92C7C7;
-                border: 3px solid #7F38EC;
-                width: 350px;
-                }
-                #formrequest table{
-                margin-top: 10px;
-                margin-right: 10px;
-                padding-left: 20px;
-                padding-right: 20px;
-                background-color: #e60ff0
-                }
-        </style>
+          </style>
     </head>
     <body>
         <!--Div Wrapper-->

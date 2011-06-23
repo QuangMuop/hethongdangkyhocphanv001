@@ -26,7 +26,7 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                     padding-bottom: 20px;
                     padding-right: 10px;
                     padding-left: 10px;
-                    background-color: #92C7C7;
+                    background-color: #153E7E;
                     border: 3px solid #7F38EC;
                 }
                    #formbrowse{
@@ -38,7 +38,7 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                     padding-bottom: 20px;
                     padding-right: 10px;
                     padding-left: 10px;
-                    background-color: #92C7C7;
+                    background-color: #2f4e3d;
                     border: 3px solid #7F38EC;
                 }
                  

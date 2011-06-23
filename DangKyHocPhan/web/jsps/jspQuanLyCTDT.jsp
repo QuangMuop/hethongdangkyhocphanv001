@@ -40,7 +40,7 @@ ArrayList<clsProgram> pro=(ArrayList<clsProgram>) session.getAttribute("pro");
 
                 #formdetail table td{
                 text-align: center;
-                background-color: #ffe2ff
+                background-color: #4792b8;
                 }
 
         </style>

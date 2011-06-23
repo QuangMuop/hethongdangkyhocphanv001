@@ -1,8 +1,3 @@
-<%-- 
-    Document   : jspmenu
-    Created on : Apr 23, 2011, 3:50:32 PM
-    Author     : ngloc_it
---%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -42,22 +37,23 @@
                          <li><a href="../servCourse?action=view">Quản lý khóa học</a> </li>
                          <li><a href="../servProManage?action=view">Chương trình đào tạo</a> </li>
                          <li><a href="../servClassView?action=view">Danh sách lớp học</a> </li>
-                         <li><a href="../servUpdateScore?action=view">Điểm kết thúc môn</a> </li> 
-                         <li> <a href="../servDetailSubject?action=viewQL">Môn học tiên quyết</a> </li>
+                         <li><a href="../servUpdateScore?action=manage">Điểm kết thúc môn</a> </li> 
+                         <li><a href="../servDetailSubject?action=viewQL">Môn học tiên quyết</a> </li>
                          <li><a href="../servAccount?action=view">Quản lý Tài Khoản</a> </li>
                          <li><a href="../servCommentManager?action=view">Quản lý commnent</a> </li>  
-                        <li><a href="../servViewRule?issetup=false">Quy định</a> </li>
+                         <li><a href="../servViewRule?issetup=false">Quy định</a> </li>
                     </ul>
                 </li>
                 <li><a href="#">Giảng Viên</a>
                     <ul>
-                       <li><a href="../servUpdateScore?action=view">Điểm kết thúc môn</a> </li>  
+                       <li><a href="../servUpdateScore?action=lecturer">Điểm kết thúc môn</a> </li>  
                     </ul>      
                 </li>
                 <li><a href="#">Sinh Viên</a>
                 <ul>
                         <li><a href="../servClassView?action=student">Danh sách lớp học</a> </li>
                         <li> <a href="../servRegistration?reg=view">Đăng Ký Môn Học</a> </li>
+                        <li> <a href="../servClassView?action=viewtest">Xem lịch thi</a> </li>
                         <li><a href="../servProgram">Xem Chương Trình Đào Tạo</a> </li>
                         <li> <a href="../servStudyResult?first=true">Xem kết quả học tập</a> </li>
                         <li> <a href="../servDetailSubject?action=view">Môn học tiên quyết</a> </li>

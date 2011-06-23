@@ -4,8 +4,10 @@
     border: 0;
     outline: 0;
     font-size: 100%;
+    color: #ffffff;
     vertical-align: baseline;
-    background: transparent;
+    
+    background: url("../imgs/background.jpg") repeat fixed center center #474C52;
 }
 body{
     line-height: 1.5;
@@ -19,6 +21,10 @@ ol, ul{
 #wrapper{
     width: 1020px;
     margin: 0 auto;
+    border: 10px solid #73726E;
+    border-top: 30px solid #73726E;
+    -moz-border-radius:0 0 6px 6px;
+    background: transparent; 
 }
 #header{
     margin-top: -140px;
@@ -28,32 +34,48 @@ ol, ul{
 }
 
 #mainNav{
-    background: #ffffff url(../imgs/bgrNav.png) repeat-y top left;
-    margin-left: 5px;
-    margin-top: 5px;
+    background: url("../imgs/opaque_10.png") repeat-x scroll 0 0 transparent;
+    border-right: 1px solid #5F676D;
     padding-top: 10px;
-    width: 240px;
+    width: 223px;
     float: left;
 }
 #mainNav li{
-    border: 1px solid #ffd8c3;
+    border: 1px solid #5F676D;
+    background: url("../imgs/opaque_10.png") repeat-x scroll 0 0 transparent;
+    list-style: none outside none;
+    left: 100cm;
 }
 #mainNav li:hover{
-    border: 3px solid #0dd200;
+    background: transparent;
+    border: 3px solid #5F676D; 
 }
-
 
 #content{
+    
     width: 764px;
-    background: #ffd8c3;
+    background: url("../imgs/sep_vertical.png") repeat-y scroll 0 0 transparent;
+    padding-left: 1.5em;
     float: right;
-    border: 5px solid #488AC7;
+    
 }
 
+
+
 #footer{
-    width: 1024px;
+    
     height: 60px;
     clear: both;
-    background: #4792b8;
+    background: url("../imgs/opaque_10.png") repeat-x scroll 0 0 transparent;
     text-align: center;
+}
+
+#input, textarea {
+    background: url("../imgs/opaque_10.png") repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #C5CBD0;
+    float: left;
+    margin-bottom: 0.5em;
+    padding: 0.4em;
+    width: 20em;
 }
