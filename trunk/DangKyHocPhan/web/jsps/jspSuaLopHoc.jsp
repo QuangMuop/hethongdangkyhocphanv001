@@ -80,6 +80,7 @@ int n=lec.size();
                             </select>
                         </td>
                     </tr>
+                    
                      <tr>
                          <td><input type="submit" value="Hoàn tất"></td>
                          <td><a href="../servClassView?action=view">Quay lại danh sách lớp</a></td>
@@ -87,6 +88,54 @@ int n=lec.size();
                 </table>
                         <input type="hidden" name="classname" id="classname" value=<%=cls.getClassName()%> >
                         <input type="hidden" name="subcode" id="subcode" value=<%=cls.getSubCode()%> >
+                </form>
+                <hr><hr><br>
+                <u>Cập nhật thời gian thi cho lớp học:</u>
+                <form name="testform" id="testform" action="../servClassView?action=updatetest"  method="post">
+                    <table>
+                       <tr>
+                        <td>Ngày thi:</td>
+                        <td>
+                            <select name="sDay">
+                                    <%for(int j = 0; j < 31; j++){%>
+                                    <option value="<%=(j+1)%>"><%=(j+1)%></option>
+                                    <%}%>
+                                </select>
+                                <select name="sMonth">
+                                    <%for(int j = 0; j < 12; j++){%>
+                                    <option value="<%=(j+1)%>"><%=(j+1)%></option>
+                                    <%}%>
+                                </select>
+                                <select name="sYear" id="sYear">
+                                    <%for(int j = 0; j < 2; j++){%>
+                                    <option value="<%=(2010+j)%>"><%=(2010+j)%></option>
+                                    <%}%>
+                                </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Giờ thi:</td>
+                        <td>
+                           <select name="stesttime" id="sYear">
+                              <option value="8h00">8h00</option>
+                              <option value="9h30">9h30</option> 
+                              <option value="13h30">13h30</option>
+                              <option value="15h00">15h00</option>
+                           </select> 
+                        </td>
+                    </tr>
+                    <tr>
+                       <td>Phòng thi:</td>
+                        <td><input type="text" name="testroom" id="testroom" value=<%=cls.getTestRoom()%>></td>
+                   </tr> 
+                   <tr>
+                       <td><input type="button" value="Cập nhật thời gian thi" onclick="updatetest()"></td>
+                    </tr>
+                    <tr>
+                        <td><a href="../servClassView?action=reset&classname=<%=cls.getClassName()%>">Xóa lịch thi lớp này</a></td>
+                    </tr>
+                    </table>
+                    <input type="hidden" name="class" id="class" value=<%=cls.getClassName()%> >
                 </form>
             </div><!--End Contents-->
 
@@ -96,4 +145,9 @@ int n=lec.size();
         </div>
         <!--End Wrapper-->
     </body>
+    <script type="text/javascript">
+        function updatetest(){
+            document.forms["testform"].submit(); 
+        }
+    </script>
 </html>

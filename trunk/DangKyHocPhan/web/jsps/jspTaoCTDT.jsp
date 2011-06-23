@@ -41,7 +41,7 @@ ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sub");
 
                 #formdetail table td{
                 text-align: center;
-                background-color: #ffe2ff
+                background-color: #474C52;
                 }
 
         </style>

@@ -54,7 +54,7 @@ for(j=0;j<m;j++){
 
                 #formdetail table td{
                 text-align: center;
-                background-color: #ffe2ff
+                background-color:#686;
                 }
 
 

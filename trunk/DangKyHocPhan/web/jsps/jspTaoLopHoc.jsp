@@ -34,7 +34,7 @@
                 padding-bottom: 10px;
                 padding-right: 10px;
                 padding-left: 10px;
-                background-color: #92C7C7;
+                background-color: #5F676D;
                 border: 3px solid #7F38EC;
             }
             #ClassName{
@@ -66,7 +66,7 @@
                 border-top:  1px solid;
             }
             #tablelistclass td{
-                background-color: #b1B700;
+                background-color: #5F676D;
                 padding: 2 5 2 5;
                 text-align: center;
             }

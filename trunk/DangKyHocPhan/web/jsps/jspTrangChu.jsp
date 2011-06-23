@@ -30,9 +30,14 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <p>
-                    Một số nội dung ở trang chủ....
+                    
+                <h4>Thông báo về việc đổi phòng thi môn Cấu trúc dữ liệu và giải thuật 1 ngày 22/06/2011 của lớp DSAL1.B24 ( 20/06/2011 )</h4></br>
+
+Phòng Đào tạo ĐH&SĐH thông báo cho các sinh viên thi môn Cấu trúc dữ liệu và giải thuật 1 ngày 22/06/2011 của lớp DSAL1.B24 sẽ chuyển từ phòng 101 và 106 sang phòng 201 và 202. Giờ thi sẽ bắt đầu vào ca 2 lúc 9 giờ 30 phút
+Phòng Đào tạo
+
                 </p>
-                <img src="../imgs/hpimg.JPG" alt="Angry face" id="frmimg"/>
+                <%--<img src="../imgs/hpimg.JPG" alt="Angry face" id="frmimg"/>--%>
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->

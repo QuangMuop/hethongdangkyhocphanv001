@@ -32,14 +32,14 @@ ArrayList<clsAccount> aclist=(ArrayList<clsAccount>) session.getAttribute("acc")
                 background-color: #F9B7FF;
             }
             #tableaclist td{
-                background-color: #b1B700;
+                background-color: #5F676D;
                 padding: 2 5 2 5;
             }
             #formsearch{
                 margin-top: 10px;
                 margin-left: 20px;
                 padding: 5 10 5 10;
-                background-color: #f29de3;
+                background-color: #2f4e3d;;
                 width: 280px;
             }
         </style>

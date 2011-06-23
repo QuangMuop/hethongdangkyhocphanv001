@@ -23,19 +23,21 @@ ArrayList<clsClass> result=(ArrayList<clsClass>) session.getAttribute("clases");
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <form id="updatescore" name="updatescore" action="../servUpdateScore?action=update" method="post">
+                <form id="updatescore" name="updatescore" action="../servUpdateScore?action=update" method="post" enctype="multipart/form-data">
                     <h3>Ghi nhận điểm môn học:</h3>
                     <i>Giảng viên hoặc quản lý cập nhật điểm môn học theo từng lớp học</i><br>
                     Chọn lớp học:
                     <select name="sclass" id="sclass">
                       <%for(int i=0; i<result.size();i++){%>
-                      <option value="<%=result.get(i).getClassName()%>"><%=result.get(i).getClassName()%> - <%=result.get(i).getSubName()%></option>
+                      <option value="<%=result.get(i).getSubCode()%>"><%=result.get(i).getClassName()%> - <%=result.get(i).getSubName()%></option>
                       <%}%>
                     </select><br>
                     <u>Chọn file điểm</u><br/>
                  <table id="tablebrowse">
-                    <tr>
+                     <tr>
                         <td><input type="file" name="txtPath" id="txtPath"></td>
+                    </tr>
+                    <tr>
                         <td><input type="button" onclick="Updatescore()" value="Ghi nhận điểm"></td><td></td>
                     </tr>
                 </table><br><br>

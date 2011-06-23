@@ -28,7 +28,7 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                 padding-bottom: 10px;
                 padding-right: 10px;
                 padding-left: 10px;
-                background-color: #92C7C7;
+                background-color: #175F6E;
                 border: 2px solid #7F38EC;
             }
             #formaddone table{

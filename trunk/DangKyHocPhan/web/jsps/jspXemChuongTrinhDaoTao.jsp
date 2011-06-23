@@ -44,7 +44,7 @@ for(j=0;j<n;j++){
 
                 table td{
                 text-align: center;
-                background-color: #ffe2ff;
+                background-color: #495C28;
                 }
         </style>
     </head>

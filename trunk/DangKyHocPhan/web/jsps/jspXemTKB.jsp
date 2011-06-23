@@ -3,6 +3,7 @@
     Created on : Apr 23, 2011, 4:29:26 PM
     Author     : ngloc_it
 --%>
+<%@page import="system.dto.clsClass"%>
 <%@page import="java.util.ArrayList"%>
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,21 +26,19 @@
             }
             table td{
                 border: 1px solid #461B7E;
-                background-color: #C8BBBE;
+                background-color: #474C52;
                 padding: 5 10 5 10;
             }
-            table a{
+            table u{
                 background-color: 	#B93B8F;
             }
         </style>
     </head>
-    <body>
+     <body>
         <!--Get data from controller-->
         <%
-        ArrayList<String> listData;
-        listData = (ArrayList<String>)session.getAttribute("listdata");
-        int i=0, n;
-        n = listData.size();
+        ArrayList<clsClass> list=(ArrayList<clsClass>) session.getAttribute("list");
+        String time=(String) session.getAttribute("time");
         %>
         <!--Div Wrapper-->
         <div id="wrapper">
@@ -48,113 +47,117 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <MARQUEE onmouseover="this.stop();" onmouseout="this.start();" HEIGHT=25 BGCOLOR=#C0C6CE BEHAVIOR=scroll SCROLLAMOUNT="4">
-                    Thời khóa biểu Học Kỳ 1 năm học 2012.
+                    <%=time%>
                 </MARQUEE>
-                <br/><br/><br/>
+                <br/>
+                <u>Chi tiết thời khóa biểu học kỳ:</u>
                 <table>
                     <!--Thu 2, clasname, sub name, phong, ca, giang vien-->
                     <tr>
-                        <td><a href="#">Thứ 2</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
+                        <td><u>Thứ 2</u></td><td>Mã lớp</td><td>Môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
                     </tr>
-                    <%while((i<n) && listData.get(i).equals("2")){
-                        i++;%>
-                        <tr>
-                            <td></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                        </tr>
-                    <%}%>
+                    <%for(int i=0;i<list.size();i++){
+                        if(list.get(i).getDate().equalsIgnoreCase("2")){
+                            %>
+                            <tr>
+                                <td></td>
+                                <td><%=list.get(i).getClassName()%></td>
+                                <td><%=list.get(i).getSubName()%></td>
+                                <td><%=list.get(i).getRoom()%></td>
+                                <td><%=list.get(i).getShift()%></td>
+                                <td><%=list.get(i).getLecturerName()%></td>
+                            </tr>
+                            <%
+                        }
+                    }%>
                 </table>
                 <table>
-                    <tr><td><a href="#">Thứ 3</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
-                    <%while((i<n) && listData.get(i).equals("3")){
-                        i++;%>
-                        <tr>
-                            <td></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                        </tr>
-                    <%}%>
+                    <tr><td><u>Thứ 3</u></td><td>Mã lớp</td><td>Môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
+                    <%for(int i=0;i<list.size();i++){
+                        if(list.get(i).getDate().equalsIgnoreCase("3")){
+                            %>
+                            <tr>
+                                <td></td>
+                                <td><%=list.get(i).getClassName()%></td>
+                                <td><%=list.get(i).getSubName()%></td>
+                                <td><%=list.get(i).getRoom()%></td>
+                                <td><%=list.get(i).getShift()%></td>
+                                <td><%=list.get(i).getLecturerName()%></td>
+                            </tr>
+                            <%
+                        }
+                    }%>
                 </table>
                 <table>
-                    <tr><td><a href="#">Thứ 4</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
-                    <%while((i<n) && listData.get(i).equals("4")){
-                        i++;%>
-                        <tr>
-                            <td></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                        </tr>
-                    <%}%>
-                </table>
-
-                <table>
-                    <tr><td><a href="#">Thứ 5</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
-                    <%while((i<n) && listData.get(i).equals("5")){
-                        i++;%>
-                        <tr>
-                            <td></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                        </tr>
-                    <%}%>
+                    <tr><td><u>Thứ 4</u></td><td>Mã lớp</td><td>Môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
+              <%for(int i=0;i<list.size();i++){
+                        if(list.get(i).getDate().equalsIgnoreCase("4")){
+                            %>
+                            <tr>
+                                <td></td>
+                                <td><%=list.get(i).getClassName()%></td>
+                                <td><%=list.get(i).getSubName()%></td>
+                                <td><%=list.get(i).getRoom()%></td>
+                                <td><%=list.get(i).getShift()%></td>
+                                <td><%=list.get(i).getLecturerName()%></td>
+                            </tr>
+                            <%
+                        }
+                    }%>
                 </table>
 
                 <table>
-                    <tr><td><a href="#">Thứ 6</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
-                   <%while((i<n) && listData.get(i).equals("2")){
-                        i++;%>
-                        <tr>
-                            <td></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                        </tr>
-                    <%}%>
+                    <tr><td><u>Thứ 5</u></td><td>Mã lớp</td><td>Môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
+                   <%for(int i=0;i<list.size();i++){
+                        if(list.get(i).getDate().equalsIgnoreCase("5")){
+                            %>
+                            <tr>
+                                <td></td>
+                                <td><%=list.get(i).getClassName()%></td>
+                                <td><%=list.get(i).getSubName()%></td>
+                                <td><%=list.get(i).getRoom()%></td>
+                                <td><%=list.get(i).getShift()%></td>
+                                <td><%=list.get(i).getLecturerName()%></td>
+                            </tr>
+                            <%
+                        }
+                    }%>
                 </table>
 
                 <table>
-                    <tr><td><a href="#">Thứ 7</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
-                    <%while((i<n) && listData.get(i).equals("2")){
-                        i++;%>
-                        <tr>
-                            <td></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                        </tr>
-                    <%}%>
+                    <tr><td><u>Thứ 6</u></td><td>Mã lớp</td><td>Môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
+                <%for(int i=0;i<list.size();i++){
+                        if(list.get(i).getDate().equalsIgnoreCase("6")){
+                            %>
+                            <tr>
+                                <td></td>
+                                <td><%=list.get(i).getClassName()%></td>
+                                <td><%=list.get(i).getSubName()%></td>
+                                <td><%=list.get(i).getRoom()%></td>
+                                <td><%=list.get(i).getShift()%></td>
+                                <td><%=list.get(i).getLecturerName()%></td>
+                            </tr>
+                            <%
+                        }
+                    }%>
                 </table>
 
                 <table>
-                    <tr><td><a href="#">Chủ Nhật</a></td><td>Mã lớp</td><td>Tên môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
-                    <%while((i<n) && ((listData.get(i).equals("chunhat"))||(listData.get(i).equals("8")))){
-                        i++;%>
-                        <tr>
-                            <td></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                            <td><%=listData.get(i++)%></td>
-                        </tr>
-                    <%}%>
+                    <tr><td><u>Thứ 7</u></td><td>Mã lớp</td><td>Môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
+                    <%for(int i=0;i<list.size();i++){
+                        if(list.get(i).getDate().equalsIgnoreCase("7")){
+                            %>
+                            <tr>
+                                <td></td>
+                                <td><%=list.get(i).getClassName()%></td>
+                                <td><%=list.get(i).getSubName()%></td>
+                                <td><%=list.get(i).getRoom()%></td>
+                                <td><%=list.get(i).getShift()%></td>
+                                <td><%=list.get(i).getLecturerName()%></td>
+                            </tr>
+                            <%
+                        }
+                    }%>
                 </table>
             </div><!--End Contents-->
 

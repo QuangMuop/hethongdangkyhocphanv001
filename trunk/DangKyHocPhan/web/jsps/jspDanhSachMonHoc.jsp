@@ -32,14 +32,14 @@ ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sub");
                 background-color: #F9B7FF;
             }
             #subjectlist td{
-                background-color: #b1B700;
+                background-color: #474C52;
                 padding: 2 5 2 5;
             }
             #formsearch{
                 margin-top: 10px;
                 margin-left: 20px;
                 padding: 5 10 5 10;
-                background-color: #f29de3;
+                background-color: #153E7E;
                 width: 280px;
             }
         </style>

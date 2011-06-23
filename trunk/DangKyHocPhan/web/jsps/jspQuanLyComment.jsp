@@ -14,17 +14,6 @@ ArrayList<clsComment> comment=(ArrayList<clsComment>) session.getAttribute("comm
         <title>Quản lý comment</title>
         <style media="all" type="text/css">
 
-                #procode{
-                margin-left: 10px;
-                margin-top: 10px;
-                margin-bottom:  10px;
-                 width: 1000px;
-                }
-                #procode table{
-                width: 100%;
-                padding-left: 5px;
-                padding-right: 5px;
-                }
                 #formdetail table{
                 width: 100%;
                     padding-left: 10px;
@@ -40,7 +29,7 @@ ArrayList<clsComment> comment=(ArrayList<clsComment>) session.getAttribute("comm
 
                 #formdetail table td{
                 text-align: center;
-                background-color: #ffe2ff
+                background-color: #4792b8;
                 }
 
         </style>

@@ -17,7 +17,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
         <title>Thông tin sinh viên</title>
         <style media="all" type="text/css">
             #myform{
-                background-color: #E3E4FA;
+                background-color: #028347;
                 width: 400px;
                 float: left;
                 margin-left:  50px;
