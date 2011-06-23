@@ -133,6 +133,14 @@ public class clsBOClass {
          clsMapperClass mpc=new clsMapperClass();
          return mpc.getAllStudentOfClass(classname);
      }
+     public void UpdateTestTime(clsClass cls) throws Exception{
+         clsMapperClass mpc=new clsMapperClass();
+         mpc.ClassUpdateTest(cls);
+     }
+     public void resetTest(String Classname) throws Exception{
+          clsMapperClass mpc=new clsMapperClass();
+         mpc.ResetTest(Classname);
+     }
      /**
       *
       * @param classname

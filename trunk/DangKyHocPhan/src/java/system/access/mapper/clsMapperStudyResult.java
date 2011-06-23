@@ -71,7 +71,10 @@ public ResultSet getStudyResultInfoByName(String name) throws Exception{
     }
 
 
-     public void StudyResultnInsert(clsStudyResult studyresult) throws Exception{
+      public void StudyResultnInsert(clsStudyResult studyresult) throws Exception{
+         if(StudyResultCheckExits(studyresult)){
+            StudyResultUpdateMark(studyresult);              
+         }else{
          try {
              StringBuffer sql = new StringBuffer();
              sql.append("Insert into dangkyhocphan.studyresult values('");
@@ -87,7 +90,9 @@ public ResultSet getStudyResultInfoByName(String name) throws Exception{
          catch (Exception e) {
              throw e;
          }
+         }
      }
+
 
   public void RegistrationDelete(clsStudyResult res) throws Exception{
        try{
@@ -118,13 +123,30 @@ public ResultSet getStudyResultInfoByName(String name) throws Exception{
         }
         return result;
 }
-  public void StudyResultUpdateMark(clsStudyResult res) throws Exception{
+   private float getMark(clsStudyResult res) throws Exception{
+     float mark=0;
+     if(StudyResultCheckExits(res)){
+         StringBuffer sql = new StringBuffer();
+            sql.append("select Mark from dangkyhocphan.studyresult where MSSV='");
+            sql.append(res.getStudentCode()).append("' and subcode='");
+            sql.append(res.getSubjectCode()).append("'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            if((rs!=null) && (rs.next()))
+                mark = Float.parseFloat(rs.getString("Mark"));
+            return mark;
+     }
+     else return mark;
+ }
+ public void StudyResultUpdateMark(clsStudyResult res) throws Exception{
+      float curentMark=getMark(res);
+      if(res.getMark()>curentMark){
       try{
             StringBuffer sql = new StringBuffer();
             sql.append("Update dangkyhocphan.studyresult set Mark =");
-            sql.append(res.getMark()).append(", year='");
-            sql.append(res.getYear()).append("', Semester=");
-            sql.append(res.getSemester()).append(" where MSSV='");
+            sql.append(res.getMark()).append(", Semester=");
+            sql.append(res.getSemester()).append(", Year='");
+            sql.append(res.getYear()).append("' where MSSV='");
             sql.append(res.getStudentCode()).append("' and SubCode='");
             sql.append(res.getSubjectCode()).append("' ");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
@@ -132,6 +154,7 @@ public ResultSet getStudyResultInfoByName(String name) throws Exception{
         }catch(Exception ex){
                 throw ex;
         }
+      }
   }
   public ArrayList<clsStudyResult> getYear(String MSSV) throws Exception{
       ArrayList<clsStudyResult> sr=new ArrayList<clsStudyResult>();

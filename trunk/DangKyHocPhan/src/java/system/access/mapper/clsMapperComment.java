@@ -59,9 +59,9 @@ public clsMapperComment() throws Exception{
             sql.append("Insert into dangkyhocphan.comment values(");
             sql.append(commnet.getId()).append(",'");
             sql.append(commnet.getMSSV()).append("','");
-            sql.append(commnet.getContent()).append("','");
             sql.append(commnet.getAuthor()).append("','");
             sql.append(commnet.getEmail()).append("','");
+            sql.append(commnet.getContent()).append("','");
             sql.append(commnet.getDate()).append("')");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
