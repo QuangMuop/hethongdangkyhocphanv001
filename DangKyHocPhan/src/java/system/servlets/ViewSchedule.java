@@ -2,6 +2,8 @@ package system.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import system.bo.clsBOClass;
 import system.bo.clsBOLecturer;
 import system.bo.clsBOSubject;
 import system.dto.clsClass;
+import system.utilities.SystemProperities;
 
 /**
  *
@@ -54,41 +57,21 @@ public class ViewSchedule extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
         req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
-        SetDataForView(session);
-
-        String path = "./jsps/jspXemTKB.jsp";
-        resp.sendRedirect(path);
+        try {
+            ViewSchedule(session, resp);
+        } catch (Exception ex) {
+            Logger.getLogger(ViewSchedule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
-    private void SetDataForView(HttpSession session){
-        //Thu 2, clasname, sub name, phong, ca, giang vien
-        ArrayList<String> listData = new ArrayList<String>();
-        int i,j,n,m;
-        try {
-            clsBOClass classBo = new clsBOClass();
-            clsBOLecturer lecturerBo = new clsBOLecturer();
-            clsBOSubject subjectBo = new clsBOSubject();
-
-            //Get class infomation
-            String strOrderBy = "DateOfWeek";
-            ArrayList<clsClass> Class = classBo.GetAllClass(strOrderBy);
-            n = Class.size();
-            for(i = 0; i < n; i++){
-                listData.add(Class.get(i).getDate());
-                listData.add(Class.get(i).getClassName());
-                String subCode = Class.get(i).getSubCode();
-                String subName = subjectBo.getSubjectNameByCode(subCode);
-                listData.add(subName);
-                listData.add(Class.get(i).getRoom());
-                listData.add(Integer.toString(Class.get(i).getShift()));
-                String lecturerCode = Class.get(i).getLectureCode();
-                String lectureName = lecturerBo.LecturerGetLecturerNameFromId(lecturerCode);
-                listData.add(lectureName);
-            }            
-        } catch (Exception ex) {
-           
-        }
-        session.setAttribute("listdata", listData);
+    private void ViewSchedule(HttpSession session, HttpServletResponse resp) throws Exception{
+        clsBOClass BOC=new clsBOClass();
+        ArrayList<clsClass> listclass = BOC.GetAllClass("DateOfWeek");
+        session.setAttribute("list", listclass);
+        session.setAttribute("time", "Thời khóa biểu học kỳ "+SystemProperities.Curentsemester+" năm học "+SystemProperities.CurentYear);
+        String path = "./jsps/jspXemTKB.jsp";
+        resp.sendRedirect(path);
     }
 
 }

@@ -168,7 +168,7 @@ public class clsMapperLecturer extends clsMapperDb {
             return true;
         }
         catch (Exception e) {
-                throw e;
+               return false;
         }
  }
  public boolean LecturerCheckExistName(String name) throws Exception{

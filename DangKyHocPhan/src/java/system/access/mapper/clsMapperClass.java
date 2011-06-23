@@ -226,6 +226,17 @@ private boolean  CheckLecDateTime(clsClass classDTO) throws Exception{
                 throw ex;
         }
      }
+      public void ResetTest(String ClassName) throws Exception{
+           try{
+            StringBuffer sql = new StringBuffer();
+            sql.append(" Update dangkyhocphan.class set TestDate='Null', TestTime='Null', TestRoom='Null'");
+            sql.append(" where ClassName='").append(ClassName).append("' and Semester="+system.utilities.SystemProperities.Curentsemester+" and Year='"+system.utilities.SystemProperities.CurentYear+"'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            stmt.execute();
+        }catch(Exception ex){
+                throw ex;
+        }
+     }
      public void ClassUpdateStudent(String classname) throws Exception{
          try{
     StringBuffer sql = new StringBuffer();

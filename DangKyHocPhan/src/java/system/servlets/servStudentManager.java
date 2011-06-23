@@ -5,7 +5,9 @@
 
 package system.servlets;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -16,6 +18,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import system.bo.clsBOAccount;
 import system.bo.clsBOCourse;
 import system.bo.clsBORule;
@@ -91,8 +102,119 @@ public class servStudentManager extends HttpServlet {
             out.close();
         }
     }
-     private void InsertListStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session){
-//lộc viết đây nha
+   private HSSFWorkbook GetWorkbook(HttpServletRequest req, HttpServletResponse response) throws IOException, FileUploadException{
+        boolean isMultipart = ServletFileUpload.isMultipartContent(req);
+        if(isMultipart){
+            ServletFileUpload upload = new ServletFileUpload();
+            FileItemIterator iter;
+            String fileNamSource = req.getParameter("txtPath");
+            try {
+                iter = upload.getItemIterator(req);
+                FileItemStream item = null;
+                String name = "";
+                InputStream stream = null;
+                while (iter.hasNext()){
+                    item = iter.next();
+                    name = item.getFieldName();
+                    stream = item.openStream();
+                    if(item.isFormField()){
+                        //String result = "notFormField";
+                        continue;
+                    }else {
+                        name = item.getName();
+                        if(name != null && !"".equals(name)){
+                            String fileName = new File(item.getName()).getName();
+                            //if(fileName.equals(fileNamSource)){
+                                POIFSFileSystem fs = new POIFSFileSystem(stream);
+                                HSSFWorkbook wb = new HSSFWorkbook(fs);
+                                return wb;
+                            //}
+                        }
+                    }
+                }
+            } catch (FileUploadException ex) {
+               response.getWriter().println(ex.toString());
+            }catch (IOException ex) {
+               response.getWriter().println(ex.toString());
+            }
+        }
+        return null;
+    }
+    private void InsertListStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, FileUploadException, Exception{
+        HSSFWorkbook wb=GetWorkbook(request, response);
+         int i = 0;
+         int numerror=0;
+        ArrayList<String> Studentinfo;
+        ArrayList<String> result=new ArrayList<String>();
+         int n = wb.getNumberOfSheets();
+
+         for (int k = 0; k < n; k++){
+             HSSFSheet sheet = wb.getSheetAt(k);
+             int rows  = sheet.getPhysicalNumberOfRows();
+
+             HSSFRow rowTemp;
+             HSSFCell cellTemp;
+             int cellType;
+             String strValue = "";
+
+             for (i = 0; i < rows; i++){
+                 Studentinfo=new ArrayList<String>();
+                 rowTemp = sheet.getRow(i);
+                 cellTemp = rowTemp.getCell(0);
+                 cellType = cellTemp.getCellType();
+                 //check the first cell of data must be a number
+                 if(cellType != HSSFCell.CELL_TYPE_NUMERIC){
+                     continue;
+                 }
+                 //CELL 1// FullName//CELL2: MSSV//CELL3: BirthDay//CELL4: Lop - Class//CELL5: Email
+                //CELL6: PhoneNumber//CELL7: TamTru/CELL8: ThuongTru
+                //CELL9: Status: Đang học, đang bảo lưu, đang ...
+                //CELL10: khóa học
+                 //cell11: Ngày nhập học
+                 //CELL11: Sex//CELL12: ID (CMND)
+                //CELL13: Hình thức: Chính qui, tại chức, ...
+                //CELL14: Bậc học : đại học, cao đẳng, cử nhân, trung cấp,...
+                 for(int j = 1; j < 16; j++){
+                     cellTemp = rowTemp.getCell(j);
+                     cellTemp.setCellType(HSSFCell.CELL_TYPE_STRING);
+                     strValue = cellTemp.getStringCellValue();
+                     Studentinfo.add(strValue);
+                 }
+                clsStudent cls=new clsStudent();
+                cls=new clsStudent(Studentinfo.get(0), Studentinfo.get(2), Studentinfo.get(1), Studentinfo.get(3), Studentinfo.get(4), Studentinfo.get(5), Studentinfo.get(6), Studentinfo.get(7), Studentinfo.get(8),Integer.parseInt(Studentinfo.get(9)), Studentinfo.get(10), Studentinfo.get(11), Studentinfo.get(12), Studentinfo.get(13), Studentinfo.get(14));
+               clsBOStudent BOS=new clsBOStudent();
+                if(BOS.Insert(cls))
+               {
+                  result.add("OK");                    
+               }
+               else{
+                       result.add(cls.getFullname());
+                    }
+                
+            }
+         }
+         for(int j=0;j<result.size();j++){
+            if(result.get(j).equalsIgnoreCase("OK")==false)
+                 numerror++; 
+         }
+          if(numerror>0) {
+              StringBuffer message=new StringBuffer();
+               message.append("Các sinh viên có tên: ");
+              for(int j=0;j<result.size();j++){
+                if(result.get(j).equalsIgnoreCase("OK")==false)
+                message.append(result.get(j)).append(", ");
+                }
+              message.append(" thêm không thành công do dữ liệu không hợp lệ, còn lại thêm thành công");
+              session.setAttribute("mes", message.toString());
+           String path = "./jsps/jspThongBao.jsp";
+           response.sendRedirect(path);
+          }
+          else{
+          session.setAttribute("mes", "Thêm tất cả sinh viên thành công!");
+           String path = "./jsps/jspThongBao.jsp";
+           response.sendRedirect(path);
+          }
+         
     }
     private void updateStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
         String MSSV=request.getParameter("txtCode");

@@ -61,7 +61,7 @@ public class servClassView extends HttpServlet {
                  }else if(action.equalsIgnoreCase("edit")){
                             editClass(request, response, session);
                   }
-                      else if(action.equalsIgnoreCase("student")){
+                   else if(action.equalsIgnoreCase("student")){
                         if(BOA.getAccountType(login)==0)
                           getAllClassSV(response, session);
                          else {
@@ -72,7 +72,11 @@ public class servClassView extends HttpServlet {
                      } else if(action.equalsIgnoreCase("update")){
                               updateClass(request);
                          getAllClass(response, session);
-                      }else if(action.equalsIgnoreCase("create")){
+                      }else if(action.equalsIgnoreCase("updatetest")){
+                          updatetest(request);
+                        getAllClass(response, session);
+                      }
+                     else if(action.equalsIgnoreCase("create")){
                          createClass(request, response, session);
                        }else if(action.equalsIgnoreCase("createcomplete")){
                       insertClass(request, response, session);
@@ -80,10 +84,36 @@ public class servClassView extends HttpServlet {
                      else if(action.equalsIgnoreCase("search")){
                            searchClass(request, response);
                      }
+                      else if(action.equalsIgnoreCase("viewtest")){
+                        if(BOA.getAccountType(login)==0)
+                          ViewTestSchedule(response, session);
+                         else {
+                    session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản sinh viên!");
+                    String path = "./jsps/jspThongBao.jsp";
+                    response.sendRedirect(path);
+                           }
+                     }
+                      else if(action.equalsIgnoreCase("reset")){
+                           resettest(request, response);
+                           getAllClass(response, session);
+                     }
             }
         } finally { 
             out.close();
         }
+    }
+    private void resettest(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        String className=request.getParameter("classname");
+        clsBOClass BOC=new clsBOClass();
+        BOC.resetTest(className);
+    }
+    private void ViewTestSchedule(HttpServletResponse response,HttpSession session) throws Exception{
+        clsBOClass BOC=new clsBOClass();
+        ArrayList<clsClass> list=BOC.GetAllClass("ClassName");
+        session.setAttribute("list", list);
+        session.setAttribute("time", "Học kỳ "+SystemProperities.Curentsemester +" năm học "+SystemProperities.CurentYear);
+        String path = "./jsps/jspXemLichThi.jsp";
+        response.sendRedirect(path);
     }
     /**
      *
@@ -207,6 +237,15 @@ public class servClassView extends HttpServlet {
         clsClass cls=new clsClass(className, subcode, "", lecturer, date, room, shift, 0, "", "", "", "", 0);
         clsBOClass BOC=new clsBOClass();
         BOC.ClassUpdateInfo(cls);
+    }
+    private void updatetest(HttpServletRequest request) throws Exception{
+        String className=request.getParameter("class");
+        String testdate=request.getParameter("sYear")+"-"+request.getParameter("sMonth")+"-"+request.getParameter("sDay");
+        String TestTime=request.getParameter("stesttime");
+        String Testroom=request.getParameter("testroom");
+        clsClass cls=new clsClass(className, "", "", "", "", "", 1, 0, testdate, TestTime, Testroom, "", 0);
+       clsBOClass BOC=new clsBOClass();
+        BOC.UpdateTestTime(cls);
     }
     /**
      *

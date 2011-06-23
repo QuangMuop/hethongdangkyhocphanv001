@@ -35,9 +35,22 @@ public class servCommentManager extends HttpServlet {
         clsBOAccount BOA=new clsBOAccount();
         String user=(String) session.getAttribute("username");
         try {
-          String action=request.getParameter("action");
+            if(user==null){
+                  session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+                  String path = "./jsps/jspThongBao.jsp";
+                response.sendRedirect(path);
+            }
+            else{
+              String action=request.getParameter("action");
                 if(action.equalsIgnoreCase("view")){
-                    getAllComment(response, session);
+                    if(BOA.getAccountType(user)==1)
+                getAllComment(response, session);
+                    else {
+                        session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản quản lý!");
+                         String path = "./jsps/jspThongBao.jsp";
+                        response.sendRedirect(path);
+                    }
+                    
                 }
                 else if(action.equalsIgnoreCase("delete")){
                     deleteComment(request, response, session);
@@ -45,6 +58,7 @@ public class servCommentManager extends HttpServlet {
                 else if(action.equalsIgnoreCase("detail")){
                     detailComment(request, response, session);
                 }
+            }
             
         } finally {            
             out.close();
