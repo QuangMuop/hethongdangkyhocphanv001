@@ -141,6 +141,7 @@ public class servStudentManager extends HttpServlet {
         return null;
     }
     private void InsertListStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, FileUploadException, Exception{
+       try{
         HSSFWorkbook wb=GetWorkbook(request, response);
          int i = 0;
          int numerror=0;
@@ -214,6 +215,11 @@ public class servStudentManager extends HttpServlet {
            String path = "./jsps/jspThongBao.jsp";
            response.sendRedirect(path);
           }
+       }catch(Exception ex){
+           session.setAttribute("mes", ex.toString());
+           String path = "./jsps/jspThongBao.jsp";
+           response.sendRedirect(path);
+       }
          
     }
     private void updateStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
@@ -270,15 +276,16 @@ public class servStudentManager extends HttpServlet {
             response.sendRedirect(path);
             }
     }
-    private void predelStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
-         String MSSV=request.getParameter("MSSV");
-       clsBOStudent BOStudent=new clsBOStudent();
-        clsStudent student =new clsStudent();
-        student=BOStudent.getStudentInfoByCode(MSSV);
-       session.setAttribute("student", student);
-       String path = "./jsps/jspXoaSV.jsp";
-       response.sendRedirect(path);
+    private void predelStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+        String MSSV = request.getParameter("MSSV");
+        clsBOStudent BOStudent = new clsBOStudent();
+        clsStudent student = new clsStudent();
+        student = BOStudent.getStudentInfoByCode(MSSV);
+        session.setAttribute("student", student);
+        String path = "./jsps/jspXoaSV.jsp";
+        response.sendRedirect(path);
     }
+
     private void StudentDetail(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
          String MSSV=request.getParameter("MSSV");
        clsBOStudent BOStudent=new clsBOStudent();
