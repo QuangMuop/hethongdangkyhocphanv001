@@ -129,8 +129,8 @@
                     <input style="position:absolute; left:710px;" type="button" value=">>" onclick="nextpage()">
                     <input style="position:absolute; left:740px;" type="button" value=">>|" onclick="nnextpage()"><br>
                         <input type="hidden" value="<%=numStudent%>" id="numstu" />
-                    <a href="#">Tải file</a>
-                    </form>
+                        <a href="../DownloadFile?action=studentlist">Tải file</a>
+                        </form>
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
@@ -144,6 +144,7 @@
         typesearch="All";
         name="All";
         action="search";
+        action1="studentlist";
         start=0;
         end=document.getElementById("numstu").value;
            var http = createRequestObject();
@@ -222,5 +223,6 @@
         function selectAll(){
            typesearch="All";
         }
+       
        </script>
 </html>
