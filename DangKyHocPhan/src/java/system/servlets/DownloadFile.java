@@ -18,10 +18,12 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import system.access.mapper.clsMapperStudyResult;
 import system.access.mapper.clsMapperSubject;
+import system.bo.clsBODetailResult;
 import system.bo.clsBORegistration;
 import system.bo.clsBOStudent;
 import system.bo.clsBOStudyResult;
 import system.bo.clsBOSubject;
+import system.dto.clsDetailResult;
 import system.dto.clsStudent;
 import system.dto.clsStudyResult;
 import system.dto.clsSubject;
@@ -76,65 +78,55 @@ public class DownloadFile extends HttpServlet {
                 Logger.getLogger(DownloadFile.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-
-    private String ExportFileListStudentInClass(String ClassName){
-        ArrayList<String> listId = new ArrayList<String>();
-        ArrayList<String> listFullName = new ArrayList<String>();
-        clsBORegistration regBo = new clsBORegistration();
-        clsBOStudent studentBo = new clsBOStudent();
-        int i = 0;
-
-        try {
-            listId = regBo.getListStudentIdFromClassName(ClassName);
-            int n = listId.size();
-            String idTemp = "";
-            String fullNameTemp = "";
-            clsStudent studentTemp = null;
-            for(i = 0; i < n; i++){
-                idTemp = listId.get(i);
-                studentTemp = studentBo.getStudentInfoByCode(idTemp);
-                fullNameTemp = studentTemp.getFullname();
-                listFullName.add(fullNameTemp);
+        else if(function.equals("studentlist")){
+            try {
+               // resp.getWriter().println("OK");
+                ExportStudentList(req, resp);
+            } catch (Exception ex) {
+                Logger.getLogger(DownloadFile.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(DownloadFile.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-         try{
+    }
+private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+   // String type=req.getParameter("type");
+   // String name=req.getParameter("name");
+    clsBOStudent BOS=new clsBOStudent();
+    ArrayList<clsStudent> studentlist=new ArrayList<clsStudent>();
+    //if(type.equalsIgnoreCase("mssv")){
+          //  studentlist=BOS.getStudentsByCode(name);
+       // }else if(type.equalsIgnoreCase("name")){
+       //    studentlist=BOS.getStudentsByName(name);
+      //  }else if(type.equalsIgnoreCase("classname")){
+       //  studentlist=BOS.GetStudentsByClass(name);
+      //  }else if(type.equalsIgnoreCase("All")){
+            studentlist=BOS.GetAllStudent();
+      //  }
+     try{
             HSSFWorkbook hwb = new HSSFWorkbook();
-            HSSFSheet sheet = hwb.createSheet("DSSV - " + ClassName);
+            HSSFSheet sheet = hwb.createSheet("Danh sách sinh viên ");
             HSSFCellStyle style = hwb.createCellStyle();
+
+            boolean done = false;
+            int nrow = 0, i = 0;
+            int n = studentlist.size();
+
+            //Write student's information into file
             HSSFRow row1 = null;
             HSSFCell cell1 = null;
-            int nrow = 0;
 
-            //Write class's information into file
             row1 = sheet.createRow((short) +(nrow++));
-            cell1 = row1.createCell((short) +2);
+            cell1 = row1.createCell((short) +4);
             cell1.setCellStyle(style);
             cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
-            cell1.setCellValue("Danh sách sinh viên lớp " + ClassName);
+            cell1.setCellValue("Danh sách sinh viên");
 
             row1 = sheet.createRow((short) +(nrow++));
             row1 = sheet.createRow((short) +(nrow++));
+         
 
-            String[] infoClass = {""};
-            for(i = 0; i <  infoClass.length; i++){
-                row1 = sheet.createRow((short) +(nrow++));
-                cell1 = row1.createCell((short) +0);
-                cell1.setCellStyle(style);
-                cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
-                cell1.setCellValue(infoClass[i]);
-            }
-//Chu nhat sua tiep
+            String[] title = {"STT","Họ tên","MSSV", "Ngày sinh", "Lớp","Email","Điện thoại","Tạm trú","Thường trú","Tình trạng","Khóa","Ngày nhập học","Giới tính","CMND","Hình thức đào tạo","Bậc học"};
             row1 = sheet.createRow((short) +(nrow++));
-            row1 = sheet.createRow((short) +(nrow++));
-            row1 = sheet.createRow((short) +(nrow++));
-
-            String[] title = {"Mã môn học", "Tên môn học", "Điểm TB"};
-            row1 = sheet.createRow((short) +(nrow++));
-            for(i = 0; i < title.length; i++){
+            for(i = 0; i < title.length; i++){                
                 cell1 = row1.createCell((short) +i);
                 cell1.setCellStyle(style);
                 cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
@@ -142,67 +134,84 @@ public class DownloadFile extends HttpServlet {
             }
 
             //write score of student into file
-//            String subCode;
-//            String subName;
-//            Float mark;
-//            for(i = 0; i < n; i++){
-//                clsStudyResult stTemp = listStudyResult.get(i);
-//                HSSFRow row = sheet.createRow((short) +(nrow++));
-//
-//                subCode = stTemp.getSubjectCode();
-//                subName = subBo.getSubjectNameByCode(subCode);
-//                mark = stTemp.getMark();
-//                year = stTemp.getYear();
-//                String[] info = {subCode , subName, Float.toString(mark)};
-//
-//                HSSFCell cell = null;
-//                for(int j = 0; j < info.length; j++){
-//                    cell = row.createCell((short) +j);
-//                    cell.setCellStyle(style);
-//                    cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-//                    cell.setCellValue(info[j]);
-//                }
-//            }
+            String Fullname;
+            String Code;
+            String Birthday;
+            String Class;
+            String Email;
+            String Phone;
+            String Address;
+            String Home;
+            String Status;
+            int Course;
+            String DateBegin;
+            String Gender;
+            String CMND;
+            String Type;
+            String BacHoc;
+            for(i = 0; i < n; i++){
+                clsStudent stTemp = studentlist.get(i);
+                HSSFRow row = sheet.createRow((short) +(nrow++));
+
+             Fullname=stTemp.getFullname();
+             Code =stTemp.getCode();
+             Birthday=stTemp.getBirthDay();
+             Class=stTemp.getClasss();
+             Email=stTemp.getEmail();
+             Phone=stTemp.getPhone();
+             Address=stTemp.getAddress();
+             Home=stTemp.getHome();
+             Status=stTemp.getIsStuding();
+             Course=stTemp.getCourse();
+             DateBegin=stTemp.getNhaphoc();
+             Gender=stTemp.getGender();
+             CMND=stTemp.getCMND();
+             Type=stTemp.getType();
+             BacHoc=stTemp.getBacHoc();
+                String[] info = {Integer.toString(i+1),Fullname, Code , Birthday, Class,Email, Phone, Address, Home,Status, Integer.toString(Course), DateBegin, Gender, CMND, Type, BacHoc};
+
+                HSSFCell cell = null;
+                for(int j = 0; j < info.length; j++){
+                    cell = row.createCell((short) +j);
+                    cell.setCellStyle(style);
+                    cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                    cell.setCellValue(info[j]);
+                }
+            }
 
             //style.setFillBackgroundColor(HSSFColor.AQUA.index);
             //style.setFillPattern(HSSFCellStyle.BIG_SPOTS);
             //style.setFillForegroundColor(HSSFColor.AQUA.index);
             //style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 
-//            FileOutputStream fileOut = new FileOutputStream("BD" + mssv +".xls");
-//            hwb.write(fileOut);
-//            fileOut.close();
-//            DownloadFile("BD" + mssv +".xls", resp);
-//            result = "Tao file thanh cong";
+            FileOutputStream fileOut = new FileOutputStream("DanhsachSV" +".xls");
+            hwb.write(fileOut);
+            fileOut.close();
+            DownloadFile("DanhsachSV" +".xls", resp);
+            
         }
         catch (Exception ex){
-            //result = ex.toString();
+            resp.getWriter().println(ex.toString());
         }
-
-        return null;
-    }
-
-    /**
-     * export student's result to an excell file
+     resp.getWriter().println("OK");
+}
+     /**
+     * 
      * @param req
      * @param resp
-     * @param mssv Id of student
-     * @return string descript the result
-     * @throws Exception
+     * @param mssv
+     * @return
+     * @throws Exception 
      */
     private String ExportFileStudentScoreTable(HttpServletRequest req, HttpServletResponse resp, String mssv) throws Exception{
+        clsBODetailResult BODR=new clsBODetailResult();
+        ArrayList<clsDetailResult> resultstudy=BODR.getResult(mssv,"All",0);
+        int numtc=getnumtc(resultstudy);
+        float DTB=DTB(resultstudy);
         String result = "";
-        clsBOStudyResult srBo = new clsBOStudyResult();
         clsBOStudent studentBo = new clsBOStudent();
-        clsBOSubject subBo = new clsBOSubject();
-        clsStudent student = new clsStudent();
-        ArrayList<clsStudyResult> listStudyResult = new ArrayList<clsStudyResult>();
-
-        student = studentBo.getStudentInfoByCode(mssv);
-        String year = (String) req.getParameter("year");
-        year = (String) req.getAttribute("year");
-        listStudyResult = srBo.GetListStudyResult(mssv, year);
-
+        
+        clsStudent student = studentBo.getStudentInfoByCode(mssv);
         //Init file on server
         try{
             HSSFWorkbook hwb = new HSSFWorkbook();
@@ -211,12 +220,12 @@ public class DownloadFile extends HttpServlet {
 
             boolean done = false;
             int nrow = 0, i = 0;
-            int n = listStudyResult.size();
+            int n = resultstudy.size();
 
-            String[] infoStudent = {"Họ Và Tên" + student.getFullname(),
+            String[] infoStudent = {"Họ Và Tên: " + student.getFullname(),
                                     "MSSV: " + student.getCode(),
-                                    "Số TC Da tich luy: " + numTc,
-                                    "Diểm TB: " + DTB(mssv)};
+                                    "Số TC Da tich luy: " + numtc,
+                                    "Diểm TB: " + DTB};
 
             //Write student's information into file
             HSSFRow row1 = null;
@@ -243,7 +252,7 @@ public class DownloadFile extends HttpServlet {
             row1 = sheet.createRow((short) +(nrow++));
             row1 = sheet.createRow((short) +(nrow++));
 
-            String[] title = {"Mã môn học", "Tên môn học", "Điểm TB"};
+            String[] title = {"Năm học","Học kỳ","Mã môn học", "Tên môn học", "Điểm"};
             row1 = sheet.createRow((short) +(nrow++));
             for(i = 0; i < title.length; i++){                
                 cell1 = row1.createCell((short) +i);
@@ -256,15 +265,18 @@ public class DownloadFile extends HttpServlet {
             String subCode;
             String subName;
             Float mark;
+            int semester;
+            String year;
             for(i = 0; i < n; i++){
-                clsStudyResult stTemp = listStudyResult.get(i);
+                clsDetailResult stTemp = resultstudy.get(i);
                 HSSFRow row = sheet.createRow((short) +(nrow++));
 
-                subCode = stTemp.getSubjectCode();
-                subName = subBo.getSubjectNameByCode(subCode);                
+                subCode = stTemp.getSubCode();
+                subName = stTemp.getSubName();               
                 mark = stTemp.getMark();
-                year = stTemp.getYear();            
-                String[] info = {subCode , subName, Float.toString(mark)};
+                semester=stTemp.getSemester();
+                year=stTemp.getYear();
+                String[] info = {year,Integer.toString(semester), subCode , subName, Float.toString(mark)};
 
                 HSSFCell cell = null;
                 for(int j = 0; j < info.length; j++){
@@ -280,10 +292,10 @@ public class DownloadFile extends HttpServlet {
             //style.setFillForegroundColor(HSSFColor.AQUA.index);
             //style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 
-            FileOutputStream fileOut = new FileOutputStream("BD" + mssv +".xls");
+            FileOutputStream fileOut = new FileOutputStream("Bangdiem" + mssv +".xls");
             hwb.write(fileOut);
             fileOut.close();
-            DownloadFile("BD" + mssv +".xls", resp);
+            DownloadFile("Bangdiem" + mssv +".xls", resp);
             result = "Tao file thanh cong";
         }
         catch (Exception ex){
@@ -291,45 +303,25 @@ public class DownloadFile extends HttpServlet {
         }
         return result;
     }
-
-    private float DTB(String mssv){
-        float result = 0;
-        numTc = 0;
-        ArrayList<clsStudyResult> studyResult = new ArrayList<clsStudyResult>();
-        
-        try {
-            clsMapperStudyResult studyMapper = new clsMapperStudyResult();
-            clsMapperSubject subMapper = new clsMapperSubject();
-            clsSubject subTemp = null;
-            clsStudyResult srTemp = null;
-            
-            studyResult = studyMapper.GetListStudyResult(mssv, "all");
-            int n = studyResult.size();
-            float[] score = new float[n];
-            int[] tc = new int[n];
-            
-            for(int i = 0; i < n; i++){
-                srTemp = studyResult.get(i);
-                score[i] = srTemp.getMark();
-                subTemp = subMapper.getSubjectinfoByCode(srTemp.getSubjectCode());
-                tc[i] = subTemp.getNumTC();
-            }
-            
-            float total = 0;            
-            for(int i = 0; i < n; i++){
-                numTc += tc[i];
-                total += score[i] * tc[i];
-            }
-
-            if(numTc != 0)
-                result = total/numTc;
-        } catch (Exception ex) {
-            Logger.getLogger(DownloadFile.class.getName()).log(Level.SEVERE, null, ex);
+  private int getnumtc(ArrayList<clsDetailResult> resultstudy){
+      int numtc=0;
+       for(int i=0;i<resultstudy.size();i++){
+          numtc+=resultstudy.get(i).getNumTC();  
         }
+      return numtc;
+  }
+    private float DTB(ArrayList<clsDetailResult> resultstudy){
+        int numtc=getnumtc(resultstudy);
+        float summark=0;
+        float result = 0;
+        for(int i=0;i<resultstudy.size();i++){
+          summark+=resultstudy.get(i).getNumTC()*resultstudy.get(i).getMark();  
+        }
+        result=(float)Math.round(summark*100/numtc)/100;
         return result;
     }
 
-    private void DownloadFile(String filename, HttpServletResponse resp){
+    private void DownloadFile(String filename, HttpServletResponse resp) throws IOException{
         try{
             resp.reset();
             resp.setContentType("application/xls");
@@ -343,7 +335,7 @@ public class DownloadFile extends HttpServlet {
             in.close();
             resp.getOutputStream().flush();
         }catch(Exception e){
-            e.printStackTrace();
+            resp.getWriter().println(e.toString());
         }
     }
 }

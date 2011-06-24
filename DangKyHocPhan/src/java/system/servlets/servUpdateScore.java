@@ -61,7 +61,7 @@ public class servUpdateScore extends HttpServlet {
             }
             else{
                 String action =request.getParameter("action");
-               if(action.equalsIgnoreCase("manage")) {
+               if(action.equalsIgnoreCase("view")) {
                  if(BOA.getAccountType(login)==1)
                      getAllClass(response, session);
                 else{
