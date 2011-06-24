@@ -17,7 +17,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
         <title>Xóa sinh viên</title>
         <style media="all" type="text/css">
             #frminfomation{
-                background-color: #E3E4FA;
+                background-color: #5F676D;
                 width: 600px;
                 float: left;
                 margin-left:  50px;
@@ -26,7 +26,7 @@ clsStudent student =(clsStudent) session.getAttribute("student");
             #frminfomation table{
 
                 width: 100%;
-                background-color: #ADDFFF
+                background-color: #73726E;
             }
 
             #frmaction{
