@@ -8,10 +8,10 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<clsClass> clases=(ArrayList<clsClass>) session.getAttribute("list");
-String time=(String) session.getAttribute("time");
+    ArrayList<clsClass> clases = (ArrayList<clsClass>) session.getAttribute("list");
+    String time = (String) session.getAttribute("time");
 %>
 <html>
     <head>
@@ -33,15 +33,15 @@ String time=(String) session.getAttribute("time");
                 background-color: #F9B7FF;
             }
             #tablelistclass td{
-                background-color: #2f4e3d;
+                background-color: #028347;
                 padding: 2 5 2 5;
             }
-            
+           
         </style>
     </head>
     <body>
         <!--Get data from controller-->
-        
+
         <!--Div Wrapper-->
         <div id="wrapper">
             <div id="mainNav"><!--Main Navigation-->
@@ -51,15 +51,15 @@ String time=(String) session.getAttribute("time");
                 <br>
                 <h3>Lịch thi chi tiết ch0 các lớp học trong <%=time%>:</h3>
                 <form id="classlist">
-                  <table id="tablelistclass" name="tablelistclass">
-                    <tr>
-                        <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Ngày thi</th><th>Phòng thi</th><th>Giờ thi</th>
-                    </tr>
-                    <%
-                    for(int i=0;i<clases.size();i++){
+                    <table id="tablelistclass" name="tablelistclass">
+                        <tr>
+                            <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Ngày thi</th><th>Phòng thi</th><th>Giờ thi</th>
+                        </tr>
+                        <%
+                            for (int i = 0; i < clases.size(); i++) {
                         %>
                         <tr>
-                            <td><%=i+1%></td>
+                            <td><%=i + 1%></td>
                             <td><%=clases.get(i).getClassName()%></td>
                             <td><%=clases.get(i).getSubName()%></td>
                             <td><%=clases.get(i).getLecturerName()%></td>
@@ -68,17 +68,17 @@ String time=(String) session.getAttribute("time");
                             <td><%=clases.get(i).getTestTime()%></td>
                         </tr>
                         <%
-                    }
-                    %>
-                </table>
+                            }
+                        %>
+                    </table>
                 </form>
                 <hr><hr>
-                </div><!--End Contents-->
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-   </html>
+</html>

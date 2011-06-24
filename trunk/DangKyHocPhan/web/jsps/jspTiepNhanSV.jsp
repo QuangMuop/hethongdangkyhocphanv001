@@ -9,11 +9,11 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<String> listClass=(ArrayList<String>) session.getAttribute("listClass");
-ArrayList<clsCourse> listCourse=(ArrayList<clsCourse>) session.getAttribute("listCourse");
-clsRule rule=(clsRule) session.getAttribute("rule");
+    ArrayList<String> listClass = (ArrayList<String>) session.getAttribute("listClass");
+    ArrayList<clsCourse> listCourse = (ArrayList<clsCourse>) session.getAttribute("listCourse");
+    clsRule rule = (clsRule) session.getAttribute("rule");
 %>
 <html>
     <head>
@@ -28,14 +28,14 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                 padding-bottom: 10px;
                 padding-right: 10px;
                 padding-left: 10px;
-                background-color: #175F6E;
+                background-color: #5F676D;
                 border: 2px solid #7F38EC;
             }
             #formaddone table{
                 width: 100%;
             }
-            </style>
-     </head>
+        </style>
+    </head>
     <body>
         <!--Div Wrapper-->
         <div id="wrapper">
@@ -62,52 +62,52 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                             <td>MSSV(*):</td><td><input type="text" name="txtMSSV" id="txtMSSV" size="30px"></td>
                             <td>Họ tên(*):</td><td><input type="text" name="txtname" id="txtname" size="30px"></td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>Ngày Sinh(*):</td>
                             <td>
-                               <select style="width:60px" name="sDay" id="sDay">
-                                    <%for(int i = 0; i < 31; i++){%>
-                                    <option value="<%=(i+1)%>"><%=(i+1)%></option>
+                                <select style="width:60px" name="sDay" id="sDay">
+                                    <%for (int i = 0; i < 31; i++) {%>
+                                    <option value="<%=(i + 1)%>"><%=(i + 1)%></option>
                                     <%}%>
                                 </select>
-                              <select style="width:60px" name="sMonth" id="sMonth">
-                                    <%for(int i = 0; i < 12; i++){%>
-                                    <option value="<%=(i+1)%>"><%=(i+1)%></option>
+                                <select style="width:60px" name="sMonth" id="sMonth">
+                                    <%for (int i = 0; i < 12; i++) {%>
+                                    <option value="<%=(i + 1)%>"><%=(i + 1)%></option>
                                     <%}%>
                                 </select>
-                              <select style="width:60px" name="sYear" id="sYear">
-                                    <%for(int i = 1980; i < 2010; i++){%>
+                                <select style="width:60px" name="sYear" id="sYear">
+                                    <%for (int i = 1980; i < 2010; i++) {%>
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
                             </td>
                             <td>Giới tính(*):</td>
-                        <td>
-                            <select style="width:190px" name="sSex">
-                                <option value="Nam">Nam</option>
-                                <option value="Nữ">Nữ</option>
-                            </select>
-                        </td>
+                            <td>
+                                <select style="width:190px" name="sSex">
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td>Lớp(*):</td>
                             <td>
                                 <select style="width:190px" name="sClass">
-                                    <%for(int i=0;i<listClass.size();i++){%>
+                                    <%for (int i = 0; i < listClass.size(); i++) {%>
                                     <option value="<%=listClass.get(i)%>"><%=listClass.get(i)%></option>
-                                      <%}%>
-                                 </select>
+                                    <%}%>
+                                </select>
                             </td>
                             <td>Khóa(*):</td>
                             <td>
-                                 <select style="width:190px" name="sCourse" id="sCourse">
-                                      <%for(int i=0;i<listCourse.size();i++){%>
-                                      <option value="<%=listCourse.get(i).getCourseCode()%>"><%=listCourse.get(i).getCourseCode()%></option>
-                                      <%}%>
-                                 </select>
+                                <select style="width:190px" name="sCourse" id="sCourse">
+                                    <%for (int i = 0; i < listCourse.size(); i++) {%>
+                                    <option value="<%=listCourse.get(i).getCourseCode()%>"><%=listCourse.get(i).getCourseCode()%></option>
+                                    <%}%>
+                                </select>
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>Loại hình đào tạo(*):</td>
                             <td>
                                 <select style="width:190px" name="sType" id="sType">
@@ -123,7 +123,7 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                                 </select>
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>Thường trú(*):</td>
                             <td><input type="text" name="txthome" id="txthome" size="30px"></td>
                             <td>Tạm trú(*):</td>
@@ -135,17 +135,17 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                             <td>Ngày nhập học(*):</td>
                             <td>
                                 <select style="width:60px" name="sDay1" id="sDay1">
-                                    <%for(int i = 0; i < 31; i++){%>
-                                    <option value="<%=(i+1)%>"><%=(i+1)%></option>
+                                    <%for (int i = 0; i < 31; i++) {%>
+                                    <option value="<%=(i + 1)%>"><%=(i + 1)%></option>
                                     <%}%>
                                 </select>
-                              <select style="width:60px" name="sMonth1" id="sMonth1">
-                                    <%for(int i = 0; i < 12; i++){%>
-                                    <option value="<%=(i+1)%>"><%=(i+1)%></option>
+                                <select style="width:60px" name="sMonth1" id="sMonth1">
+                                    <%for (int i = 0; i < 12; i++) {%>
+                                    <option value="<%=(i + 1)%>"><%=(i + 1)%></option>
                                     <%}%>
                                 </select>
-                              <select style="width:60px" name="sYear1" id="sYear1">
-                                    <%for(int i = 2006; i < 2021; i++){%>
+                                <select style="width:60px" name="sYear1" id="sYear1">
+                                    <%for (int i = 2006; i < 2021; i++) {%>
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
@@ -158,78 +158,78 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                             <td><input type="text" name="txtemail" id="txtemail" size="30px"></td>
                         </tr>
                     </table>
+                    <br/>
+                    <input type="button" value="Thêm sinh viên" onclick="PreCheckStudentOne()">
+                </form>
                 <br/>
-                <input type="button" value="Thêm sinh viên" onclick="PreCheckStudentOne()">
-            </form>
-            <br/>
-            <form id="formbrowse" action="../servStudentManager?action=addlist" method="post" name="formbrowse" enctype="multipart/form-data">
-                <u>Thêm Sinh Viên Từ File</u><br/>
-                <table id="tablebrowse">
-                    <tr>
-                        <td><input type="file" name="txtPath" id="txtPath"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="button" onclick="insertFromFile()" value="Thêm"></td><td></td>
-                    </tr>
-                </table>
-            </form><br>
-             </div><!--End Contents-->
+                <form id="formbrowse" action="../servStudentManager?action=addlist" method="post" name="formbrowse" enctype="multipart/form-data">
+                    <u>Thêm Sinh Viên Từ File</u><br/>
+                    <table id="tablebrowse">
+                        <tr>
+                            <td><input type="file" name="txtPath" id="txtPath"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="button" onclick="insertFromFile()" value="Thêm"></td><td></td>
+                        </tr>
+                    </table>
+                </form><br>
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-       <script  type = "text/javascript" >
-         function PreCheckStudentOne(){
-             var curent=new Date().getFullYear();
-             var year=document.getElementById("sYear").value;
-             var minage=document.getElementById("minage").value;
-             var maxage=document.getElementById("maxage").value;
-             //var yearin=document.getElementById("sCourse").value+2005;
-           if(document.getElementById("txtMSSV").value.length==0){
-               alert("Vui lòng nhập MSSV");
-           }
-           else if(document.getElementById("txtname").value.length==0){
-               alert("Vui lòng nhập họ tên sinh viên");
-           }
-           else if(document.getElementById("txthome").value.length==0){
-               alert("Vui lòng nhập địa chỉ thường trú của sinh viên");
-           }
-           else if(document.getElementById("txtadd").value.length==0){
-               alert("Vui lòng nhập địa chỉ tạm trú của sinh viên");
-           }
-           else if(document.getElementById("txtcmnd").value.length==0){
-               alert("Vui lòng nhập CMND của sinh viên");
-           }
-          else if(curent-year<minage){
-               alert("Sinh viên chưa đủ tuổi quy định");
-         }
-         else if(curent-year>maxage){
-            alert("Sinh viên đã quá tuổi quy định");
-          }
-          //else if(document.getElementById("sYear1").value != yearin){
-         //   alert("Năm nhập học không hợp lý");
-         // }
-           else{
-              document.forms["formaddone"].submit();
-           }
+    <script  type = "text/javascript" >
+        function PreCheckStudentOne(){
+            var curent=new Date().getFullYear();
+            var year=document.getElementById("sYear").value;
+            var minage=document.getElementById("minage").value;
+            var maxage=document.getElementById("maxage").value;
+            //var yearin=document.getElementById("sCourse").value+2005;
+            if(document.getElementById("txtMSSV").value.length==0){
+                alert("Vui lòng nhập MSSV");
+            }
+            else if(document.getElementById("txtname").value.length==0){
+                alert("Vui lòng nhập họ tên sinh viên");
+            }
+            else if(document.getElementById("txthome").value.length==0){
+                alert("Vui lòng nhập địa chỉ thường trú của sinh viên");
+            }
+            else if(document.getElementById("txtadd").value.length==0){
+                alert("Vui lòng nhập địa chỉ tạm trú của sinh viên");
+            }
+            else if(document.getElementById("txtcmnd").value.length==0){
+                alert("Vui lòng nhập CMND của sinh viên");
+            }
+            else if(curent-year<minage){
+                alert("Sinh viên chưa đủ tuổi quy định");
+            }
+            else if(curent-year>maxage){
+                alert("Sinh viên đã quá tuổi quy định");
+            }
+            //else if(document.getElementById("sYear1").value != yearin){
+            //   alert("Năm nhập học không hợp lý");
+            // }
+            else{
+                document.forms["formaddone"].submit();
+            }
         }
-      function insertFromFile(){
-             var filename=document.getElementById("txtPath").value;
-              if(filename.length==0){
-                  alert("Bạn chưa chọn file");
-              }
-               else{
-                  var duoi=filename.substr(filename.length-4, 4);
-                  if(duoi!=".xls"&&duoi!="xlsx"){
-                      alert("Chỉ hỗ trợ thêm sinh viên từ file excel, xin chọn file khác");
-                  }else {
-                 document.forms["formbrowse"].submit();
+        function insertFromFile(){
+            var filename=document.getElementById("txtPath").value;
+            if(filename.length==0){
+                alert("Bạn chưa chọn file");
+            }
+            else{
+                var duoi=filename.substr(filename.length-4, 4);
+                if(duoi!=".xls"&&duoi!="xlsx"){
+                    alert("Chỉ hỗ trợ thêm sinh viên từ file excel, xin chọn file khác");
+                }else {
+                    document.forms["formbrowse"].submit();
 
-                  }
-              }
-      }
-       </script>
+                }
+            }
+        }
+    </script>
 </html>

@@ -8,42 +8,42 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-clsRule rule=(clsRule) session.getAttribute("rule");
+    clsRule rule = (clsRule) session.getAttribute("rule");
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tiếp nhận giảng viên</title>
         <style media="all" type="text/css">
-             #formaddone{
-                    margin-left: 20px;
-                    margin-top: 20px;
-                    margin-bottom: 10px;
-                    width: 320px;
-                    padding-top: 20px;
-                    padding-bottom: 20px;
-                    padding-right: 10px;
-                    padding-left: 10px;
-                    background-color: #153E7E;
-                    border: 3px solid #7F38EC;
-                }
-                   #formbrowse{
-                       margin-top: 10px;
-                    margin-left: 20px;
-                    margin-bottom: 20px;
-                    width: 320px;
-                    padding-top: 20px;
-                    padding-bottom: 20px;
-                    padding-right: 10px;
-                    padding-left: 10px;
-                    background-color: #2f4e3d;
-                    border: 3px solid #7F38EC;
-                }
-                 
-            </style>
-           
+            #formaddone{
+                margin-left: 20px;
+                margin-top: 20px;
+                margin-bottom: 10px;
+                width: 320px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                padding-right: 10px;
+                padding-left: 10px;
+                background-color: #474C52;
+                border: 3px solid #7F38EC;
+            }
+            #formbrowse{
+                margin-top: 10px;
+                margin-left: 20px;
+                margin-bottom: 20px;
+                width: 320px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                padding-right: 10px;
+                padding-left: 10px;
+                background-color: #73726E;
+                border: 3px solid #7F38EC;
+            }
+
+        </style>
+
     </head>
     <body>
         <!--Div Wrapper-->
@@ -76,19 +76,19 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                         <tr>
                             <td>Ngày Sinh</td>
                             <td>
-                                 <select name="sDay">
-                                    <%for(int j = 0; j < 31; j++){%>
-                                    <option value="<%=(j+1)%>"><%=(j+1)%></option>
+                                <select name="sDay">
+                                    <%for (int j = 0; j < 31; j++) {%>
+                                    <option value="<%=(j + 1)%>"><%=(j + 1)%></option>
                                     <%}%>
                                 </select>
                                 <select name="sMonth">
-                                    <%for(int j = 0; j < 12; j++){%>
-                                    <option value="<%=(j+1)%>"><%=(j+1)%></option>
+                                    <%for (int j = 0; j < 12; j++) {%>
+                                    <option value="<%=(j + 1)%>"><%=(j + 1)%></option>
                                     <%}%>
                                 </select>
                                 <select name="sYear" id="sYear">
-                                    <%for(int j = 0; j < 50; j++){%>
-                                    <option value="<%=(1940+j)%>"><%=(1940+j)%></option>
+                                    <%for (int j = 0; j < 50; j++) {%>
+                                    <option value="<%=(1940 + j)%>"><%=(1940 + j)%></option>
                                     <%}%>
                                 </select>
                             </td>
@@ -114,17 +114,17 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                         <tr>
                             <td>Học Hàm</td>
                             <td>
-                                 <select name="sHocHam">
-                                     <option value="Null">Null</option>
+                                <select name="sHocHam">
+                                    <option value="Null">Null</option>
                                     <option value="Giáo sư">Giáo sư</option>
                                     <option value="P.Giáo sư">P.Giáo sư</option>
-                                  </select>
+                                </select>
                             </td>
                         </tr>
                         <tr>
                             <td>Học Vị</td>
                             <td>
-                               <select name="sHocVi">
+                                <select name="sHocVi">
                                     <option value="Null">Null</option>
                                     <option value="Cao học">Cao Học</option>
                                     <option value="Thạc sĩ">Thạc sĩ</option>
@@ -138,8 +138,8 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                         </tr>
                     </table>
                     <input type="button" value="Thêm" onclick="PreCheckOne()">
-                 </form>
-                  <hr><hr>
+                </form>
+                <hr><hr>
                 <form id="formbrowse" name="formbrowse" action="../servLecturerManager?action=addlist"
                       method="post" enctype="multipart/form-data">
                     <u>Thêm Giảng Viên Từ File</u><br/><br/>
@@ -151,56 +151,56 @@ clsRule rule=(clsRule) session.getAttribute("rule");
                             <td><input type="button" onclick="precheckfile()" value="Thêm"></td><td></td>
                         </tr>
                     </table>
-                   <br/>
+                    <br/>
                 </form>
 
-                </div><!--End Contents-->
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
     <script  type = "text/javascript" >
-         function PreCheckOne(){
-             var curent=new Date().getFullYear();
-             var year=document.getElementById("sYear").value;
-             var minage=document.getElementById("minage").value;
-             var maxage=document.getElementById("maxage").value;
-           if(document.getElementById("txtCode").value.length==0){
-               alert("Vui lòng nhập mã giảng viên");
-           }
-           else if(document.getElementById("txtname").value.length==0){
-               alert("Vui lòng nhập họ tên giảng viên");
-           }
-           else if(document.getElementById("txtCMND").value.length==0){
-               alert("Vui lòng nhập CMND của giảng viên");
-           }
-           else if(curent-year<minage){
+        function PreCheckOne(){
+            var curent=new Date().getFullYear();
+            var year=document.getElementById("sYear").value;
+            var minage=document.getElementById("minage").value;
+            var maxage=document.getElementById("maxage").value;
+            if(document.getElementById("txtCode").value.length==0){
+                alert("Vui lòng nhập mã giảng viên");
+            }
+            else if(document.getElementById("txtname").value.length==0){
+                alert("Vui lòng nhập họ tên giảng viên");
+            }
+            else if(document.getElementById("txtCMND").value.length==0){
+                alert("Vui lòng nhập CMND của giảng viên");
+            }
+            else if(curent-year<minage){
                 alert("Giảng viên chưa đut tuổi quy định");
-           }
-           else if(curent-year>maxage){
+            }
+            else if(curent-year>maxage){
                 alert("Giảng viên đã quá tuổi quy định");
-           }
-           else{
-              document.forms["formaddone"].submit();
-           }
+            }
+            else{
+                document.forms["formaddone"].submit();
+            }
         }
-      function precheckfile(){
-             var filename=document.getElementById("txtPath").value;
-              if(filename.length==0){
-                  alert("Bạn chưa chọn file");
-              }
-             else{
-                  var duoi=filename.substr(filename.length-4, 4);
-                  if(duoi!=".xls"&&duoi!="xlsx"){
-                      alert("Chỉ hỗ trợ thêm sinh viên từ file excel, xin chọn file khác");
-                  }else {
-                 document.forms["formbrowse"].submit();
+        function precheckfile(){
+            var filename=document.getElementById("txtPath").value;
+            if(filename.length==0){
+                alert("Bạn chưa chọn file");
+            }
+            else{
+                var duoi=filename.substr(filename.length-4, 4);
+                if(duoi!=".xls"&&duoi!="xlsx"){
+                    alert("Chỉ hỗ trợ thêm sinh viên từ file excel, xin chọn file khác");
+                }else {
+                    document.forms["formbrowse"].submit();
 
-                  }
-              }
-      }
-       </script>
+                }
+            }
+        }
+    </script>
 </html>

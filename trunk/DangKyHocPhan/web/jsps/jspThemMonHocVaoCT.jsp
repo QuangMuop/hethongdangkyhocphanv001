@@ -8,10 +8,10 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-Integer code=(Integer) session.getAttribute("code");
-ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sublist");
+    Integer code = (Integer) session.getAttribute("code");
+    ArrayList<clsSubject> sub = (ArrayList<clsSubject>) session.getAttribute("sublist");
 %>
 <html>
     <head>
@@ -20,7 +20,7 @@ ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sublist"
         <style media="all" type="text/css">
 
         </style>
-        </head>
+    </head>
     <body>
         <!--Div Wrapper-->
         <div id="wrapper">
@@ -36,39 +36,39 @@ ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sublist"
                             <td>Mã chương trình:</td>
                             <td><b><%=code%></b></td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>Môn học</td>
                             <td>
                                 <select name="sub" id="sub">
-                                    <%for(int i=0;i<sub.size();i++){%>
+                                    <%for (int i = 0; i < sub.size(); i++) {%>
 
                                     <option value="<%=sub.get(i).getSubCode()%>"><%=sub.get(i).getSubName()%></option>
                                     <%}%>
                                 </select>
                             </td>
-                         </tr>
-                          <tr>
+                        </tr>
+                        <tr>
                             <td>Học kỳ dự kiến</td>
                             <td>
                                 <select style="width:100px" name="semester" id="semester">
-                                    <%for(int i=1;i<10;i++){%>
+                                    <%for (int i = 1; i < 10; i++) {%>
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
                             </td>
-                         </tr>
-                      </table>
+                        </tr>
+                    </table>
                     <br/>
                     <input type="submit" value="Thêm môn học" >
                     <input type="hidden" name="code" id="code" value="<%=code%>">
-		</form>
-               	</div><!--End Contents-->
+                </form>
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-     
+
 </html>

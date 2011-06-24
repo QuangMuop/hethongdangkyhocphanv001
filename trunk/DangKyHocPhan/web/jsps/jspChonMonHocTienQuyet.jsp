@@ -3,11 +3,11 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sub");
-String subname=(String) session.getAttribute("subname");
-String subcode=(String) session.getAttribute("subcode");
+    ArrayList<clsSubject> sub = (ArrayList<clsSubject>) session.getAttribute("sub");
+    String subname = (String) session.getAttribute("subname");
+    String subcode = (String) session.getAttribute("subcode");
 %>
 <html>
     <head>
@@ -54,27 +54,27 @@ String subcode=(String) session.getAttribute("subcode");
                 <h3>Chọn môn học tiên quyết cho môn học <%=subname%> vừa tạo :</h3>
                 Nếu môn học không có môn học tiên quyết có thể bỏ qua bước này
                 <form id="sublist" action="../servSubject?action=presub" method="post">
-                   <input type="hidden" value="<%=subcode%>" name="subcode" id="subcode">
-                  <table id="subjectlist" name="subjectlist">
-                    <tr>
-                        <th>STT</th><th>Mã môn</th><th>Môn học</th><th>Chọn</th>
-                    </tr>
-                    <%for(int i=0;i<sub.size();i++){%>
-                    <tr>
-                        <td><%=i+1%></td><td><%=sub.get(i).getSubCode()%></td><td><%=sub.get(i).getSubName()%></td>
-                        <td><input type="checkbox" name="check" value="<%=sub.get(i).getSubCode()%>"></td>
+                    <input type="hidden" value="<%=subcode%>" name="subcode" id="subcode">
+                    <table id="subjectlist" name="subjectlist">
+                        <tr>
+                            <th>STT</th><th>Mã môn</th><th>Môn học</th><th>Chọn</th>
+                        </tr>
+                        <%for (int i = 0; i < sub.size(); i++) {%>
+                        <tr>
+                            <td><%=i + 1%></td><td><%=sub.get(i).getSubCode()%></td><td><%=sub.get(i).getSubName()%></td>
+                            <td><input type="checkbox" name="check" value="<%=sub.get(i).getSubCode()%>"></td>
 
-                    </tr>
-                    <%}%>
-                </table>
-                <input type="submit" value="Hoàn tất">
+                        </tr>
+                        <%}%>
+                    </table>
+                    <input type="submit" value="Hoàn tất">
                 </form>
-                </div><!--End Contents-->
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-   </html>
+</html>

@@ -8,9 +8,9 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<clsAccount> aclist=(ArrayList<clsAccount>) session.getAttribute("acc");
+    ArrayList<clsAccount> aclist = (ArrayList<clsAccount>) session.getAttribute("acc");
 %>
 <html>
     <head>
@@ -39,7 +39,7 @@ ArrayList<clsAccount> aclist=(ArrayList<clsAccount>) session.getAttribute("acc")
                 margin-top: 10px;
                 margin-left: 20px;
                 padding: 5 10 5 10;
-                background-color: #2f4e3d;;
+                background-color: #2f4e3d;
                 width: 280px;
             }
         </style>
@@ -56,12 +56,12 @@ ArrayList<clsAccount> aclist=(ArrayList<clsAccount>) session.getAttribute("acc")
                 <br>
                 <h1>Tìm kiếm tài khoản:</h1>
                 <form id = "formsearch" name="formsearch" action="" method="">
-                     <table>
-                         <tr>
-                             <td>Tên đăng nhập:</td>
-                             <td><input type="text" name="username" id="username" </td>
-                         </tr>
-                         <tr>
+                    <table>
+                        <tr>
+                            <td>Tên đăng nhập:</td>
+                            <td><input type="text" name="username" id="username" </td>
+                        </tr>
+                        <tr>
                             <td colspan="2"><input type="button" onclick="search()" value="Tìm Kiếm"></td>
                         </tr>
                     </table>
@@ -70,52 +70,52 @@ ArrayList<clsAccount> aclist=(ArrayList<clsAccount>) session.getAttribute("acc")
                 <hr><hr>
                 <h3>Danh sách các tài khoản trong hệ thống:</h3>
                 <form id="acclist">
-                  <table id="tableaclist" name="tableaclist">
-                    <tr>
-                        <th>STT</th><th>Tên đăng nhập</th><th>Họ Tên</th><th>Hiện trạng</th><th>Loại</th><th>Cập nhật</th>
-                    </tr>
-                    <%for(int i=0;i<aclist.size();i++){%>
-                    <tr>
-                        <td><%=i+1%></td>
-                        <td><%=aclist.get(i).getUserName()%></td>
-                        <td><%=aclist.get(i).getFullName()%></td>
-                        <%if(aclist.get(i).getIsLocked()==1){%>
-                        <td>Đang khóa</td>
-                        <%}else{%>
-                        <td>Bình thường</td>
+                    <table id="tableaclist" name="tableaclist">
+                        <tr>
+                            <th>STT</th><th>Tên đăng nhập</th><th>Họ Tên</th><th>Hiện trạng</th><th>Loại</th><th>Cập nhật</th>
+                        </tr>
+                        <%for (int i = 0; i < aclist.size(); i++) {%>
+                        <tr>
+                            <td><%=i + 1%></td>
+                            <td><%=aclist.get(i).getUserName()%></td>
+                            <td><%=aclist.get(i).getFullName()%></td>
+                            <%if (aclist.get(i).getIsLocked() == 1) {%>
+                            <td>Đang khóa</td>
+                            <%} else {%>
+                            <td>Bình thường</td>
+                            <%}%>
+                            <%if (aclist.get(i).getType() == 1) {%>
+                            <td>Quản lý</td>
+                            <%} else {%>
+                            <td>Sinh viên</td>
+                            <%}%>
+                            <%if (aclist.get(i).getIsLocked() == 1) {%>
+                            <td><a href="../servAccount?action=update&username=<%=aclist.get(i).getUserName()%>" >Mở khóa</a></td>
+                            <%} else {%>
+                            <td><a href="../servAccount?action=update&username=<%=aclist.get(i).getUserName()%>" >Khóa</a></td>
+                            <%}%>
+                        </tr>
                         <%}%>
-                        <%if(aclist.get(i).getType()==1){%>
-                        <td>Quản lý</td>
-                        <%}else{%>
-                        <td>Sinh viên</td>
-                        <%}%>
-                        <%if(aclist.get(i).getIsLocked()==1){%>
-                        <td><a href="../servAccount?action=update&username=<%=aclist.get(i).getUserName()%>" >Mở khóa</a></td>
-                        <%}else{%>
-                        <td><a href="../servAccount?action=update&username=<%=aclist.get(i).getUserName()%>" >Khóa</a></td>
-                        <%}%>
-                       </tr>
-                    <%}%>
-                </table>
+                    </table>
                 </form>
                 <hr><hr>
-                </div><!--End Contents-->
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
     <script src="../javascripts/jspCapNhatTK.js"></script>
-     <script  type = "text/javascript" >
+    <script  type = "text/javascript" >
         name="";
         action="search";
         var http = createRequestObject();
         function search(){
-              username=document.getElementById("username").value;
-                 ajaxfunction("../servAccount?action="+action+"&username="+username);
+            username=document.getElementById("username").value;
+            ajaxfunction("../servAccount?action="+action+"&username="+username);
         }
 
-       </script>
+    </script>
 </html>

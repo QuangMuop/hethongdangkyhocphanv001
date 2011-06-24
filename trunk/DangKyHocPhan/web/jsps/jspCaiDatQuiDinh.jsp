@@ -6,7 +6,7 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
@@ -59,9 +59,9 @@
             </div>
             <div id="content">
                 <p>
-                    <MARQUEE onmouseover="this.stop();" onmouseout="this.start();" HEIGHT=25 BGCOLOR=#C0C6CE BEHAVIOR=scroll SCROLLAMOUNT="4">
-                        Qui định chỉ được thay đổi bởi Quản lý khoa.
-                    </MARQUEE>
+                <MARQUEE onmouseover="this.stop();" onmouseout="this.start();" HEIGHT=25 BGCOLOR=#C0C6CE BEHAVIOR=scroll SCROLLAMOUNT="4">
+                    Qui định chỉ được thay đổi bởi Quản lý khoa.
+                </MARQUEE>
                 </p>
                 <form action="../servViewRule?issetup=true" method="post">
                     <table>
@@ -87,12 +87,12 @@
                             <td align="center">29</td>
                             <td align="center">
                                 <select name="sTuoiSVToiDa">
-                                        <option>30</option>
-                                        <option>31</option>
-                                        <option>32</option>
-                                        <option>33</option>
-                                        <option>34</option>
-                                        <option>35</option>
+                                    <option>30</option>
+                                    <option>31</option>
+                                    <option>32</option>
+                                    <option>33</option>
+                                    <option>34</option>
+                                    <option>35</option>
                                 </select>
                             </td>
                         </tr>
@@ -116,10 +116,10 @@
                                 <select name="sTuoiGVToiDa">
                                     <option>60</option>
                                     <option>61</option>
-                                        <option>62</option>
-                                        <option>63</option>
-                                        <option>64</option>
-                                        <option>65</option>
+                                    <option>62</option>
+                                    <option>63</option>
+                                    <option>64</option>
+                                    <option>65</option>
                                 </select>
                             </td>
                         </tr>
@@ -194,7 +194,7 @@
                     <input id="button-update" type="submit" name="btnChange" value="Update">
                 </form>
 
-              <br/><br/>
+                <br/><br/>
             </div> <!--End Content-->
             <div id="footer">
                 <%@include file="jspFooter.jsp" %>

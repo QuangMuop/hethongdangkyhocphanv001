@@ -8,9 +8,9 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-clsSubject sub=(clsSubject) session.getAttribute("sub");
+    clsSubject sub = (clsSubject) session.getAttribute("sub");
 %>
 <html>
     <head>
@@ -19,7 +19,7 @@ clsSubject sub=(clsSubject) session.getAttribute("sub");
         <style media="all" type="text/css">
 
         </style>
-        </head>
+    </head>
     <body>
         <!--Div Wrapper-->
         <div id="wrapper">
@@ -35,33 +35,33 @@ clsSubject sub=(clsSubject) session.getAttribute("sub");
                             <td>Môn học : </td>
                             <td><%=sub.getSubName()%></td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>Mã môn : </td>
                             <td><%=sub.getSubCode()%></td>
-                         </tr>
-                          <tr>
+                        </tr>
+                        <tr>
                             <td>Số Tín chỉ : </td>
                             <td><%=sub.getNumTC()%></td>
-                         </tr>
-                          <tr>
+                        </tr>
+                        <tr>
                             <td>Số tín chỉ lý thuyết : </td>
                             <td><%=sub.getTCLT()%></td>
-                         </tr>
-                          <tr>
+                        </tr>
+                        <tr>
                             <td>Số tín chỉ thực hành : </td>
                             <td><%=sub.getTCTH()%></td>
-                         </tr>
+                        </tr>
                     </table>
                     <br/>
                     <input type="submit" value="xóa môn học" >
                     <input type="hidden" name="subcode" value="<%=sub.getSubCode()%>">
-		</form>
-               	</div><!--End Contents-->
+                </form>
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-  </html>
+</html>

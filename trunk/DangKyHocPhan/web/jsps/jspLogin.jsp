@@ -22,8 +22,8 @@
                 padding-left: 25px;
                 padding-right: 25px;
                 padding-bottom: 120px;
-                border: 1px solid #5F676D;
-                background: transparent no-repeat left top;
+                border: 3px solid #5F676D;
+                background: url("../imgs/opaque_10.png") repeat scroll 0 0 transparent;
                 width: 340px;
                 height: 350px;
             }

@@ -8,9 +8,9 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-clsSubject sub=(clsSubject) session.getAttribute("sub");
+    clsSubject sub = (clsSubject) session.getAttribute("sub");
 %>
 <html>
     <head>
@@ -19,7 +19,7 @@ clsSubject sub=(clsSubject) session.getAttribute("sub");
         <style media="all" type="text/css">
 
         </style>
-        </head>
+    </head>
     <body>
         <!--Div Wrapper-->
         <div id="wrapper">
@@ -37,71 +37,71 @@ clsSubject sub=(clsSubject) session.getAttribute("sub");
                                 <input type="text" readonly name="txtsubname" id="txtsubname" value="<%=sub.getSubName()%>">
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>Mã môn</td>
                             <td>
                                 <input type="text" readonly name="txtsuncode" id="txtsuncode" value="<%=sub.getSubCode()%>">
                             </td>
-                         </tr>
-                          <tr>
+                        </tr>
+                        <tr>
                             <td>Số Tín chỉ</td>
                             <td>
                                 <select name="snumTC" id="snumTC" onchange="numtcchange()">
-                                    <%for(int i=1;i<11;i++){%>
+                                    <%for (int i = 1; i < 11; i++) {%>
 
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
                             </td>
-                         </tr>
-                          <tr>
+                        </tr>
+                        <tr>
                             <td>Số tín chỉ lý thuyết</td>
                             <td>
                                 <select name="snumTCLT" id="snumTCLT" onchange="numtcltchange()">
-                                    <%for(int i=0;i<11;i++){%>
+                                    <%for (int i = 0; i < 11; i++) {%>
 
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
                             </td>
-                         </tr>
-                          <tr>
+                        </tr>
+                        <tr>
                             <td>Số tín chỉ thực hành</td>
                             <td>
                                 <input type="text" name="txtTCTH" id="txtTCTH" readonly>
                             </td>
-                         </tr>
+                        </tr>
 
                     </table>
                     <br/>
                     <input type="button" value="cập nhật môn học" onclick="updatesub()">
-		</form>
-               	</div><!--End Contents-->
+                </form>
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-     <script  type = "text/javascript" >
-         function numtcchange(){
-         TC=document.getElementById("snumTC").value;
-         TCLT=document.getElementById("snumTCLT").value;
-         document.getElementById("txtTCTH").value=TC-TCLT;
-  }
-  function numtcltchange(){
-      TC=document.getElementById("snumTC").value;
-      TCLT=document.getElementById("snumTCLT").value;
-      if(TCLT-TC>0){
-          document.getElementById("snumTCLT").value=0;
-           document.getElementById("txtTCTH").value=TC;
-      }
-       numtcchange();
+    <script  type = "text/javascript" >
+        function numtcchange(){
+            TC=document.getElementById("snumTC").value;
+            TCLT=document.getElementById("snumTCLT").value;
+            document.getElementById("txtTCTH").value=TC-TCLT;
+        }
+        function numtcltchange(){
+            TC=document.getElementById("snumTC").value;
+            TCLT=document.getElementById("snumTCLT").value;
+            if(TCLT-TC>0){
+                document.getElementById("snumTCLT").value=0;
+                document.getElementById("txtTCTH").value=TC;
+            }
+            numtcchange();
 
-  }
-  function updatesub(){
-             document.forms["frmInfo"].submit();
-       }
-       </script>
+        }
+        function updatesub(){
+            document.forms["frmInfo"].submit();
+        }
+    </script>
 </html>

@@ -8,9 +8,9 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<clsDetailSubject> list=(ArrayList<clsDetailSubject>) session.getAttribute("list");
+    ArrayList<clsDetailSubject> list = (ArrayList<clsDetailSubject>) session.getAttribute("list");
 %>
 <html>
     <head>
@@ -32,7 +32,7 @@ ArrayList<clsDetailSubject> list=(ArrayList<clsDetailSubject>) session.getAttrib
                 background-color: #F9B7FF;
             }
             #subjectlist td{
-                background-color: #4792b8;;
+                background-color: #4792b8;
                 padding: 2 5 2 5;
             }
            
@@ -50,36 +50,36 @@ ArrayList<clsDetailSubject> list=(ArrayList<clsDetailSubject>) session.getAttrib
 
                 <h3>Chi tiết các môn học tiên quyết :</h3>
                 <form id="sublist">
-                  <table id="subjectlist" name="subjectlist">
-                    <tr>
-                        <th>Môn học</th><th>Môn học tiên quyết</th>
-                    </tr>
-                   <%for(int i=0;i<list.size();i++){ %>
-                         <%if(i==0){%>
-                         <tr>
-                             <td><b><%=list.get(i).getSubName()%></b></td>
-                              <td><%=list.get(i).getPreSubName()%></td>
-                         </tr>
-                          <%}else{
-                             if(list.get(i).getSubName().equalsIgnoreCase(list.get(i-1).getSubName())){%>
-                             <tr>
-                                <td></td>
-                                <td><%=list.get(i).getPreSubName()%></td>
-                             </tr>
-                             <%}else{%>
-                              <tr>
-                                  <td><b><%=list.get(i).getSubName()%></b></td>
-                                  <td><%=list.get(i).getPreSubName()%></td>
-                              </tr>
-                              <%}%>
-                          <%}%>
-                     <%}%>
-                </table>
+                    <table id="subjectlist" name="subjectlist">
+                        <tr>
+                            <th>Môn học</th><th>Môn học tiên quyết</th>
+                        </tr>
+                        <%for (int i = 0; i < list.size(); i++) {%>
+                        <%if (i == 0) {%>
+                        <tr>
+                            <td><b><%=list.get(i).getSubName()%></b></td>
+                            <td><%=list.get(i).getPreSubName()%></td>
+                        </tr>
+                        <%} else {
+                              if (list.get(i).getSubName().equalsIgnoreCase(list.get(i - 1).getSubName())) {%>
+                        <tr>
+                            <td></td>
+                            <td><%=list.get(i).getPreSubName()%></td>
+                        </tr>
+                        <%} else {%>
+                        <tr>
+                            <td><b><%=list.get(i).getSubName()%></b></td>
+                            <td><%=list.get(i).getPreSubName()%></td>
+                        </tr>
+                        <%}%>
+                        <%}%>
+                        <%}%>
+                    </table>
                 </form>
-                </div><!--End Contents-->
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->

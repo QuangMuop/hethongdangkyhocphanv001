@@ -8,10 +8,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-    clsLecturer lec=(clsLecturer) session.getAttribute("lec");
+    clsLecturer lec = (clsLecturer) session.getAttribute("lec");
 %>
 <html>
     <head>
@@ -50,10 +50,10 @@
                 <form id="formaddone" name="formaddone" action="../servLecturerManager?action=delete" method="post">
                     <u>Xóa giảng viên: <%=lec.getFullname()%></u><br/>
                     <table id="tableinfo">
-                         <tr>
+                        <tr>
                             <td width="120px">Mã GV</td>
                             <td width="200px"><%=lec.getLecturerCode()%></td>
-                           </tr>
+                        </tr>
                         <tr>
                             <td>Họ tên</td>
                             <td><%=lec.getFullname()%></td>
@@ -61,7 +61,7 @@
                         <tr>
                             <td>Ngày Sinh</td>
                             <td><%=lec.getBirthDay()%></td>
-                         </tr>
+                        </tr>
                         <tr>
                             <td>Giới Tính</td>
                             <td><%=lec.getGender()%></td>
@@ -73,7 +73,7 @@
                         <tr>
                             <td>Điện thoại</td>
                             <td><%=lec.getPhone()%></td>
-                         </tr>
+                        </tr>
                         <tr>
                             <td>Email</td>
                             <td><%=lec.getEmail()%></td>
@@ -81,18 +81,18 @@
                         <tr>
                             <td>Học Hàm</td>
                             <td><%=lec.getHocHam()%></td>
-                         </tr>
+                        </tr>
                         <tr>
                             <td>Học Vị</td>
                             <td><%=lec.getHocVi()%></td>
-                           </tr>
+                        </tr>
                         <tr>
                             <td>CMND</td>
                             <td><%=lec.getCMND()%></td>
-                         </tr>
+                        </tr>
                     </table>
-                         <input type="submit" value="Xóa giảng viên">
-                         <input type="hidden" name="txtcode" value="<%=lec.getLecturerCode()%>">
+                    <input type="submit" value="Xóa giảng viên">
+                    <input type="hidden" name="txtcode" value="<%=lec.getLecturerCode()%>">
                 </form>
 
                 <br/><br/>
@@ -100,7 +100,7 @@
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->

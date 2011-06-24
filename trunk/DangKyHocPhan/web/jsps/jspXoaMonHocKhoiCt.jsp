@@ -9,9 +9,9 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<clsProgram> pro=(ArrayList<clsProgram>) session.getAttribute("pro");
+    ArrayList<clsProgram> pro = (ArrayList<clsProgram>) session.getAttribute("pro");
 %>
 <html>
     <head>
@@ -20,7 +20,7 @@ ArrayList<clsProgram> pro=(ArrayList<clsProgram>) session.getAttribute("pro");
         <style media="all" type="text/css">
 
         </style>
-        </head>
+    </head>
     <body>
         <!--Div Wrapper-->
         <div id="wrapper">
@@ -36,26 +36,26 @@ ArrayList<clsProgram> pro=(ArrayList<clsProgram>) session.getAttribute("pro");
                             <td>Mã chương trình:</td>
                             <td><b><%=pro.get(0).getProgramCode()%></b></td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>Môn học</td>
                             <td>
                                 <select name="sub" id="sub">
-                                    <%for(int i=0;i<pro.size();i++){%>
+                                    <%for (int i = 0; i < pro.size(); i++) {%>
 
                                     <option value="<%=pro.get(i).getSubjectCode()%>"><%=pro.get(i).getSubName()%></option>
                                     <%}%>
                                 </select>
                             </td>
-                         </tr>
-                          </table>
+                        </tr>
+                    </table>
                     <br/>
                     <input type="submit" value="Xóa môn học" >
                     <input type="hidden" name="code" id="code" value="<%=pro.get(0).getProgramCode()%>">
-		</form>
-               	</div><!--End Contents-->
+                </form>
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->

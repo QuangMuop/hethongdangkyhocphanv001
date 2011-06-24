@@ -7,7 +7,7 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
 String user=(String) session.getAttribute("username");
 %>
@@ -48,7 +48,7 @@ String user=(String) session.getAttribute("username");
                     Vui lòng ghi yêu cầu vào ô bên dưới và click Gửi Yêu Cầu.
                 </p>
                 <form id="myform" name="myform" method="post" action="../servSendComment?guest=false">
-                     <table>
+                    <table>
                         <tr>
                             <td><a>Họ Tên</a></td>
                             <td><input type="text" name="txtName" id="txt-info"></td>
@@ -74,27 +74,27 @@ String user=(String) session.getAttribute("username");
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-     <script  type = "text/javascript" >
-         function sendComment(){
-           var content = document.myform.txtContent.value;
-           var name = document.myform.txtName.value;
-           var email = document.myform.txtEmail.value;
-         if(content.length==0){
-             alert("Bạn chưa nhập nội dung");
-          }
-          else if(name.length==0){
-             alert("Bạn chưa nhập tên");
-          }else if(email.length==0){
-             alert("Bạn chưa nhập email");
-          }
-          else{
-           document.forms["myform"].submit();
-          }
-  }
-       </script>
+    <script  type = "text/javascript" >
+        function sendComment(){
+            var content = document.myform.txtContent.value;
+            var name = document.myform.txtName.value;
+            var email = document.myform.txtEmail.value;
+            if(content.length==0){
+                alert("Bạn chưa nhập nội dung");
+            }
+            else if(name.length==0){
+                alert("Bạn chưa nhập tên");
+            }else if(email.length==0){
+                alert("Bạn chưa nhập email");
+            }
+            else{
+                document.forms["myform"].submit();
+            }
+        }
+    </script>
 </html>

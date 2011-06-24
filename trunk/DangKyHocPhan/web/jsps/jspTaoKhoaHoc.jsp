@@ -8,10 +8,10 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<Integer> pro=(ArrayList<Integer>) session.getAttribute("pro");
-ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course");
+    ArrayList<Integer> pro = (ArrayList<Integer>) session.getAttribute("pro");
+    ArrayList<clsCourse> course = (ArrayList<clsCourse>) session.getAttribute("course");
 %>
 <html>
     <head>
@@ -29,7 +29,7 @@ ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course"
                 background-color: #92C7C7;
                 border: 3px solid #7F38EC;
             }
-             #tablelistcourse{
+            #tablelistcourse{
                 margin-left: 10px;
                 margin-top: 10px;
                 margin-bottom: 20px;
@@ -54,7 +54,7 @@ ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course"
                 text-align: center;
             }
         </style>
-        </head>
+    </head>
     <body>
         <!--Div Wrapper-->
         <div id="wrapper">
@@ -70,7 +70,7 @@ ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course"
                             <td>Khóa học học</td>
                             <td>
                                 <select name="courseID" id="courseID" style="width:100px">
-                                     <%for(int i=1;i<11;i++){%>
+                                    <%for (int i = 1; i < 11; i++) {%>
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
@@ -80,7 +80,7 @@ ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course"
                             <td>Năm bắt đầu</td>
                             <td>
                                 <select name="yearIn" id="yearIn" style="width:100px">
-                                    <%for(int i=2006;i<2021;i++){%>
+                                    <%for (int i = 2006; i < 2021; i++) {%>
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
@@ -90,19 +90,19 @@ ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course"
                             <td>Năm kết thúc</td>
                             <td>
                                 <select name="yearOut" id="yearOut" style="width:100px">
-                                    <%for(int i=2010;i<2025;i++){%>
+                                    <%for (int i = 2010; i < 2025; i++) {%>
                                     <option value="<%=i%>"><%=i%></option>
                                     <%}%>
                                 </select>
                             </td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td>Chương trình đào tạo: </td>
                             <td>
                                 <select name="ProCode" id="ProCode" style="width:100px">
-                                <%for(int i=0;i<pro.size();i++){%>
-                                <option value="<%=pro.get(i)%>"><%=pro.get(i)%></option>
-                                <%}%>
+                                    <%for (int i = 0; i < pro.size(); i++) {%>
+                                    <option value="<%=pro.get(i)%>"><%=pro.get(i)%></option>
+                                    <%}%>
                                 </select>
                             </td>
                         </tr>
@@ -110,19 +110,19 @@ ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course"
                             <td>Tạo mới chương trình</td>
                             <td><a href="../servProManage?action=create">Click</a></td>
                         </tr>
-                     </table>
+                    </table>
                     <br/>
                     <input type="button" value="Tạo khóa học" onclick="insertCourse()">
-		</form>
+                </form>
                 <br><hr><hr>
                	<u>Danh sách các khóa học hiện có.</u>
-		<table id="tablelistcourse">
+                <table id="tablelistcourse">
                     <tr>
                         <th>STT</th><th>Khóa học</th><th>Năm bắt đầu</th><th>Năm kết thúc</th><th>Số SV hiện tại</th><th>Chương trình đào tạo</th>
                     </tr>
-                    <%for(int i=0;i<course.size();i++){%>
+                    <%for (int i = 0; i < course.size(); i++) {%>
                     <tr>
-                        <td><%=i+1%></td><td><%=course.get(i).getCourseCode()%></td>
+                        <td><%=i + 1%></td><td><%=course.get(i).getCourseCode()%></td>
                         <td><%=course.get(i).getYearIn()%></td><td><%=course.get(i).getYearOut()%></td>
                         <td><%=course.get(i).getNumOfStudent()%></td><td><%=course.get(i).getProgramCode()%></td>
                     </tr>
@@ -131,21 +131,21 @@ ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course"
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-     <script  type = "text/javascript" >
-         function insertCourse(){
-         var yearin = document.frmInfo.yearIn.value;
-         var yearout = document.frmInfo.yearOut.value;
-         if(yearout-yearin<4){
-           alert("Năm kết thúc phải sau năm bắt đầu ít nhất 4 năm")
-          }
-          else{
-           document.forms["frmInfo"].submit();
-          }
-  }
-       </script>
+    <script  type = "text/javascript" >
+        function insertCourse(){
+            var yearin = document.frmInfo.yearIn.value;
+            var yearout = document.frmInfo.yearOut.value;
+            if(yearout-yearin<4){
+                alert("Năm kết thúc phải sau năm bắt đầu ít nhất 4 năm")
+            }
+            else{
+                document.forms["frmInfo"].submit();
+            }
+        }
+    </script>
 </html>
