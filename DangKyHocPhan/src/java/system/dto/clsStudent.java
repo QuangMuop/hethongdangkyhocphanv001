@@ -21,7 +21,7 @@ public class clsStudent {
     public clsStudent(){
 
     }
-    public clsStudent(String fullname, String birthday, String code, String classs, String email, String phone, String address, String home, String isstuding, int course,String nhaphoc, String gender, String cmnd, String type, String bachoc){
+    public clsStudent(String fullname, String code, String birthday, String classs, String email, String phone, String address, String home, String isstuding, int course,String nhaphoc, String gender, String cmnd, String type, String bachoc){
         this.FullName=fullname;
         this.BirthDay=birthday;
         this.Code=code;

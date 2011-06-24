@@ -120,10 +120,6 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
             cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
             cell1.setCellValue("Danh sách sinh viên");
 
-            row1 = sheet.createRow((short) +(nrow++));
-            row1 = sheet.createRow((short) +(nrow++));
-         
-
             String[] title = {"STT","Họ tên","MSSV", "Ngày sinh", "Lớp","Email","Điện thoại","Tạm trú","Thường trú","Tình trạng","Khóa","Ngày nhập học","Giới tính","CMND","Hình thức đào tạo","Bậc học"};
             row1 = sheet.createRow((short) +(nrow++));
             for(i = 0; i < title.length; i++){                
@@ -174,8 +170,15 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
                 for(int j = 0; j < info.length; j++){
                     cell = row.createCell((short) +j);
                     cell.setCellStyle(style);
+                    if(j==0) {
+                        cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+                        cell.setCellValue(Double.parseDouble(info[j]));
+                    }
+                    else {
                     cell.setCellType(HSSFCell.CELL_TYPE_STRING);
                     cell.setCellValue(info[j]);
+                    }
+                    
                 }
             }
 
