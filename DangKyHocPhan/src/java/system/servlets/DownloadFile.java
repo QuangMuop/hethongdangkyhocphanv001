@@ -16,17 +16,10 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import system.access.mapper.clsMapperStudyResult;
-import system.access.mapper.clsMapperSubject;
 import system.bo.clsBODetailResult;
-import system.bo.clsBORegistration;
 import system.bo.clsBOStudent;
-import system.bo.clsBOStudyResult;
-import system.bo.clsBOSubject;
 import system.dto.clsDetailResult;
 import system.dto.clsStudent;
-import system.dto.clsStudyResult;
-import system.dto.clsSubject;
 
 /**
  *
@@ -86,27 +79,26 @@ public class DownloadFile extends HttpServlet {
                 Logger.getLogger(DownloadFile.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
+   }
 private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp) throws Exception{
-   // String type=req.getParameter("type");
-   // String name=req.getParameter("name");
+    String type=req.getParameter("type");
+    String name=req.getParameter("name");
     clsBOStudent BOS=new clsBOStudent();
     ArrayList<clsStudent> studentlist=new ArrayList<clsStudent>();
-    //if(type.equalsIgnoreCase("mssv")){
-          //  studentlist=BOS.getStudentsByCode(name);
-       // }else if(type.equalsIgnoreCase("name")){
-       //    studentlist=BOS.getStudentsByName(name);
-      //  }else if(type.equalsIgnoreCase("classname")){
-       //  studentlist=BOS.GetStudentsByClass(name);
-      //  }else if(type.equalsIgnoreCase("All")){
+    if(type.equalsIgnoreCase("mssv")){
+            studentlist=BOS.getStudentsByCode(name);
+        }else if(type.equalsIgnoreCase("name")){
+           studentlist=BOS.getStudentsByName(name);
+        }else if(type.equalsIgnoreCase("classname")){
+         studentlist=BOS.GetStudentsByClass(name);
+        }else if(type.equalsIgnoreCase("All")){
             studentlist=BOS.GetAllStudent();
-      //  }
+        }
      try{
             HSSFWorkbook hwb = new HSSFWorkbook();
             HSSFSheet sheet = hwb.createSheet("Danh sách sinh viên ");
             HSSFCellStyle style = hwb.createCellStyle();
 
-            boolean done = false;
             int nrow = 0, i = 0;
             int n = studentlist.size();
 
@@ -118,7 +110,16 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
             cell1 = row1.createCell((short) +4);
             cell1.setCellStyle(style);
             cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
-            cell1.setCellValue("Danh sách sinh viên");
+            if (type.equalsIgnoreCase("mssv")) {
+               cell1.setCellValue("Danh sách sinh viên có MSSV "+name);
+            } else if (type.equalsIgnoreCase("name")) {
+              cell1.setCellValue("Danh sách sinh viên có tên "+name);
+            } else if (type.equalsIgnoreCase("classname")) {
+                cell1.setCellValue("Danh sách sinh viên lớp "+name);
+            } else if (type.equalsIgnoreCase("All")) {
+                cell1.setCellValue("Danh sách tất cả các sinh viên của khoa");
+            }
+            
 
             String[] title = {"STT","Họ tên","MSSV", "Ngày sinh", "Lớp","Email","Điện thoại","Tạm trú","Thường trú","Tình trạng","Khóa","Ngày nhập học","Giới tính","CMND","Hình thức đào tạo","Bậc học"};
             row1 = sheet.createRow((short) +(nrow++));
