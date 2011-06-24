@@ -57,7 +57,7 @@ public class servStudentManager extends HttpServlet {
             if(login==null){
                 session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
                   String path = "./jsps/jspThongBao.jsp";
-                response.sendRedirect(path);
+               response.sendRedirect(path);
             }
             else{
             String action =request.getParameter("action");
@@ -142,31 +142,27 @@ public class servStudentManager extends HttpServlet {
     }
     private void InsertListStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, FileUploadException, Exception{
        try{
+           int numerror=0;
         HSSFWorkbook wb=GetWorkbook(request, response);
-         int i = 0;
-         int numerror=0;
         ArrayList<String> Studentinfo;
         ArrayList<String> result=new ArrayList<String>();
-         int n = wb.getNumberOfSheets();
-
-         for (int k = 0; k < n; k++){
-             HSSFSheet sheet = wb.getSheetAt(k);
+        HSSFSheet sheet = wb.getSheetAt(0);
              int rows  = sheet.getPhysicalNumberOfRows();
-
              HSSFRow rowTemp;
              HSSFCell cellTemp;
+             
              int cellType;
              String strValue = "";
 
-             for (i = 0; i < rows; i++){
-                 Studentinfo=new ArrayList<String>();
+             for (int i = 1; i < rows; i++){
+                Studentinfo=new ArrayList<String>();
                  rowTemp = sheet.getRow(i);
                  cellTemp = rowTemp.getCell(0);
                  cellType = cellTemp.getCellType();
                  //check the first cell of data must be a number
-                 if(cellType != HSSFCell.CELL_TYPE_NUMERIC){
+                if(cellType != HSSFCell.CELL_TYPE_NUMERIC){
                      continue;
-                 }
+                }else{
                  //CELL 1// FullName//CELL2: MSSV//CELL3: BirthDay//CELL4: Lop - Class//CELL5: Email
                 //CELL6: PhoneNumber//CELL7: TamTru/CELL8: ThuongTru
                 //CELL9: Status: Đang học, đang bảo lưu, đang ...
@@ -182,17 +178,17 @@ public class servStudentManager extends HttpServlet {
                      Studentinfo.add(strValue);
                  }
                 clsStudent cls=new clsStudent();
-                cls=new clsStudent(Studentinfo.get(0), Studentinfo.get(2), Studentinfo.get(1), Studentinfo.get(3), Studentinfo.get(4), Studentinfo.get(5), Studentinfo.get(6), Studentinfo.get(7), Studentinfo.get(8),Integer.parseInt(Studentinfo.get(9)), Studentinfo.get(10), Studentinfo.get(11), Studentinfo.get(12), Studentinfo.get(13), Studentinfo.get(14));
-               clsBOStudent BOS=new clsBOStudent();
+                cls=new clsStudent(Studentinfo.get(0), Studentinfo.get(1), Studentinfo.get(2), Studentinfo.get(3), Studentinfo.get(4), Studentinfo.get(5), Studentinfo.get(6), Studentinfo.get(7), Studentinfo.get(8),Integer.parseInt(Studentinfo.get(9)), Studentinfo.get(10), Studentinfo.get(11), Studentinfo.get(12), Studentinfo.get(13), Studentinfo.get(14));
+                clsBOStudent BOS=new clsBOStudent();
                 if(BOS.Insert(cls))
                {
                   result.add("OK");                    
                }
                else{
                        result.add(cls.getFullname());
-                    }
+                   }
                 
-            }
+           }
          }
          for(int j=0;j<result.size();j++){
             if(result.get(j).equalsIgnoreCase("OK")==false)
@@ -216,7 +212,7 @@ public class servStudentManager extends HttpServlet {
            response.sendRedirect(path);
           }
        }catch(Exception ex){
-           session.setAttribute("mes", ex.toString());
+           session.setAttribute("mes", "Lỗi định dạng file, vui lòng kiểm tra lại");
            String path = "./jsps/jspThongBao.jsp";
            response.sendRedirect(path);
        }
