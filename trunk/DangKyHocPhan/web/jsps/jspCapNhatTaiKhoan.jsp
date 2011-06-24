@@ -86,8 +86,10 @@
                             <%}%>
                             <%if (aclist.get(i).getType() == 1) {%>
                             <td>Quản lý</td>
-                            <%} else {%>
-                            <td>Sinh viên</td>
+                            <%} else if(aclist.get(i).getType() == 2) {%>
+                            <td>Giảng viên</td>
+                            <%}else{%>
+                            <td>Sinh viên viên</td>
                             <%}%>
                             <%if (aclist.get(i).getIsLocked() == 1) {%>
                             <td><a href="../servAccount?action=update&username=<%=aclist.get(i).getUserName()%>" >Mở khóa</a></td>
