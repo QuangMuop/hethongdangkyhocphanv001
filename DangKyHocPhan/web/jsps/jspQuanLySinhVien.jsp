@@ -99,7 +99,7 @@
                 </form>
                  <p align="right"><b><a href="../servStudentManager?action=create">Tiếp nhận sinh viên</a></b></p>
                 <hr><hr>
-                <form method="#">
+                <form id="formdown" name="formdown" action="../DownloadFile?action=test" method="post">
                     Danh sách sinh viên:<br/>
                     <table id="tableliststudent" name="tableliststudent">
                         <tr>
@@ -129,7 +129,7 @@
                     <input style="position:absolute; left:710px;" type="button" value=">>" onclick="nextpage()">
                     <input style="position:absolute; left:740px;" type="button" value=">>|" onclick="nnextpage()"><br>
                         <input type="hidden" value="<%=numStudent%>" id="numstu" />
-                        <a href="../DownloadFile?action=studentlist">Tải file</a>
+                        <input type="button" value="Tải file" onclick="load()"/>
                         </form>
             </div><!--End Contents-->
 
@@ -140,7 +140,7 @@
         <!--End Wrapper-->
     </body>
      <script src="../javascripts/jsSinhVien.js"></script>
-    <script  type = "text/javascript" >
+     <script  type = "text/javascript" >
         typesearch="All";
         name="All";
         action="search";
@@ -223,6 +223,21 @@
         function selectAll(){
            typesearch="All";
         }
+       function load(){
+            if(start<0){
+                start=0;
+            }
+                 if(typesearch=="name"){
+                    name=document.formsearch.txtName.value;
+               }else if(typesearch == "mssv"){
+                    name=document.formsearch.txtcode.value;
+                }else if(typesearch == "classname"){
+                    name = document.formsearch.sClass.value;
+                }
+            document.forms["formdown"].action="../DownloadFile?action=studentlist&type="+typesearch+"&name="+name;
+            document.forms["formdown"].submit();
+                   // downloadfunction("../DownloadFile?action=test&type="+typesearch+"&name="+name);
        
+       }
        </script>
 </html>
