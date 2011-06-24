@@ -74,7 +74,7 @@
                 </li>
                 <li><a href="#"> Giảng viên </a>
                     <ul>
-                        <li><a href="../servUpdateScore?action=view">Điểm kết thúc môn</a> </li>  
+                        <li><a href="../servUpdateScore?action=lecturer">Điểm kết thúc môn</a> </li>  
                     </ul>
                 </li>
                 <li><a href="#"> Sinh viên </a>
