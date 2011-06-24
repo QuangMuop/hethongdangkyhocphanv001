@@ -178,7 +178,7 @@ public class servStudentManager extends HttpServlet {
                      Studentinfo.add(strValue);
                  }
                 clsStudent cls=new clsStudent();
-                cls=new clsStudent(Studentinfo.get(0), Studentinfo.get(1), Studentinfo.get(2), Studentinfo.get(3), Studentinfo.get(4), Studentinfo.get(5), Studentinfo.get(6), Studentinfo.get(7), Studentinfo.get(8),Integer.parseInt(Studentinfo.get(9)), Studentinfo.get(10), Studentinfo.get(11), Studentinfo.get(12), Studentinfo.get(13), Studentinfo.get(14));
+                cls=new clsStudent(Studentinfo.get(0), Studentinfo.get(2), Studentinfo.get(1), Studentinfo.get(3), Studentinfo.get(4), Studentinfo.get(5), Studentinfo.get(6), Studentinfo.get(7), Studentinfo.get(8),Integer.parseInt(Studentinfo.get(9)), Studentinfo.get(10), Studentinfo.get(11), Studentinfo.get(12), Studentinfo.get(13), Studentinfo.get(14));
                 clsBOStudent BOS=new clsBOStudent();
                 if(BOS.Insert(cls))
                {
