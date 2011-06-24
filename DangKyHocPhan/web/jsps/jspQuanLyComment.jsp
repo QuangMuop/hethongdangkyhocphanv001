@@ -4,7 +4,7 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
 ArrayList<clsComment> comment=(ArrayList<clsComment>) session.getAttribute("comment");
 %>
@@ -14,23 +14,23 @@ ArrayList<clsComment> comment=(ArrayList<clsComment>) session.getAttribute("comm
         <title>Quản lý comment</title>
         <style media="all" type="text/css">
 
-                #formdetail table{
+            #formdetail table{
                 width: 100%;
-                    padding-left: 10px;
-                        padding-right: 10px;
-                        text-align: center;
+                padding-left: 10px;
+                padding-right: 10px;
+                text-align: center;
 
-                }
-                #formdetail table th{
+            }
+            #formdetail table th{
                 background-color:#00ff00;
                 height: 30px;
                 border-color: black;
-                }
+            }
 
-                #formdetail table td{
+            #formdetail table td{
                 text-align: center;
-                background-color: #4792b8;
-                }
+                background-color: #5F676D;
+            }
 
         </style>
     </head>
@@ -43,35 +43,35 @@ ArrayList<clsComment> comment=(ArrayList<clsComment>) session.getAttribute("comm
             <div id="content"><!--Main Contents-->
                 <br><h3>Danh sách các comment chưa giải quyết:</h3><br>
                 <hr/><hr/><br>
-		<form id="formdetail" name="formdetail">
-                <table id="detail" name="detail" border="2" bordercolor="yellow" >
+                <form id="formdetail" name="formdetail">
+                    <table id="detail" name="detail" border="2" bordercolor="yellow" >
                         <tr>
                             <th>STT</th><th>Người gửi</th><th >Nội dung</th><th>Xem</th><th>Xóa</th>
                         </tr>
-                         <%for(int i=0;i<comment.size();i++){%>
-                         <tr>
-                             <td><%=i+1%></td>
-                             <td><%=comment.get(i).getAuthor()%></td>
-                             <%
+                        <%for(int i=0;i<comment.size();i++){%>
+                        <tr>
+                            <td><%=i+1%></td>
+                            <td><%=comment.get(i).getAuthor()%></td>
+                            <%
                              if(comment.get(i).getContent().length()>50){%>
-                              <td><%=comment.get(i).getContent().substring(0, 50) %>....</td>
-                              <%}else {%>
-                               <td><%=comment.get(i).getContent()%></td>
-                             <%}%>
+                            <td><%=comment.get(i).getContent().substring(0, 50) %>....</td>
+                            <%}else {%>
+                            <td><%=comment.get(i).getContent()%></td>
+                            <%}%>
                             <td><a href="../servCommentManager?action=detail&Id=<%=comment.get(i).getId()%>">Xem</a> </td>
-                             <td><a href="../servCommentManager?action=delete&Id=<%=comment.get(i).getId()%>">Xóa</a> </td>
-                         </tr>
-                         <%}%>
-			</table>
-			<br/>
+                            <td><a href="../servCommentManager?action=delete&Id=<%=comment.get(i).getId()%>">Xóa</a> </td>
+                        </tr>
+                        <%}%>
+                    </table>
+                    <br/>
                 </form>
 
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-  </html>
+</html>

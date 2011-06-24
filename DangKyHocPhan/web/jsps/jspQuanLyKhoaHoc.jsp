@@ -8,9 +8,9 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course");
+    ArrayList<clsCourse> course = (ArrayList<clsCourse>) session.getAttribute("course");
 %>
 <html>
     <head>
@@ -32,10 +32,10 @@ ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course"
                 background-color: #F9B7FF;
             }
             #tblcourselist td{
-                background-color: #495C28;
+                background-color: #5F676D;
                 padding: 2 5 2 5;
             }
-            
+
         </style>
     </head>
     <body>
@@ -52,24 +52,24 @@ ArrayList<clsCourse> course=(ArrayList<clsCourse>) session.getAttribute("course"
                 <hr><hr>
                 <h3>Danh sách các khóa học của khoa :</h3>
                 <form id="classlist">
-                  <table id="tblcourselist" name="tblcourselist">
-                    <tr>
-                        <th>STT</th><th>Khóa học</th><th>Năm bắt đầu</th><th>Năm kết thúc</th><th>Số SV hiện tại</th><th>Chương trình đào tạo</th>
-                    </tr>
-                    <%for(int i=0;i<course.size();i++){%>
-                    <tr>
-                        <td><%=i+1%></td><td><%=course.get(i).getCourseCode()%></td>
-                        <td><%=course.get(i).getYearIn()%></td><td><%=course.get(i).getYearOut()%></td>
-                        <td><%=course.get(i).getNumOfStudent()%></td><td><%=course.get(i).getProgramCode()%></td>
-                    </tr>
-                    <%}%>
-                </table>
+                    <table id="tblcourselist" name="tblcourselist">
+                        <tr>
+                            <th>STT</th><th>Khóa học</th><th>Năm bắt đầu</th><th>Năm kết thúc</th><th>Số SV hiện tại</th><th>Chương trình đào tạo</th>
+                        </tr>
+                        <%for (int i = 0; i < course.size(); i++) {%>
+                        <tr>
+                            <td><%=i + 1%></td><td><%=course.get(i).getCourseCode()%></td>
+                            <td><%=course.get(i).getYearIn()%></td><td><%=course.get(i).getYearOut()%></td>
+                            <td><%=course.get(i).getNumOfStudent()%></td><td><%=course.get(i).getProgramCode()%></td>
+                        </tr>
+                        <%}%>
+                    </table>
                 </form>
                 <hr><hr>
-                </div><!--End Contents-->
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->

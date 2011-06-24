@@ -23,24 +23,26 @@
                 margin-top: 20px;
                 margin-bottom: 20px;
                 width: 740px;
-                border-left: 2px solid;
-                border-right: 2px solid;
+                border: 3px solid #73726E;
+                -moz-border-radius:5px 5px 5px 5px;
                 text-align: center;
             }
             #tablelistlecturer th{
                 height: 32px;
                 font-weight: bold;
-                background-color: #F9B7FF;
+                background: url("../imgs/opaque_10.png") repeat scroll 0 0 transparent;
             }
             #tablelistlecturer td{
-                background-color: #686;
+                background: url("../imgs/opaque_10.png") repeat scroll 0 0 transparent;
                 padding: 2 5 2 5;
             }
             #formsearch{
                 margin-top: 10px;
                 margin-left: 20px;
                 padding: 5 10 5 10;
-                background-color: #4792b8;
+                border: 3px solid #73726E;
+                -moz-border-radius:5px 5px 5px 5px;
+                background: url("../imgs/opaque_10.png") repeat scroll 0 0 transparent;
                 width: 320px;
             }
         </style>

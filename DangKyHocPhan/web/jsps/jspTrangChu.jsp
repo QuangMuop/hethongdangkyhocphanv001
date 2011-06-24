@@ -8,7 +8,7 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
@@ -30,18 +30,27 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
                 <p>
-                    
+
                 <h4>Thông báo về việc đổi phòng thi môn Cấu trúc dữ liệu và giải thuật 1 ngày 22/06/2011 của lớp DSAL1.B24 ( 20/06/2011 )</h4></br>
 
-Phòng Đào tạo ĐH&SĐH thông báo cho các sinh viên thi môn Cấu trúc dữ liệu và giải thuật 1 ngày 22/06/2011 của lớp DSAL1.B24 sẽ chuyển từ phòng 101 và 106 sang phòng 201 và 202. Giờ thi sẽ bắt đầu vào ca 2 lúc 9 giờ 30 phút
-Phòng Đào tạo
+                Phòng Đào tạo ĐH&SĐH thông báo cho các sinh viên thi môn Cấu trúc dữ liệu và giải thuật 1 ngày 22/06/2011 của lớp DSAL1.B24 sẽ chuyển từ phòng 101 và 106 sang phòng 201 và 202. Giờ thi sẽ bắt đầu vào ca 2 lúc 9 giờ 30 phút
+                Phòng Đào tạo...<a href="#">Chi tiết</a><br>
+                Phòng Đào tạo ĐH&SĐH thông báo cho các sinh viên thi môn Cấu trúc dữ liệu và giải thuật 1 ngày 22/06/2011 của lớp DSAL1.B24 sẽ chuyển từ phòng 101 và 106 sang phòng 201 và 202. Giờ thi sẽ bắt đầu vào ca 2 lúc 9 giờ 30 phút
+                Phòng Đào tạo...<a href="#">Chi tiết</a><br>
+                Phòng Đào tạo ĐH&SĐH thông báo cho các sinh viên thi môn Cấu trúc dữ liệu và giải thuật 1 ngày 22/06/2011 của lớp DSAL1.B24 sẽ chuyển từ phòng 101 và 106 sang phòng 201 và 202. Giờ thi sẽ bắt đầu vào ca 2 lúc 9 giờ 30 phút
+                Phòng Đào tạo...<a href="#">Chi tiết</a><br>
+                Phòng Đào tạo ĐH&SĐH thông báo cho các sinh viên thi môn Cấu trúc dữ liệu và giải thuật 1 ngày 22/06/2011 của lớp DSAL1.B24 sẽ chuyển từ phòng 101 và 106 sang phòng 201 và 202. Giờ thi sẽ bắt đầu vào ca 2 lúc 9 giờ 30 phút
+                Phòng Đào tạo...<a href="#">Chi tiết</a><br>
+                Phòng Đào tạo ĐH&SĐH thông báo cho các sinh viên thi môn Cấu trúc dữ liệu và giải thuật 1 ngày 22/06/2011 của lớp DSAL1.B24 sẽ chuyển từ phòng 101 và 106 sang phòng 201 và 202. Giờ thi sẽ bắt đầu vào ca 2 lúc 9 giờ 30 phút
+                Phòng Đào tạo...<a href="#">Chi tiết</a><br>
+                
 
                 </p>
                 <%--<img src="../imgs/hpimg.JPG" alt="Angry face" id="frmimg"/>--%>
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->

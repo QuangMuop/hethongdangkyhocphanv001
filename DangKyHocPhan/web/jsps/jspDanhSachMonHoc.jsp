@@ -8,7 +8,7 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
 ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sub");
 %>
@@ -32,14 +32,14 @@ ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sub");
                 background-color: #F9B7FF;
             }
             #subjectlist td{
-                background-color: #474C52;
+                background-color: #5F676D;
                 padding: 2 5 2 5;
             }
             #formsearch{
                 margin-top: 10px;
                 margin-left: 20px;
                 padding: 5 10 5 10;
-                background-color: #153E7E;
+                background-color: #474C52;
                 width: 280px;
             }
         </style>
@@ -56,50 +56,50 @@ ArrayList<clsSubject> sub=(ArrayList<clsSubject>) session.getAttribute("sub");
                 <br>
                 <h1>Tìm kiếm môn học:</h1>
                 <form id = "formsearch" name="formsearch" action="#" method="post">
-                     <table>
-                         <tr>
-                             <td>Tên môn học:</td>
-                             <td><input type="text" id="subname" name="subname"></td>
-                         </tr>
+                    <table>
+                        <tr>
+                            <td>Tên môn học:</td>
+                            <td><input type="text" id="subname" name="subname"></td>
+                        </tr>
                         <tr>
                             <td colspan="2"><input type="button" onclick="search()" value="Tìm Kiếm"></td>
                         </tr>
                     </table>
                 </form>
                 <p align="right"><b><a href="jspTaoMoiMonHoc.jsp">Thêm môn học mới</a></b></p>
-                 <hr><hr>
+                <hr><hr>
                 <h3>Danh sách các môn học :</h3>
                 <form id="sublist">
-                  <table id="subjectlist" name="subjectlist">
-                    <tr>
-                        <th>STT</th><th>Mã môn</th><th>Môn học</th><th>Số TC</th><th>Số TCLT</th><th>Số TCTH</th><th>Sửa</th><th>Xóa</th>
-                    </tr>
-                    <%for(int i=0;i<sub.size();i++){%>
-                    <tr>
-                        <td><%=i+1%></td><td><%=sub.get(i).getSubCode()%></td><td><%=sub.get(i).getSubName()%></td>
-                        <td><%=sub.get(i).getNumTC()%></td><td><%=sub.get(i).getTCLT()%></td><td><%=sub.get(i).getTCTH()%></td>
-                        <td><a href="../servSubject?action=edit&subcode=<%=sub.get(i).getSubCode()%>">Sửa</a></td>
-                        <td><a href="../servSubject?action=delete&subcode=<%=sub.get(i).getSubCode()%>">Xóa</a></td>
-                    </tr>
-                    <%}%>
-                </table>
+                    <table id="subjectlist" name="subjectlist">
+                        <tr>
+                            <th>STT</th><th>Mã môn</th><th>Môn học</th><th>Số TC</th><th>Số TCLT</th><th>Số TCTH</th><th>Sửa</th><th>Xóa</th>
+                        </tr>
+                        <%for(int i=0;i<sub.size();i++){%>
+                        <tr>
+                            <td><%=i+1%></td><td><%=sub.get(i).getSubCode()%></td><td><%=sub.get(i).getSubName()%></td>
+                            <td><%=sub.get(i).getNumTC()%></td><td><%=sub.get(i).getTCLT()%></td><td><%=sub.get(i).getTCTH()%></td>
+                            <td><a href="../servSubject?action=edit&subcode=<%=sub.get(i).getSubCode()%>">Sửa</a></td>
+                            <td><a href="../servSubject?action=delete&subcode=<%=sub.get(i).getSubCode()%>">Xóa</a></td>
+                        </tr>
+                        <%}%>
+                    </table>
                 </form>
-                </div><!--End Contents-->
+            </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
     <script src="../javascripts/jsDanhSachMonHoc.js"></script>
-     <script  type = "text/javascript" >
-           action="search";
-       var http = createRequestObject();
+    <script  type = "text/javascript" >
+        action="search";
+        var http = createRequestObject();
         function search(){
-                name=document.getElementById("subname").value;
-                ajaxfunction("../servSubject?action="+action+"&name="+name);
-       }
+            name=document.getElementById("subname").value;
+            ajaxfunction("../servSubject?action="+action+"&name="+name);
+        }
        
-       </script>
+    </script>
 </html>

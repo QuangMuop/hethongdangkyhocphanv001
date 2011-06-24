@@ -20,17 +20,16 @@
                 margin-top: 20px;
                 margin-bottom: 20px;
                 width: 740px;
-                border-left: 2px solid;
-                border-right: 2px solid;                
+                border: 3px solid #73726E;
             }
             #tableliststudent th{
                 height: 32px;
                 font-weight: bold;
-                background-color: #F9B7FF;
+                background: url("../imgs/opaque_10.png") repeat scroll 0 0 transparent;
                 text-align: center;
             }
             #tableliststudent td{
-                background-color: #4792b8;
+                background: url("../imgs/opaque_10.png") repeat scroll 0 0 transparent;
                 padding: 2 5 2 5;
                 text-align: left;
             }
@@ -38,7 +37,8 @@
                 margin-top: 10px;
                 margin-left: 20px;
                 padding: 5 10 5 10;
-                background-color: #153E7E;
+                background: url("../imgs/opaque_10.png") repeat scroll 0 0 transparent;
+                border: 3px solid #73726E;
                 width: 320px;
             }
             #red{

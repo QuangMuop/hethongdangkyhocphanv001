@@ -1,3 +1,8 @@
+<%-- 
+    Document   : jspmenu
+    Created on : Apr 23, 2011, 3:50:32 PM
+    Author     : ngloc_it
+--%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,14 +15,14 @@
         
     </head>
     <body>
-        <MARQUEE onmouseover="this.stop();" onmouseout="this.start();" HEIGHT=25 BGCOLOR=#C0C6CE BEHAVIOR=scroll SCROLLAMOUNT="4">
+        <MARQUEE onmouseover="this.stop();" onmouseout="this.start();" HEIGHT=25 BGCOLOR=transparent BEHAVIOR=scroll SCROLLAMOUNT="4">
             Chào mừng đến với hệ thống đăng ký học phần.
         </MARQUEE>
 
         <div id="logo">
-            <DIV id="flash" style="Z-INDEX: 1; padding-left: 10%; padding-top: 0px; WIDTH: 80%; POSITION: absolute; TOP: 0px; HEIGHT: 1px">
-                <OBJECT height=200 width=100%>
-                    <embed src="../flash/flash.swf" width="100%" height="120"
+            <DIV id="flash" style="Z-INDEX: 1; padding-left: 10%; padding-top: 0px; WIDTH: 80%; POSITION: absolute; TOP: 0px; HEIGHT: 0px; margin-left: -150px; margin-top: 40px">
+                <OBJECT height=200 width=1060>
+                    <embed src="../flash/flash.swf" width="1060" height="120"
                            quality="high" 
                            type="application/x-shockwave-flash" menu="false"
                            wmode="transparent">
@@ -27,9 +32,9 @@
         </div>
         <div id = "menu">
             <ul>
-                <li><a href="jspTrangChu.jsp"> Trang chủ </a>
+                <li><a href="jspTrangChu.jsp"> Trang chủ |</a>
                 </li>
-                <li><a href="#">Quản Lý Khoa</a>
+                <li><a href="#">Quản Lý Khoa |</a>
                     <ul>
                          <li><a href="../servLecturerManager?action=view">Quản lý giảng viên</a> </li>
                          <li><a href="../servStudentManager?action=view">Quản lý sinh viên</a> </li>
@@ -37,23 +42,22 @@
                          <li><a href="../servCourse?action=view">Quản lý khóa học</a> </li>
                          <li><a href="../servProManage?action=view">Chương trình đào tạo</a> </li>
                          <li><a href="../servClassView?action=view">Danh sách lớp học</a> </li>
-                         <li><a href="../servUpdateScore?action=manage">Điểm kết thúc môn</a> </li> 
-                         <li><a href="../servDetailSubject?action=viewQL">Môn học tiên quyết</a> </li>
+                         <li><a href="../servUpdateScore?action=view">Điểm kết thúc môn</a> </li> 
+                         <li> <a href="../servDetailSubject?action=viewQL">Môn học tiên quyết</a> </li>
                          <li><a href="../servAccount?action=view">Quản lý Tài Khoản</a> </li>
                          <li><a href="../servCommentManager?action=view">Quản lý commnent</a> </li>  
-                         <li><a href="../servViewRule?issetup=false">Quy định</a> </li>
+                        <li><a href="../servViewRule?issetup=false">Quy định</a> </li>
                     </ul>
                 </li>
-                <li><a href="#">Giảng Viên</a>
+                <li><a href="#">Giảng Viên |</a>
                     <ul>
-                       <li><a href="../servUpdateScore?action=lecturer">Điểm kết thúc môn</a> </li>  
+                       <li><a href="../servUpdateScore?action=view">Điểm kết thúc môn</a> </li>  
                     </ul>      
                 </li>
-                <li><a href="#">Sinh Viên</a>
+                <li><a href="#">Sinh Viên |</a>
                 <ul>
                         <li><a href="../servClassView?action=student">Danh sách lớp học</a> </li>
                         <li> <a href="../servRegistration?reg=view">Đăng Ký Môn Học</a> </li>
-                        <li> <a href="../servClassView?action=viewtest">Xem lịch thi</a> </li>
                         <li><a href="../servProgram">Xem Chương Trình Đào Tạo</a> </li>
                         <li> <a href="../servStudyResult?first=true">Xem kết quả học tập</a> </li>
                         <li> <a href="../servDetailSubject?action=view">Môn học tiên quyết</a> </li>
@@ -62,17 +66,17 @@
                         <li> <a href="../servSendComment?guest=notlogin">Gửi Yêu Cầu</a> </li>
                     </ul>
                 </li>
-                <li><a href="../ViewSchedule">Thời khóa biểu</a></li>
+                <li><a href="../ViewSchedule">Thời khóa biểu |</a></li>
                 <%
                 HttpSession sesstion = request.getSession();
                 String username = (String) session.getAttribute("username");
                 if(username == null){
                 %>
-                    <li><a href="jspLogin.jsp">Đăng nhập</a></li>
+                    <li><a href="jspLogin.jsp">Đăng nhập |</a></li>
                 <%}
                 else{
                 %>
-                <li><a href="../servLogin?login=false">Đăng xuất</a></li>
+                <li><a href="../servLogin?login=false">Đăng xuất |</a></li>
                 <%}%>
 
                 <li><a href="jspLienHe.jsp">Liên Hệ</a></li>

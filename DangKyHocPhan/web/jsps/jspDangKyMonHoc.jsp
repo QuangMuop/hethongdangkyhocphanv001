@@ -8,13 +8,13 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<clsClass> clases=(ArrayList<clsClass>) session.getAttribute("clases");
-clsStudent student =(clsStudent) session.getAttribute("student");
-String time=(String) session.getAttribute("time");
-int n=clases.size();
-int j=0;
+    ArrayList<clsClass> clases = (ArrayList<clsClass>) session.getAttribute("clases");
+    clsStudent student = (clsStudent) session.getAttribute("student");
+    String time = (String) session.getAttribute("time");
+    int n = clases.size();
+    int j = 0;
 %>
 <html>
     <head>
@@ -35,7 +35,7 @@ int j=0;
                 background-color: #F9B7FF;
             }
             #tablelistclass td{
-                background-color:#5F676D;
+                background-color:#2f4e3d;
                 padding: 2 5 2 5;
             }
             #formaction{
@@ -57,14 +57,14 @@ int j=0;
                 background-color: #92C7C7;
                 border: 3px solid #7F38EC;
                 width: 350px;
-                }
-                #formrequest table{
+            }
+            #formrequest table{
                 margin-top: 10px;
                 margin-right: 10px;
                 padding-left: 20px;
                 padding-right: 20px;
                 background-color: #e60ff0
-                }
+            }
         </style>
     </head>
     <body>
@@ -82,34 +82,34 @@ int j=0;
                 <u>Đăng ký học phần:<%=time%></u><br>
                 <i>Lưu ý: Mỗi sinh viên đưang ký học phần không dưới 14 tín chỉ và không quá 25 tín chỉ.</i>
                 <form id="registry" name="registry" action="../servRegistration?reg=registry" method="post">
-                <table id="tablelistclass">
-                    <tr>
-                        <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Số TC</th><th>Giảng viên</th><th>Thứ</th><th>Ca</th><th>Phòng</th><th>SV tối đa</th><th>SV Đã ĐK</th><th><th>
-                    </tr>
-                    <%
-                    for(j=0;j<n;j++){%>
-                     <tr>
-                         <td><%=j+1%></td>
-                         <td><a href="jspChiTietLopHoc.jsp?id=SE001"><%=clases.get(j).getClassName()%></a></td>
-                         <td><%=clases.get(j).getSubName()%></td>
-                         <td><%=clases.get(j).getNumTC()%></td>
-                         <td><%=clases.get(j).getLecturerName()%></td>
-                         <td><%=clases.get(j).getDate()%></td>
-                         <td><%=clases.get(j).getShift()%></td>
-                         <td><%=clases.get(j).getRoom()%></td>
-                         <td>120</td>
-                         <td><%=clases.get(j).getNumOfStudent()%></td>
-                         <%if(clases.get(j).getNumOfStudent()>=120) {%>
-                         <td><input type="checkbox" disabled="true" name="check" value="<%=clases.get(j).getClassName()%>"></td>
-                         <%}else{%>
-                         <td><input type="checkbox" name="check" value="<%=clases.get(j).getClassName()%>"></td>
-                         <%}%>
-                    </tr>
-                    <%}%>
-                 </table>
-                 <input type="submit" value="Đăng ký">
-              </form>
-                      <br>
+                    <table id="tablelistclass">
+                        <tr>
+                            <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Số TC</th><th>Giảng viên</th><th>Thứ</th><th>Ca</th><th>Phòng</th><th>SV tối đa</th><th>SV Đã ĐK</th><th><th>
+                        </tr>
+                        <%
+                        for (j = 0; j < n; j++) {%>
+                        <tr>
+                            <td><%=j + 1%></td>
+                            <td><%=clases.get(j).getClassName()%></td>
+                            <td><%=clases.get(j).getSubName()%></td>
+                            <td><%=clases.get(j).getNumTC()%></td>
+                            <td><%=clases.get(j).getLecturerName()%></td>
+                            <td><%=clases.get(j).getDate()%></td>
+                            <td><%=clases.get(j).getShift()%></td>
+                            <td><%=clases.get(j).getRoom()%></td>
+                            <td>120</td>
+                            <td><%=clases.get(j).getNumOfStudent()%></td>
+                            <%if (clases.get(j).getNumOfStudent() >= 120) {%>
+                            <td><input type="checkbox" disabled="true" name="check" value="<%=clases.get(j).getClassName()%>"></td>
+                                <%} else {%>
+                            <td><input type="checkbox" name="check" value="<%=clases.get(j).getClassName()%>"></td>
+                                <%}%>
+                        </tr>
+                        <%}%>
+                    </table>
+                    <input type="submit" value="Đăng ký">
+                </form>
+                <br>
                 <form action="#" method="post" id="formequest">
                     <u>Yêu cầu mở lớp:</u>
                     <table id="tablerequest">
@@ -137,10 +137,10 @@ int j=0;
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-    
- </html>
+
+</html>

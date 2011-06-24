@@ -6,9 +6,9 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <%
-String message=(String) session.getAttribute("mes");
+    String message = (String) session.getAttribute("mes");
 %>
 <html>
     <head>
@@ -37,19 +37,19 @@ String message=(String) session.getAttribute("mes");
         </style>
     </head>
     <body>
-       <!--Div Wrapper-->
+        <!--Div Wrapper-->
         <div id="wrapper">
             <div id="mainNav"><!--Main Navigation-->
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-               <br> <h3>
-                   <%=message%>
+                <br> <h3>
+                    <%=message%>
                 </h3>
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
