@@ -2,7 +2,6 @@ package system.bo;
 
 import java.util.ArrayList;
 import system.access.mapper.clsMapperRegistration;
-import system.dto.clsClass;
 import system.dto.clsRegistration;
 
 /**
@@ -26,9 +25,9 @@ public class clsBORegistration {
      }
 
      /**
-      * Delte all registraion of student by id
-      * @param mssv id of student
-      * @throws Exception
+      * 
+      * @param mssv
+      * @throws Exception 
       */
      public void Delete(String mssv) throws Exception{
          try{
@@ -53,5 +52,9 @@ public class clsBORegistration {
      public ArrayList<String> getRegistrationInfo(clsRegistration cls) throws Exception{
          clsMapperRegistration mpr=new clsMapperRegistration();
          return mpr.getRegistrationInfo(cls);
+     }
+     public void updateMark(clsRegistration cls) throws Exception{
+         clsMapperRegistration mpr=new clsMapperRegistration();
+         mpr.updateMark(cls);
      }
 }

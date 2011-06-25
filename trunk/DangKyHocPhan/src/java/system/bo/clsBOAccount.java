@@ -28,6 +28,10 @@ public class clsBOAccount {
         clsMapperAccount mpa=new clsMapperAccount();
         return mpa.getAllAccount();
     }
+     public ArrayList<clsAccount> getAllAccoutWithLimmit(int start, int limmit) throws Exception{
+        clsMapperAccount mpa=new clsMapperAccount();
+        return mpa.getAllAccountWithLimmit(start, limmit);
+    }
     /**
      *
      * @param username
@@ -37,6 +41,18 @@ public class clsBOAccount {
     public ArrayList<clsAccount> SearchAcByUser(String username) throws Exception{
         clsMapperAccount mpa=new clsMapperAccount();
         return mpa.SearchAccByUser(username);
+    }
+    public ArrayList<clsAccount> SearchAcByUserWithLimmit(String username,int start, int limmit) throws Exception{
+        clsMapperAccount mpa=new clsMapperAccount();
+        return mpa.SearchAccByUserWithLimmit(username, start, limmit);
+    }
+    public int CountNumAccount() throws Exception{
+        clsMapperAccount mpa=new clsMapperAccount();
+        return mpa.CountNumAccount();
+    }
+     public int CountNumAccountByUser(String Username) throws Exception{
+        clsMapperAccount mpa=new clsMapperAccount();
+        return mpa.CountNumAccountByUser(Username);
     }
     /**
      *

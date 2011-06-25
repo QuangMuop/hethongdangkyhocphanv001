@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javassist.bytecode.stackmap.TypeData.ClassName;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +26,10 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import system.bo.clsBOAccount;
 import system.bo.clsBOClass;
+import system.bo.clsBORegistration;
 import system.bo.clsBOStudyResult;
 import system.dto.clsClass;
+import system.dto.clsRegistration;
 import system.dto.clsStudent;
 import system.dto.clsStudyResult;
 import system.utilities.SystemProperities;
@@ -127,6 +130,7 @@ public class servUpdateScore extends HttpServlet {
     }
     private void updateSocre(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, FileUploadException, Exception{
        String subcode;
+       String Classname;
         HSSFWorkbook wb=GetWorkbook(request, response);
          int i = 0;
         ArrayList<String> StudyInfo;
@@ -145,6 +149,11 @@ public class servUpdateScore extends HttpServlet {
               HSSFCell cellsubcode=rowsubcode.getCell(1);
                cellsubcode.setCellType(HSSFCell.CELL_TYPE_STRING);
                subcode = cellsubcode.getStringCellValue();
+               //lấy mã lớp học
+              HSSFRow rowclass=  sheet.getRow(1);
+              HSSFCell cellclass=rowclass.getCell(1);
+               cellclass.setCellType(HSSFCell.CELL_TYPE_STRING);
+               Classname = cellclass.getStringCellValue();
              for (i = 0; i < rows; i++){
                  StudyInfo=new ArrayList<String>();
                  rowTemp = sheet.getRow(i);
@@ -166,6 +175,9 @@ public class servUpdateScore extends HttpServlet {
                 clsStudyResult cls=new clsStudyResult(StudyInfo.get(0), subcode, Float.parseFloat(StudyInfo.get(1)), SystemProperities.CurentYear, SystemProperities.Curentsemester);
                 clsBOStudyResult BOS=new clsBOStudyResult();
                 BOS.Insert(cls);
+                 clsRegistration clsreg=new clsRegistration(StudyInfo.get(0),Classname,SystemProperities.Curentsemester,SystemProperities.CurentYear,Float.parseFloat(StudyInfo.get(1)));
+                 clsBORegistration BOR=new clsBORegistration();
+                 BOR.updateMark(clsreg);
                 
                 
              }
@@ -173,7 +185,7 @@ public class servUpdateScore extends HttpServlet {
                 String path = "./jsps/jspThongBao.jsp";
                response.sendRedirect(path);
          }
-         
+                
     }
     /**
      * 
