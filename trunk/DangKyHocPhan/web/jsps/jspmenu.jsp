@@ -57,6 +57,7 @@
                 <li><a href="#">Sinh Viên |</a>
                 <ul>
                         <li><a href="../servClassView?action=student">Danh sách lớp học</a> </li>
+                         <li><a href="../ServScore?action=view">Điểm cuối kỳ</a> </li>
                         <li> <a href="../servRegistration?reg=view">Đăng Ký Môn Học</a> </li>
                         <li><a href="../servProgram">Xem Chương Trình Đào Tạo</a> </li>
                         <li> <a href="../servStudyResult?first=true">Xem kết quả học tập</a> </li>
