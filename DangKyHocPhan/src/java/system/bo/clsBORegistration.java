@@ -57,4 +57,8 @@ public class clsBORegistration {
          clsMapperRegistration mpr=new clsMapperRegistration();
          mpr.updateMark(cls);
      }
+     public ArrayList<clsRegistration> getRegistrationByClassName(String ClassName) throws Exception{
+         clsMapperRegistration mpr=new clsMapperRegistration();
+         return mpr.getRegistryByClassName(ClassName);
+     }
 }

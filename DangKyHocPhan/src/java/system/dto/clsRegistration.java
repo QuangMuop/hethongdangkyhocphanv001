@@ -22,8 +22,8 @@ public clsRegistration(String studentcode, String classname, int semester,String
 public void setStudentCode(String studentcode){
     this.StudentCode=studentcode;
 }
-public void setClassName(String subjectcode){
-    this.ClassName=subjectcode;
+public void setClassName(String classname){
+    this.ClassName=classname;
 }
 public void setSemester(int semetesr){
     this.Semester=semetesr;
