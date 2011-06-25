@@ -153,7 +153,7 @@ public class servLecturerManager extends HttpServlet {
              int cellType;
              String strValue = "";
 
-             for (i = 0; i < rows; i++){
+             for (i = 1; i < rows; i++){
                  lecturerinfo=new ArrayList<String>();
                  rowTemp = sheet.getRow(i);
                  cellTemp = rowTemp.getCell(0);

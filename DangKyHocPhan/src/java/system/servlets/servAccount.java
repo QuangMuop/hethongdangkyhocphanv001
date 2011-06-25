@@ -105,12 +105,18 @@ public class servAccount extends HttpServlet {
     private void searchAccount(HttpServletRequest request, HttpServletResponse response) throws Exception{
          PrintWriter out = response.getWriter();
         String username=request.getParameter("username");
+        int start=Integer.parseInt(request.getParameter("start"));
         clsBOAccount BOA=new clsBOAccount();
-        ArrayList<clsAccount> AccountList=BOA.SearchAcByUser(username);
+        ArrayList<clsAccount> AccountList=BOA.SearchAcByUserWithLimmit(username, start, 10);
+        int numacc=BOA.CountNumAccountByUser(username);
+        if(AccountList.isEmpty()){
+           out.println("Không có kết quả nào phù hợp"); 
+        }
+        else{
         out.println("<tr> <th>STT</th><th>Tên đăng nhập</th><th>Họ Tên</th><th>Hiện trạng</th><th>Loại</th><th>Cập nhật</th></tr>");
         for(int i=0;i<AccountList.size();i++){
              StringBuffer str = new StringBuffer();
-            str.append("<tr><td>"+(i+1)+"</td><td>"+AccountList.get(i).getUserName()+"</td>");
+            str.append("<tr><td>"+(start+i+1)+"</td><td>"+AccountList.get(i).getUserName()+"</td>");
             str.append("<td>"+AccountList.get(i).getFullName()+"</td>");
             if(AccountList.get(i).getIsLocked()==0)
             str.append("<td>Bình thường</td>");
@@ -118,6 +124,8 @@ public class servAccount extends HttpServlet {
             str.append("<td>Đang khóa</td>");
             if(AccountList.get(i).getType()==1)
             str.append("<td>Quản lý</td>");
+            else if(AccountList.get(i).getType()==2)
+            str.append("<td>Giảng viên</td>");
            else
             str.append("<td>Sinh viên</td>");
             if(AccountList.get(i).getIsLocked()==1)
@@ -126,11 +134,15 @@ public class servAccount extends HttpServlet {
             str.append("<td><a href='../servAccount?action=update&username="+AccountList.get(i).getUserName()+"' >Khóa</a></td>");
             out.println(str.toString());
           }
+        }
+        out.println("<input type='hidden' value='"+numacc+"' id='numaccafter' />");
     }
 private void getAllAccount(HttpServletResponse response, HttpSession session) throws Exception{
     clsBOAccount BOA=new clsBOAccount();
-    ArrayList<clsAccount> AccountList=BOA.getAllAccout();
+    ArrayList<clsAccount> AccountList=BOA.getAllAccoutWithLimmit(0, 10);
     session.setAttribute("acc", AccountList);
+    int numAccount=BOA.CountNumAccount();
+    session.setAttribute("numaccount", numAccount);
     String path = "./jsps/jspCapNhatTaiKhoan.jsp";
        response.sendRedirect(path);
 }

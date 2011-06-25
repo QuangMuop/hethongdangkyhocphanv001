@@ -40,11 +40,59 @@ public class clsMapperAccount extends clsMapperDb {
             accountDTO.setType(Integer.parseInt(rs.getString("Type")));
          }
     }
+    public int CountNumAccount() throws Exception{
+        int Result =0;
+       try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("select COUNT(UserName) as Num from dangkyhocphan.accounts");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                Result=Integer.parseInt(rs.getString("Num"));
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return Result;
+    }
+    public int CountNumAccountByUser(String UserName) throws Exception{
+        int Result =0;
+       try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("select COUNT(UserName) as Num from dangkyhocphan.accounts where UserName like'");
+            sql.append(UserName).append("%'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                Result=Integer.parseInt(rs.getString("Num"));
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+        return Result;
+    }
     public ArrayList<clsAccount> getAllAccount() throws Exception{
           ArrayList<clsAccount> listResult = new ArrayList<clsAccount>();
          try{
             StringBuffer sql = new StringBuffer();
             sql.append("Select DISTINCT * from dangkyhocphan.accounts");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsAccount classTemp = new clsAccount();
+                InitAccountDTOFromRs(classTemp, rs);
+                listResult.add(classTemp);
+            }
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+    }
+    public ArrayList<clsAccount> getAllAccountWithLimmit(int start, int limmit) throws Exception{
+          ArrayList<clsAccount> listResult = new ArrayList<clsAccount>();
+         try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select DISTINCT * from dangkyhocphan.accounts LIMIT "+start+","+limmit+"");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while((rs!=null) && rs.next()){
@@ -63,6 +111,24 @@ public class clsMapperAccount extends clsMapperDb {
             StringBuffer sql = new StringBuffer();
             sql.append("Select DISTINCT * from dangkyhocphan.accounts where UserName like'");
             sql.append(username).append("%'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while((rs!=null) && rs.next()){
+                clsAccount classTemp = new clsAccount();
+                InitAccountDTOFromRs(classTemp, rs);
+                listResult.add(classTemp);
+            }
+         }catch(Exception ex){
+            throw ex;
+         }
+         return listResult;
+    }
+    public ArrayList<clsAccount> SearchAccByUserWithLimmit(String username,int start, int limmit) throws Exception{
+          ArrayList<clsAccount> listResult = new ArrayList<clsAccount>();
+         try{
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select DISTINCT * from dangkyhocphan.accounts where UserName like'");
+            sql.append(username).append("%' LIMIT "+start+","+limmit+"");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while((rs!=null) && rs.next()){
