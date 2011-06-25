@@ -48,6 +48,7 @@
                             <td>
                                 <select style="width:135px" name="txttype" id="txttype">
                                     <option value="0">Sinh viên</option>
+                                    <option value="2">Giảng viên</option>
                                     <option value="1">Quản lý</option>
                                 </select>
                             </td>

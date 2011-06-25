@@ -11,6 +11,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <%
     ArrayList<clsAccount> aclist = (ArrayList<clsAccount>) session.getAttribute("acc");
+    Integer numaccount = (Integer) session.getAttribute("numaccount");
 %>
 <html>
     <head>
@@ -84,21 +85,27 @@
                             <%} else {%>
                             <td>Bình thường</td>
                             <%}%>
-                            <%if (aclist.get(i).getType() == 1) {%>
-                            <td>Quản lý</td>
-                            <%} else if(aclist.get(i).getType() == 2) {%>
-                            <td>Giảng viên</td>
-                            <%}else{%>
-                            <td>Sinh viên viên</td>
-                            <%}%>
+                              <%if (aclist.get(i).getType() == 1) {%>
+                                     <td>Quản lý</td>
+                               <%} else if (aclist.get(i).getType() == 0) {%>
+                                     <td>Sinh viên</td>
+                                  <%} else {%>
+                                     <td>Giảng viên</td>
+                                 <%}%>
                             <%if (aclist.get(i).getIsLocked() == 1) {%>
                             <td><a href="../servAccount?action=update&username=<%=aclist.get(i).getUserName()%>" >Mở khóa</a></td>
                             <%} else {%>
                             <td><a href="../servAccount?action=update&username=<%=aclist.get(i).getUserName()%>" >Khóa</a></td>
                             <%}%>
-                        </tr>
+                       </tr>
                         <%}%>
                     </table>
+                     <input style="position:absolute; left:750px;" type="button" value="|<<" onclick="nprepage()">
+                    <input style="position:absolute; left:790px;" type="button" value="<<" onclick="prepage()">
+                    <input style="position:absolute; left:830px;" type="button" value=">>" onclick="nextpage()">
+                    <input style="position:absolute; left:870px;" type="button" value=">>|" onclick="nnextpage()"><br>
+                        
+                    <input type="hidden" value="<%=numaccount%>" id="numacc" />
                 </form>
                 <hr><hr>
             </div><!--End Contents-->
@@ -113,10 +120,45 @@
     <script  type = "text/javascript" >
         name="";
         action="search";
+        start=0;
+        end=document.getElementById("numacc").value;
         var http = createRequestObject();
         function search(){
+            start=0;
             username=document.getElementById("username").value;
-            ajaxfunction("../servAccount?action="+action+"&username="+username);
+            ajaxfunction("../servAccount?action="+action+"&username="+username+"&start="+start);
+        }
+        function nprepage(){
+            start=0;
+            username=document.getElementById("username").value;
+            ajaxfunction("../servAccount?action="+action+"&username="+username+"&start="+start);
+        }
+        function prepage(){
+            start=start-10;
+            if(start<0){
+                start=0;
+            }
+             username=document.getElementById("username").value;
+            ajaxfunction("../servAccount?action="+action+"&username="+username+"&start="+start);
+        }
+        function nextpage(){
+            start=start+10;
+            if(start+10>end){
+                start=end-10;
+            }
+            if(start<0){
+                start=0;
+            }
+            username=document.getElementById("username").value;
+            ajaxfunction("../servAccount?action="+action+"&username="+username+"&start="+start);
+        }
+        function nnextpage(){
+            start=end-10;
+            if(start<0){
+                start=0;
+            }
+                username=document.getElementById("username").value;
+            ajaxfunction("../servAccount?action="+action+"&username="+username+"&start="+start);
         }
 
     </script>

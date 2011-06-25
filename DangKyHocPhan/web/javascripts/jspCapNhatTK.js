@@ -27,5 +27,6 @@ function createRequestObject(){
             if(http.readyState == 4 && http.status == 200){
                 var detail=document.getElementById("tableaclist");
                 detail.innerHTML=http.responseText;
+                end=document.getElementById("numaccafter").value;
             }
         }
