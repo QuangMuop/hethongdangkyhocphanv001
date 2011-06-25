@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import system.dto.clsRegistration;
-import system.dto.clsStudyResult;
 import system.utilities.SystemProperities;
 
 public class clsMapperRegistration extends clsMapperDb {
@@ -26,11 +25,16 @@ public class clsMapperRegistration extends clsMapperDb {
      */
     public void IniRegistrationDTOFromRs(clsRegistration reg, ResultSet rs) throws SQLException {
         if ((rs != null) && (reg != null)) {
-            reg.setStudentCode(rs.getString("MSSV"));
-            reg.setClassName(rs.getString("ClassName"));
-            reg.setSemester(Integer.parseInt(rs.getString("Semester")));
-            reg.setYear(rs.getString("Year"));
-            reg.setMark(Float.parseFloat(rs.getString("Mark")));
+           reg.setClassName(rs.getString("ClassName"));
+           reg.setStudentCode(rs.getString("MSSV"));
+           reg.setYear(rs.getString("Year"));
+           reg.setSemester(Integer.parseInt(rs.getString("Semester")));
+           try{
+           reg.setMark(Float.parseFloat(rs.getString("Mark")));
+           }
+           catch(Exception e){
+               reg.setMark(11);
+           }
         }
     }
 
@@ -83,6 +87,27 @@ public class clsMapperRegistration extends clsMapperDb {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+    public ArrayList<clsRegistration> getRegistryByClassName(String ClassName) throws Exception{
+        ArrayList<clsRegistration> result = new ArrayList<clsRegistration>();
+        try {
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.registry where ClassName='");
+            sql.append(ClassName).append("' and Semester=");
+            sql.append(SystemProperities.Curentsemester);
+            sql.append(" and Year='"+SystemProperities.CurentYear+"' ");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            while (rs != null && rs.next()) {
+                clsRegistration temp=new clsRegistration();
+              IniRegistrationDTOFromRs(temp, rs);
+                result.add(temp);
+            }
+            
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return result;
     }
 
     /**
