@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: dangkyhocphan
 Target Host: localhost
 Target Database: dangkyhocphan
-Date: 6/23/2011 10:15:14 PM
+Date: 6/26/2011 10:25:51 AM
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,7 +67,7 @@ CREATE TABLE `comment` (
   `Content` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `Date` date NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for course
@@ -100,18 +100,6 @@ CREATE TABLE `lecturer` (
   `Gender` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `CMND` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`LectuterCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Table structure for news
--- ----------------------------
-DROP TABLE IF EXISTS `news`;
-CREATE TABLE `news` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Content` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Author` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Date` date DEFAULT NULL,
-  PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
@@ -240,6 +228,19 @@ CREATE TABLE `subjectdetail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
+-- Table structure for tintuc
+-- ----------------------------
+DROP TABLE IF EXISTS `tintuc`;
+CREATE TABLE `tintuc` (
+  `Id` int(11) NOT NULL,
+  `Content` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `Author` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `Type` tinyint(4) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
 -- Procedure structure for select_account
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `select_account`;
@@ -254,6 +255,7 @@ DELIMITER ;
 -- ----------------------------
 -- Records 
 -- ----------------------------
+INSERT INTO `accounts` VALUES ('06520156', '06520156', 'Mai Văn Nam', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('07520001', '07520001', 'Chu Văn An', '1', '0', '0');
 INSERT INTO `accounts` VALUES ('07520012', '07520012', 'Lê Đức Anh', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('07520020', '07520020', 'Đặng Bảo Ân', '0', '0', '0');
@@ -265,6 +267,8 @@ INSERT INTO `accounts` VALUES ('07520112', '07520112', 'Nguyễn Đắc Thắng'
 INSERT INTO `accounts` VALUES ('07520113', '07520113', 'Trịnh Hoàng Việt Quốc', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('07520128', '07520128', 'Nguyễn Bảo Duy', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('07520210', '07520210', 'Nguyễn Văn Lộc', '0', '0', '0');
+INSERT INTO `accounts` VALUES ('07520211', '07520211', 'Nguyễn Hải Hòa', '0', '0', '0');
+INSERT INTO `accounts` VALUES ('07520212', '07520212', 'Nhân Phúc Hậu', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('07520222', '07520222', 'Nguyễn Hữu Hải', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('07520234', '07520234', 'Chu Hoàng Nhật', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('07520235', '07520235', 'Nguyên Văn Nam', '0', '0', '0');
@@ -274,23 +278,36 @@ INSERT INTO `accounts` VALUES ('07520356', '07520356', 'Võ Như Thông', '0', '
 INSERT INTO `accounts` VALUES ('07520420', '07520420', 'Mai Đức An', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('07520444', '07520444', 'Nguyễn Đức Hạnh', '0', '0', '0');
 INSERT INTO `accounts` VALUES ('admin', 'admin', 'admin', '0', '0', '1');
-INSERT INTO `class` VALUES ('CNET1.B11', '1', '2009-2010', 'CNET1', 'GV05', '2', '203', '0', '1', 'Null', 'Null', 'Null');
-INSERT INTO `class` VALUES ('CNET1.B11', '1', '2010-2011', 'CNET1', 'GV05', '2', '204', '1', '1', 'Null', 'Null', 'Null');
-INSERT INTO `class` VALUES ('MAT04.B12', '1', '2010-2011', 'MAT04', 'GV07', '4', '302', '0', '1', 'Null', 'Null', 'Null');
-INSERT INTO `class` VALUES ('MLPE1.B25', '1', '2010-2011', 'MLPE1', 'GV08', '3', '207', '2', '1', 'Null', 'Null', 'Null');
+INSERT INTO `accounts` VALUES ('GV01', 'GV01', 'Vũ Thanh Nguyên', '0', '0', '2');
+INSERT INTO `accounts` VALUES ('GV02', 'GV02', 'Trần Anh Dũng', '0', '0', '2');
+INSERT INTO `accounts` VALUES ('GV04', 'GV04', 'Nguyễn Hữu Thương', '0', '0', '2');
+INSERT INTO `accounts` VALUES ('GV05', 'GV05', 'Đàm Quang Hồng Hải', '0', '0', '2');
+INSERT INTO `accounts` VALUES ('GV06', 'GV06', 'Huỳnh Ngọc Tín', '0', '0', '2');
+INSERT INTO `accounts` VALUES ('GV07', 'GV07', 'Vũ Đức Lung', '0', '0', '2');
+INSERT INTO `accounts` VALUES ('GV08', 'GV08', 'Đào Trọng Tấn', '0', '0', '2');
+INSERT INTO `accounts` VALUES ('GV09', 'GV09', 'Hoàng Văn Kiếm', '0', '0', '2');
+INSERT INTO `accounts` VALUES ('GV10', 'GV10', 'Nguyễn Trần Minh Khuê', '0', '0', '2');
+INSERT INTO `accounts` VALUES ('GV11', 'GV11', 'Đinh Thị Thanh Trúc', '0', '0', '2');
+INSERT INTO `accounts` VALUES ('GV12', 'GV12', 'Phạm Thi Vương', '0', '0', '2');
+INSERT INTO `class` VALUES ('CNET1.B11', '1', '2009-2010', 'CNET1', 'GV05', '2', '203', '1', '1', 'Null', 'Null', 'Null');
+INSERT INTO `class` VALUES ('CNET1.B11', '1', '2010-2011', 'CNET1', 'GV05', '2', '204', '2', '1', 'Null', 'Null', 'Null');
+INSERT INTO `class` VALUES ('MAT04.B12', '1', '2010-2011', 'MAT04', 'GV07', '4', '302', '1', '1', 'Null', 'Null', 'Null');
+INSERT INTO `class` VALUES ('MLPE1.B25', '1', '2010-2011', 'MLPE1', 'GV08', '3', '207', '3', '1', 'Null', 'Null', 'Null');
 INSERT INTO `class` VALUES ('OSYS1.B12', '1', '2010-2011', 'OSYS1', 'GV07', '2', '108', '1', '1', 'Null', 'Null', 'Null');
 INSERT INTO `class` VALUES ('SE101.B11', '1', '2010-2011', 'SE101', 'GV01', '5', '106', '1', '1', 'Null', 'Null', 'Null');
-INSERT INTO `class` VALUES ('SE104.B13', '1', '2010-2011', 'SE104', 'GV02', '3', '201', '1', '1', 'Null', 'Null', 'Null');
-INSERT INTO `class` VALUES ('SE417.B12', '1', '2010-2011', 'SE417', 'GV01', '5', '108', '1', '1', 'Null', 'Null', 'Null');
+INSERT INTO `class` VALUES ('SE104.B13', '1', '2010-2011', 'SE104', 'GV02', '3', '201', '0', '1', 'Null', 'Null', 'Null');
+INSERT INTO `class` VALUES ('SE325.B21', '1', '2010-2011', 'SE325', 'GV06', '5', '202', '1', '1', '', '', '');
+INSERT INTO `class` VALUES ('SE417.B12', '1', '2010-2011', 'SE417', 'GV01', '5', '108', '0', '1', 'Null', 'Null', 'Null');
 INSERT INTO `class` VALUES ('SE418.B11', '1', '2010-2011', 'SE418', 'GV02', '6', '108', '0', '2', 'Null', 'Null', 'Null');
-INSERT INTO `class` VALUES ('SMET2.B21', '1', '2010-2011', 'SMET2', 'GV09', '2', '208', '0', '1', 'Null', 'Null', 'Null');
+INSERT INTO `class` VALUES ('SMET2.B21', '1', '2010-2011', 'SMET2', 'GV09', '2', '208', '1', '1', 'Null', 'Null', 'Null');
 INSERT INTO `classname` VALUES ('CNPM01');
 INSERT INTO `classname` VALUES ('CNPM02');
 INSERT INTO `comment` VALUES ('1', '########', 'Nguyen Trung Thanh', 'thanhnt28@gmail.com', 'Đề nghị khoa dạy nhiều môn học chuyên ngành trong học kỳ hè cho sinh viên học để kịp thời gian ra trường', '2011-05-07');
 INSERT INTO `comment` VALUES ('2', '07520210', 'Nguyễn Văn Lộc', 'loc.uit@gmail.com', 'Comment này dùng để thử', '2011-06-16');
 INSERT INTO `comment` VALUES ('3', '07520190', 'Nguyễn Đức Lê', 'lenguyen@gmail.com', 'Ý kiến về việc đóng học phí của phòng kế hoạch tài chính', '2011-06-16');
-INSERT INTO `course` VALUES ('1', '2006', '2011', '2', '1');
-INSERT INTO `course` VALUES ('2', '2007', '2012', '17', '2');
+INSERT INTO `comment` VALUES ('4', 'visiter', 'Chu Van An', 'ancv@gmail.com', 'hey, admin. sao khoa nick tau', '2011-06-24');
+INSERT INTO `course` VALUES ('1', '2006', '2011', '3', '1');
+INSERT INTO `course` VALUES ('2', '2007', '2012', '19', '2');
 INSERT INTO `lecturer` VALUES ('GV01', 'Vũ Thanh Nguyên', '1956-01-01', 'nguyenvt@uit.edu.vn', '0989567432', 'Tp.HCM', 'Null', 'Tiến sĩ', 'Nam', '1234567890');
 INSERT INTO `lecturer` VALUES ('GV02', 'Trần Anh Dũng', '1976-02-03', 'dungta@uit.edu.vn', '0977346123', 'Tp.HCm', 'null', 'Cao Học', 'Nam', '1234567890');
 INSERT INTO `lecturer` VALUES ('GV04', 'Nguyễn Hữu Thương', '1984-04-16', 'thuongnh@uit.edu.vn', '0988456278', 'Hồ Chí Minh', 'Null', 'Thạc sĩ', 'Nam', '57686786786');
@@ -394,14 +411,18 @@ INSERT INTO `program` VALUES ('2', 'SMET2', '8');
 INSERT INTO `program` VALUES ('2', 'STA01', '5');
 INSERT INTO `program` VALUES ('2', 'VCPL1', '3');
 INSERT INTO `program` VALUES ('2', 'WINP1', '4');
-INSERT INTO `registry` VALUES ('07520210', 'CNET1.B11', '1', '2010-2011', null);
+INSERT INTO `registry` VALUES ('07520106', 'MLPE1.B25', '1', '2010-2011', null);
+INSERT INTO `registry` VALUES ('07520106', 'SE101.B11', '1', '2010-2011', null);
+INSERT INTO `registry` VALUES ('07520106', 'SE325.B21', '1', '2010-2011', null);
+INSERT INTO `registry` VALUES ('07520106', 'SMET2.B21', '1', '2010-2011', null);
+INSERT INTO `registry` VALUES ('07520210', 'CNET1.B11', '1', '2010-2011', '10');
 INSERT INTO `registry` VALUES ('07520210', 'MLPE1.B25', '1', '2010-2011', null);
+INSERT INTO `registry` VALUES ('07520319', 'CNET1.B11', '1', '2010-2011', '10');
+INSERT INTO `registry` VALUES ('07520319', 'MAT04.B12', '1', '2010-2011', null);
 INSERT INTO `registry` VALUES ('07520319', 'MLPE1.B25', '1', '2010-2011', null);
 INSERT INTO `registry` VALUES ('07520319', 'OSYS1.B12', '1', '2010-2011', null);
-INSERT INTO `registry` VALUES ('07520319', 'SE101.B11', '1', '2010-2011', null);
-INSERT INTO `registry` VALUES ('07520319', 'SE104.B13', '1', '2010-2011', null);
-INSERT INTO `registry` VALUES ('07520319', 'SE417.B12', '1', '2010-2011', null);
 INSERT INTO `rule` VALUES ('1', '24', '14', '30', '15', '100', '30', '4.5', '60', '26');
+INSERT INTO `student` VALUES ('Mai Văn Nam', '06520156', '1988-09-09', 'CNPM01', 'nammv@gmail.com', '1234353453', 'TP. Hồ Chí Minh', 'Tp. Hà Tĩnh', 'Đang học', '1', '2006-09-06', 'Nam', '12345678', 'Chính Qui', 'Đại học', 'Null');
 INSERT INTO `student` VALUES ('Nguyễn Văn Tí', '06520313', '1989-01-17', 'CNPM01', 'cute@gmail.com', '0989568743', 'Quận Bình Thạnh', 'Nghệ An', 'Đang học', '1', '2006-9-10', 'Nam', '123456789', 'Chính quy', 'Đại học', 'Null');
 INSERT INTO `student` VALUES ('Mai Đức An', '06520420', '1989-03-28', 'CNPM01', 'ducan@gmail.com', '2423435454', 'Ký túc xá ĐHQG Tp.HCm', 'Vĩnh Long', 'Đang học', '1', '2006-2-19', 'Nam', '242535434346', 'Chính quy', 'Đại học', 'Null');
 INSERT INTO `student` VALUES ('Chu Văn An', '07520001', '1989-11-21', 'CNPm02', 'ancv@gmail.com', '142525525253', 'Quận 2', 'Khánh Hòa', 'Đang học', '2', '2007-09-12', 'Nam', '23525235235', 'Chính quy', 'Đại học', 'Null');
@@ -415,10 +436,12 @@ INSERT INTO `student` VALUES ('Trịnh Hoàng Việt Quốc', '07520113', '1989-
 INSERT INTO `student` VALUES ('Nguyễn Bảo Duy', '07520128', '1989-04-23', 'CNPM02', 'duynb@gmail.com', '42423424424', 'Quận 3, Tp. HCM', 'Hồ Chí Minh', 'Đang học', '2', '2007-05-06', 'Nam', '235435454434', 'Chính quy', 'Đại học', 'Null');
 INSERT INTO `student` VALUES ('Nguyễn Đức Lê', '07520190', '1989-01-02', 'CNPM02', 'ducle133@yahoo.com', '2343435435', 'Quận 1, Tp.HCM', 'Quận 1, Tp.HCM', 'Đang học', '2', '2007-9-6', 'Nam', '1232441', 'Chính quy', 'Đại học', 'Null');
 INSERT INTO `student` VALUES ('Nguyễn Văn Lộc', '07520210', '1988-05-04', 'CNPM02', 'loc@uit.edu.vn', '089893429', 'Hồ Chí Minh', 'Ninh Bình', 'Đang học', '2', '2007-9-6', 'Nam', '34325345', 'Chính quy', 'Đại học', 'Null');
+INSERT INTO `student` VALUES ('Nguyễn Hải Hòa', '07520211', '1989-08-05', 'CNPM02', 'hoanh@gmail.com', '989343242', 'Quận Bình Thạnh', 'Đồng Nai', 'Đang học', '2', '2007-09-05', 'Nam', '222145786', 'Chính quy', 'Đại học', 'Null');
+INSERT INTO `student` VALUES ('Nhân Phúc Hậu', '07520212', '1989-08-06', 'CNPM02', 'haunp@gmail.com', '987654312', 'Quận 2', 'Bình Định', 'Đang học', '2', '2007-09-06', 'Nam', '123899312', 'Chính quy', 'Đại học', 'Null');
 INSERT INTO `student` VALUES ('Nguyễn Hữu Hải', '07520222', '1989-09-08', 'CNPM02', 'hainh@gmail.com', '1683508402', 'TP. Hồ Chí Minh', 'TP. Ninh Bình', 'Đang học', '2', '2007-09-05', 'Nam', '123456789', 'Chính Qui', 'Đại học', 'Null');
 INSERT INTO `student` VALUES ('Chu Hoàng Nhật', '07520234', '1989-06-12', 'CNPM02', 'nhatcn@gmail.com', '12423523532', 'Quận 9', 'Tây Ninh', 'Đang học', '2', '2007-09-19', 'Nam', '3534534534', 'Chính quy', 'Đại học', 'Null');
 INSERT INTO `student` VALUES ('Nguyên Văn Nam', '07520235', '1989-09-08', 'CNPM02', 'namnv@gmail.com', '28582572357', 'Quận Bình Thạnh', 'Nghệ An', 'Đang học', '2', '2007-09-23', 'Nam', '223523523', 'Chính quy', 'Đại học', 'Null');
-INSERT INTO `student` VALUES ('Nguyễn Trung Thành', '07520319', '1988-08-02', 'CNPM02', 'thanhnt28@gmail.com', '0989432371', '9/32 khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.HCm', 'Xuân Liên-Nghi Xuân-Hà Tĩnh', 'Đang học', '2', '2007-9-9', 'Nam', '12345678', 'Chính quy', 'Đại học', 'Null');
+INSERT INTO `student` VALUES ('Nguyễn Trung Thành', '07520319', '1988-08-02', 'CNPM02', 'thanhnt28@gmail.com', '0989432371', '9/32 khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.HCm', 'Xuân Liên-Nghi Xuân-Hà Tĩnh', 'Đang học', '2', '2007-9-9', 'Nam', '12345678', 'Chính quy', 'Đại học', 'Thông tin mới cập nhật - Tên: Nguyễn Trung Thành, Ngày sinh: 1/1/1980, Giới tính: Nam, Lớp: CNPM02, Khóa: 2, Loại hình đào tạo: Chính quy, Bậc học: Đại học, Email: thanhGA28@gmail.com, Điện thoại: 0989432371, Địa chỉ liên lạc: 9/32 khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.HCm, Thường trú: Xuân Liên-Nghi Xuân-Hà Tĩnh, CMND: 12345678');
 INSERT INTO `student` VALUES ('Võ Như Thông', '07520356', '1989-06-09', 'CNPM02', 'thongvn@gmail.com', '2423235255', 'Quận 1, Tp. Hồ Chí Minh', 'Quận 1, Tp.HCM', 'Đang học', '2', '2007-09-08', 'Nam', '2434233444', 'Chính quy', 'Đại học', 'Null');
 INSERT INTO `student` VALUES ('Nguyễn Đức Hạnh', '07520444', '1989-09-10', 'CNPM02', 'locnv.uit@gmail.com', '1683508402', 'TP. Hồ Chí Minh', 'TP. Ninh Bình', 'Đang học', '2', '2007-09-07', 'Nam', '123456789', 'Chính Qui', 'Đại học', 'Null');
 INSERT INTO `studyresult` VALUES ('07520087', 'CNET1', '10', '2010-2011', '1');
@@ -430,6 +453,7 @@ INSERT INTO `studyresult` VALUES ('07520190', 'CNET1', '10', '2010-2011', '1');
 INSERT INTO `studyresult` VALUES ('07520210', 'CNET1', '10', '2010-2011', '1');
 INSERT INTO `studyresult` VALUES ('07520210', 'SE209', '8', '2010-2011', '1');
 INSERT INTO `studyresult` VALUES ('07520222', 'CNET1', '4.5', '2010-2011', '1');
+INSERT INTO `studyresult` VALUES ('07520234', 'CNET1', '10', '2010-2011', '1');
 INSERT INTO `studyresult` VALUES ('07520319', 'CARC1 ', '8.5', '2008-2009', '1');
 INSERT INTO `studyresult` VALUES ('07520319', 'CNET1', '10', '2010-2011', '1');
 INSERT INTO `studyresult` VALUES ('07520319', 'CSC21', '8.5', '2008-2009', '1');
@@ -538,6 +562,27 @@ INSERT INTO `subjectdetail` VALUES ('SE501', 'SE417');
 INSERT INTO `subjectdetail` VALUES ('SE504', 'SE501');
 INSERT INTO `subjectdetail` VALUES ('SE505', 'SE501');
 INSERT INTO `subjectdetail` VALUES ('SE104', 'WINP1');
+INSERT INTO `tintuc` VALUES ('1', 'Ban quản lý khoa thông báo lớp học Các thuật toán thông minh SE111.1B21 của thầy Vũ Thanh Nguyên vào thứ 6 ngày 24/6/2011 nghỉ học do thầy đi công tác, lịch học bù sẽ thông báo sau.', 'admin', '2011-06-20', '0');
+INSERT INTO `tintuc` VALUES ('2', 'Ban quản lý khoa Công Nghệ Phần Mềm thông báo lớp học Chuyên đề J2EE(SE123.B21) của thầy Huỳnh Ngọc Tín sẽ dời lịch thi qua ngày 26/6/2011 do thầy bận đột xuất.', 'admin', '2011-06-20', '0');
+INSERT INTO `tintuc` VALUES ('3', 'Ban quản lý khoa Công Nghệ Phần Mềm thông báo lớp học Chuyên đề J2EE(SE123.B21) của thầy Huỳnh Ngọc Tín sẽ dời lịch thi qua ngày 26/6/2011 do thầy bận đột xuất.', 'admin', '2011-06-14', '0');
+
+-- ----------------------------
+-- Trigger structure for lecturertacc
+-- ----------------------------
+DELIMITER ;;
+CREATE TRIGGER `lecturertacc` AFTER INSERT ON `lecturer` FOR EACH ROW BEGIN
+     INSERT into dangkyhocphan.accounts values(New.LectuterCode,New.LectuterCode,New.FullName,0,0,2 );
+  END;;
+DELIMITER ;
+
+-- ----------------------------
+-- Trigger structure for lecturertacc_del
+-- ----------------------------
+DELIMITER ;;
+CREATE TRIGGER `lecturertacc_del` BEFORE DELETE ON `lecturer` FOR EACH ROW BEGIN
+    Delete from dangkyhocphan.accounts where UserName=Old.LectuterCode;
+  END;;
+DELIMITER ;
 
 -- ----------------------------
 -- Trigger structure for updateNumStudent
