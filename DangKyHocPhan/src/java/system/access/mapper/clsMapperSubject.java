@@ -1,19 +1,19 @@
 package system.access.mapper;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import system.dto.clsSubject;
 
-
 public class clsMapperSubject extends clsMapperDb {
 
-    public clsMapperSubject() throws Exception{
+    public clsMapperSubject() throws Exception {
         super();
     }
-    
-    public void IniSubjectDTOFromRs(clsSubject subject, ResultSet rs) throws SQLException{
-        if((rs!=null) && (subject!=null)){
+
+    public void IniSubjectDTOFromRs(clsSubject subject, ResultSet rs) throws SQLException {
+        if ((rs != null) && (subject != null)) {
             subject.setSubName(rs.getString("SubName"));
             subject.setSubCode(rs.getString("SubCode"));
             subject.setNumTC(Integer.parseInt(rs.getString("NumTC")));
@@ -21,93 +21,101 @@ public class clsMapperSubject extends clsMapperDb {
             subject.setTCTH(Integer.parseInt(rs.getString("NumTCTH")));
         }
     }
-      public clsSubject getSubjectinfoByName(String subname) throws Exception{
-        clsSubject subject=new clsSubject();
-        try{
+
+    public clsSubject getSubjectinfoByName(String subname) throws Exception {
+        clsSubject subject = new clsSubject();
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.subject Where");
             sql.append(" SubName = '").append(subname).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && rs.next()){
+            if ((rs != null) && rs.next()) {
                 IniSubjectDTOFromRs(subject, rs);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return subject;
     }
-    
-    public ArrayList<clsSubject> GetListSubject()throws Exception{
+
+    public ArrayList<clsSubject> GetListSubject() throws Exception {
         ArrayList<clsSubject> listResult = new ArrayList<clsSubject>();
-        try{
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.subject order by SubName");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            while((rs!=null) && rs.next()){
+            while ((rs != null) && rs.next()) {
                 clsSubject subject = new clsSubject();
                 IniSubjectDTOFromRs(subject, rs);
                 listResult.add(subject);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
-        return listResult;        
+        return listResult;
     }
-    public ArrayList<clsSubject> GetSubjectFree(int procode)throws Exception{
+
+    public ArrayList<clsSubject> GetSubjectFree(int procode) throws Exception {
         ArrayList<clsSubject> listResult = new ArrayList<clsSubject>();
-        try{
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("select * from dangkyhocphan.subject where subcode not in(select subcode from dangkyhocphan.program where procode=");
             sql.append(procode).append(")");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            while((rs!=null) && rs.next()){
+            while ((rs != null) && rs.next()) {
                 clsSubject subject = new clsSubject();
                 IniSubjectDTOFromRs(subject, rs);
                 listResult.add(subject);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return listResult;
     }
-    public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
-        clsSubject subject=new clsSubject();
-        try{
+
+    public clsSubject getSubjectinfoByCode(String subcode) throws Exception {
+        clsSubject subject = new clsSubject();
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.subject Where SubCode='");
             sql.append(subcode).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && rs.next()){
+            if ((rs != null) && rs.next()) {
                 IniSubjectDTOFromRs(subject, rs);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return subject;
     }
-    public int getNumTCByClassName(String classname) throws Exception{
-        int numTC=0;
-        try{
+
+    public int getNumTCByClassName(String classname) throws Exception {
+        int numTC = 0;
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("select NumTC from dangkyhocphan.subject, dangkyhocphan.class where dangkyhocphan.subject.SubCode=dangkyhocphan.class.SubCode and dangkyhocphan.class.ClassName='");
             sql.append(classname).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && rs.next()){
-               numTC=Integer.parseInt(rs.getString("NumTC"));
+            if ((rs != null) && rs.next()) {
+                numTC = Integer.parseInt(rs.getString("NumTC"));
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return numTC;
     }
-    public int SubjectInsert(clsSubject subject) throws Exception{
-        if(SubCheckExitsByName(subject.getSubName())) return 1;//subname already exist
-        else if(SubCheckExitsByCode(subject.getSubCode())) return 2;// subcode already exist
+
+    public int SubjectInsert(clsSubject subject) throws Exception {
+        if (SubCheckExitsByName(subject.getSubName())) {
+            return 1;//subname already exist
+        } else if (SubCheckExitsByCode(subject.getSubCode())) {
+            return 2;// subcode already exist
+        }
         try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.subject values('");
@@ -120,100 +128,103 @@ public class clsMapperSubject extends clsMapperDb {
             stmt.execute();
             stmt.close();
             return 0;
-        }
-        catch (Exception e) {
-                throw e;
+        } catch (Exception e) {
+            throw e;
         }
     }
 
-
-    public boolean SubCheckExitsByName(String subname) throws Exception{
-         boolean result = false;
-        try{
+    public boolean SubCheckExitsByName(String subname) throws Exception {
+        boolean result = false;
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.subject Where SubName = '").append(subname).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && (rs.next()))
+            if ((rs != null) && (rs.next())) {
                 result = true;
+            }
             stmt.close();
-        }catch(Exception ex){
-                throw ex;
+        } catch (Exception ex) {
+            throw ex;
         }
         return result;
     }
 
-    public boolean SubCheckExitsByCode(String subcode) throws Exception{
-         boolean result = false;
-        try{
+    public boolean SubCheckExitsByCode(String subcode) throws Exception {
+        boolean result = false;
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.subject Where SubCode = '").append(subcode).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && (rs.next()))
+            if ((rs != null) && (rs.next())) {
                 result = true;
+            }
             stmt.close();
-        }catch(Exception ex){
-                throw ex;
+        } catch (Exception ex) {
+            throw ex;
         }
         return result;
     }
-    
-    public void SubjectDeleteByName(String subname) throws Exception{
-        try{
+
+    public void SubjectDeleteByName(String subname) throws Exception {
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.subject Where subname = '").append(subname).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
-        }catch(Exception ex){
-                throw ex;
+        } catch (Exception ex) {
+            throw ex;
         }
     }
-    public void DeleteDetailSub(String subcode) throws Exception{
-        try{
+
+    public void DeleteDetailSub(String subcode) throws Exception {
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("delete from dangkyhocphan.subjectdetail where SubCode='");
             sql.append(subcode).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
     }
-    public boolean  SubjectDeleteByCode(String subcode) throws Exception{
-        try{
+
+    public boolean SubjectDeleteByCode(String subcode) throws Exception {
+        try {
             DeleteDetailSub(subcode);
             StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.subject Where SubCode = '").append(subcode).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             return true;
-        }catch(Exception ex){
-               return  false;
+        } catch (Exception ex) {
+            return false;
         }
     }
-    public ArrayList<clsSubject> SearchSubjectByName(String subname) throws Exception{
-         ArrayList<clsSubject> listResult = new ArrayList<clsSubject>();
-         try{
+
+    public ArrayList<clsSubject> SearchSubjectByName(String subname) throws Exception {
+        ArrayList<clsSubject> listResult = new ArrayList<clsSubject>();
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("select * from dangkyhocphan.subject where dangkyhocphan.subject.SubName like '");
             sql.append(subname).append("%' order by SubName");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            while((rs!=null) && rs.next()){
+            while ((rs != null) && rs.next()) {
                 clsSubject classTemp = new clsSubject();
                 IniSubjectDTOFromRs(classTemp, rs);
                 listResult.add(classTemp);
             }
-         }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
-         }
-         return listResult;
-     }
-    
-    public void SubjectUpdate(clsSubject subject) throws Exception{
-        try{
+        }
+        return listResult;
+    }
+
+    public void SubjectUpdate(clsSubject subject) throws Exception {
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("update dangkyhocphan.subject set NumTC=");
             sql.append(subject.getNumTC()).append(", NumTCLT=");
@@ -222,8 +233,8 @@ public class clsMapperSubject extends clsMapperDb {
             sql.append(subject.getSubCode()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
-        }catch(Exception ex){
-                throw ex;
+        } catch (Exception ex) {
+            throw ex;
         }
-     }
+    }
 }

@@ -1,5 +1,3 @@
-
-
 package system.bo;
 
 import java.util.ArrayList;
@@ -12,12 +10,12 @@ import system.dto.clsStudyResult;
  */
 public class clsBOStudyResult {
 
-    public ArrayList<clsStudyResult> getYear(String MSSV) throws Exception{
-        clsMapperStudyResult mps=new clsMapperStudyResult();
+    public ArrayList<clsStudyResult> getYear(String MSSV) throws Exception {
+        clsMapperStudyResult mps = new clsMapperStudyResult();
         return mps.getYear(MSSV);
     }
 
-    public void Insert(clsStudyResult studyresult) throws Exception{
+    public void Insert(clsStudyResult studyresult) throws Exception {
         clsMapperStudyResult mapper = new clsMapperStudyResult();
         mapper.StudyResultnInsert(studyresult);
     }
@@ -28,11 +26,11 @@ public class clsBOStudyResult {
      * @return list result order by year
      * @throws Exception
      */
-    public ArrayList<clsStudyResult> GetListStudyResult(String mssv, String year) throws Exception{
-        try{
+    public ArrayList<clsStudyResult> GetListStudyResult(String mssv, String year) throws Exception {
+        try {
             clsMapperStudyResult mapper = new clsMapperStudyResult();
             return mapper.GetListStudyResult(mssv, year);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
     }

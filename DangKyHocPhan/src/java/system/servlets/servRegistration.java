@@ -223,7 +223,7 @@ public class servRegistration extends HttpServlet {
         }
         session.setAttribute("reg", reg);
         session.setAttribute("regitry", registry);
-        String path = "./jsps/jspPreviewRegistry.jsp";
+        String path = "./jsps/jspHienThiDangKy.jsp";
         resp.sendRedirect(path);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -20,10 +20,9 @@ import system.utilities.SystemProperities;
  *
  * @author ngloc_it
  */
-@WebServlet(name="ViewSchedule", urlPatterns={"/ViewSchedule"})
+@WebServlet(name = "ViewSchedule", urlPatterns = {"/ViewSchedule"})
 public class ViewSchedule extends HttpServlet {
-   
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      *
@@ -34,9 +33,8 @@ public class ViewSchedule extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
-    } 
+            throws ServletException, IOException {
+    }
 
     /**
      *
@@ -47,8 +45,7 @@ public class ViewSchedule extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
+            throws ServletException, IOException {
     }
 
     @Override
@@ -62,16 +59,15 @@ public class ViewSchedule extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(ViewSchedule.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
-    private void ViewSchedule(HttpSession session, HttpServletResponse resp) throws Exception{
-        clsBOClass BOC=new clsBOClass();
+    private void ViewSchedule(HttpSession session, HttpServletResponse resp) throws Exception {
+        clsBOClass BOC = new clsBOClass();
         ArrayList<clsClass> listclass = BOC.GetAllClass("DateOfWeek");
         session.setAttribute("list", listclass);
-        session.setAttribute("time", "Thời khóa biểu học kỳ "+SystemProperities.Curentsemester+" năm học "+SystemProperities.CurentYear);
+        session.setAttribute("time", "Thời khóa biểu học kỳ " + SystemProperities.Curentsemester + " năm học " + SystemProperities.CurentYear);
         String path = "./jsps/jspXemTKB.jsp";
         resp.sendRedirect(path);
     }
-
 }

@@ -16,8 +16,10 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import system.bo.clsBOClass;
 import system.bo.clsBODetailResult;
 import system.bo.clsBOStudent;
+import system.dto.clsClass;
 import system.dto.clsDetailResult;
 import system.dto.clsStudent;
 
@@ -25,10 +27,11 @@ import system.dto.clsStudent;
  *
  * @author ngloc_it
  */
-@WebServlet(name="DownloadFile", urlPatterns={"/DownloadFile"})
+@WebServlet(name = "DownloadFile", urlPatterns = {"/DownloadFile"})
 public class DownloadFile extends HttpServlet {
+
     int numTc = 0;
-   
+
     /** 
      * 
      * @param request
@@ -38,9 +41,8 @@ public class DownloadFile extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
-    } 
+            throws ServletException, IOException {
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -51,8 +53,7 @@ public class DownloadFile extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
+            throws ServletException, IOException {
     }
 
     @Override
@@ -60,41 +61,169 @@ public class DownloadFile extends HttpServlet {
         super.service(req, resp);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
-        
+
         String function = (String) req.getParameter("action");
         String mssv = (String) req.getParameter("mssv");
 
-        if(function.equals("studentresult")){
+        if (function.equals("studentresult")) {
             try {
                 ExportFileStudentScoreTable(req, resp, mssv);
             } catch (Exception ex) {
                 Logger.getLogger(DownloadFile.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else if(function.equals("studentlist")){
+        } else if (function.equals("studentlist")) {
             try {
-               // resp.getWriter().println("OK");
                 ExportStudentList(req, resp);
             } catch (Exception ex) {
                 Logger.getLogger(DownloadFile.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if (function.equals("detailClass")) {
+            try {
+                ExportClassRegistry(req, resp);
+            } catch (Exception ex) {
+                Logger.getLogger(DownloadFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-   }
-private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp) throws Exception{
-    String type=req.getParameter("type");
-    String name=req.getParameter("name");
-    clsBOStudent BOS=new clsBOStudent();
-    ArrayList<clsStudent> studentlist=new ArrayList<clsStudent>();
-    if(type.equalsIgnoreCase("mssv")){
-            studentlist=BOS.getStudentsByCode(name);
-        }else if(type.equalsIgnoreCase("name")){
-           studentlist=BOS.getStudentsByName(name);
-        }else if(type.equalsIgnoreCase("classname")){
-         studentlist=BOS.GetStudentsByClass(name);
-        }else if(type.equalsIgnoreCase("All")){
-            studentlist=BOS.GetAllStudent();
+    }
+
+    private void ExportClassRegistry(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        String ClassName = req.getParameter("classname");
+        clsBOClass BOC = new clsBOClass();
+        clsClass cls = BOC.getClassinfo(ClassName);
+        ArrayList<clsStudent> studentlist = new ArrayList<clsStudent>();
+        studentlist = BOC.getAllStudentOfClass(ClassName);
+        try {
+            HSSFWorkbook hwb = new HSSFWorkbook();
+            HSSFSheet sheet = hwb.createSheet("Danh sách lớp " + ClassName);
+            HSSFCellStyle style = hwb.createCellStyle();
+            int nrow = 0, i = 0;
+            int n = studentlist.size();
+            HSSFRow row1 = null;
+            HSSFCell cell1 = null;
+            row1 = sheet.createRow((short) +(nrow++));
+            //tạo tiêu đề và các thông tin lớp
+            row1 = sheet.createRow((short) +(nrow++));
+            cell1 = row1.createCell((short) +2);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue("Lớp:");
+            cell1 = row1.createCell((short) +3);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue(ClassName);
+            //môn học
+            cell1 = row1.createCell((short) +4);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue("Môn học: ");
+            cell1 = row1.createCell((short) +5);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue(cls.getSubName());
+            //GV
+            row1 = sheet.createRow((short) +(nrow++));
+            cell1 = row1.createCell((short) +2);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue("Giảng viên:");
+            cell1 = row1.createCell((short) +3);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue(cls.getLecturerName());
+            //Ngày học
+            cell1 = row1.createCell((short) +4);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue("Ngày học:");
+            cell1 = row1.createCell((short) +5);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue("Thứ: " + cls.getDate());
+            //ca
+            row1 = sheet.createRow((short) +(nrow++));
+            cell1 = row1.createCell((short) +2);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue("Ca:");
+            cell1 = row1.createCell((short) +3);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue(cls.getShift());
+            //phòng
+            cell1 = row1.createCell((short) +4);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue("Phòng:");
+            cell1 = row1.createCell((short) +5);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue(cls.getRoom());
+            //tạo dòng trống
+            row1 = sheet.createRow((short) +(nrow++));
+            row1 = sheet.createRow((short) +(nrow++));
+            cell1 = row1.createCell((short) +1);
+            cell1.setCellStyle(style);
+            cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            cell1.setCellValue("Danh sách sinh viên:");
+            row1 = sheet.createRow((short) +(nrow++));
+            String[] title = {"STT", "MSSV", "Họ Tên", "Lớp", "Điểm giữa kỳ", "Điểm cuối kỳ", "Ghi chú"};
+            row1 = sheet.createRow((short) +(nrow++));
+            for (i = 0; i < title.length; i++) {
+                cell1 = row1.createCell((short) +i);
+                cell1.setCellStyle(style);
+                cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+                cell1.setCellValue(title[i]);
+            }
+            String MSSV;
+            String FullName;
+            String Class;
+            for (i = 0; i < n; i++) {
+                clsStudent stTemp = studentlist.get(i);
+                HSSFRow row = sheet.createRow((short) +(nrow++));
+                MSSV = stTemp.getCode();
+                FullName = stTemp.getFullname();
+                Class = stTemp.getClasss();
+                String[] info = {Integer.toString(i + 1), MSSV, FullName, Class};
+
+                HSSFCell cell = null;
+                for (int j = 0; j < info.length; j++) {
+                    cell = row.createCell((short) +j);
+                    cell.setCellStyle(style);
+                    if (j == 0) {
+                        cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+                        cell.setCellValue(Double.parseDouble(info[j]));
+                    } else {
+                        cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                        cell.setCellValue(info[j]);
+                    }
+
+                }
+            }
+            FileOutputStream fileOut = new FileOutputStream("DanhsachSV" + ".xls");
+            hwb.write(fileOut);
+            fileOut.close();
+            DownloadFile("DanhsachSV" + ".xls", resp);
+
+        } catch (Exception ex) {
+            resp.getWriter().println(ex.toString());
         }
-     try{
+    }
+
+    private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        String type = req.getParameter("type");
+        String name = req.getParameter("name");
+        clsBOStudent BOS = new clsBOStudent();
+        ArrayList<clsStudent> studentlist = new ArrayList<clsStudent>();
+        if (type.equalsIgnoreCase("mssv")) {
+            studentlist = BOS.getStudentsByCode(name);
+        } else if (type.equalsIgnoreCase("name")) {
+            studentlist = BOS.getStudentsByName(name);
+        } else if (type.equalsIgnoreCase("classname")) {
+            studentlist = BOS.GetStudentsByClass(name);
+        } else if (type.equalsIgnoreCase("All")) {
+            studentlist = BOS.GetAllStudent();
+        }
+        try {
             HSSFWorkbook hwb = new HSSFWorkbook();
             HSSFSheet sheet = hwb.createSheet("Danh sách sinh viên ");
             HSSFCellStyle style = hwb.createCellStyle();
@@ -111,19 +240,19 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
             cell1.setCellStyle(style);
             cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
             if (type.equalsIgnoreCase("mssv")) {
-               cell1.setCellValue("Danh sách sinh viên có MSSV "+name);
+                cell1.setCellValue("Danh sách sinh viên có MSSV " + name);
             } else if (type.equalsIgnoreCase("name")) {
-              cell1.setCellValue("Danh sách sinh viên có tên "+name);
+                cell1.setCellValue("Danh sách sinh viên có tên " + name);
             } else if (type.equalsIgnoreCase("classname")) {
-                cell1.setCellValue("Danh sách sinh viên lớp "+name);
+                cell1.setCellValue("Danh sách sinh viên lớp " + name);
             } else if (type.equalsIgnoreCase("All")) {
                 cell1.setCellValue("Danh sách tất cả các sinh viên của khoa");
             }
-            
 
-            String[] title = {"STT","Họ tên","MSSV", "Ngày sinh", "Lớp","Email","Điện thoại","Tạm trú","Thường trú","Tình trạng","Khóa","Ngày nhập học","Giới tính","CMND","Hình thức đào tạo","Bậc học"};
+
+            String[] title = {"STT", "Họ tên", "MSSV", "Ngày sinh", "Lớp", "Email", "Điện thoại", "Tạm trú", "Thường trú", "Tình trạng", "Khóa", "Ngày nhập học", "Giới tính", "CMND", "Hình thức đào tạo", "Bậc học"};
             row1 = sheet.createRow((short) +(nrow++));
-            for(i = 0; i < title.length; i++){                
+            for (i = 0; i < title.length; i++) {
                 cell1 = row1.createCell((short) +i);
                 cell1.setCellStyle(style);
                 cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
@@ -146,40 +275,39 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
             String CMND;
             String Type;
             String BacHoc;
-            for(i = 0; i < n; i++){
+            for (i = 0; i < n; i++) {
                 clsStudent stTemp = studentlist.get(i);
                 HSSFRow row = sheet.createRow((short) +(nrow++));
 
-             Fullname=stTemp.getFullname();
-             Code =stTemp.getCode();
-             Birthday=stTemp.getBirthDay();
-             Class=stTemp.getClasss();
-             Email=stTemp.getEmail();
-             Phone=stTemp.getPhone();
-             Address=stTemp.getAddress();
-             Home=stTemp.getHome();
-             Status=stTemp.getIsStuding();
-             Course=stTemp.getCourse();
-             DateBegin=stTemp.getNhaphoc();
-             Gender=stTemp.getGender();
-             CMND=stTemp.getCMND();
-             Type=stTemp.getType();
-             BacHoc=stTemp.getBacHoc();
-                String[] info = {Integer.toString(i+1),Fullname, Code , Birthday, Class,Email, Phone, Address, Home,Status, Integer.toString(Course), DateBegin, Gender, CMND, Type, BacHoc};
+                Fullname = stTemp.getFullname();
+                Code = stTemp.getCode();
+                Birthday = stTemp.getBirthDay();
+                Class = stTemp.getClasss();
+                Email = stTemp.getEmail();
+                Phone = stTemp.getPhone();
+                Address = stTemp.getAddress();
+                Home = stTemp.getHome();
+                Status = stTemp.getIsStuding();
+                Course = stTemp.getCourse();
+                DateBegin = stTemp.getNhaphoc();
+                Gender = stTemp.getGender();
+                CMND = stTemp.getCMND();
+                Type = stTemp.getType();
+                BacHoc = stTemp.getBacHoc();
+                String[] info = {Integer.toString(i + 1), Fullname, Code, Birthday, Class, Email, Phone, Address, Home, Status, Integer.toString(Course), DateBegin, Gender, CMND, Type, BacHoc};
 
                 HSSFCell cell = null;
-                for(int j = 0; j < info.length; j++){
+                for (int j = 0; j < info.length; j++) {
                     cell = row.createCell((short) +j);
                     cell.setCellStyle(style);
-                    if(j==0) {
+                    if (j == 0) {
                         cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
                         cell.setCellValue(Double.parseDouble(info[j]));
+                    } else {
+                        cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                        cell.setCellValue(info[j]);
                     }
-                    else {
-                    cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-                    cell.setCellValue(info[j]);
-                    }
-                    
+
                 }
             }
 
@@ -188,18 +316,17 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
             //style.setFillForegroundColor(HSSFColor.AQUA.index);
             //style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 
-            FileOutputStream fileOut = new FileOutputStream("DanhsachSV" +".xls");
+            FileOutputStream fileOut = new FileOutputStream("DanhsachSV" + ".xls");
             hwb.write(fileOut);
             fileOut.close();
-            DownloadFile("DanhsachSV" +".xls", resp);
-            
-        }
-        catch (Exception ex){
+            DownloadFile("DanhsachSV" + ".xls", resp);
+
+        } catch (Exception ex) {
             resp.getWriter().println(ex.toString());
         }
-     resp.getWriter().println("OK");
-}
-     /**
+    }
+
+    /**
      * 
      * @param req
      * @param resp
@@ -207,17 +334,17 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
      * @return
      * @throws Exception 
      */
-    private String ExportFileStudentScoreTable(HttpServletRequest req, HttpServletResponse resp, String mssv) throws Exception{
-        clsBODetailResult BODR=new clsBODetailResult();
-        ArrayList<clsDetailResult> resultstudy=BODR.getResult(mssv,"All",0);
-        int numtc=getnumtc(resultstudy);
-        float DTB=DTB(resultstudy);
+    private String ExportFileStudentScoreTable(HttpServletRequest req, HttpServletResponse resp, String mssv) throws Exception {
+        clsBODetailResult BODR = new clsBODetailResult();
+        ArrayList<clsDetailResult> resultstudy = BODR.getResult(mssv, "All", 0);
+        int numtc = getnumtc(resultstudy);
+        float DTB = DTB(resultstudy);
         String result = "";
         clsBOStudent studentBo = new clsBOStudent();
-        
+
         clsStudent student = studentBo.getStudentInfoByCode(mssv);
         //Init file on server
-        try{
+        try {
             HSSFWorkbook hwb = new HSSFWorkbook();
             HSSFSheet sheet = hwb.createSheet("Bang Diem SV " + mssv);
             HSSFCellStyle style = hwb.createCellStyle();
@@ -227,9 +354,9 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
             int n = resultstudy.size();
 
             String[] infoStudent = {"Họ Và Tên: " + student.getFullname(),
-                                    "MSSV: " + student.getCode(),
-                                    "Số TC Da tich luy: " + numtc,
-                                    "Diểm TB: " + DTB};
+                "MSSV: " + student.getCode(),
+                "Số TC Da tich luy: " + numtc,
+                "Diểm TB: " + DTB};
 
             //Write student's information into file
             HSSFRow row1 = null;
@@ -244,7 +371,7 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
             row1 = sheet.createRow((short) +(nrow++));
             row1 = sheet.createRow((short) +(nrow++));
 
-            for(i = 0; i < infoStudent.length; i++){
+            for (i = 0; i < infoStudent.length; i++) {
                 row1 = sheet.createRow((short) +(nrow++));
                 cell1 = row1.createCell((short) +0);
                 cell1.setCellStyle(style);
@@ -256,9 +383,9 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
             row1 = sheet.createRow((short) +(nrow++));
             row1 = sheet.createRow((short) +(nrow++));
 
-            String[] title = {"Năm học","Học kỳ","Mã môn học", "Tên môn học", "Điểm"};
+            String[] title = {"Năm học", "Học kỳ", "Mã môn học", "Tên môn học", "Điểm"};
             row1 = sheet.createRow((short) +(nrow++));
-            for(i = 0; i < title.length; i++){                
+            for (i = 0; i < title.length; i++) {
                 cell1 = row1.createCell((short) +i);
                 cell1.setCellStyle(style);
                 cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
@@ -271,19 +398,19 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
             Float mark;
             int semester;
             String year;
-            for(i = 0; i < n; i++){
+            for (i = 0; i < n; i++) {
                 clsDetailResult stTemp = resultstudy.get(i);
                 HSSFRow row = sheet.createRow((short) +(nrow++));
 
                 subCode = stTemp.getSubCode();
-                subName = stTemp.getSubName();               
+                subName = stTemp.getSubName();
                 mark = stTemp.getMark();
-                semester=stTemp.getSemester();
-                year=stTemp.getYear();
-                String[] info = {year,Integer.toString(semester), subCode , subName, Float.toString(mark)};
+                semester = stTemp.getSemester();
+                year = stTemp.getYear();
+                String[] info = {year, Integer.toString(semester), subCode, subName, Float.toString(mark)};
 
                 HSSFCell cell = null;
-                for(int j = 0; j < info.length; j++){
+                for (int j = 0; j < info.length; j++) {
                     cell = row.createCell((short) +j);
                     cell.setCellStyle(style);
                     cell.setCellType(HSSFCell.CELL_TYPE_STRING);
@@ -296,49 +423,50 @@ private void ExportStudentList(HttpServletRequest req, HttpServletResponse resp)
             //style.setFillForegroundColor(HSSFColor.AQUA.index);
             //style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 
-            FileOutputStream fileOut = new FileOutputStream("Bangdiem" + mssv +".xls");
+            FileOutputStream fileOut = new FileOutputStream("Bangdiem" + mssv + ".xls");
             hwb.write(fileOut);
             fileOut.close();
-            DownloadFile("Bangdiem" + mssv +".xls", resp);
+            DownloadFile("Bangdiem" + mssv + ".xls", resp);
             result = "Tao file thanh cong";
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             result = ex.toString();
         }
         return result;
     }
-  private int getnumtc(ArrayList<clsDetailResult> resultstudy){
-      int numtc=0;
-       for(int i=0;i<resultstudy.size();i++){
-          numtc+=resultstudy.get(i).getNumTC();  
+
+    private int getnumtc(ArrayList<clsDetailResult> resultstudy) {
+        int numtc = 0;
+        for (int i = 0; i < resultstudy.size(); i++) {
+            numtc += resultstudy.get(i).getNumTC();
         }
-      return numtc;
-  }
-    private float DTB(ArrayList<clsDetailResult> resultstudy){
-        int numtc=getnumtc(resultstudy);
-        float summark=0;
+        return numtc;
+    }
+
+    private float DTB(ArrayList<clsDetailResult> resultstudy) {
+        int numtc = getnumtc(resultstudy);
+        float summark = 0;
         float result = 0;
-        for(int i=0;i<resultstudy.size();i++){
-          summark+=resultstudy.get(i).getNumTC()*resultstudy.get(i).getMark();  
+        for (int i = 0; i < resultstudy.size(); i++) {
+            summark += resultstudy.get(i).getNumTC() * resultstudy.get(i).getMark();
         }
-        result=(float)Math.round(summark*100/numtc)/100;
+        result = (float) Math.round(summark * 100 / numtc) / 100;
         return result;
     }
 
-    private void DownloadFile(String filename, HttpServletResponse resp) throws IOException{
-        try{
+    private void DownloadFile(String filename, HttpServletResponse resp) throws IOException {
+        try {
             resp.reset();
             resp.setContentType("application/xls");
-            resp.setHeader("Content-disposition","attachment; filename=" +filename);
+            resp.setHeader("Content-disposition", "attachment; filename=" + filename);
 
             FileInputStream in = new FileInputStream(filename);
             int i;
-            while ((i = in.read()) != -1){
+            while ((i = in.read()) != -1) {
                 resp.getOutputStream().write(i);
             }
             in.close();
             resp.getOutputStream().flush();
-        }catch(Exception e){
+        } catch (Exception e) {
             resp.getWriter().println(e.toString());
         }
     }

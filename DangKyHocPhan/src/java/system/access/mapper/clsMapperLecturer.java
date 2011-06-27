@@ -1,4 +1,5 @@
 package system.access.mapper;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,14 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import system.dto.clsLecturer;
+
 public class clsMapperLecturer extends clsMapperDb {
-    public clsMapperLecturer() throws Exception{
+
+    public clsMapperLecturer() throws Exception {
         super();
     }
 
-    
- public void IniLecturerDTOFromRs(clsLecturer lecturer, ResultSet rs) throws SQLException{
-         if((rs!=null) && (lecturer!=null)){
+    public void IniLecturerDTOFromRs(clsLecturer lecturer, ResultSet rs) throws SQLException {
+        if ((rs != null) && (lecturer != null)) {
             lecturer.setFullName(rs.getString("FullName"));
             lecturer.setLecturerCode(rs.getString("LectuterCode"));
             lecturer.setBirthDay(rs.getString("BirthDay"));
@@ -24,22 +26,22 @@ public class clsMapperLecturer extends clsMapperDb {
             lecturer.setHocVi(rs.getString("Degree"));
             lecturer.setGender(rs.getString("Gender"));
             lecturer.setCMND(rs.getString("CMND"));
-         }
-     }
+        }
+    }
 
- /**
-  *
-  * @param name
-  * @return
-  * @throws Exception
-  */
- public clsLecturer getLecturerInfo(String name) throws Exception{
-     clsLecturer lecturer=new clsLecturer();
-        try{
+    /**
+     *
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    public clsLecturer getLecturerInfo(String name) throws Exception {
+        clsLecturer lecturer = new clsLecturer();
+        try {
             StringBuffer sql = new StringBuffer();
 
             //sql.append("Select * from dangkyhocphan.lecturer");
-           // sql.append("Select * from dangkyhocphan.lecturer Where ");
+            // sql.append("Select * from dangkyhocphan.lecturer Where ");
             //sql.append("FullName like '%Thanh Nguyen'");//.append(name).append("' order by FullName COLLATE utf8_unicode_ci DESC");//có dấu tiếng việt thì chưa lấy được
 
             //sql.append("Select * from dangkyhocphan.lecturer");
@@ -48,7 +50,7 @@ public class clsMapperLecturer extends clsMapperDb {
             //sql.append("FullName LIKE '%Anh%'");//có dấu tiếng việt thì chưa lấy được
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && rs.next()){
+            if ((rs != null) && rs.next()) {
                 IniLecturerDTOFromRs(lecturer, rs);
             }
 //            while((rs!=null) && rs.next()){
@@ -56,69 +58,71 @@ public class clsMapperLecturer extends clsMapperDb {
 //                IniLecturerDTOFromRs(lecturer, rs);
 //              break;
 //              }
- //           }
-        }catch(Exception ex){
+            //           }
+        } catch (Exception ex) {
             throw ex;
         }
         return lecturer;
- }
+    }
 
-    public ArrayList<clsLecturer> GetLecturerByName(String name) throws Exception{
+    public ArrayList<clsLecturer> GetLecturerByName(String name) throws Exception {
         ArrayList<clsLecturer> listResult = new ArrayList<clsLecturer>();
-        try{
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.lecturer where FullName like '%");
             sql.append(name).append("%'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
 
-            while((rs!=null) && rs.next()){
+            while ((rs != null) && rs.next()) {
                 clsLecturer lecturer = new clsLecturer();
                 IniLecturerDTOFromRs(lecturer, rs);
                 listResult.add(lecturer);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return listResult;
     }
-     public ArrayList<clsLecturer> GetLecturerByID(String Id) throws Exception{
+
+    public ArrayList<clsLecturer> GetLecturerByID(String Id) throws Exception {
         ArrayList<clsLecturer> listResult = new ArrayList<clsLecturer>();
-        try{
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.lecturer where LectuterCode like '%");
             sql.append(Id).append("%'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
 
-            while((rs!=null) && rs.next()){
+            while ((rs != null) && rs.next()) {
                 clsLecturer lecturer = new clsLecturer();
                 IniLecturerDTOFromRs(lecturer, rs);
                 listResult.add(lecturer);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return listResult;
     }
+
     /**
      * Get all lecturer in database
      * @return list of lecturer
      * @throws Exception
      */
-    public ArrayList<clsLecturer> GetAllLecturer()throws Exception{
+    public ArrayList<clsLecturer> GetAllLecturer() throws Exception {
         ArrayList<clsLecturer> listResult = new ArrayList<clsLecturer>();
-        try{
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.lecturer");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            while((rs!=null) && rs.next()){
+            while ((rs != null) && rs.next()) {
                 clsLecturer lecturer = new clsLecturer();
                 IniLecturerDTOFromRs(lecturer, rs);
                 listResult.add(lecturer);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return listResult;
@@ -130,26 +134,28 @@ public class clsMapperLecturer extends clsMapperDb {
      * @return lecturer object found or null
      * @throws Exception
      */
-     public clsLecturer getLecturerInfoById(String id) throws Exception{
-         clsLecturer lecturer=new clsLecturer();
-            try{
-                StringBuffer sql = new StringBuffer();
-                sql.append("Select * from dangkyhocphan.lecturer Where ");
-                sql.append("LectuterCode = '").append(id).append("'");
-                PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-                ResultSet rs = stmt.executeQuery();
-                if((rs!=null) && rs.next()){
-                    IniLecturerDTOFromRs(lecturer, rs);
-                }
-            }catch(Exception ex){
-                throw ex;
+    public clsLecturer getLecturerInfoById(String id) throws Exception {
+        clsLecturer lecturer = new clsLecturer();
+        try {
+            StringBuffer sql = new StringBuffer();
+            sql.append("Select * from dangkyhocphan.lecturer Where ");
+            sql.append("LectuterCode = '").append(id).append("'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            ResultSet rs = stmt.executeQuery();
+            if ((rs != null) && rs.next()) {
+                IniLecturerDTOFromRs(lecturer, rs);
             }
-            return lecturer;
-     }
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return lecturer;
+    }
 
- public boolean LecturerInsert(clsLecturer lecturer) throws Exception{
-     if(LecturerCheckExistCode(lecturer.getLecturerCode())) return false;
-     try {
+    public boolean LecturerInsert(clsLecturer lecturer) throws Exception {
+        if (LecturerCheckExistCode(lecturer.getLecturerCode())) {
+            return false;
+        }
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.lecturer values('");
             sql.append(lecturer.getLecturerCode()).append("','");
@@ -166,64 +172,70 @@ public class clsMapperLecturer extends clsMapperDb {
             stmt.execute();
             stmt.close();
             return true;
+        } catch (Exception e) {
+            return false;
         }
-        catch (Exception e) {
-               return false;
-        }
- }
- public boolean LecturerCheckExistName(String name) throws Exception{
-      boolean result = false;
-       try{
+    }
+
+    public boolean LecturerCheckExistName(String name) throws Exception {
+        boolean result = false;
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.lecturer Where FullName = '").append(name).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && (rs.next()))
+            if ((rs != null) && (rs.next())) {
                 result = true;
+            }
             stmt.close();
-        }catch(Exception ex){
-                throw ex;
+        } catch (Exception ex) {
+            throw ex;
         }
         return result;
- }
-  public boolean LecturerCheckExistCode(String code) throws Exception{
-      boolean result = false;
-       try{
+    }
+
+    public boolean LecturerCheckExistCode(String code) throws Exception {
+        boolean result = false;
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.lecturer Where LectuterCode = '").append(code).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && (rs.next()))
+            if ((rs != null) && (rs.next())) {
                 result = true;
+            }
             stmt.close();
-        }catch(Exception ex){
-                throw ex;
+        } catch (Exception ex) {
+            throw ex;
         }
         return result;
- }
-  public void LecturerDeleteByName(String name) throws Exception{
-        try{
-    StringBuffer sql = new StringBuffer();
+    }
+
+    public void LecturerDeleteByName(String name) throws Exception {
+        try {
+            StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.lecturer Where FullName = '").append(name).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
-        }catch(Exception ex){
-                throw ex;
+        } catch (Exception ex) {
+            throw ex;
         }
-  }
-  public boolean  LecturerDeleteByCode(String code) throws Exception{
-        try{
+    }
+
+    public boolean LecturerDeleteByCode(String code) throws Exception {
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.lecturer Where LectuterCode = '").append(code).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             return true;
-        }catch(Exception ex){
-                return false;
+        } catch (Exception ex) {
+            return false;
         }
-  }
-  public void LecturerUpdate(clsLecturer lecturer) throws Exception{
-      try{
+    }
+
+    public void LecturerUpdate(clsLecturer lecturer) throws Exception {
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Update dangkyhocphan.lecturer set FullName = '").append(lecturer.getFullname()).append("',");
             sql.append("BirthDay='").append(lecturer.getBirthDay()).append("',");
@@ -237,8 +249,8 @@ public class clsMapperLecturer extends clsMapperDb {
             sql.append("Where LectuterCode='").append(lecturer.getLecturerCode()).append("'");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
-        }catch(Exception ex){
-                throw ex;
+        } catch (Exception ex) {
+            throw ex;
         }
-  }
+    }
 }

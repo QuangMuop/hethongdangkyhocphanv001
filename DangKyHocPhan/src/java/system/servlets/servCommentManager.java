@@ -1,4 +1,3 @@
-
 package system.servlets;
 
 import java.io.IOException;
@@ -32,60 +31,60 @@ public class servCommentManager extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
-        clsBOAccount BOA=new clsBOAccount();
-        String user=(String) session.getAttribute("username");
+        clsBOAccount BOA = new clsBOAccount();
+        String user = (String) session.getAttribute("username");
         try {
-            if(user==null){
-                  session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
-                  String path = "./jsps/jspThongBao.jsp";
+            if (user == null) {
+                session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+                String path = "./jsps/jspThongBao.jsp";
                 response.sendRedirect(path);
-            }
-            else{
-              String action=request.getParameter("action");
-                if(action.equalsIgnoreCase("view")){
-                    if(BOA.getAccountType(user)==1)
-                getAllComment(response, session);
-                    else {
+            } else {
+                String action = request.getParameter("action");
+                if (action.equalsIgnoreCase("view")) {
+                    if (BOA.getAccountType(user) == 1) {
+                        getAllComment(response, session);
+                    } else {
                         session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản quản lý!");
-                         String path = "./jsps/jspThongBao.jsp";
+                        String path = "./jsps/jspThongBao.jsp";
                         response.sendRedirect(path);
                     }
-                    
-                }
-                else if(action.equalsIgnoreCase("delete")){
+
+                } else if (action.equalsIgnoreCase("delete")) {
                     deleteComment(request, response, session);
-                }
-                else if(action.equalsIgnoreCase("detail")){
+                } else if (action.equalsIgnoreCase("detail")) {
                     detailComment(request, response, session);
                 }
             }
-            
-        } finally {            
+
+        } finally {
             out.close();
         }
     }
- private void detailComment(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception{
-        int Id=Integer.parseInt(request.getParameter("Id"));
-        clsBOComment BOC=new clsBOComment();
-        clsComment comment=BOC.getCommentInfo(Id);
+
+    private void detailComment(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+        int Id = Integer.parseInt(request.getParameter("Id"));
+        clsBOComment BOC = new clsBOComment();
+        clsComment comment = BOC.getCommentInfo(Id);
         session.setAttribute("comment", comment);
         String path = "./jsps/jspChiTietComment.jsp";
         response.sendRedirect(path);
     }
-    private void deleteComment(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception{
-        int Id=Integer.parseInt(request.getParameter("Id"));
-        clsBOComment BOC=new clsBOComment();
+
+    private void deleteComment(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+        int Id = Integer.parseInt(request.getParameter("Id"));
+        clsBOComment BOC = new clsBOComment();
         BOC.deleteComment(Id);
         getAllComment(response, session);
     }
-private void getAllComment(HttpServletResponse response,HttpSession session) throws Exception{
-    clsBOComment BOC=new clsBOComment();
-    ArrayList<clsComment> listcomment=BOC.getAllComment();
-    session.setAttribute("comment", listcomment);
-    String path = "./jsps/jspQuanLyComment.jsp";
-    response.sendRedirect(path);
-}
-    
+
+    private void getAllComment(HttpServletResponse response, HttpSession session) throws Exception {
+        clsBOComment BOC = new clsBOComment();
+        ArrayList<clsComment> listcomment = BOC.getAllComment();
+        session.setAttribute("comment", listcomment);
+        String path = "./jsps/jspQuanLyComment.jsp";
+        response.sendRedirect(path);
+    }
+
     /** 
      * 
      * @param request

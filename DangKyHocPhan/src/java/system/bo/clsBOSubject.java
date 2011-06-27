@@ -15,27 +15,29 @@ public class clsBOSubject {
      * @return list result
      * @throws Exception
      */
-    public ArrayList<clsSubject> GetListSubject()throws Exception{
-        try{
+    public ArrayList<clsSubject> GetListSubject() throws Exception {
+        try {
             clsMapperSubject mapper = new clsMapperSubject();
             return mapper.GetListSubject();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
     }
-    public ArrayList<clsSubject> GetSubjectFree(int procode)throws Exception{
-        try{
+
+    public ArrayList<clsSubject> GetSubjectFree(int procode) throws Exception {
+        try {
             clsMapperSubject mapper = new clsMapperSubject();
             return mapper.GetSubjectFree(procode);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
     }
-     public ArrayList<clsSubject> SearchSubjectByName(String subname)throws Exception{
-        try{
+
+    public ArrayList<clsSubject> SearchSubjectByName(String subname) throws Exception {
+        try {
             clsMapperSubject mapper = new clsMapperSubject();
             return mapper.SearchSubjectByName(subname);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
     }
@@ -46,36 +48,39 @@ public class clsBOSubject {
      * @return Subject found or null
      * @throws Exception
      */
-    public clsSubject getSubjectinfoByName(String subname) throws Exception{        
-        try{
+    public clsSubject getSubjectinfoByName(String subname) throws Exception {
+        try {
             clsMapperSubject mapper = new clsMapperSubject();
             return mapper.getSubjectinfoByName(subname);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
-        }        
-     }
-public void updateSubject(clsSubject subject) throws Exception{
-    clsMapperSubject mps=new clsMapperSubject();
-    mps.SubjectUpdate(subject);
-}
+        }
+    }
+
+    public void updateSubject(clsSubject subject) throws Exception {
+        clsMapperSubject mps = new clsMapperSubject();
+        mps.SubjectUpdate(subject);
+    }
+
     /**
      * Get an Subject object by it's Id
      * @param subcode Id for search
      * @return Subject found or null
      * @throws Exception
      */
-public int getNumTCByClassName(String Classname) throws Exception{
-     clsMapperSubject mapper = new clsMapperSubject();
-     return mapper.getNumTCByClassName(Classname);
-}
-    public clsSubject getSubjectinfoByCode(String subcode) throws Exception{
-        try{
+    public int getNumTCByClassName(String Classname) throws Exception {
+        clsMapperSubject mapper = new clsMapperSubject();
+        return mapper.getNumTCByClassName(Classname);
+    }
+
+    public clsSubject getSubjectinfoByCode(String subcode) throws Exception {
+        try {
             clsMapperSubject mapper = new clsMapperSubject();
             return mapper.getSubjectinfoByCode(subcode);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
-     }
+    }
 
     /**
      * Get name of a subject with it's code
@@ -83,13 +88,13 @@ public int getNumTCByClassName(String Classname) throws Exception{
      * @return
      * @throws Exception
      */
-    public String getSubjectNameByCode(String subcode) throws Exception{
+    public String getSubjectNameByCode(String subcode) throws Exception {
         String result = "";
-        try{
+        try {
             clsMapperSubject mapper = new clsMapperSubject();
             clsSubject subject = mapper.getSubjectinfoByCode(subcode);
             result = subject.getSubName();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return result;
@@ -101,10 +106,10 @@ public int getNumTCByClassName(String Classname) throws Exception{
      * @return
      * @throws Exception
      */
-    public int SubjectInsert(clsSubject subject) throws Exception{
-        clsMapperSubject mps=new clsMapperSubject();
+    public int SubjectInsert(clsSubject subject) throws Exception {
+        clsMapperSubject mps = new clsMapperSubject();
         return mps.SubjectInsert(subject);
-     }
+    }
 
     /**
      *
@@ -112,40 +117,40 @@ public int getNumTCByClassName(String Classname) throws Exception{
      * @return
      * @throws Exception
      */
-    public boolean SubCheckExitsByName(String subname) throws Exception{
+    public boolean SubCheckExitsByName(String subname) throws Exception {
         boolean result = false;
-         try{
+        try {
             clsMapperSubject mapper = new clsMapperSubject();
             result = mapper.SubCheckExitsByName(subname);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return result;
-     }
-    
+    }
+
     /**
      * Check if one subject's id is already existed in database
      * @param subcode id for test
      * @return true if existed and false for other
      * @throws Exception
      */
-    public boolean SubCheckExitsByCode(String subcode) throws Exception{
+    public boolean SubCheckExitsByCode(String subcode) throws Exception {
         boolean result = false;
-         try{
+        try {
             clsMapperSubject mapper = new clsMapperSubject();
             result = mapper.SubCheckExitsByCode(subcode);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return result;
-     }
+    }
 
     /**
      *
      * @param subname
      * @throws Exception
      */
-    public void SubjectDeleteByName(String subname) throws Exception{
+    public void SubjectDeleteByName(String subname) throws Exception {
     }
 
     /**
@@ -153,26 +158,24 @@ public int getNumTCByClassName(String Classname) throws Exception{
      * @param subcode
      * @throws Exception
      */
-    public boolean  SubjectDeleteByCode(String subcode) throws Exception{
-        clsMapperSubject mps=new clsMapperSubject();
+    public boolean SubjectDeleteByCode(String subcode) throws Exception {
+        clsMapperSubject mps = new clsMapperSubject();
         return mps.SubjectDeleteByCode(subcode);
     }
 
-
     /**
      *
      * @param subject
      * @throws Exception
      */
-    public void SubjectUpdateByName(clsSubject subject) throws Exception{
+    public void SubjectUpdateByName(clsSubject subject) throws Exception {
     }
 
-
     /**
      *
      * @param subject
      * @throws Exception
      */
-    public void SubjectUpdateByCode(clsSubject subject) throws Exception{
+    public void SubjectUpdateByCode(clsSubject subject) throws Exception {
     }
 }

@@ -1,4 +1,3 @@
-
 package system.servlets;
 
 import java.io.IOException;
@@ -15,10 +14,9 @@ import system.bo.clsBOAccount;
 import system.bo.clsBOStudent;
 import system.dto.clsStudent;
 
-
-@WebServlet(name="servUpdateInfo", urlPatterns={"/servUpdateInfo"})
+@WebServlet(name = "servUpdateInfo", urlPatterns = {"/servUpdateInfo"})
 public class servUpdateInfo extends HttpServlet {
-   
+
     /**
      *
      * @param request
@@ -26,75 +24,75 @@ public class servUpdateInfo extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException, Exception {
+            throws ServletException, IOException, Exception {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        clsBOAccount BOA=new clsBOAccount();
+        clsBOAccount BOA = new clsBOAccount();
         String isupdate = request.getParameter("isupdate");
         try {
-            String login=(String) session.getAttribute("username");
-            if(login==null){
-              session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
-             String path = "./jsps/jspThongBao.jsp";
-             response.sendRedirect(path);
-            }
-            else {
-               if(isupdate.equalsIgnoreCase("false")){//Xem thông tin sinh viên
-                   if(BOA.getAccountType(login)==0)
-                   getStudentInfo(session, response);
-                   else {
+            String login = (String) session.getAttribute("username");
+            if (login == null) {
+                session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
+                String path = "./jsps/jspThongBao.jsp";
+                response.sendRedirect(path);
+            } else {
+                if (isupdate.equalsIgnoreCase("false")) {//Xem thông tin sinh viên
+                    if (BOA.getAccountType(login) == 0) {
+                        getStudentInfo(session, response);
+                    } else {
                         session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản sinh viên!");
                         String path = "./jsps/jspThongBao.jsp";
                         response.sendRedirect(path);
-                   }
+                    }
+                } else if (isupdate.equalsIgnoreCase("true")) {//cập nhật thông tin sinh viên
+                    updateStudentInfo(session, request, response);
                 }
-               else if(isupdate.equalsIgnoreCase("true")){//cập nhật thông tin sinh viên
-                  updateStudentInfo(session, request, response);
-               }
             }
-           
-        } finally { 
+
+        } finally {
             out.close();
         }
     }
-    private void getStudentInfo(HttpSession session,HttpServletResponse response) throws Exception{
-        String username=(String)session.getAttribute("username");
-       clsBOStudent BOStudent=new clsBOStudent();
-        clsStudent student =new clsStudent();
-        student=BOStudent.getStudentInfoByCode(username);
-       session.setAttribute("student", student);
-       String path = "./jsps/jspThongTinSinhVien.jsp";
-       response.sendRedirect(path);
+
+    private void getStudentInfo(HttpSession session, HttpServletResponse response) throws Exception {
+        String username = (String) session.getAttribute("username");
+        clsBOStudent BOStudent = new clsBOStudent();
+        clsStudent student = new clsStudent();
+        student = BOStudent.getStudentInfoByCode(username);
+        session.setAttribute("student", student);
+        String path = "./jsps/jspThongTinSinhVien.jsp";
+        response.sendRedirect(path);
     }
-private void updateStudentInfo(HttpSession session,HttpServletRequest request,HttpServletResponse response) throws IOException, Exception{
-    String username=(String)session.getAttribute("username");
-    String name=request.getParameter("name");
-    String date=request.getParameter("day");
-    String month=request.getParameter("month");
-    String year=request.getParameter("year");
-    String gender=request.getParameter("gender");
-    String classs=request.getParameter("classs");
-    String course=request.getParameter("course");
-    String type=request.getParameter("type");
-    String bachoc=request.getParameter("bachoc");
-    String email=request.getParameter("email");
-    String phone=request.getParameter("phone");
-    String address=request.getParameter("address");
-    String home=request.getParameter("home");
-    String cmnd=request.getParameter("cmnd");
-    String updateinfo="Thông tin mới cập nhật - Tên: "+ name + ", Ngày sinh: "+date+"/"+month+"/"+year+", Giới tính: "+gender+", Lớp: "+classs+
-            ", Khóa: "+course+", Loại hình đào tạo: "+type+", Bậc học: "+bachoc+", Email: "+email+", Điện thoại: "+phone+
-            ", Địa chỉ liên lạc: "+address+", Thường trú: "+home+", CMND: "+cmnd;
-    clsBOStudent student=new clsBOStudent();
-    student.updateStudentByStudent(updateinfo, username);
-     session.setAttribute("mes", "Thông tin cập nhật của bạn đã đươc gửi tới quản lý khoa!");
-             String path = "./jsps/jspThongBao.jsp";
-             response.sendRedirect(path);
-}
+
+    private void updateStudentInfo(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException, Exception {
+        String username = (String) session.getAttribute("username");
+        String name = request.getParameter("name");
+        String date = request.getParameter("day");
+        String month = request.getParameter("month");
+        String year = request.getParameter("year");
+        String gender = request.getParameter("gender");
+        String classs = request.getParameter("classs");
+        String course = request.getParameter("course");
+        String type = request.getParameter("type");
+        String bachoc = request.getParameter("bachoc");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String home = request.getParameter("home");
+        String cmnd = request.getParameter("cmnd");
+        String updateinfo = "Thông tin mới cập nhật - Tên: " + name + ", Ngày sinh: " + date + "/" + month + "/" + year + ", Giới tính: " + gender + ", Lớp: " + classs
+                + ", Khóa: " + course + ", Loại hình đào tạo: " + type + ", Bậc học: " + bachoc + ", Email: " + email + ", Điện thoại: " + phone
+                + ", Địa chỉ liên lạc: " + address + ", Thường trú: " + home + ", CMND: " + cmnd;
+        clsBOStudent student = new clsBOStudent();
+        student.updateStudentByStudent(updateinfo, username);
+        session.setAttribute("mes", "Thông tin cập nhật của bạn đã đươc gửi tới quản lý khoa!");
+        String path = "./jsps/jspThongBao.jsp";
+        response.sendRedirect(path);
+    }
+
     /**
      *
      * @param request
@@ -104,13 +102,13 @@ private void updateStudentInfo(HttpSession session,HttpServletRequest request,Ht
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
             Logger.getLogger(servUpdateInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
+    }
 
     /**
      *
@@ -121,7 +119,7 @@ private void updateStudentInfo(HttpSession session,HttpServletRequest request,Ht
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
@@ -137,5 +135,4 @@ private void updateStudentInfo(HttpSession session,HttpServletRequest request,Ht
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

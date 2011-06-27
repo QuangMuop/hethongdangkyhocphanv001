@@ -25,16 +25,15 @@ public class clsMapperRegistration extends clsMapperDb {
      */
     public void IniRegistrationDTOFromRs(clsRegistration reg, ResultSet rs) throws SQLException {
         if ((rs != null) && (reg != null)) {
-           reg.setClassName(rs.getString("ClassName"));
-           reg.setStudentCode(rs.getString("MSSV"));
-           reg.setYear(rs.getString("Year"));
-           reg.setSemester(Integer.parseInt(rs.getString("Semester")));
-           try{
-           reg.setMark(Float.parseFloat(rs.getString("Mark")));
-           }
-           catch(Exception e){
-               reg.setMark(11);
-           }
+            reg.setClassName(rs.getString("ClassName"));
+            reg.setStudentCode(rs.getString("MSSV"));
+            reg.setYear(rs.getString("Year"));
+            reg.setSemester(Integer.parseInt(rs.getString("Semester")));
+            try {
+                reg.setMark(Float.parseFloat(rs.getString("Mark")));
+            } catch (Exception e) {
+                reg.setMark(11);
+            }
         }
     }
 
@@ -88,22 +87,23 @@ public class clsMapperRegistration extends clsMapperDb {
             throw ex;
         }
     }
-    public ArrayList<clsRegistration> getRegistryByClassName(String ClassName) throws Exception{
+
+    public ArrayList<clsRegistration> getRegistryByClassName(String ClassName) throws Exception {
         ArrayList<clsRegistration> result = new ArrayList<clsRegistration>();
         try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.registry where ClassName='");
             sql.append(ClassName).append("' and Semester=");
             sql.append(SystemProperities.Curentsemester);
-            sql.append(" and Year='"+SystemProperities.CurentYear+"' ");
+            sql.append(" and Year='" + SystemProperities.CurentYear + "' ");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
             while (rs != null && rs.next()) {
-                clsRegistration temp=new clsRegistration();
-              IniRegistrationDTOFromRs(temp, rs);
+                clsRegistration temp = new clsRegistration();
+                IniRegistrationDTOFromRs(temp, rs);
                 result.add(temp);
             }
-            
+
         } catch (Exception ex) {
             throw ex;
         }
@@ -257,6 +257,20 @@ public class clsMapperRegistration extends clsMapperDb {
         }
     }
 
+    public void DeleteAllRegistryByClassName(String ClassName, int semester, String year) throws Exception {
+        try {
+            StringBuffer sql = new StringBuffer();
+            sql.append("delete from dangkyhocphan.registry where ClassName='");
+            sql.append(ClassName).append("'  and Semester=");
+            sql.append(semester).append(" and Year='");
+            sql.append(year).append("'");
+            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+            stmt.execute();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
     /**
      * 
      * @param mssv
@@ -300,8 +314,9 @@ public class clsMapperRegistration extends clsMapperDb {
         }
         return result;
     }
-    public void updateMark(clsRegistration cls) throws Exception{
-             try {
+
+    public void updateMark(clsRegistration cls) throws Exception {
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("update dangkyhocphan.registry set Mark=");
             sql.append(cls.getMark()).append(" where MSSV='");
@@ -314,5 +329,5 @@ public class clsMapperRegistration extends clsMapperDb {
         } catch (Exception ex) {
             throw ex;
         }
-}
+    }
 }

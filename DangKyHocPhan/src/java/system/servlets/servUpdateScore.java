@@ -1,4 +1,3 @@
-
 package system.servlets;
 
 import java.io.File;
@@ -50,49 +49,47 @@ public class servUpdateScore extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-         request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
-        clsBOAccount BOA=new clsBOAccount();
-        String login=(String) session.getAttribute("username");
+        clsBOAccount BOA = new clsBOAccount();
+        String login = (String) session.getAttribute("username");
         try {
-            if(login==null){
+            if (login == null) {
                 session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập!");
-                  String path = "./jsps/jspThongBao.jsp";
+                String path = "./jsps/jspThongBao.jsp";
                 response.sendRedirect(path);
-            }
-            else{
-                String action =request.getParameter("action");
-               if(action.equalsIgnoreCase("view")) {
-                 if(BOA.getAccountType(login)==1)
-                     getAllClass(response, session);
-                else{
-                      session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản quản lý!");
-                  String path = "./jsps/jspThongBao.jsp";
-                response.sendRedirect(path);
+            } else {
+                String action = request.getParameter("action");
+                if (action.equalsIgnoreCase("view")) {
+                    if (BOA.getAccountType(login) == 1) {
+                        getAllClass(response, session);
+                    } else {
+                        session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản quản lý!");
+                        String path = "./jsps/jspThongBao.jsp";
+                        response.sendRedirect(path);
+                    }
+                } else if (action.equalsIgnoreCase("lecturer")) {
+                    if (BOA.getAccountType(login) == 2) {
+                        getAllClass(response, session);
+                    } else {
+                        session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản giảng viên!");
+                        String path = "./jsps/jspThongBao.jsp";
+                        response.sendRedirect(path);
+                    }
+                } else if (action.equalsIgnoreCase("update")) {
+                    updateSocre(request, response, session);
                 }
-               }
-               else  if(action.equalsIgnoreCase("lecturer")) {
-                 if(BOA.getAccountType(login)==2)
-                     getAllClass(response, session);
-                else{
-                      session.setAttribute("mes", "Để xem trang này bạn phải đăng nhập với tài khoản giảng viên!");
-                  String path = "./jsps/jspThongBao.jsp";
-                response.sendRedirect(path);
-                }
-               }
-               else if(action.equalsIgnoreCase("update")) {
-                   updateSocre(request, response, session);
-               }
             }
-         } finally {            
+        } finally {
             out.close();
         }
     }
-   private HSSFWorkbook GetWorkbook(HttpServletRequest req, HttpServletResponse response) throws IOException, FileUploadException{
+
+    private HSSFWorkbook GetWorkbook(HttpServletRequest req, HttpServletResponse response) throws IOException, FileUploadException {
         boolean isMultipart = ServletFileUpload.isMultipartContent(req);
-        if(isMultipart){
+        if (isMultipart) {
             ServletFileUpload upload = new ServletFileUpload();
             FileItemIterator iter;
             String fileNamSource = req.getParameter("txtPath");
@@ -101,92 +98,94 @@ public class servUpdateScore extends HttpServlet {
                 FileItemStream item = null;
                 String name = "";
                 InputStream stream = null;
-                while (iter.hasNext()){
+                while (iter.hasNext()) {
                     item = iter.next();
                     name = item.getFieldName();
                     stream = item.openStream();
-                    if(item.isFormField()){
+                    if (item.isFormField()) {
                         //String result = "notFormField";
                         continue;
-                    }else {
+                    } else {
                         name = item.getName();
-                        if(name != null && !"".equals(name)){
+                        if (name != null && !"".equals(name)) {
                             String fileName = new File(item.getName()).getName();
                             //if(fileName.equals(fileNamSource)){
-                                POIFSFileSystem fs = new POIFSFileSystem(stream);
-                                HSSFWorkbook wb = new HSSFWorkbook(fs);
-                               return wb;
+                            POIFSFileSystem fs = new POIFSFileSystem(stream);
+                            HSSFWorkbook wb = new HSSFWorkbook(fs);
+                            return wb;
                             //}
                         }
                     }
                 }
             } catch (FileUploadException ex) {
-               response.getWriter().println(ex.toString());
-            }catch (IOException ex) {
-               response.getWriter().println(ex.toString());
+                response.getWriter().println(ex.toString());
+            } catch (IOException ex) {
+                response.getWriter().println(ex.toString());
             }
         }
         return null;
     }
-    private void updateSocre(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, FileUploadException, Exception{
-       String subcode;
-       String Classname;
-        HSSFWorkbook wb=GetWorkbook(request, response);
-         int i = 0;
+
+    private void updateSocre(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, FileUploadException, Exception {
+        String subcode;
+        String Classname;
+        HSSFWorkbook wb = GetWorkbook(request, response);
+        int i = 0;
         ArrayList<String> StudyInfo;
         int n = wb.getNumberOfSheets();
 
-         for (int k = 0; k < n; k++){
-             HSSFSheet sheet = wb.getSheetAt(k);
-             int rows  = sheet.getPhysicalNumberOfRows();
+        for (int k = 0; k < n; k++) {
+            HSSFSheet sheet = wb.getSheetAt(k);
+            int rows = sheet.getPhysicalNumberOfRows();
 
-             HSSFRow rowTemp;
-             HSSFCell cellTemp;
-             int cellType;
-             String strValue = "";
-             //lấy mã môn học
-              HSSFRow rowsubcode=  sheet.getRow(3);
-              HSSFCell cellsubcode=rowsubcode.getCell(1);
-               cellsubcode.setCellType(HSSFCell.CELL_TYPE_STRING);
-               subcode = cellsubcode.getStringCellValue();
-               //lấy mã lớp học
-              HSSFRow rowclass=  sheet.getRow(1);
-              HSSFCell cellclass=rowclass.getCell(1);
-               cellclass.setCellType(HSSFCell.CELL_TYPE_STRING);
-               Classname = cellclass.getStringCellValue();
-             for (i = 0; i < rows; i++){
-                 StudyInfo=new ArrayList<String>();
-                 rowTemp = sheet.getRow(i);
-                 cellTemp = rowTemp.getCell(0);
-                 cellType = cellTemp.getCellType();
-                 //check the first cell of data must be a number
-                 if(cellType != HSSFCell.CELL_TYPE_NUMERIC){
-                     continue;
-                 }
-                 //CELL 1 MSSV
+            HSSFRow rowTemp;
+            HSSFCell cellTemp;
+            int cellType;
+            String strValue = "";
+            //lấy mã môn học
+            HSSFRow rowsubcode = sheet.getRow(3);
+            HSSFCell cellsubcode = rowsubcode.getCell(1);
+            cellsubcode.setCellType(HSSFCell.CELL_TYPE_STRING);
+            subcode = cellsubcode.getStringCellValue();
+            //lấy mã lớp học
+            HSSFRow rowclass = sheet.getRow(1);
+            HSSFCell cellclass = rowclass.getCell(1);
+            cellclass.setCellType(HSSFCell.CELL_TYPE_STRING);
+            Classname = cellclass.getStringCellValue();
+            for (i = 0; i < rows; i++) {
+                StudyInfo = new ArrayList<String>();
+                rowTemp = sheet.getRow(i);
+                cellTemp = rowTemp.getCell(0);
+                cellType = cellTemp.getCellType();
+                //check the first cell of data must be a number
+                if (cellType != HSSFCell.CELL_TYPE_NUMERIC) {
+                    continue;
+                }
+                //CELL 1 MSSV
                 //CELL2 Ho tên
                 //CELL3 Diem
-                 for(int j = 2; j < 4; j++){
-                     cellTemp = rowTemp.getCell(j);
+                for (int j = 2; j < 4; j++) {
+                    cellTemp = rowTemp.getCell(j);
                     cellTemp.setCellType(HSSFCell.CELL_TYPE_STRING);
                     strValue = cellTemp.getStringCellValue();
-                  StudyInfo.add(strValue);
-                 }
-                clsStudyResult cls=new clsStudyResult(StudyInfo.get(0), subcode, Float.parseFloat(StudyInfo.get(1)), SystemProperities.CurentYear, SystemProperities.Curentsemester);
-                clsBOStudyResult BOS=new clsBOStudyResult();
+                    StudyInfo.add(strValue);
+                }
+                clsStudyResult cls = new clsStudyResult(StudyInfo.get(0), subcode, Float.parseFloat(StudyInfo.get(1)), SystemProperities.CurentYear, SystemProperities.Curentsemester);
+                clsBOStudyResult BOS = new clsBOStudyResult();
                 BOS.Insert(cls);
-                 clsRegistration clsreg=new clsRegistration(StudyInfo.get(0),Classname,SystemProperities.Curentsemester,SystemProperities.CurentYear,Float.parseFloat(StudyInfo.get(1)));
-                 clsBORegistration BOR=new clsBORegistration();
-                 BOR.updateMark(clsreg);
-                
-                
-             }
-             session.setAttribute("mes", "Ghi nhận điểm hoàn tất!");
-                String path = "./jsps/jspThongBao.jsp";
-               response.sendRedirect(path);
-         }
-                
+                clsRegistration clsreg = new clsRegistration(StudyInfo.get(0), Classname, SystemProperities.Curentsemester, SystemProperities.CurentYear, Float.parseFloat(StudyInfo.get(1)));
+                clsBORegistration BOR = new clsBORegistration();
+                BOR.updateMark(clsreg);
+
+
+            }
+            session.setAttribute("mes", "Ghi nhận điểm hoàn tất!");
+            String path = "./jsps/jspThongBao.jsp";
+            response.sendRedirect(path);
+        }
+
     }
+
     /**
      * 
      * @param resp
@@ -194,13 +193,14 @@ public class servUpdateScore extends HttpServlet {
      * @throws IOException
      * @throws Exception 
      */
-private void getAllClass(HttpServletResponse resp, HttpSession session) throws IOException, Exception{
-             clsBOClass BOClass=new clsBOClass();
-             ArrayList<clsClass> result=BOClass.GetAllClass("ClassName");
-             session.setAttribute("clases", result);
-             String path = "./jsps/jspGhiNhanDiem.jsp";
-             resp.sendRedirect(path);
+    private void getAllClass(HttpServletResponse resp, HttpSession session) throws IOException, Exception {
+        clsBOClass BOClass = new clsBOClass();
+        ArrayList<clsClass> result = BOClass.GetAllClass("ClassName");
+        session.setAttribute("clases", result);
+        String path = "./jsps/jspGhiNhanDiem.jsp";
+        resp.sendRedirect(path);
     }
+
     /** 
      * 
      * @param request
