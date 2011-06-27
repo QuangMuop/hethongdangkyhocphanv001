@@ -28,7 +28,7 @@
     </head>
     <body>        
         <%
-            response.sendRedirect("./jsps/jspTrangChu.jsp");
+            response.sendRedirect("./ServHompage?action=view");
         %>
 
     </body>

@@ -11,13 +11,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%
-    ArrayList<ClsNews> list = (ArrayList<ClsNews>) session.getAttribute("news");
+    ClsNews newsinfo = (ClsNews) session.getAttribute("news");
 %>
 <html>
     <head>
         <link href="../csss/general.css" rel="stylesheet" type="text/css" media="screen">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Trang Chủ</title>
+        <title>Chi tiết bản tin</title>
         <style media="all" type="text/css">
             #frmimg{
                 margin-left: 50px;
@@ -34,13 +34,8 @@
             <div id="content"><!--Main Contents-->
                 <br><br>
                 <p>
-                    <%for (int i = 0; i < list.size(); i++) {
-                             if (list.get(i).GetType() == 0) {%>
-                <h4><%=list.get(i).GetContent().substring(0, 100)%>...<a href="../ServHompage?action=detail&Id=<%=list.get(i).GetId()%>">Chi tiết</a></h4>
-                <%}
-
-
-                             }%>
+                    <u>Chi tiết thông báo:</u><br>
+                    <%=newsinfo.GetContent()%>
 
                 </p>
                 <%--<img src="../imgs/hpimg.JPG" alt="Angry face" id="frmimg"/>--%>

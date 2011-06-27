@@ -7,7 +7,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<clsClass> classlist=(ArrayList<clsClass>) session.getAttribute("clases");
+    ArrayList<clsClass> classlist = (ArrayList<clsClass>) session.getAttribute("clases");
 %>
 <html>
     <head>
@@ -61,7 +61,7 @@ ArrayList<clsClass> classlist=(ArrayList<clsClass>) session.getAttribute("clases
                             <td>
                                 <select style="width:300px" name="sclassname" id="sclassname" onchange="ReloadScore()">
                                     <option value="All">-----------------------------</option>
-                                    <%for(int i=0;i<classlist.size();i++){%>
+                                    <%for (int i = 0; i < classlist.size(); i++) {%>
                                     <option value="<%=classlist.get(i).getClassName()%>"><%=classlist.get(i).getClassName()%> - <%=classlist.get(i).getSubName()%></option>
                                     <%}%>
                                 </select>
@@ -73,10 +73,10 @@ ArrayList<clsClass> classlist=(ArrayList<clsClass>) session.getAttribute("clases
                 <form id="formdetail" name="formdetail">
                     <u>Chi tiết điểm theo lớp</u>
                     <table id="detail" name="detail" border="2" bordercolor="yellow" >
-                          
+
                     </table>
                     <br/>
-                     </form>
+                </form>
 
             </div><!--End Contents-->
 
@@ -90,12 +90,12 @@ ArrayList<clsClass> classlist=(ArrayList<clsClass>) session.getAttribute("clases
     <script  type = "text/javascript" >
         var http = createRequestObject();
         function ReloadScore(){
-                 if(http){
+            if(http){
                 var action="reload";
                 var classname=document.classname.sclassname.value;
                 if(classname=="All");
                 else
-                ajaxfunction("../ServScore?action="+action+"&classname="+classname);
+                    ajaxfunction("../ServScore?action="+action+"&classname="+classname);
             }
         }
         

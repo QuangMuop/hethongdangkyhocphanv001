@@ -8,10 +8,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-    clsLecturer lec=(clsLecturer) session.getAttribute("lec");
+    clsLecturer lec = (clsLecturer) session.getAttribute("lec");
 %>
 <html>
     <head>
@@ -36,7 +36,7 @@
                 background-color: #b1B700;                
                 padding: 2 5 2 5;
             }
-            
+
         </style>
     </head>
     <body>
@@ -68,18 +68,18 @@
                             <td><input type="text" name="txtBirth" value="<%=lec.getBirthDay()%>" readonly></td>
                             <td>
                                 <select name="sDay">
-                                    <%for(int j = 0; j < 31; j++){%>
-                                    <option value="<%=(j+1)%>"><%=(j+1)%></option>
+                                    <%for (int j = 0; j < 31; j++) {%>
+                                    <option value="<%=(j + 1)%>"><%=(j + 1)%></option>
                                     <%}%>
                                 </select>
                                 <select name="sMonth">
-                                    <%for(int j = 0; j < 12; j++){%>
-                                    <option value="<%=(j+1)%>"><%=(j+1)%></option>
+                                    <%for (int j = 0; j < 12; j++) {%>
+                                    <option value="<%=(j + 1)%>"><%=(j + 1)%></option>
                                     <%}%>
                                 </select>
                                 <select name="sYear">
-                                    <%for(int j = 0; j < 50; j++){%>
-                                    <option value="<%=(1940+j)%>"><%=(1940+j)%></option>
+                                    <%for (int j = 0; j < 50; j++) {%>
+                                    <option value="<%=(1940 + j)%>"><%=(1940 + j)%></option>
                                     <%}%>
                                 </select>
                             </td>
@@ -114,10 +114,10 @@
                             <td><input type="text" value="<%=lec.getHocHam()%>" readonly></td>
                             <td>
                                 <select name="sHocHam">
-                                     <option value="Null">Null</option>
+                                    <option value="Null">Null</option>
                                     <option value="Giáo sư">Giáo sư</option>
                                     <option value="P.Giáo sư">P.Giáo sư</option>
-                                    
+
                                 </select>
                             </td>
                         </tr>
@@ -139,7 +139,7 @@
                             <td><input type="text" id="txtCMND" name="txtCMND" value="<%=lec.getCMND()%>"></td>
                         </tr>
                     </table>
-                        <input type="button" value="Cập Nhật" onclick="update()">
+                    <input type="button" value="Cập Nhật" onclick="update()">
                 </form>
 
                 <br/><br/>
@@ -147,22 +147,22 @@
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
     <script  type = "text/javascript" >
-         function update(){
-           if(document.formaddone.txtName.value.length==0){
-             alert("Tên giảng viên không được trống");
-          }
-          else if(document.formaddone.txtCMND.value.length==0){
-             alert("CMND không được trống");
-          }
-          else{
-           document.forms["formaddone"].submit();
-          }
-  }
-       </script>
+        function update(){
+            if(document.formaddone.txtName.value.length==0){
+                alert("Tên giảng viên không được trống");
+            }
+            else if(document.formaddone.txtCMND.value.length==0){
+                alert("CMND không được trống");
+            }
+            else{
+                document.forms["formaddone"].submit();
+            }
+        }
+    </script>
 </html>

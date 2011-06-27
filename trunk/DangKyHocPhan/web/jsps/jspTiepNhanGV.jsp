@@ -195,7 +195,7 @@
             else{
                 var duoi=filename.substr(filename.length-4, 4);
                 if(duoi!=".xls"&&duoi!="xlsx"){
-                    alert("Chỉ hỗ trợ thêm sinh viên từ file excel, xin chọn file khác");
+                    alert("Chỉ hỗ trợ thêm giảng viên từ file excel, xin chọn file khác");
                 }else {
                     document.forms["formbrowse"].submit();
 

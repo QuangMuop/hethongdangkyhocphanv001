@@ -47,14 +47,14 @@
 
             #formliststudent table th{
                 height: 22px;
-                background-color: #F9B7FF;
+                background-color: #153E7E;
                 border-left: 1px solid;
                 border-right: 1px solid;
                 border-bottom:  1px solid;
                 border-top:  1px solid;
             }
             #formliststudent table td{
-                background-color: #b1B700;
+                background-color: #5F676D;
                 padding: 2 5 2 5;
                 text-align: center;
             }
@@ -100,7 +100,7 @@
                 </form>
                 <br/><hr><hr>
                 <u>Danh sách các sinh viên đăng ký lớp học: <%=n%> sinh viên</u>
-                <form name="formliststudent" id="formliststudent" action="#" method="post">
+                <form name="formliststudent" id="formliststudent" action="../DownloadFile?action=detailClass&classname=<%=cls.getClassName()%>" method="post">
                     <table id="tableliststudent">
                         <tr>
                             <th>STT</th><th>MSSV</th><th>Họ Và Tên</th><th>Lớp</th>
