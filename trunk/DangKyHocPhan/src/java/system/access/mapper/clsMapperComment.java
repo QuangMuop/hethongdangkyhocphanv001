@@ -1,60 +1,87 @@
-
-
 package system.access.mapper;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import system.dto.clsComment;
-public class clsMapperComment extends clsMapperDb{
-public clsMapperComment() throws Exception{
-    super();
-}
- public void IniCommnetDTOFromRs(clsComment comment, ResultSet rs) throws SQLException{
-         if((rs!=null) && (comment!=null)){
+
+public class clsMapperComment extends clsMapperDb {
+
+    public clsMapperComment() throws Exception {
+        super();
+    }
+
+    /**
+     * 
+     * @param comment
+     * @param rs
+     * @throws SQLException 
+     */
+    public void IniCommnetDTOFromRs(clsComment comment, ResultSet rs) throws SQLException {
+        if ((rs != null) && (comment != null)) {
             comment.setId(Integer.parseInt(rs.getString("Id")));
             comment.setContent(rs.getString("Content"));
             comment.setAuthor(rs.getString("Author"));
             comment.setEmail(rs.getString("Email"));
             comment.setMSSV(rs.getString("MSSV"));
             comment.setDate(rs.getString("Date"));
-          }
-     }
-  public ArrayList<clsComment> GetAllComment() throws Exception{
-         ArrayList<clsComment> listResult = new ArrayList<clsComment>();
-         try{
+        }
+    }
+
+    /**
+     * 
+     * @return
+     * @throws Exception 
+     */
+    public ArrayList<clsComment> GetAllComment() throws Exception {
+        ArrayList<clsComment> listResult = new ArrayList<clsComment>();
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("select Id,MSSV,Author,Email,Content, Date from dangkyhocphan.comment");
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            while((rs!=null) && rs.next()){
+            while ((rs != null) && rs.next()) {
                 clsComment classTemp = new clsComment();
                 IniCommnetDTOFromRs(classTemp, rs);
                 listResult.add(classTemp);
             }
-         }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
-         }
-         return listResult;
-     }
-  public clsComment getCommnetInfo(int id) throws Exception{
-         clsComment comment=new clsComment();
-        try{
+        }
+        return listResult;
+    }
+
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
+    public clsComment getCommnetInfo(int id) throws Exception {
+        clsComment comment = new clsComment();
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Select * from dangkyhocphan.comment Where");
             sql.append(" Id = ").append(id);
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && rs.next()){
+            if ((rs != null) && rs.next()) {
                 IniCommnetDTOFromRs(comment, rs);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
         }
         return comment;
-     }
-  public void CommentInsert(clsComment commnet) throws Exception{
-       try {
+    }
+
+    /**
+     * 
+     * @param commnet
+     * @throws Exception 
+     */
+    public void CommentInsert(clsComment commnet) throws Exception {
+        try {
             StringBuffer sql = new StringBuffer();
             sql.append("Insert into dangkyhocphan.comment values(");
             sql.append(commnet.getId()).append(",'");
@@ -66,14 +93,19 @@ public clsMapperComment() throws Exception{
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
             stmt.close();
+        } catch (Exception e) {
+            throw e;
         }
-        catch (Exception e) {
-                throw e;
-        }
-  }
- public void CommentDelete(int id) throws Exception{
-          try{
-           StringBuffer sql = new StringBuffer();
+    }
+
+    /**
+     * 
+     * @param id
+     * @throws Exception 
+     */
+    public void CommentDelete(int id) throws Exception {
+        try {
+            StringBuffer sql = new StringBuffer();
             sql.append("Delete from dangkyhocphan.comment Where Id = ").append(id);
             PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
             stmt.execute();
@@ -81,19 +113,25 @@ public clsMapperComment() throws Exception{
             sql1.append("UPDATE dangkyhocphan.comment set Id=Id-1 where Id > ").append(id);
             PreparedStatement stmt1 = getConnection().prepareStatement(sql1.toString());
             stmt1.execute();
-        }catch(Exception ex){
-                throw ex;
+        } catch (Exception ex) {
+            throw ex;
         }
-     }
- public int getMaxId() throws SQLException{
-     String a="";
-    StringBuffer sql = new StringBuffer();
-            sql.append("Select Max(Id) from dangkyhocphan.comment ");
-            PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
-            ResultSet rs = stmt.executeQuery();
-            if((rs!=null) && rs.next()){
-                a=rs.getString("Max(Id)");
-            }
-      return Integer.parseInt(a);
- }
+    }
+
+    /**
+     * 
+     * @return
+     * @throws SQLException 
+     */
+    public int getMaxId() throws SQLException {
+        String a = "";
+        StringBuffer sql = new StringBuffer();
+        sql.append("Select Max(Id) from dangkyhocphan.comment ");
+        PreparedStatement stmt = getConnection().prepareStatement(sql.toString());
+        ResultSet rs = stmt.executeQuery();
+        if ((rs != null) && rs.next()) {
+            a = rs.getString("Max(Id)");
+        }
+        return Integer.parseInt(a);
+    }
 }

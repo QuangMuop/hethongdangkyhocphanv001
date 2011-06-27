@@ -15,10 +15,10 @@ public class clsBOLecturer {
      * @return list of lecturer
      * @throws Exception
      */
-    public ArrayList<clsLecturer> GetAllLecturer()throws Exception{
+    public ArrayList<clsLecturer> GetAllLecturer() throws Exception {
         clsMapperLecturer mapper = new clsMapperLecturer();
-         return mapper.GetAllLecturer();
-      
+        return mapper.GetAllLecturer();
+
     }
 
     /**
@@ -27,27 +27,28 @@ public class clsBOLecturer {
      * @return
      * @throws Exception
      */
-     public ArrayList<clsLecturer> GetLecturerByName(String name) throws Exception{
+    public ArrayList<clsLecturer> GetLecturerByName(String name) throws Exception {
         clsMapperLecturer mapper = new clsMapperLecturer();
         return mapper.GetLecturerByName(name);
-     }
-      public ArrayList<clsLecturer> GetLecturerById(String Id) throws Exception{
+    }
+
+    public ArrayList<clsLecturer> GetLecturerById(String Id) throws Exception {
         clsMapperLecturer mapper = new clsMapperLecturer();
         return mapper.GetLecturerByID(Id);
-     }
-    
+    }
+
     /**
      * Get a lecturer object from name of teacher
      * @param name name for search
      * @return an Lecturer object
      * @throws Exception
      */
-    public clsLecturer getLecturerInfo(String name) throws Exception{
+    public clsLecturer getLecturerInfo(String name) throws Exception {
         clsLecturer lecturer = new clsLecturer();
-        try{
+        try {
             clsMapperLecturer mapper = new clsMapperLecturer();
             lecturer = mapper.getLecturerInfo(name);
-        }catch(Exception e){
+        } catch (Exception e) {
             throw e;
         }
         return lecturer;
@@ -59,20 +60,20 @@ public class clsBOLecturer {
      * @return
      * @throws Exception
      */
-    public clsLecturer getLecturereByCode(String lecturerId) throws Exception{
+    public clsLecturer getLecturereByCode(String lecturerId) throws Exception {
         clsMapperLecturer mapper = new clsMapperLecturer();
-            return  mapper.getLecturerInfoById(lecturerId);
-      }
+        return mapper.getLecturerInfoById(lecturerId);
+    }
 
     /**
      * Insert a lecturer into database
      * @param lecturer Lecturer for insert
      * @throws Exception
      */
-    public boolean LecturerInsert(clsLecturer lecturer) throws Exception{
-           clsMapperLecturer mapper = new clsMapperLecturer();
-           return mapper.LecturerInsert(lecturer);
-       
+    public boolean LecturerInsert(clsLecturer lecturer) throws Exception {
+        clsMapperLecturer mapper = new clsMapperLecturer();
+        return mapper.LecturerInsert(lecturer);
+
     }
 
     /**
@@ -81,12 +82,12 @@ public class clsBOLecturer {
      * @return true if existed and false if not
      * @throws Exception
      */
-    public boolean LecturerCheckExistName(String name) throws Exception{
+    public boolean LecturerCheckExistName(String name) throws Exception {
         boolean result = false;
-        try{
+        try {
             clsMapperLecturer mapper = new clsMapperLecturer();
             result = mapper.LecturerCheckExistName(name);
-        }catch(Exception e){
+        } catch (Exception e) {
             throw e;
         }
         return result;
@@ -97,13 +98,13 @@ public class clsBOLecturer {
      * @param id id for search
      * @return name of lecturer with code is id or null if not found
      */
-    public String LecturerGetLecturerNameFromId(String id) throws Exception{
+    public String LecturerGetLecturerNameFromId(String id) throws Exception {
         String result = "";
-        try{
+        try {
             clsMapperLecturer mapper = new clsMapperLecturer();
             clsLecturer lecture = mapper.getLecturerInfoById(id);
             result = lecture.getFullname();
-        }catch(Exception e){
+        } catch (Exception e) {
             throw e;
         }
         return result;
@@ -115,12 +116,12 @@ public class clsBOLecturer {
      * @return tru if existed and false if not
      * @throws Exception
      */
-    public boolean LecturerCheckExistCode(String code) throws Exception{
+    public boolean LecturerCheckExistCode(String code) throws Exception {
         boolean result = false;
-        try{
+        try {
             clsMapperLecturer mapper = new clsMapperLecturer();
             result = mapper.LecturerCheckExistCode(code);
-        }catch(Exception e){
+        } catch (Exception e) {
             throw e;
         }
         return result;
@@ -131,18 +132,17 @@ public class clsBOLecturer {
      * @param name
      * @throws Exception
      */
-    public void LecturerDeleteByName(String name) throws Exception{
-    
+    public void LecturerDeleteByName(String name) throws Exception {
     }
-    
+
     /**
      * 
      * @param code
      * @throws Exception
      */
-    public boolean  LecturerDeleteByCode(String code) throws Exception{
-     clsMapperLecturer mapper = new clsMapperLecturer();
-     return mapper.LecturerDeleteByCode(code);
+    public boolean LecturerDeleteByCode(String code) throws Exception {
+        clsMapperLecturer mapper = new clsMapperLecturer();
+        return mapper.LecturerDeleteByCode(code);
     }
 
     /**
@@ -150,7 +150,7 @@ public class clsBOLecturer {
      * @param lecturer
      * @throws Exception
      */
-    public void LecturerUpdate(clsLecturer lecturer) throws Exception{
+    public void LecturerUpdate(clsLecturer lecturer) throws Exception {
         clsMapperLecturer mapper = new clsMapperLecturer();
         mapper.LecturerUpdate(lecturer);
     }
