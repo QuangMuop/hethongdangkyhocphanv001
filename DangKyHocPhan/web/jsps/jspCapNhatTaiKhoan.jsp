@@ -85,26 +85,26 @@
                             <%} else {%>
                             <td>Bình thường</td>
                             <%}%>
-                              <%if (aclist.get(i).getType() == 1) {%>
-                                     <td>Quản lý</td>
-                               <%} else if (aclist.get(i).getType() == 0) {%>
-                                     <td>Sinh viên</td>
-                                  <%} else {%>
-                                     <td>Giảng viên</td>
-                                 <%}%>
+                            <%if (aclist.get(i).getType() == 1) {%>
+                            <td>Quản lý</td>
+                            <%} else if (aclist.get(i).getType() == 0) {%>
+                            <td>Sinh viên</td>
+                            <%} else {%>
+                            <td>Giảng viên</td>
+                            <%}%>
                             <%if (aclist.get(i).getIsLocked() == 1) {%>
                             <td><a href="../servAccount?action=update&username=<%=aclist.get(i).getUserName()%>" >Mở khóa</a></td>
                             <%} else {%>
                             <td><a href="../servAccount?action=update&username=<%=aclist.get(i).getUserName()%>" >Khóa</a></td>
                             <%}%>
-                       </tr>
+                        </tr>
                         <%}%>
                     </table>
-                     <input style="position:absolute; left:750px;" type="button" value="|<<" onclick="nprepage()">
+                    <input style="position:absolute; left:750px;" type="button" value="|<<" onclick="nprepage()">
                     <input style="position:absolute; left:790px;" type="button" value="<<" onclick="prepage()">
                     <input style="position:absolute; left:830px;" type="button" value=">>" onclick="nextpage()">
                     <input style="position:absolute; left:870px;" type="button" value=">>|" onclick="nnextpage()"><br>
-                        
+
                     <input type="hidden" value="<%=numaccount%>" id="numacc" />
                 </form>
                 <hr><hr>
@@ -138,7 +138,7 @@
             if(start<0){
                 start=0;
             }
-             username=document.getElementById("username").value;
+            username=document.getElementById("username").value;
             ajaxfunction("../servAccount?action="+action+"&username="+username+"&start="+start);
         }
         function nextpage(){
@@ -157,7 +157,7 @@
             if(start<0){
                 start=0;
             }
-                username=document.getElementById("username").value;
+            username=document.getElementById("username").value;
             ajaxfunction("../servAccount?action="+action+"&username="+username+"&start="+start);
         }
 

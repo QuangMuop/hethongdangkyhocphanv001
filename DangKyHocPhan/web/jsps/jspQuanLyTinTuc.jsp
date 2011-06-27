@@ -1,3 +1,4 @@
+<%@page import="system.dto.ClsNews"%>
 <%@page import="system.dto.clsComment"%>
 <%@page import="system.dto.clsProgram"%>
 <%@page import="system.dto.clsCourse"%>
@@ -6,12 +7,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%
-    ArrayList<clsComment> comment = (ArrayList<clsComment>) session.getAttribute("comment");
+    ArrayList<ClsNews> list = (ArrayList<ClsNews>) session.getAttribute("news");
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Quản lý comment</title>
+        <title>Quản lý tin tức</title>
         <style media="all" type="text/css">
 
             #formdetail table{
@@ -41,25 +42,29 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <br><h3>Danh sách các comment chưa giải quyết:</h3><br>
+                <br><h3>Danh sách các thông báo của khoa:</h3><br>
                 <hr/><hr/><br>
                 <form id="formdetail" name="formdetail">
                     <table id="detail" name="detail" border="2" bordercolor="yellow" >
                         <tr>
-                            <th>STT</th><th>Người gửi</th><th >Nội dung</th><th>Xem</th><th>Xóa</th>
+                            <th>STT</th><th>Ngày đăng</th><th >Nội dung</th><th>Tình trạng</th><th>Sửa</th><th>Xóa</th>
                         </tr>
-                        <%for (int i = 0; i < comment.size(); i++) {%>
+                        <%for (int i = 0; i < list.size(); i++) {%>
                         <tr>
                             <td><%=i + 1%></td>
-                            <td><%=comment.get(i).getAuthor()%></td>
-                            <%
-                                if (comment.get(i).getContent().length() > 50) {%>
-                            <td><%=comment.get(i).getContent().substring(0, 50)%>....</td>
+                            <td><%=list.get(i).GetDate()%></td>
+                            <td><%=list.get(i).GetContent().substring(0, 50)%>....</td>
+                            <%if (list.get(i).GetType() == 0) {%>
+                            <td>Đang đăng</td>
                             <%} else {%>
-                            <td><%=comment.get(i).getContent()%></td>
+                            <td>Chưa đăng</td>
                             <%}%>
-                            <td><a href="../servCommentManager?action=detail&Id=<%=comment.get(i).getId()%>">Xem</a> </td>
-                            <td><a href="../servCommentManager?action=delete&Id=<%=comment.get(i).getId()%>">Xóa</a> </td>
+                            <%if (list.get(i).GetType() == 0) {%>
+                            <td><a href="../ServNews?action=update&Id=<%=list.get(i).GetId()%>">Gỡ bõ</a> </td>
+                            <%} else {%>
+                            <td><a href="../ServNews?action=update&Id=<%=list.get(i).GetId()%>">Đăng</a> </td>
+                            <%}%>
+                            <td><a href="../ServNews?action=delete&Id=<%=list.get(i).GetId()%>">Xóa</a> </td>
                         </tr>
                         <%}%>
                     </table>

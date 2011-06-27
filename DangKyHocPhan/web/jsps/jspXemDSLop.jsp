@@ -23,10 +23,10 @@
         <title>Danh sách lớp học</title>
         <style media="all" type="text/css">
             #tablelistclass{
-                margin-left: 10px;
+                margin-left: 5px;
                 margin-top: 20px;
                 margin-bottom: 10px;
-                width: 740px;
+                width: 760px;
                 border-left: 2px solid;
                 border-right: 2px solid;
                 text-align: center;
@@ -99,7 +99,7 @@
                 <form id="classlist">
                     <table id="tablelistclass" name="tablelistclass">
                         <tr>
-                            <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Số TC</th><th>Ngày</th><th>Phòng</th><th>Ca</th><th>Sửa</th><th>Xóa</th>
+                            <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Giảng Viên</th><th>Số TC</th><th>Ngày</th><th>Phòng</th><th>Ca</th><th>SV</th><th>Sửa</th><th>Xóa</th>
                         </tr>
                         <%for (j = 0; j < n; j++) {%>
                         <tr>
@@ -111,6 +111,7 @@
                             <td>Thứ <%=clases.get(j).getDate()%></td>
                             <td><%=clases.get(j).getRoom()%></td>
                             <td><%=clases.get(j).getShift()%></td>
+                            <td><b><%=clases.get(j).getNumOfStudent()%></b></td>
                             <td><a href="../servClassView?action=edit&classname=<%=clases.get(j).getClassName()%>">Sửa</a></td>
                             <td><a href="../servClassView?action=delete&classname=<%=clases.get(j).getClassName()%>">Xóa</a></td>
                         </tr>

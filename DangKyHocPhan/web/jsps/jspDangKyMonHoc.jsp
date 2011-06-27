@@ -87,10 +87,10 @@
                             <th>STT</th><th>Mã lớp</th><th>Môn học</th><th>Số TC</th><th>Giảng viên</th><th>Thứ</th><th>Ca</th><th>Phòng</th><th>SV tối đa</th><th>SV Đã ĐK</th><th><th>
                         </tr>
                         <%
-                        for (j = 0; j < n; j++) {%>
+                            for (j = 0; j < n; j++) {%>
                         <tr>
                             <td><%=j + 1%></td>
-                            <td><%=clases.get(j).getClassName()%></td>
+                            <td><a href="../servClassView?action=detail&classname=<%=clases.get(j).getClassName()%>"><%=clases.get(j).getClassName()%></a></td>
                             <td><%=clases.get(j).getSubName()%></td>
                             <td><%=clases.get(j).getNumTC()%></td>
                             <td><%=clases.get(j).getLecturerName()%></td>

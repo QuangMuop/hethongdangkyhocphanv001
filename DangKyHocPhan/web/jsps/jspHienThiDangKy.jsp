@@ -91,7 +91,6 @@
                 <form id="frmreset" name="frmreset" method="post" action="../servRegistration?reg=reset">
                     <table>
                         <tr>
-                            <td><input type="button" onclick="completereg()" value="Hoàn tất đăng ký"></td>
                             <td><input type="button" onclick="reseet()" value="Đăng ký lại"></td>
                         </tr>
                     </table>
@@ -108,9 +107,6 @@
     <script  type = "text/javascript" >
         function reseet(){
             document.forms["frmreset"].submit();
-        }
-        function completereg(){
-            document.forms["complete"].submit();
         }
     </script>
 </html>

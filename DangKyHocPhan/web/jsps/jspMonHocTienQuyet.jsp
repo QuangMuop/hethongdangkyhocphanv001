@@ -32,10 +32,10 @@
                 background-color: #F9B7FF;
             }
             #subjectlist td{
-                background-color: #4792b8;
+               background: url("../imgs/opaque_10.png") repeat scroll 0 0 transparent;
                 padding: 2 5 2 5;
             }
-           
+
         </style>
     </head>
     <body>
@@ -48,32 +48,39 @@
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
 
-                <h3>Chi tiết các môn học tiên quyết :</h3>
+                <h3>Quản lý danh mục môn học tiên quyết :</h3><br>
+                <p align="right"><a href="../servDetailSubject?action=create">Tạo mới môn học tiên quyết</a></p>
+                <hr><hr><br>
+                <u>Danh sách môn học tiên quyết:</u>
                 <form id="sublist">
                     <table id="subjectlist" name="subjectlist">
                         <tr>
-                            <th>Môn học</th><th>Môn học tiên quyết</th>
+                            <th>Môn học</th><th>Môn học tiên quyết</th><th>Xóa</th>
                         </tr>
                         <%for (int i = 0; i < list.size(); i++) {%>
                         <%if (i == 0) {%>
                         <tr>
                             <td><b><%=list.get(i).getSubName()%></b></td>
                             <td><%=list.get(i).getPreSubName()%></td>
+                            <td><a href="../servDetailSubject?action=delete&subcode=<%=list.get(i).getSubjectCode()%>&presub=<%=list.get(i).getPreSubjectCode()%>">Xóa</a></td>
                         </tr>
                         <%} else {
-                              if (list.get(i).getSubName().equalsIgnoreCase(list.get(i - 1).getSubName())) {%>
+                            if (list.get(i).getSubName().equalsIgnoreCase(list.get(i - 1).getSubName())) {%>
                         <tr>
                             <td></td>
                             <td><%=list.get(i).getPreSubName()%></td>
+                            <td><a href="../servDetailSubject?action=delete&subcode=<%=list.get(i).getSubjectCode()%>presub=<%=list.get(i).getPreSubjectCode()%>">Xóa</a></td>
                         </tr>
                         <%} else {%>
                         <tr>
                             <td><b><%=list.get(i).getSubName()%></b></td>
                             <td><%=list.get(i).getPreSubName()%></td>
+                            <td><a href="../servDetailSubject?action=delete&subcode=<%=list.get(i).getSubjectCode()%>&presub=<%=list.get(i).getPreSubjectCode()%>">Xóa</a></td>
                         </tr>
                         <%}%>
                         <%}%>
                         <%}%>
+                        
                     </table>
                 </form>
             </div><!--End Contents-->

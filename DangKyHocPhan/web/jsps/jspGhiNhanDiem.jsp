@@ -9,7 +9,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<clsClass> result=(ArrayList<clsClass>) session.getAttribute("clases");
+    ArrayList<clsClass> result = (ArrayList<clsClass>) session.getAttribute("clases");
 %>
 <html>
     <head>
@@ -28,7 +28,7 @@ ArrayList<clsClass> result=(ArrayList<clsClass>) session.getAttribute("clases");
                     <i>Giảng viên hoặc quản lý cập nhật điểm môn học theo từng lớp học</i><br>
                     Chọn lớp học:
                     <select name="sclass" id="sclass">
-                        <%for(int i=0; i<result.size();i++){%>
+                        <%for (int i = 0; i < result.size(); i++) {%>
                         <option value="<%=result.get(i).getSubCode()%>"><%=result.get(i).getClassName()%> - <%=result.get(i).getSubName()%></option>
                         <%}%>
                     </select><br>
@@ -59,7 +59,7 @@ ArrayList<clsClass> result=(ArrayList<clsClass>) session.getAttribute("clases");
             else{
                 var duoi=filename.substr(filename.length-4, 4);
                 if(duoi!=".xls"&&duoi!="xlsx"){
-                    alert("Chỉ hỗ trợ thêm sinh viên từ file excel, xin chọn file khác");
+                    alert("Chỉ hỗ trợ ghi nhận điểm từ file excel, xin chọn file khác");
                 }else {
                     document.forms["updatescore"].submit();
 

@@ -56,8 +56,8 @@
     <body>
         <div id="mainmenu">
             <ul>
-                <li><a href="jspTrangChu.jsp"> Trang chủ </a></li>
-                <li> <a href="#">Quản lý khoa</a>
+                <li><a href="../ServHompage?action=view"> Trang chủ </a></li>
+                <li> <a href="">Quản lý khoa</a>
                     <ul>
                         <li><a href="../servLecturerManager?action=view">Quản lý giảng viên</a> </li>
                         <li><a href="../servStudentManager?action=view">Quản lý sinh viên</a> </li>
@@ -72,12 +72,12 @@
                         <li><a href="../servViewRule?issetup=false">Quy định</a> </li>
                     </ul>
                 </li>
-                <li><a href="#"> Giảng viên </a>
+                <li><a href=""> Giảng viên </a>
                     <ul>
                         <li><a href="../servUpdateScore?action=lecturer">Điểm kết thúc môn</a> </li>  
                     </ul>
                 </li>
-                <li><a href="#"> Sinh viên </a>
+                <li><a href=""> Sinh viên </a>
                     <ul>
                         <li><a href="../servClassView?action=student">Danh sách lớp học</a> </li>
                         <li> <a href="../servRegistration?reg=view">Đăng Ký Môn Học</a> </li>

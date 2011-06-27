@@ -47,7 +47,7 @@
                 <%@include file="jspMainNav.jsp" %>
             </div><!--End Navigation-->
             <div id="content"><!--Main Contents-->
-                <MARQUEE onmouseover="this.stop();" onmouseout="this.start();" HEIGHT=25 BGCOLOR=#C0C6CE BEHAVIOR=scroll SCROLLAMOUNT="4">
+                <MARQUEE onmouseover="this.stop();" onmouseout="this.start();" HEIGHT=25 BGCOLOR=#B93B8F BEHAVIOR=scroll SCROLLAMOUNT="4">
                     <%=time%>
                 </MARQUEE>
                 <br/>
@@ -69,8 +69,8 @@
                         <td><%=list.get(i).getLecturerName()%></td>
                     </tr>
                     <%
-                                    }
-                                }%>
+                            }
+                        }%>
                 </table>
                 <table>
                     <tr><td><u>Thứ 3</u></td><td>Mã lớp</td><td>Môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
@@ -86,8 +86,8 @@
                         <td><%=list.get(i).getLecturerName()%></td>
                     </tr>
                     <%
-                                    }
-                                }%>
+                            }
+                        }%>
                 </table>
                 <table>
                     <tr><td><u>Thứ 4</u></td><td>Mã lớp</td><td>Môn học</td><td>Phòng</td><td>Ca</td><td>Giảng viên</td>
@@ -103,8 +103,8 @@
                         <td><%=list.get(i).getLecturerName()%></td>
                     </tr>
                     <%
-                                    }
-                                }%>
+                            }
+                        }%>
                 </table>
 
                 <table>
@@ -121,8 +121,8 @@
                         <td><%=list.get(i).getLecturerName()%></td>
                     </tr>
                     <%
-                                    }
-                                }%>
+                            }
+                        }%>
                 </table>
 
                 <table>
@@ -139,8 +139,8 @@
                         <td><%=list.get(i).getLecturerName()%></td>
                     </tr>
                     <%
-                                    }
-                                }%>
+                            }
+                        }%>
                 </table>
 
                 <table>
@@ -157,8 +157,8 @@
                         <td><%=list.get(i).getLecturerName()%></td>
                     </tr>
                     <%
-                                    }
-                                }%>
+                            }
+                        }%>
                 </table>
             </div><!--End Contents-->
 

@@ -5,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%
-ArrayList<clsProgram> prolist=(ArrayList<clsProgram>) session.getAttribute("prolist");
+    ArrayList<clsProgram> prolist = (ArrayList<clsProgram>) session.getAttribute("prolist");
 %>
 <html>
     <head>
@@ -66,9 +66,9 @@ ArrayList<clsProgram> prolist=(ArrayList<clsProgram>) session.getAttribute("prol
                         <tr>
                             <th>STT</th><th>Mã môn học</th><th>Tên môn học</th><th>Học kỳ</th>
                         </tr>
-                        <%for(int i=0;i<prolist.size();i++){%>
+                        <%for (int i = 0; i < prolist.size(); i++) {%>
                         <tr>
-                            <td><%=i+1%></td>
+                            <td><%=i + 1%></td>
                             <td><%=prolist.get(i).getSubjectCode()%></td>
                             <td><%=prolist.get(i).getSubName()%></td>
                             <td><%=prolist.get(i).getSemester()%></td>

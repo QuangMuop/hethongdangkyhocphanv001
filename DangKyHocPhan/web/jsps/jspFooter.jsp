@@ -8,8 +8,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
     </head>
     <body>
-        <p>
-            Copyright @2011 Design for ...
+        <p align="center">
+            Copyright @2011 Design for.......
         </p>
     </body>
 </html>

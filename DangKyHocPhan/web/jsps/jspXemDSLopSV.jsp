@@ -21,7 +21,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Danh sách lớp học</title>
-       <style media="all" type="text/css">
+        <style media="all" type="text/css">
             #tablelistclass{
                 margin-left: 10px;
                 margin-top: 20px;

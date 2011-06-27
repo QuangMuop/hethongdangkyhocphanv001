@@ -6,7 +6,7 @@
 <%@include file="jspmenu.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
@@ -72,25 +72,25 @@
             </div><!--End Contents-->
 
             <div id="footer"><!--Footer-->
-                 <%@include file="jspFooter.jsp" %>
+                <%@include file="jspFooter.jsp" %>
             </div><!--End footer-->
         </div>
         <!--End Wrapper-->
     </body>
-         <script  type = "text/javascript" >
-         function Login(){
-           var txtUsername = document.myform.txtUsername.value;
-           var txtPassword = document.myform.txtPassword.value;
-          if(txtUsername.length==0){
-             alert("Bạn chưa nhập tên người dùng");
-             txtUsername.focus();
-          }else if(txtPassword.length==0){
-             alert("Bạn chưa nhập mật khẩu");
-             txtPassword.focus();
-          }
-          else{
-              document.forms["myform"].submit();
-          }
-  }
-       </script>
+    <script  type = "text/javascript" >
+        function Login(){
+            var txtUsername = document.myform.txtUsername.value;
+            var txtPassword = document.myform.txtPassword.value;
+            if(txtUsername.length==0){
+                alert("Bạn chưa nhập tên người dùng");
+                txtUsername.focus();
+            }else if(txtPassword.length==0){
+                alert("Bạn chưa nhập mật khẩu");
+                txtPassword.focus();
+            }
+            else{
+                document.forms["myform"].submit();
+            }
+        }
+    </script>
 </html>
